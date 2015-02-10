@@ -9,8 +9,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 400848}
   - 212: {fileID: 21200848}
-  - 114: {fileID: 11400848}
-  - 61: {fileID: 6100848}
+  - 61: {fileID: 6174888}
+  - 114: {fileID: 11474888}
   m_Layer: 0
   m_Name: Pipe I
   m_TagString: Untagged
@@ -26,11 +26,11 @@ Transform:
   m_GameObject: {fileID: 100848}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -.492089838, y: .180689245, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!61 &6100848
+--- !u!61 &6174888
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -39,9 +39,9 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: .479999989, y: .479999989}
+  m_Size: {x: 1, y: 1}
   m_Center: {x: 0, y: 0}
---- !u!114 &11400848
+--- !u!114 &11474888
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 026772389d8cec2448c310c2cf82fcd4, type: 3}
+  m_Script: {fileID: 11500000, guid: 30875106aed5ac6418d2f24457b1cdc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &21200848
