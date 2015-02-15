@@ -1,0 +1,962 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Transformro",
+				"Transform.rotation"
+			],
+			[
+				"rigidbody2Dadd",
+				"Rigidbody2D.AddRelativeForce(relativeForce, mode)"
+			],
+			[
+				"for",
+				"forv	Vector For Loop"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"class",
+				"classToPut"
+			],
+			[
+				"hi",
+				"hide  (function)"
+			],
+			[
+				"tu",
+				"tuplesA"
+			],
+			[
+				"el",
+				"elsif	elsif ..."
+			],
+			[
+				"if",
+				"if	Ruby if"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"ann",
+				"_anneeParution"
+			],
+			[
+				"a",
+				"auteur"
+			],
+			[
+				"doc",
+				"doc1"
+			],
+			[
+				"aut",
+				"_auteur"
+			],
+			[
+				"_",
+				"_resume"
+			],
+			[
+				"objet",
+				"objet2"
+			],
+			[
+				"dele",
+				"deleteNameTel"
+			],
+			[
+				"e",
+				"_nbElements"
+			],
+			[
+				"get",
+				"getNbElements"
+			],
+			[
+				"entre",
+				"Entree"
+			],
+			[
+				"prin",
+				"print_r"
+			],
+			[
+				"form",
+				"formData"
+			],
+			[
+				"fun",
+				"function  (keyword)"
+			],
+			[
+				"cli",
+				"clicked"
+			],
+			[
+				"aja",
+				"ajax"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "Package Control Messages\n========================\n\nPackage Control:\n---------------\n\n  Version 3.0 Release Notes\n  \n  \n  **** Windows Sublime Text 3 Users ****\n  \n  Due to a bug in Package Control 2.0, Windows ST3 users will need to open the\n  Sublime Text console (ctrl+`) and execute the following Python to properly\n  upgrade. All other users may ignore this part of the message.\n  \n  Make sure NOT to copy the leading two spaces, or an \"unexpected indent\" error\n  will occur.\n  \n  import urllib.request,os,sys; exec(\"if sys.version_info < (3,) or os.name != 'nt': raise OSError('This code is for Windows ST3 only!')\"); pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')\n  \n  ********\n  \n  \n  Package Control 3.0 adds a bunch of polish, improving the Sublime Text\n  experience for users and package developers:\n  \n   - improved upgrades of themes, color schemes and syntaxes\n   - dependency support\n   - SSL for Linux\n   - new secondary Windows HTTP backend\n   - patches for Python in Sublime Text 2 on Windows\n   - commands to easily remove channels and repositories\n   - an events API for packages\n   - improved documentation\n  \n  \n  As of July 2014, I now work for myself. This has allowed me to spend more time\n  working on open source software, including Package Control. If you appreciate\n  the work I've done, please consider a small donation. If even 5% of regular\n  users donated the price of a coffee or beer, that would cover quite a bit of\n  my development time! See https://packagecontrol.io/about for options.\n  \n  \n  Some recent Package Control stats:\n  \n   - every weekday over 1M JSON requests hit the channel server\n   - in December, the channel server will transmit 4TB+ of compressed JSON\n   - users have installed, upgraded or removed 85M+ packages since late 2011\n  \n  \n  Read more about the release at:\n  \n  https://packagecontrol.io/news#2014-12-23-Package_Control_30_Released\n  \n",
+			"settings":
+			{
+				"buffer_size": 2443,
+				"line_ending": "Windows",
+				"name": "Package Control Messages",
+				"scratch": true
+			}
+		}
+	],
+	"build_system": "Packages/C++/C++.sublime-build",
+	"command_palette":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"togg",
+				"View: Toggle Side Bar"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"instam",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"uni",
+				"Set Syntax: Unity C#"
+			],
+			[
+				"unity",
+				"Set Syntax: Unity C#"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"wr",
+				"Word Wrap: Toggle"
+			],
+			[
+				"C++",
+				"Set Syntax: C++"
+			],
+			[
+				"wra",
+				"Word Wrap: Toggle"
+			],
+			[
+				"tog",
+				"View: Toggle Side Bar"
+			],
+			[
+				"ajax",
+				"Snippet: jQuery AJAX call"
+			],
+			[
+				"wro",
+				"Word Wrap: Toggle"
+			],
+			[
+				"re	dy",
+				"Snippet: jQuery ready function"
+			],
+			[
+				"rdy",
+				"Snippet: jQuery ready function"
+			],
+			[
+				"read",
+				"Snippet: jQuery ready function"
+			],
+			[
+				"jquer",
+				"Snippet: jQuery ready function"
+			],
+			[
+				"qj",
+				"Snippet: jQuery AJAX call"
+			],
+			[
+				"ru",
+				"Snippet: RSpec \"shoulda\" validate_uniqueness_of"
+			],
+			[
+				"toggl",
+				"View: Toggle Side Bar"
+			],
+			[
+				"as",
+				"ASCII Decorator: Font Selector"
+			],
+			[
+				"repl",
+				"SublimeREPL: Shell"
+			],
+			[
+				"setcoff",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"asci",
+				"ASCII Decorator: Font Selector"
+			],
+			[
+				"ASC",
+				"ASCII Decorator: Font Selector"
+			],
+			[
+				"ifnd",
+				"Snippet: #ifndef … #define … #endif"
+			],
+			[
+				"ifn",
+				"File: New View into File"
+			],
+			[
+				"",
+				"ASCII Decorator: Generate Font Test"
+			],
+			[
+				"if",
+				"Snippet: #ifndef … #define … #endif"
+			],
+			[
+				"inclu",
+				"Snippet: #include \"…\""
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"include",
+				"Snippet: #include <…>"
+			],
+			[
+				"ifdn",
+				"Snippet: #ifndef … #define … #endif"
+			],
+			[
+				"encod",
+				"HTML: Encode Special Characters"
+			],
+			[
+				"coffee",
+				"SublimeREPL: CoffeeScript"
+			],
+			[
+				"jav",
+				"Set Syntax: Java"
+			],
+			[
+				"plaint",
+				"Set Syntax: Plain Text"
+			],
+			[
+				"wo",
+				"Word Wrap: Toggle"
+			],
+			[
+				"sni",
+				"Snippet: with …; use …;"
+			],
+			[
+				"ada",
+				"Set Syntax: Ada"
+			],
+			[
+				"isn",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"text",
+				"Set Syntax: Plain Text"
+			],
+			[
+				"to",
+				"View: Toggle Side Bar"
+			],
+			[
+				"w",
+				"Word Wrap: Toggle"
+			],
+			[
+				"remop",
+				"Package Control: Remove Package"
+			],
+			[
+				"word",
+				"Word Wrap: Toggle"
+			],
+			[
+				"wrap",
+				"Word Wrap: Toggle"
+			],
+			[
+				"nn",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"colo",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"color",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"themr",
+				"Themr: List themes"
+			],
+			[
+				"them",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"theme",
+				"Colorsublime: Install Theme"
+			]
+		],
+		"width": 746.0
+	},
+	"console":
+	{
+		"height": 168.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/jlibert/Documents/DCLL/ExemplesMoodleXML/quiz.xml",
+		"/C/Users/jlibert/Documents/DCLL/ExemplesMoodleXML/ShortAnswerQuestion.xml",
+		"/C/Users/jlibert/Documents/DCLL/ExemplesMoodleXML/MultipleChoiceQuestion.xml",
+		"/C/Users/jlibert/Documents/DCLL/ExemplesMoodleXML/PairMatchingQuestion.xml",
+		"/C/Users/jlibert/Documents/DCLL/ExemplesMoodleXML/TrueFalseQuestion.xml",
+		"/C/Users/jlibert/.ssh/id_rsa.pub",
+		"/C/Users/jlibert/Documents/PichFly/Assets/1 - MainGame/Scripts/PlanePhysicsIntro.cs",
+		"/C/Users/jlibert/Documents/PichFly/Assets/1 - MainGame/Scripts/SlidingBackground.cs",
+		"/C/Users/jlibert/Documents/PichFly/Assets/pichfly.sublime-project",
+		"/C/Users/jlibert/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/jlibert/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP4Heritage/Livre.h",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP4Heritage/Document.h",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP4Heritage/Article.h",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP4Heritage/main.cc",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP4Heritage/Document.cc",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP4Heritage/Article.cc",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP4Heritage/Biblio.cc",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP4Heritage/Livre.cc",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP4Heritage/Biblio.h",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP3/Livre.h",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP3/Livre.cc",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP3/main.cpp",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP3/Document.cc",
+		"/C/Users/jlibert/Dropbox/S8/DCLL/grilleevalcms",
+		"/C/Users/jlibert/Desktop/stage",
+		"/C/Users/jlibert/Documents/PichFly/.gitignore",
+		"/C/Users/jlibert/Documents/PichFly/Assets/1 - MainGame/Prefabs/.keep",
+		"/C/Users/jlibert/Documents/PichFly/Assets/1 - MainGame/Prefabs/plane.prefab",
+		"/C/Users/jlibert/Documents/taille-crayon/pitchme/config/locales/en.bootstrap.yml",
+		"/C/Users/jlibert/Documents/taille-crayon/pitchme/app/assets/stylesheets/intro.css",
+		"/C/Users/jlibert/Documents/taille-crayon/pitchme/app/assets/javascripts/intro.js",
+		"/C/Users/jlibert/Documents/taille-crayon/pitchme/config/application.rb",
+		"/C/Users/jlibert/Documents/taille-crayon/pitchme/app/views/intro/fromAtoB.html.erb",
+		"/C/Users/jlibert/Documents/taille-crayon/pitchme/app/views/intro/index.html.erb",
+		"/C/Users/jlibert/Documents/taille-crayon/pitchme/config/routes.rb",
+		"/C/Users/jlibert/Documents/taille-crayon/pitchme/app/assets/javascripts/application.js",
+		"/C/Users/jlibert/Documents/taille-crayon/pitchme/app/views/intro/showExo1.html.erb",
+		"/C/Users/jlibert/Documents/taille-crayon/pitchme/README.rdoc",
+		"/C/Users/jlibert/Documents/taille-crayon/pitchme/app/controllers/intro_controller.rb",
+		"/C/Users/jlibert/Documents/taille-crayon/pitchme/app/views/bdajax/index.html.erb",
+		"/C/Users/jlibert/Documents/taille-crayon/pitchme/app/controllers/bdajax_controller.rb",
+		"/C/Users/jlibert/Documents/taille-crayon/pitchme/app/views/intro/showexo1.html.erb",
+		"/C/Users/jlibert/Documents/sites/pitchme/app/assets/stylesheets/exo1.css",
+		"/C/Users/jlibert/Documents/sites/pitchme/app/assets/javascripts/intro.js",
+		"/C/Users/jlibert/Documents/sites/pitchme/app/assets/javascripts/exo1.js",
+		"/C/Users/jlibert/Documents/sites/pitchme/app/views/intro/index.html.erb",
+		"/C/Users/jlibert/Documents/taille-crayon/pitchme/app/views/exo1/index.html.erb",
+		"/C/Users/jlibert/Documents/taille-crayon/pitchme/app/controllers/exo1_controller.rb",
+		"/C/Users/jlibert/Documents/taille-crayon/pitchme/app/views/exo1/showexo1.html.erb",
+		"/C/Users/jlibert/Documents/taille-crayon/pitchme/Gemfile",
+		"/C/Users/jlibert/Documents/taille-crayon/pitchme/app/helpers/intro_helper.rb",
+		"/C/Users/jlibert/Documents/taille-crayon/pitchme/app/assets/javascripts/exo1.js",
+		"/C/Users/jlibert/Documents/sites/pitchme/config/routes.rb",
+		"/C/Users/jlibert/Documents/sites/pitchme/app/helpers/application_helper.rb",
+		"/C/Users/jlibert/Documents/sites/pitchme/app/helpers/intro_helper.rb",
+		"/C/Users/jlibert/Documents/sites/pitchme/app/controllers/intro_controller.rb",
+		"/C/Users/jlibert/Documents/sites/pitchme/app/assets/stylesheets/intro.css",
+		"/C/Users/jlibert/Documents/sites/pitchme/app/views/exo1/index.html.erb",
+		"/C/Users/jlibert/Documents/sites/pitchme/app/models/human.rb",
+		"/C/Users/jlibert/Documents/sites/pitchme/app/assets/javascripts/application.js",
+		"/C/Users/jlibert/Documents/sites/pitchme/Gemfile",
+		"/C/Users/jlibert/Dropbox/IUT/S3/Multi-niveau/projet/js/inscription.js",
+		"/C/Users/jlibert/Dropbox/IUT/S3/Multi-niveau/projet/js/connexion.js",
+		"/C/Users/jlibert/Dropbox/IUT/S3/Multi-niveau/projet/js/evenementCatalogue.js",
+		"/C/Users/jlibert/Dropbox/IUT/S3/Multi-niveau/projet/js/lignetableaucliquable.js",
+		"/C/Users/jlibert/Dropbox/IUT/S3/Multi-niveau/projet/js/navigation.js",
+		"/C/Users/jlibert/Dropbox/IUT/S3/Multi-niveau/projet/js/paginationtable.js",
+		"/C/Users/jlibert/Dropbox/IUT/S3/Multi-niveau/projet/js/panier.js",
+		"/C/Users/jlibert/Dropbox/IUT/S3/Multi-niveau/projet/js/search.js",
+		"/C/Users/jlibert/Dropbox/IUT/S3/Multi-niveau/projet/css/styles.css",
+		"/C/Users/jlibert/Documents/sites/pitchme/config/database.yml",
+		"/C/Users/jlibert/Desktop/dfgdfg",
+		"/C/Users/jlibert/Desktop/truc.rp",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP3/CMakeLists.txt",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP3/.idea/vcs.xml",
+		"/C/Users/jlibert/Documents/cr",
+		"/C/Users/jlibert/Documents/FlyHigher/.gitignore",
+		"/C/Users/jlibert/Dropbox/S8/projet/markdown.text",
+		"/C/Users/jlibert/Dropbox/2013/blub/server/blub-server.coffee",
+		"/C/Users/jlibert/Dropbox/S8/lettremotiv",
+		"/C/Users/jlibert/Dropbox/S8/AL/TP1/PojoEstore/src/Order.java",
+		"/C/Users/jlibert/Dropbox/2015/lettremotiv/LettreMotiv.tex",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP3/Document.h",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP3/Article.h",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP3/Article.cc",
+		"/c/users/jlibert/appdata/local/temp/tmp8ckke5.txt",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP1/Agenda.h",
+		"/C/Users/jlibert/Dropbox/S8/ihmul/cours",
+		"/C/Users/jlibert/Dropbox/2013/blub/server/global/Client.coffee",
+		"/C/Users/jlibert/Dropbox/2013/blub/server/global/Client.js",
+		"/C/Users/jlibert/Downloads/Chilly Gonzales Re-Introduction Etudes.epub",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP1/main.cpp",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP1/Agenda.cpp",
+		"/C/Users/jlibert/Dropbox/2015/cvtex/cv_10 - Copie.tex",
+		"/C/Users/jlibert/Dropbox/2013/blub/server/gameroom/RoomController.js",
+		"/C/Users/jlibert/Dropbox/2013/blub/server/gameroom/RoomController.coffee",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP1/Table.cpp",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP1/Table.h",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP1/Input.h",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP1/Input.cpp",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP1/makefile",
+		"/C/Users/jlibert/Dropbox/S8/cpp/TP1/exe",
+		"/C/Users/jlibert/Downloads/tmp",
+		"/C/Users/jlibert/Dropbox/2015/cvtex/friggeri-cv.cls",
+		"/C/Users/jlibert/Dropbox/S8/cpp/Entree.cpp",
+		"/C/Users/jlibert/Dropbox/S8/cpp/main.cpp",
+		"/C/Users/jlibert/Dropbox/S8/cpp/Tableau.cpp",
+		"/C/Users/jlibert/Pictures/butterfly.jpg",
+		"/C/Users/jlibert/Downloads/Unity 3D Pro v4.6.1f1/UnitySetup-4.6.1.exe",
+		"/C/Users/jlibert/Dropbox/IUT/S2/AP2/PROJET/Sources/GameViewEditor.cc",
+		"/C/Users/jlibert/Dropbox/S8/cpp/test.cpp",
+		"/C/Users/jlibert/Dropbox/IUT/S2/AP2/PROJET/Sources/Element.h",
+		"/C/Users/jlibert/Dropbox/IUT/S2/AP2/PROJET/Sources/Element.cc",
+		"/C/Users/jlibert/Dropbox/IUT/S2/AP2/PROJET/Sources/GameViewEditor.h",
+		"/C/Users/jlibert/Dropbox/S8/cpp/Agenda.h",
+		"/C/Users/jlibert/Dropbox/2015/projetter/Code source jeu Fly Higher/FlyHigherUnityVersion2/Assets/Scripts/00 - Intro/GUIStartScreen.cs",
+		"/C/Users/jlibert/Dropbox/2015/projetter/Code source jeu Fly Higher/FlyHigherUnityVersion2/Assets/Scripts/AnimatedText.cs",
+		"/C/Users/jlibert/Dropbox/2014/blubgame/core/src/game/blub/v2/model/BlubObject.java",
+		"/C/Users/jlibert/Dropbox/S7/anglais/problematiqueetplan",
+		"/C/Users/jlibert/Documents/NetBeansProjects/cisi.tp5/src/cisi/tp5/models/PieChartModel.java",
+		"/C/Users/jlibert/Dropbox/S7/anglais/rapport.txt",
+		"/C/Users/jlibert/Documents/NetBeansProjects/cisi.tp5/src/cisi/tp5/controllers/PieChartController.java",
+		"/C/Users/jlibert/Documents/NetBeansProjects/cisi.tp5/src/cisi/tp5/views/PieChartView.java",
+		"/C/Users/jlibert/Downloads/The.Babadook.2014.LIMITED.MULTi.1080p.BluRay.x264-LOST/the.babadook.2014.limited.multi.1080p.bluray.x264-lost.nfo",
+		"/C/Users/jlibert/Dropbox/S7/lettremotiv",
+		"/C/wamp/www/nuitdelinfo20141/README.md",
+		"/C/wamp/www/nuitdelinfo20141/deployment/deploy.sh"
+	],
+	"find":
+	{
+		"height": 48.0
+	},
+	"find_in_files":
+	{
+		"height": 139.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"veut",
+			"Document",
+			"biblio",
+			"\"",
+			"list",
+			"SYMBOL",
+			"5",
+			"buttonexo1",
+			"6",
+			"2",
+			"1",
+			"<%",
+			"%>",
+			"2000",
+			"\"",
+			"#",
+			"green",
+			"blue",
+			"red",
+			"\"",
+			"rocket",
+			"red",
+			"welcome",
+			"4",
+			"3",
+			"2",
+			"1",
+			"livre",
+			"anneeParution",
+			"Agenda",
+			"anneeParution",
+			"Livre",
+			"auteur",
+			"titre",
+			"_titre",
+			"document",
+			"Document",
+			"Other",
+			"_titre",
+			"Livre",
+			"livre",
+			"Livre",
+			"livre",
+			"Livre",
+			"livre",
+			"Livre",
+			"LIVRE",
+			"SYMBOL",
+			"affichage",
+			"titre",
+			"string",
+			";",
+			"();\n",
+			"SYMBOL",
+			".",
+			"_",
+			"_titre",
+			"auteur",
+			"resume",
+			"string",
+			"Document",
+			"string",
+			"SYMBOL",
+			"×",
+			"Drapeau",
+			"->",
+			"TABLE",
+			";",
+			"Agenda",
+			"purple",
+			"Helvetica Neue",
+			"XITS",
+			"Helvetica Neue",
+			"this->",
+			"SYMBOL",
+			"ENTREE",
+			";",
+			".",
+			"Nom",
+			"; ",
+			">\n",
+			"Entree",
+			"Agenda",
+			"AGENDA",
+			"agenda",
+			"SYMBOL",
+			"view",
+			"set",
+			"setA",
+			"setAngle",
+			"(state",
+			"state ",
+			"State",
+			"state",
+			"State",
+			"state",
+			"State",
+			"state",
+			"State",
+			"state",
+			"State",
+			"state",
+			"State",
+			"state",
+			"State",
+			"state",
+			"State",
+			"state",
+			"State",
+			"state",
+			"State",
+			"state",
+			"State",
+			"state",
+			"State",
+			"state",
+			"State",
+			"state",
+			"State",
+			"state",
+			"State",
+			"state",
+			"State",
+			"state",
+			"State",
+			"state",
+			"State",
+			"state"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2443,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								382,
+								382
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 32.0
+	},
+	"input":
+	{
+		"height": 48.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 152.0
+	},
+	"output.figlet_preview":
+	{
+		"height": 152.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "pichfly.sublime-project",
+	"replace":
+	{
+		"height": 60.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"li",
+				"TP4Heritage\\Livre.cc"
+			],
+			[
+				"lic",
+				"TP3\\Livre.cc"
+			],
+			[
+				"do",
+				"TP3\\Document.cc"
+			],
+			[
+				"dat",
+				"config\\database.yml"
+			],
+			[
+				"",
+				"Entree.hpp"
+			],
+			[
+				"js",
+				"projet\\js\\search.js"
+			],
+			[
+				"java",
+				"projet\\js\\navigation.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 241.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
