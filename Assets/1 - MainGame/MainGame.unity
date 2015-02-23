@@ -232,7 +232,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1704847860}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -287,7 +287,7 @@ Transform:
   - {fileID: 1421255779}
   - {fileID: 1240283903}
   m_Father: {fileID: 1704847860}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!1 &871242890
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,10 +367,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 871242890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.06369972, y: 1.03309572, z: -9.19799995}
+  m_LocalPosition: {x: 1.15369976, y: 2.64309573, z: -20.6879997}
   m_LocalScale: {x: .824999928, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1231583004}
+  m_Father: {fileID: 1704847860}
   m_RootOrder: 0
 --- !u!1001 &881195307
 Prefab:
@@ -459,7 +459,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
-  m_GravityScale: 0
+  m_GravityScale: 9.99999997e-07
   m_FixedAngle: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -497,8 +497,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.90999997, y: 1.61000001, z: -11.4899998}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 871242895}
+  m_Children: []
   m_Father: {fileID: 1519751297}
   m_RootOrder: 0
 --- !u!114 &1231583005
@@ -539,7 +538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reactorForce: 0
-  angle: 0
+  rotationSpeed: 0
 --- !u!1 &1240283901
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,7 +662,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1704847860}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1 &1421255777
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,7 +742,7 @@ Transform:
   - {fileID: 1231583004}
   - {fileID: 1680005697}
   m_Father: {fileID: 1704847860}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!1 &1680005695
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,6 +833,7 @@ Transform:
   m_LocalPosition: {x: -1.15371847, y: -2.64309573, z: 10.6875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 871242895}
   - {fileID: 436908546}
   - {fileID: 1519751297}
   - {fileID: 425795343}
@@ -862,13 +862,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e0b76af58c6a5845b4a0350b21f9559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plane: {fileID: 1231583000}
+  state: 0
+  scriptIntroControl: {fileID: 0}
+  scriptPlanePhysics: {fileID: 0}
 --- !u!114 &1704847863
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1704847859}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c1dae669c41313448c970def0dc02b6, type: 3}
   m_Name: 
