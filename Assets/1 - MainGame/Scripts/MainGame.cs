@@ -10,16 +10,21 @@ public class MainGame : MonoBehaviour {
 
 	public IntroControl scriptIntroControl;
 	public PlanePhysics scriptPlanePhysics;
+	public IntroState scriptIntroState;
 
 
 	// Use this for initialization
 	void Start () {
 		scriptIntroControl = this.GetComponent<IntroControl> ();
 		scriptIntroControl.enabled = true;
+
+		scriptIntroState = plane.GetComponent<IntroState> ();
+		scriptIntroState.enabled = true;
 		//intro script activation
 		state = State.INTRO;
 
 		scriptPlanePhysics = plane.GetComponent<PlanePhysics> ();
+		scriptPlanePhysics.enabled = false;
 
 
 	}
@@ -32,14 +37,16 @@ public class MainGame : MonoBehaviour {
 		case State.INTRO :
 			//If in the final state of introControl, leave the state
 			if(scriptIntroControl.state == IntroControl.State.TWOCLICK) {
+				scriptIntroState.enabled = false;
+				scriptPlanePhysics.enabled = true;
 
+				scriptPlanePhysics.decoller(scriptIntroControl.angle,scriptIntroControl.power);
 				state = State.ANIM_LIFTOFF;
 			}
 			break;
 		
 		case State.ANIM_LIFTOFF :
 			//Plane lift off with informations gotten in Intro sequence
-			scriptPlanePhysics.decoller(scriptIntroControl.angle,scriptIntroControl.power);
 
 
 			break;

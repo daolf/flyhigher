@@ -17,8 +17,8 @@ public class IntroControl : MonoBehaviour {
 
 	void Start () {
 		state = State.INIT;
-		powerBarGUIScript = GUIObject.GetComponent<PowerBarGUI>();
-		pivotGUIScript = GUIObject.GetComponent<PivotGUI>();
+		powerBarGUIScript = GUIObject.GetComponentInChildren<PowerBarGUI>();
+		pivotGUIScript = GUIObject.GetComponentInChildren<PivotGUI>();
 	}
 	
 	void Update () {
@@ -28,8 +28,10 @@ public class IntroControl : MonoBehaviour {
 			{
 			case State.INIT:
 				state = State.ONECLICK;
-				power = powerBarGUIScript.barValue;
+				power = powerBarGUIScript.barValue*1000;
 				powerBarGUIScript.state = PowerBarGUI.State.stop;
+				pivotGUIScript.state = PivotGUI.State.mov;
+
 				break;
 			case State.ONECLICK:
 				state = State.TWOCLICK;

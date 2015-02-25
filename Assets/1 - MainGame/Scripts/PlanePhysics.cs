@@ -9,7 +9,10 @@ public class PlanePhysics : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		rotationSpeed = 1000;
+	}
+
+	void OnEnable() {
+		rigidbody2D.gravityScale = 1;
 	}
 
 	void FixedUpdate() {
@@ -18,12 +21,16 @@ public class PlanePhysics : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
 
 	public void decoller (float angle, float power) {
-		rigidbody2D.MoveRotation (rigidbody2D.rotation + rotationSpeed * Time.deltaTime);
-	
+		Quaternion theRotation = transform.localRotation;
+		theRotation.eulerAngles = new Vector3(0,0,angle);
+		transform.localRotation = theRotation;	
+
+		Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
+		rigidbody2D.AddForce(dir*power);
+
 	}
 
 }
