@@ -5,30 +5,37 @@ public class PrimaryCog : MonoBehaviour {
 
 	public Sprite[] cogs;
 	
-	public int difficulty;
+	//public int difficulty = 0;
 	
-	private float rotationSpeed;
+	private float rotationSpeed = 0;
+	private float currentSpeed = 0;
+	private float sinRatio = 1;
 	
 	private int cogId;
 
 	// Use this for initialization
 	void Start () {
 		setCogId(Random.Range(0, cogs.Length));
-		
-		rotationSpeed = Random.Range(40.0f, 90.0f) * difficulty;
-		rotationSpeed = Random.Range(0, 2) == 0 ? rotationSpeed : -rotationSpeed;
 	}
 	
 	/**
 	 * Set the cog used from its ID
 	 */
-	void setCogId(int id) {
+	public void setCogId(int id) {
 		cogId = id;
 		gameObject.GetComponent<SpriteRenderer>().sprite = cogs[cogId];
 	}
 	
+	public void setSpeedRatio(float ratio) {
+		sinRatio = Random.Range(1.0f, 3.0f) * ratio;
+		rotationSpeed = Random.Range(40.0f, 90.0f) * ratio;
+		rotationSpeed = Random.Range(0, 2) == 0 ? rotationSpeed : -rotationSpeed;
+	}
+	
 	// Update is called once per frame
 	void Update () {
-		gameObject.transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
+		// update rotation and speed (which is a sinusoid)
+		currentSpeed = rotationSpeed * Mathf.Cos(Time.time / sinRatio);
+		gameObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime);
 	}
 }
