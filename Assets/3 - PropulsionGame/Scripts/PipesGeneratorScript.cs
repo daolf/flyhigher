@@ -2,6 +2,10 @@
 using System.Collections;
 using UnityEngine.UI;
 
+using System.Text;
+using System.Xml;
+using System.IO;
+
 public class PipesGeneratorScript : MonoBehaviour {
 
 	// Used to reference the prefabs used from Unity interface
@@ -9,6 +13,8 @@ public class PipesGeneratorScript : MonoBehaviour {
 	public PipeElementScript pipeL;
 	public PipeElementScript pipeIn;
 	public PipeElementScript pipeOut;
+
+	public TextAsset level;
 
 	public Text toShow;
 
@@ -22,7 +28,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 
 	void Update() {
 		// really dirty proof of concept, check path every frame
-		if (isPathValid (origin.getNeighbor(PipeElement.Orientation.SOUTH), origin.orientation.opposite())) {
+		if (true) {//isPathValid (origin.getNeighbor(PipeElement.Orientation.SOUTH), origin.orientation.opposite())) {
 			toShow.text = "You win!";
 		}
 		else {
@@ -56,6 +62,10 @@ public class PipesGeneratorScript : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		PipeElement[,] grid = instanciateLevelFromXml (level);
+		instanciatePipeGrid (grid);
+		return;
+
 		// test level
 		origin = new PipeElement(PipeElement.Type.PIPE_IN, PipeElement.Orientation.SOUTH);
 		PipeElement cur, prev;
@@ -88,6 +98,92 @@ public class PipesGeneratorScript : MonoBehaviour {
 		}*/
 
 		instanciatePipePath (origin, 0, GRID_SIZE);
+	}
+
+	/**
+	 * Read a level from an XML document. 
+	 */
+	private PipeElement[,] instanciateLevelFromXml(TextAsset document) {
+		XmlDocument xml = new XmlDocument ();
+		PipeElement[,] grid = new PipeElement[GRID_SIZE, GRID_SIZE];
+
+		// load the document and get the level(s)
+		xml.LoadXml(document.text);
+		XmlNodeList levelNodes = xml.GetElementsByTagName("level");
+
+		XmlNodeList pipeNodes = levelNodes[0].ChildNodes;
+		foreach (XmlNode curNode in pipeNodes) {
+			if(curNode.Name == "pipe") {
+				int x=0;
+				int y=0;
+				PipeElement.Orientation orientation = PipeElement.Orientation.NORTH;
+				PipeElement.Type type = PipeElement.Type.PIPE_I;
+
+				// add the pipe if possible
+				x = int.Parse(curNode.Attributes["x"].Value);
+				y = int.Parse(curNode.Attributes["y"].Value);
+
+				switch(curNode.Attributes["type"].Value) {
+				case "L":
+					type = PipeElement.Type.PIPE_L;
+					break;
+				case "I":
+					type = PipeElement.Type.PIPE_I;
+					break;
+				case "in":
+					type = PipeElement.Type.PIPE_IN;
+					break;
+				case "out":
+					type = PipeElement.Type.PIPE_OUT;
+					break;
+				}
+
+
+				if(x >= 0 && x < GRID_SIZE && y >= 0 && y < GRID_SIZE) {
+					// add the new pipe to the grid, and set its neighbors
+					PipeElement toAdd = new PipeElement(type, orientation);
+					grid[x, y] = toAdd;
+					// TODO neighbors
+				}
+			}
+			else {
+
+			}
+		}
+
+		return grid;
+	}
+
+	private void instanciatePipeGrid(PipeElement[,] grid) {
+		for (int y=0; y<GRID_SIZE; y++) {
+			for (int x=0; x<GRID_SIZE; x++) {
+				if(grid[x, y] != null) {
+					PipeElement origin = grid[x, y];
+					PipeElementScript prefab = null;
+					switch(origin.type) {
+					case PipeElement.Type.PIPE_I:
+						prefab = pipeI;
+						break;
+					case PipeElement.Type.PIPE_L:
+						prefab = pipeL;
+						break;
+					case PipeElement.Type.PIPE_IN:
+						prefab = pipeIn;
+						break;
+					case PipeElement.Type.PIPE_OUT:
+						prefab = pipeOut;
+						break;
+					}
+					
+					PipeElementScript pipeSprite;
+					pipeSprite = (PipeElementScript) 
+						Instantiate(prefab, new Vector3 (x + ORIGIN_X, y + ORIGIN_Y, 0), Quaternion.identity);
+					
+					// set internal pipe element
+					pipeSprite.setPipeElement (origin);
+				}
+			}
+		}
 	}
 
 	/**
