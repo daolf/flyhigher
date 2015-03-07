@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class MainGame : MonoBehaviour {
 
 	public GameObject plane;
+	public GameObject guiComponent;
+	public GameObject scoreIntLabel;
+	public GameObject gui;
 
 	public enum State {INTRO,ANIM_LIFTOFF,MAIN,END_WIN,END_LOOSE};
 	public State state;
@@ -11,6 +15,8 @@ public class MainGame : MonoBehaviour {
 	public IntroControl scriptIntroControl;
 	public PlanePhysics scriptPlanePhysics;
 	public IntroState scriptIntroState;
+
+	public float score;
 
 
 	// Use this for initialization
@@ -41,6 +47,7 @@ public class MainGame : MonoBehaviour {
 				scriptPlanePhysics.enabled = true;
 
 				scriptPlanePhysics.decoller(scriptIntroControl.angle,scriptIntroControl.power);
+				scriptPlanePhysics.setOrigin();
 				state = State.ANIM_LIFTOFF;
 			}
 			break;
@@ -48,15 +55,24 @@ public class MainGame : MonoBehaviour {
 		case State.ANIM_LIFTOFF :
 			//Plane lift off with informations gotten in Intro sequence
 
+			score = scriptPlanePhysics.getDistanceFromOrigin();
+			setScore(score);
 
 			break;
 		case State.MAIN :
+			score = scriptPlanePhysics.getDistanceFromOrigin();
+			setScore(score);
 			break;
 		case State.END_WIN :
 			break;
 		case State.END_LOOSE :
 			break;
-
 		}
+	}
+
+	void setScore(float score)
+	{
+		scoreIntLabel.GetComponent<Text>().text = ""+score;
+
 	}
 }
