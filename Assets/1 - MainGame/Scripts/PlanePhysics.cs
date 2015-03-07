@@ -13,7 +13,7 @@ public class PlanePhysics : MonoBehaviour {
 	}
 
 	void OnEnable() {
-		rigidbody2D.gravityScale = 1;
+		GetComponent<Rigidbody2D>().gravityScale = 1;
 	}
 
 	void FixedUpdate() {
@@ -30,7 +30,7 @@ public class PlanePhysics : MonoBehaviour {
 		transform.localRotation = theRotation;	
 
 		Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
-		rigidbody2D.AddForce(dir*power);
+		GetComponent<Rigidbody2D>().AddForce(dir*power);
 
 	}
 

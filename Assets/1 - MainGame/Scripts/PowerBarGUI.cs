@@ -48,7 +48,7 @@ public class PowerBarGUI : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		Bounds redBarBounds = redBar.renderer.bounds;
+		Bounds redBarBounds = redBar.GetComponent<Renderer>().bounds;
 		//redBarBounds.size = new Vector3(redBarBounds.size.x, defaultSize.y*barValue);
 		redBar.transform.localScale = new Vector3(redBar.transform.localScale.x, defaultSize.y*barValue);
 		switch (state) {

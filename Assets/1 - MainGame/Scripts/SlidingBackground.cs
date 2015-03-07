@@ -3,22 +3,23 @@ using System.Collections;
 
 public class SlidingBackground : MonoBehaviour {
 
-	GameObject leftBackground, rightBackground;
-	GameObject mainCamera;
+	public GameObject leftBackground, rightBackground;
+	public GameObject mainCamera;
+	public float xFactor;
+
 
 	// Use this for initialization
 	void Start () {
-		mainCamera = GameObject.Find ("MainCamera");
-		leftBackground = GameObject.Find ("background1");
-		rightBackground = GameObject.Find ("background2");
-
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (mainCamera.transform.position.x >= rightBackground.transform.position.x) {
-			Vector2 tmpPos = leftBackground.transform.position;
-			tmpPos.x += (rightBackground.transform.position.x-leftBackground.transform.position.x)*2;
+		float cameraX = mainCamera.GetComponent<Camera>().ScreenToWorldPoint(mainCamera.GetComponent<Camera>().rect.min).x;
+		Vector3 tmpPos;
+		if(leftBackground.GetComponent<Renderer>().bounds.max.x < cameraX)
+		{
+			tmpPos = rightBackground.transform.position;
+			tmpPos.x += rightBackground.GetComponent<Renderer>().bounds.size.x;
 			leftBackground.transform.position = tmpPos;
 
 			GameObject tmp = leftBackground;

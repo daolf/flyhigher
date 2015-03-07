@@ -8,13 +8,13 @@ public class IntroState : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	//	rigidbody2D.velocity = Vector;
-		rigidbody2D.AddForce (Vector2.right*introConstantSpeed);
-		rigidbody2D.gravityScale = 0;
+		GetComponent<Rigidbody2D>().AddForce (Vector2.right*introConstantSpeed);
+		GetComponent<Rigidbody2D>().gravityScale = 0;
 	}
 
 	void OnDisable()
 	{
-		rigidbody2D.AddForce(-Vector2.right*introConstantSpeed);
+		GetComponent<Rigidbody2D>().AddForce(-Vector2.right*introConstantSpeed);
 	}
 
 	// Update is called once per frame
