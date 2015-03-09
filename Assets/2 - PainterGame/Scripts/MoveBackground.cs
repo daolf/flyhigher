@@ -15,7 +15,7 @@ public class MoveBackground : MonoBehaviour {
 		movement = 0;
 		previousX = this.transform.position.x;
 		// TODO modify calculation of maxMovement
-		maxMovement = this.renderer.bounds.size.x - (float)10.5 ;
+		maxMovement = this.GetComponent<Renderer>().bounds.size.x - (float)10.5 ;
 	}
 
 	void FixedUpdate() {

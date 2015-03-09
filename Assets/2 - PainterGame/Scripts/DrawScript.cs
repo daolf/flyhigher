@@ -50,7 +50,7 @@ public class DrawScript : MonoBehaviour {
 		Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 		if(Input.GetMouseButton(0) && 
-		   collider2D == Physics2D.OverlapPoint(new Vector2(pz.x,pz.y))
+		   GetComponent<Collider2D>() == Physics2D.OverlapPoint(new Vector2(pz.x,pz.y))
 		   ){
 			drawPaint(pz);
 			updateScore(gain);
