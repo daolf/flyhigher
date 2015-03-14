@@ -74,10 +74,10 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleIdentifier: com.Company.ProductName
+  iPhoneBundleIdentifier: com.Pichopanda.Flyhigher
+  bundleIdentifier: com.Pichot.FlyHigher
   bundleVersion: 1.0
   preloadedAssets: []
-  iPhoneBundleIdentifier: com.Pichopanda.Flyhigher
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   xboxOneDisableKinectGpuReservation: 0
