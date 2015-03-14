@@ -5,7 +5,7 @@ PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
   AndroidProfiler: 0
-  defaultScreenOrientation: 4
+  defaultScreenOrientation: 2
   targetDevice: 2
   targetGlesGraphics: 1
   targetIOSGraphics: -1
@@ -77,12 +77,13 @@ PlayerSettings:
   bundleIdentifier: com.Company.ProductName
   bundleVersion: 1.0
   preloadedAssets: []
+  iPhoneBundleIdentifier: com.Pichopanda.Flyhigher
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   xboxOneDisableKinectGpuReservation: 0
   productGUID: 7a1139024e35b414ea828ce474bb7790
   AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 9
+  AndroidMinSdkVersion: 16
   AndroidPreferredInstallLocation: 1
   aotOptions: 
   apiCompatibilityLevel: 2
