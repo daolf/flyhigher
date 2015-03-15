@@ -6,4 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/2 - PainterGame/Scenes/MenuPaint.unity
+    path: Assets/2 - PainterGame/Scenes/MenuBeginPaint.unity
+  - enabled: 1
+    path: Assets/2 - PainterGame/Scenes/PainterGameLvl0.unity
+  - enabled: 1
+    path: Assets/2 - PainterGame/Scenes/MenuEndPaint.unity
