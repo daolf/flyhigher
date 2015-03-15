@@ -21,8 +21,11 @@ public class DrawScript : MonoBehaviour {
 	}
 
 	public void drawTache(Vector3 pz) {
-		//buffer = Instantiate(tachePrefab,new Vector3(pz.x,pz.y,-1), Quaternion.identity) as GameObject;
-		//buffer.transform.parent = GameObject.Find("background").transform;
+		buffer = Instantiate(tachePrefab,new Vector3(pz.x,pz.y,-1), Quaternion.identity) as Transform;	
+		if (buffer == null) {
+			print("erreur buffer null");		
+		}
+		buffer.transform.parent = GameObject.Find("background").transform;
 
 	}
 
