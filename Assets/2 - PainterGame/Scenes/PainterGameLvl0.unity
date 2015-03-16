@@ -169,7 +169,7 @@ Canvas:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 295152970}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -471,6 +471,12 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!114 &820229300
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11462264, guid: aa1c1b0f3648d4017b73e56e81ee1198,
+    type: 2}
+  m_PrefabInternal: {fileID: 402744008}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!224 &820229302
 RectTransform:
   m_PrefabParentObject: {fileID: 22462264, guid: aa1c1b0f3648d4017b73e56e81ee1198,
@@ -624,7 +630,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1069341483}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.55999994, y: -0, z: 0}
+  m_LocalPosition: {x: 2.55999994, y: 0, z: -.340000004}
   m_LocalScale: {x: 1, y: .834999979, z: 1}
   m_Children: []
   m_Father: {fileID: 858159564}
@@ -932,9 +938,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1249071188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e6e68eb9342d4650864844c79664b2e, type: 3}
+  m_Script: {fileID: 11500000, guid: 32678259bca5e49f6af711fc22045d79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endMenu: {fileID: 295152970}
+  score: {fileID: 1189557230}
 --- !u!212 &1249071191
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1024,7 +1032,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1249071188}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28d6327b64ffd42448760f14daee4315, type: 3}
+  m_Script: {fileID: 11500000, guid: b2fff1575e5d542cdb703cce61ea2ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1249071194
@@ -1038,6 +1046,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd63a183a76cb4895922dc694122c3cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tachePrefab: {fileID: 452092, guid: d0f75a45cba70473ba7690261d4d16f0, type: 2}
+  paintPrefab: {fileID: 424300, guid: f4f71065e7ab14745ae637b8afd3f922, type: 2}
+  textScore: {fileID: 820229300}
+  score: 0
+  gain: 500
+  perte: 1000
+  buffer: {fileID: 0}
+  speed: 0
+  movement: 0
+  previousX: 0
+  maxMovement: 0
+  endScroll: 0
 --- !u!114 &1249071195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1050,9 +1070,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  beginPaintScript: {fileID: 1249071190}
+  beginPaintScript: {fileID: 1249071193}
   mainPaintScript: {fileID: 1249071194}
-  endPaintScript: {fileID: 1249071193}
+  endPaintScript: {fileID: 1249071190}
 --- !u!1 &1985095631
 GameObject:
   m_ObjectHideFlags: 0
