@@ -74,7 +74,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleIdentifier: com.Pichot.FlyHigher
+  bundleIdentifier: com.Pichopanda.Flyhigher
   bundleVersion: 1.0
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
@@ -116,7 +116,7 @@ PlayerSettings:
   iOSLaunchScreenLandscape: {fileID: 0}
   iOSLaunchScreenBackgroundColor:
     serializedVersion: 2
-    rgba: 0
+    rgba: 4294967040
   iOSLaunchScreenFillPct: 1
   iOSLaunchScreenCustomXibPath: 
   AndroidTargetDevice: 0
