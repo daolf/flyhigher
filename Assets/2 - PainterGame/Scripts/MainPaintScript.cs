@@ -58,7 +58,7 @@ public class MainPaintScript : MonoBehaviour {
 		// TODO modify calculation of maxMovement
 		maxMovement = this.GetComponent<Renderer>().bounds.size.x - (float)10.5 ;
 		score = 0;
-		endMenu.GetComponent<Canvas> ().enabled = false;
+		endMenu.GetComponent<Canvas>().enabled = false;
 	}
 
 	void FixedUpdate() {
