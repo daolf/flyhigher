@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class TimeBarscript : MonoBehaviour {
 
 	public RectTransform timeTransform;
+	public Sprite gameHover;
 	private float cachedY;
 	private float minXValue;
 	private float maxXValue;
@@ -29,7 +30,15 @@ public class TimeBarscript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		CurrentTime -= 1;
+		if (CurrentTime > 0) {
+			CurrentTime -= 1;
+		} else {
+			// Game over
+			// Update is called once per frame
+			Application.LoadLevel("gameover");
+			//CurrentTime = (int) maxTime;
+		}
+		
 	}
 
 	private void HandleTime () {
