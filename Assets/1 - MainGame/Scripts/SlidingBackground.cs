@@ -7,9 +7,11 @@ public class SlidingBackground : MonoBehaviour {
 	public GameObject mainCamera;
 	public float xFactor;
 
+	int swapGroundGrassNextTime;
 
 	// Use this for initialization
 	void Start () {
+		swapGroundGrassNextTime = 0;
 	}
 	
 	// Update is called once per frame
@@ -25,6 +27,28 @@ public class SlidingBackground : MonoBehaviour {
 			GameObject tmp = leftBackground;
 			leftBackground = rightBackground;
 			rightBackground = tmp;
+
+			if(swapGroundGrassNextTime>0)
+			{
+				swapGroundGrass();
+				swapGroundGrassNextTime--;
+			}
 		}
+	}
+
+	public void swapGroundOnNextFrame() {
+		swapGroundGrassNextTime = 2;
+	}
+
+	void swapGroundGrass ()
+	{
+		SpriteRenderer rendererBG = rightBackground.GetComponent<SpriteRenderer>();
+		
+		rendererBG.sprite = Resources.Load<Sprite>("groundGrass");
+		BoxCollider2D boxCollider = rightBackground.GetComponent<BoxCollider2D>();
+		PolygonCollider2D polygonCollider = rightBackground.GetComponent<PolygonCollider2D>();
+		
+		boxCollider.enabled = false;
+		polygonCollider.enabled = true;
 	}
 }

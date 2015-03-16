@@ -166,8 +166,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 118867959}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.96999979, y: .379999995, z: -13.1700001}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 4.61000013, y: .519999981, z: -13.1700001}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 376984387}
   m_RootOrder: 1
@@ -646,7 +646,7 @@ RectTransform:
   m_RootOrder: 4
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -.862999976, y: 1.47300005}
+  m_AnchoredPosition: {x: -.860000014, y: 1.61000001}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &957501798
@@ -903,12 +903,7 @@ PolygonCollider2D:
       - {x: -.25320375, y: -.1577245}
       - {x: -.252335429, y: -.235000014}
       - {x: -.211346984, y: -.286466956}
-      - {x: -.127701163, y: -.281979561}
-      - {x: -.0990704298, y: -.244020462}
-      - {x: .0297604799, y: -.277694464}
-      - {x: .052752614, y: -.324323058}
-      - {x: .109281659, y: -.365988016}
-      - {x: .183853984, y: -.363635302}
+      - {x: .171304792, y: -.380585194}
       - {x: .255059838, y: -.282993793}
       - {x: .299341083, y: -.273502946}
       - {x: .355386138, y: -.29445982}
@@ -968,7 +963,7 @@ Transform:
   m_PrefabInternal: {fileID: 881195307}
   m_GameObject: {fileID: 1231583000}
   m_LocalRotation: {x: 0, y: 0, z: .128050566, w: .991767645}
-  m_LocalPosition: {x: -1.954, y: .730000019, z: -11.4899998}
+  m_LocalPosition: {x: -1.95000005, y: .866999984, z: -11.4899998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1519751297}
@@ -1254,8 +1249,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1680005695}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.100000001, y: .379999995, z: -13.1700001}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -7.48000002, y: .519999981, z: -13.1700001}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 376984387}
   m_RootOrder: 0
@@ -1365,11 +1360,14 @@ MonoBehaviour:
   guiComponent: {fileID: 2010495808}
   scoreIntLabel: {fileID: 466329787}
   gui: {fileID: 2010495808}
+  backgrounds: {fileID: 1025964513}
   state: 0
   scriptIntroControl: {fileID: 0}
   scriptPlanePhysics: {fileID: 1231583007}
   scriptIntroState: {fileID: 0}
+  scriptSlidingBackground: {fileID: 0}
   score: 0
+  ground: {fileID: 376984386}
 --- !u!114 &1704847863
 MonoBehaviour:
   m_ObjectHideFlags: 0
