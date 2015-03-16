@@ -16,6 +16,7 @@ public class MainPaintScript : MonoBehaviour {
 	public float previousX;
 	public float maxMovement;
 	public bool endScroll = false;
+	public GameObject endMenu;
 	
 	public void drawPaint(Vector3 pz) {
 		buffer = Instantiate(paintPrefab,new Vector3(pz.x,pz.y,-1), Quaternion.identity) as Transform;	
@@ -57,6 +58,7 @@ public class MainPaintScript : MonoBehaviour {
 		// TODO modify calculation of maxMovement
 		maxMovement = this.GetComponent<Renderer>().bounds.size.x - (float)10.5 ;
 		score = 0;
+		endMenu.GetComponent<Canvas> ().enabled = false;
 	}
 
 	void FixedUpdate() {
