@@ -18,7 +18,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/1 - MainGame/MainGame.unity
   - enabled: 0
-    path: Assets/2 - PainterGame/Scenes/PainterGame.unity
+    path: Assets/2 - PainterGame/Scenes/PainterGameLvl0.unity
   - enabled: 1
     path: Assets/3 - PropulsionGame/Scenes/IngameScene.unity
   - enabled: 1
