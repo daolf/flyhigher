@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	public void Painter () {
-		Application.LoadLevel("PainterGame");
+		Application.LoadLevel("PainterGameLvl0");
 	}
 
 	// Update is called once per frame
