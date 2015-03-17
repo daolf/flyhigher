@@ -401,7 +401,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 499176, guid: 842b1017dabc50d4192f4bfcb458a76d, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 21299660, guid: 842b1017dabc50d4192f4bfcb458a76d, type: 2}
       propertyPath: m_Sprite
@@ -632,7 +632,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 499176, guid: 842b1017dabc50d4192f4bfcb458a76d, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 21299660, guid: 842b1017dabc50d4192f4bfcb458a76d, type: 2}
       propertyPath: m_Sprite
@@ -941,7 +941,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 499176, guid: 842b1017dabc50d4192f4bfcb458a76d, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 21299660, guid: 842b1017dabc50d4192f4bfcb458a76d, type: 2}
       propertyPath: m_Sprite
@@ -987,13 +987,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1174464422}
+  - {fileID: 223450345}
   - {fileID: 223905842}
   - {fileID: 939423634}
-  - {fileID: 223450345}
   - {fileID: 2142735591}
   - {fileID: 670928110}
-  - {fileID: 887545136}
   - {fileID: 1953305927}
+  - {fileID: 887545136}
   m_Father: {fileID: 293824611}
   m_RootOrder: 2
 --- !u!1 &1387465025
@@ -1268,7 +1268,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 499176, guid: 842b1017dabc50d4192f4bfcb458a76d, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 21299660, guid: 842b1017dabc50d4192f4bfcb458a76d, type: 2}
       propertyPath: m_Sprite
@@ -1315,7 +1315,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 499176, guid: 842b1017dabc50d4192f4bfcb458a76d, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 21299660, guid: 842b1017dabc50d4192f4bfcb458a76d, type: 2}
       propertyPath: m_Sprite

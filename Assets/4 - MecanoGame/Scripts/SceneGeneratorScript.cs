@@ -29,6 +29,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		for(int i=0; i<COGS_NB; i++) {
 			cogs[i].setCogId(cogIds[i]);
 			cogs[i].setSpeedRatio(3.0f);
+			cogs[i].generator = this;
 		}
 	}
 	
@@ -36,4 +37,13 @@ public class SceneGeneratorScript : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	public PrimaryCog getCogToFind() {
+		return cogToFind;
+	}
+
+	public void cogFound()  {
+		Application.LoadLevel("mecano-win");
+	}
+
 }
