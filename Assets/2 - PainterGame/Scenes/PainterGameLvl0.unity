@@ -778,7 +778,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1069341483}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.55999994, y: 0, z: -.340000004}
+  m_LocalPosition: {x: .400000006, y: 0, z: -.340000004}
   m_LocalScale: {x: 1, y: .834999979, z: 1}
   m_Children: []
   m_Father: {fileID: 858159564}
@@ -941,8 +941,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.52587891e-05, y: .000282287598}
-  m_SizeDelta: {x: 0, y: -.619995117}
+  m_AnchoredPosition: {x: -1.52587891e-05, y: -.154861003}
+  m_SizeDelta: {x: 0, y: -.309689999}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1180004177
 MonoBehaviour:
@@ -1091,6 +1091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endMenu: {fileID: 277795468}
+  scoreText: {fileID: 669581023}
   score: {fileID: 931677657}
 --- !u!212 &1249071191
 SpriteRenderer:
