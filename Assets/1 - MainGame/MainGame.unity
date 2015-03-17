@@ -1400,7 +1400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   balloonPrefab: {fileID: 434282, guid: 511670866aca514429568bcb4ed9a813, type: 2}
-  backgroundRight: {fileID: 1025964513}
+  skyBG: {fileID: 1025964513}
 --- !u!114 &1704847862
 MonoBehaviour:
   m_ObjectHideFlags: 0
