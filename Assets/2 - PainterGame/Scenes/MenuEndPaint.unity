@@ -299,6 +299,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 11494948, guid: bac720813c5bd4aea8499616be1e6594, type: 2}
       propertyPath: m_Color.a
       value: 1
@@ -335,6 +336,8 @@ Prefab:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
+=======
+>>>>>>> parent of 946c8b4... tentative FIX resopnsive MENU
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bac720813c5bd4aea8499616be1e6594, type: 2}
   m_IsPrefabParent: 0
