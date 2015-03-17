@@ -41,12 +41,15 @@ public class MainPaintScript : MonoBehaviour {
 	}
 	
 	void OnMouseExit() {
-		Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);	
-		if(Input.GetMouseButton(0)){
-			drawTache(pz);
-			print("perte" + this.perte);
-			updateScore(this.perte);
-		}
+		// Actif que si le script est actif
+		if (this.enabled == true) {
+						Vector3 pz = Camera.main.ScreenToWorldPoint (Input.mousePosition);	
+						if (Input.GetMouseButton (0)) {
+								drawTache (pz);
+								print ("perte sure" + this.perte);
+								updateScore (this.perte);
+						}
+				}
 	}
 	
 	
