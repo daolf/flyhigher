@@ -371,7 +371,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1203289275}
-        m_MethodName: OnClickMenuPrincipal
+        m_MethodName: MiniGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -588,7 +588,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1203289269}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28d6327b64ffd42448760f14daee4315, type: 3}
+  m_Script: {fileID: 11500000, guid: e3ee8b1d6ce18084a91b7a1af1f2821b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1340076047
@@ -831,7 +831,7 @@ Prefab:
       objectReference: {fileID: 1203289275}
     - target: {fileID: 11417014, guid: c79a52706be3346999e6822988435c6d, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnClickReplay
+      value: Painter
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c79a52706be3346999e6822988435c6d, type: 2}
