@@ -30,6 +30,9 @@ sysinfo.txt
 Icon?
 ehthumbs.db
 [Tt]humbs.db*.apk
-lol
-lol/*
-lol/
+
+# ================== #
+#  Recurent problems #
+# ================== #
+/lol
+*.apk
