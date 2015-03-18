@@ -29,7 +29,9 @@ public class RandomBalloon : MonoBehaviour {
 		stopCreateRandomBalloon();
 		for (int i = 0; i < balloons.Count; i++) {
 			Transform balloon = balloons[i];
-			Destroy(balloon.gameObject);
+			if(balloon != null) {
+				Destroy(balloon.gameObject);
+			}
 		}
 		balloons.RemoveRange(0, balloons.Count);
 	}

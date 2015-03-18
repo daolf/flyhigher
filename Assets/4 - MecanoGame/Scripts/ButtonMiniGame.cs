@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ButtonMiniGame : MonoBehaviour {
 	
-	public void OnStart () {
+	public void OnClick () {
 	Application.LoadLevel("main");
 	}
 

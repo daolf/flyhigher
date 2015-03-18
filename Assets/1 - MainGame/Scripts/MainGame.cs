@@ -19,6 +19,7 @@ public class MainGame : MonoBehaviour {
 	public SlidingBackground scriptSlidingBackground;
 
 	public float score;
+	public float prevScore;
 
 	public GameObject ground;
 
@@ -60,10 +61,15 @@ public class MainGame : MonoBehaviour {
 		
 		case State.ANIM_LIFTOFF :
 			//Plane lift off with informations gotten in Intro sequence
-
+			prevScore = score;
 			score = scriptPlanePhysics.getDistanceFromOrigin();
 
 			setScore(score);
+
+			//FIN du jeu
+			if (score == prevScore ){
+				state = State.END_WIN;
+			}
 
 
 			break;
@@ -72,6 +78,7 @@ public class MainGame : MonoBehaviour {
 			setScore(score);
 			break;
 		case State.END_WIN :
+			Application.LoadLevel("EndMain");
 			break;
 		case State.END_LOOSE :
 			break;
