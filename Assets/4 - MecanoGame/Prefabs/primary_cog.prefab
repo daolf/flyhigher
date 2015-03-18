@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 499176}
   - 212: {fileID: 21299660}
   - 114: {fileID: 11460400}
-  - 114: {fileID: 11443982}
   - 58: {fileID: 5846114}
   m_Layer: 0
   m_Name: primary_cog
@@ -44,20 +43,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2
---- !u!114 &11443982
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 199176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 5
 --- !u!114 &11460400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70,14 +55,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cogs:
-  - {fileID: 21300000, guid: d1d47a8d80d245c47b68ad70fa2c1d4a, type: 3}
-  - {fileID: 21300000, guid: 22267a5ec07b0b747a2f0db1f11d6f89, type: 3}
-  - {fileID: 21300000, guid: a36a31caeab98a44abc1a039ee96aa1c, type: 3}
-  - {fileID: 21300000, guid: e5e2e7822d2b9eb4194581783e28f03c, type: 3}
-  - {fileID: 21300000, guid: 8f812fa6a21d3aa40960d702f5121e48, type: 3}
-  - {fileID: 21300000, guid: 08b99a055f41110429b305c937b55b9c, type: 3}
-  - {fileID: 21300000, guid: cb989915cdc0e574b87323445c88af8e, type: 3}
-  - {fileID: 21300000, guid: 807271feccf05c649a1d18b70788c0fc, type: 3}
+  - {fileID: 21300000, guid: e959b69ae8c46b943884acf3fefc5604, type: 3}
+  - {fileID: 21300000, guid: 4868f30b58a52414ebcc4827228eec0d, type: 3}
+  - {fileID: 21300000, guid: 2c3a1882e6dbcd442aaef6a49ab0ddb4, type: 3}
+  - {fileID: 21300000, guid: 1363bda16e6f53349b679f7e39270b04, type: 3}
+  - {fileID: 21300000, guid: c7696903a2b41d84aa2ccbe05edb9c95, type: 3}
+  - {fileID: 21300000, guid: 64b4b0ee630d9a94b9a268a15e80025c, type: 3}
+  - {fileID: 21300000, guid: 578cff57039b34b4ea15634b6b9bd9ab, type: 3}
+  - {fileID: 21300000, guid: 289493afeb70b9b4a84180fddce949e1, type: 3}
   generator: {fileID: 0}
 --- !u!212 &21299660
 SpriteRenderer:
@@ -104,7 +89,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

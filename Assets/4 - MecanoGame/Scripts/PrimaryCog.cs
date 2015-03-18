@@ -14,10 +14,15 @@ public class PrimaryCog : MonoBehaviour {
 	private float sinRatio = 1;
 	
 	private int cogId;
+	private bool isSelectable;
 
 	// Use this for initialization
 	void Start () {
-		setCogId(Random.Range(0, cogs.Length));
+		isSelectable = true;
+	}
+
+	public void setSelectable (bool s) {
+		isSelectable = s;
 	}
 	
 	/**
@@ -45,9 +50,9 @@ public class PrimaryCog : MonoBehaviour {
 		gameObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime);
 	}
 
-	void OnMouseUp() {
-		if (generator.getCogToFind().getCogId () == cogId) {
-			generator.cogFound();
+	void OnMouseDown() {
+		if (isSelectable) {
+			generator.cogSelected(this);
 		}
 	}
 }

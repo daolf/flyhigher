@@ -8,6 +8,9 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public PrimaryCog[] cogs = new PrimaryCog[COGS_NB];
 	public PrimaryCog cogToFind;
 
+	// position used to display an important cog...
+	public Transform importantCogPosition;
+
 	// Use this for initialization
 	void Start () {
 		cogToFind.setCogId(Random.Range(0, cogs.Length));
@@ -38,12 +41,50 @@ public class SceneGeneratorScript : MonoBehaviour {
 	
 	}
 
+	private void setGoodCogFind(PrimaryCog goodOne) {
+		goodOne.setSelectable(false);
+		goodOne.gameObject.AddComponent<SmoothTranslation> ();
+		SmoothTranslation st = goodOne.GetComponent<SmoothTranslation> ();
+		st.duration = 1;
+		st.from = goodOne.transform.position;
+		st.to = importantCogPosition.position;
+	}
+
 	public PrimaryCog getCogToFind() {
 		return cogToFind;
 	}
 
-	public void cogFound()  {
-		Application.LoadLevel("mecano-win");
+	// called when a cog other than the cog to find is selected
+	public void cogSelected(PrimaryCog cog) {
+		if(cog.getCogId() == cogToFind.getCogId()) {
+			setGoodCogFind(cog);
+			cog.gameObject.GetComponent<SpriteRenderer> ().color = new Color (143/255, 235/255, 40/255);
+			//TODO wait 
+			Application.LoadLevel("mecano-win");
+		}
+		else {
+			// may change later : for now, remove all other cogs than the selected
+			// and the good one
+			PrimaryCog goodOne = null;
+
+			for (int i=0; i<COGS_NB; i++) {
+				if(cogs[i] != cog && cogs[i].getCogId() != cogToFind.getCogId()) {
+					cogs[i].enabled = false;
+					Destroy(cogs[i].gameObject);
+				}
+				else if(cogs[i].getCogId() == cogToFind.getCogId()) {
+					goodOne = cogs[i];
+				}
+			}
+
+			if(goodOne) {
+				setGoodCogFind(goodOne);
+			}
+
+			// change bad one to red color
+			cog.gameObject.GetComponent<SpriteRenderer> ().color = new Color (255/255, 100/255, 0/255);
+			Destroy (cog);
+		}
 	}
 
 }
