@@ -29,7 +29,7 @@ public class PlanePhysics : MonoBehaviour {
 		//Quand on appuie on alège la gravité
 		if (Input.GetMouseButton(0)) {
 			print ("TouchMainGame");
-			rb.gravityScale = (float)( 0.06 / -Mathf.Abs(rb.velocity.y));
+			rb.gravityScale = (float)( 0.25 / -Mathf.Abs(rb.velocity.y));
 
 		}
 		//Si on appuie plus on la remet a la valeur initiale
@@ -46,7 +46,7 @@ public class PlanePhysics : MonoBehaviour {
 		transform.localRotation = theRotation;	
 
 		Vector3 dir = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
-		GetComponent<Rigidbody2D>().AddForce(dir*power*(float)0.4);
+		GetComponent<Rigidbody2D>().AddForce(dir*power*(float)0.5);
 
 	}
 
