@@ -8,11 +8,13 @@ public class PlanePhysics : MonoBehaviour {
 	public float rotationSpeed;
 	public Rigidbody2D rb;
 	public float initialGravity;
+	public Vector3 previousPos;
 
 	// Use this for initialization
 	void Start () {
 		origin = transform.position;
 		initialGravity = (float)0.4;
+		previousPos = transform.position;
 	}
 
 	void OnEnable() {
@@ -37,6 +39,10 @@ public class PlanePhysics : MonoBehaviour {
 			print ("NoTouch");
 			rb.gravityScale = initialGravity;
 		}
+
+		//To face direction
+		transform.right = rb.velocity;
+		//transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);;
 	}
 	
 
