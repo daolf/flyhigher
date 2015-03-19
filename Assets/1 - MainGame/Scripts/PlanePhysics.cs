@@ -9,11 +9,12 @@ public class PlanePhysics : MonoBehaviour {
 	public Rigidbody2D rb;
 	public float initialGravity;
 	public Vector3 previousPos;
+	private float bufferGravity;
 
 	// Use this for initialization
 	void Start () {
 		origin = transform.position;
-		initialGravity = (float)0.4;
+		initialGravity = (float)0.3;
 		previousPos = transform.position;
 	}
 
@@ -31,7 +32,11 @@ public class PlanePhysics : MonoBehaviour {
 		//Quand on appuie on alège la gravité
 		if (Input.GetMouseButton(0)) {
 			print ("TouchMainGame");
-			rb.gravityScale = (float)( 0.25 / -Mathf.Abs(rb.velocity.y));
+			//TODO rendre plus linéaire on alors on met un maximum sur y (rb.gravityscale)
+			bufferGravity = (float)( 0.3 / -Mathf.Abs(rb.velocity.y));
+			if (bufferGravity > -2 ) {
+				rb.gravityScale = bufferGravity;
+			}
 
 		}
 		//Si on appuie plus on la remet a la valeur initiale
