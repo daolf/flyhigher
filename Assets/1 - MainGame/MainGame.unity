@@ -486,6 +486,7 @@ GameObject:
   - 124: {fileID: 871242892}
   - 81: {fileID: 871242891}
   - 114: {fileID: 871242896}
+  - 114: {fileID: 871242897}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -570,6 +571,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTracked: {fileID: 1231583000}
+--- !u!114 &871242897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 871242890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1690312454, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1001 &877604883
 Prefab:
   m_ObjectHideFlags: 0
@@ -964,8 +979,8 @@ Rigidbody2D:
   m_GameObject: {fileID: 1231583000}
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: .0500000007
-  m_GravityScale: 9.99999997e-07
+  m_AngularDrag: 0
+  m_GravityScale: 1
   m_FixedAngle: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1049,6 +1064,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reactorForce: 0
   rotationSpeed: 0
+  rb: {fileID: 1231583002}
+  initialGravity: 0
 --- !u!1001 &1372437160
 Prefab:
   m_ObjectHideFlags: 0
@@ -1394,7 +1411,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1704847859}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86211819826b2444db1e5b88c65c37cb, type: 3}
   m_Name: 
@@ -1423,6 +1440,7 @@ MonoBehaviour:
   scriptIntroState: {fileID: 0}
   scriptSlidingBackground: {fileID: 0}
   score: 0
+  prevScore: 0
   ground: {fileID: 376984386}
 --- !u!114 &1704847863
 MonoBehaviour:

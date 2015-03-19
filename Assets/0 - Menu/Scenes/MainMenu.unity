@@ -256,7 +256,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11434302, guid: c79a52706be3346999e6822988435c6d, type: 2}
       propertyPath: m_Text
-      value: "D\xE9coler"
+      value: "D\xE9coller"
       objectReference: {fileID: 0}
     - target: {fileID: 11424122, guid: c79a52706be3346999e6822988435c6d, type: 2}
       propertyPath: m_Sprite
