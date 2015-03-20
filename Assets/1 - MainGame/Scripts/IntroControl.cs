@@ -14,6 +14,10 @@ public class IntroControl : MonoBehaviour {
 	public PowerBarGUI powerBarGUIScript;
 	public PivotGUI pivotGUIScript;
 
+	void OnDisable() {
+		powerBarGUIScript.enabled = false;
+		pivotGUIScript.enabled = false;
+	}
 
 	void Start () {
 		state = State.INIT;

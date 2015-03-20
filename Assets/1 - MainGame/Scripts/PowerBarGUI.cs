@@ -17,6 +17,12 @@ public class PowerBarGUI : MonoBehaviour {
 	public Transform whiteBG;
 
 
+	void OnDisable() {
+		print ("lola");
+		Destroy(redBar.gameObject);
+		Destroy (whiteBG.gameObject);
+	}
+
 
 	// Use this for initialization
 	void Start () {

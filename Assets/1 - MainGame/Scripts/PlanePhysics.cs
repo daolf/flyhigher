@@ -21,8 +21,8 @@ public class PlanePhysics : MonoBehaviour {
 		initialGravity = (float)0.3;
 		previousPos = transform.position;
 
-		bonusGravity = -(float)3.15;
-		malusGravity = (float)2;
+		bonusGravity = -(float)3.55;
+		malusGravity = (float)2.5;
 	}
 
 	void OnEnable() {

@@ -15,6 +15,10 @@ public class PivotGUI : MonoBehaviour {
 	public float pasAngle;
 	public GameObject arrowPivot;
 
+	void OnDisable() {
+		Destroy (this.gameObject);
+	}
+
 	// Use this for initialization
 	void Start () {
 		borneSupAngle= 71;

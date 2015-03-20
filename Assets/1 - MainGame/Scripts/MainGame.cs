@@ -67,6 +67,7 @@ public class MainGame : MonoBehaviour {
 
 			//TODO do animation
 
+			scriptIntroControl.enabled = false ;
 			scriptRandomObject.enabled = true;
 			state = State.MAIN;
 
