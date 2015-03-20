@@ -76,7 +76,7 @@ public class RandomObject : MonoBehaviour {
 			objects.Add ((Transform)Instantiate (goodCloudPrefab, new Vector3 (myX, y, -2), Quaternion.identity));
 		} else if (r < 0.75) {
 			//print ("pop BadBloud");
-			objects.Add ((Transform)Instantiate (goodCloudPrefab, new Vector3 (myX, y, -2), Quaternion.identity));
+			objects.Add ((Transform)Instantiate (badCloudPrefab, new Vector3 (myX, y, -2), Quaternion.identity));
 		} else {
 			//nothing
 			//print ("no pop");

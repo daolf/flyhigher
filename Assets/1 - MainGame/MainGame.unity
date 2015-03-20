@@ -274,8 +274,7 @@ GameObject:
 --- !u!60 &147451789
 PolygonCollider2D:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6020782, guid: 5d2c8c1f045f9405890400302fe712bc,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 147451788}
   m_Enabled: 1
@@ -1564,8 +1563,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22e4ac54895524f0280ab4534c7d6cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  balloonPrefab: {fileID: 487660, guid: 5d2c8c1f045f9405890400302fe712bc, type: 2}
-  goodCloudPrefab: {fileID: 487660, guid: 5d2c8c1f045f9405890400302fe712bc, type: 2}
+  balloonPrefab: {fileID: 434282, guid: 511670866aca514429568bcb4ed9a813, type: 2}
+  goodCloudPrefab: {fileID: 439422, guid: 6f02a784e5cda430c86ed4dced3430cc, type: 2}
   badCloudPrefab: {fileID: 487660, guid: 5d2c8c1f045f9405890400302fe712bc, type: 2}
   _xMin: 0
   _xMax: 0
