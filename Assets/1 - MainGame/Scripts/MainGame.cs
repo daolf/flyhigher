@@ -18,6 +18,8 @@ public class MainGame : MonoBehaviour {
 	public IntroState scriptIntroState;
 	public SlidingBackground scriptSlidingBackground;
 	public RandomObject scriptRandomObject;
+	public FuelControl scriptFuelControl;
+
 
 	public float score;
 	public float prevScore;
@@ -41,6 +43,9 @@ public class MainGame : MonoBehaviour {
 
 		scriptRandomObject = this.GetComponent<RandomObject> ();
 		scriptRandomObject.enabled = false;
+
+		scriptFuelControl = GetComponent<FuelControl>();
+		scriptFuelControl.enabled = false;
 
 	}
 
@@ -69,6 +74,7 @@ public class MainGame : MonoBehaviour {
 
 			scriptIntroControl.enabled = false ;
 			scriptRandomObject.enabled = true;
+			scriptFuelControl.enabled = true;
 			state = State.MAIN;
 
 

@@ -11,12 +11,16 @@ public class PlanePhysics : MonoBehaviour {
 	public Vector3 previousPos;
 	private float bufferGravity;
 
+	public enum FlappyState {BOUNCING, NORMAL};
+	public FlappyState flappyState;
+
 	//Bonus
 	private float malusGravity;
 	private float bonusGravity;
 
 	// Use this for initialization
 	void Start () {
+		flappyState = FlappyState.NORMAL;
 		origin = transform.position;
 		initialGravity = (float)0.3;
 		previousPos = transform.position;
@@ -37,11 +41,9 @@ public class PlanePhysics : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Quand on appuie on alège la gravité
-		if (Input.GetMouseButton(0)) {
+		if (flappyState == FlappyState.BOUNCING) {
 			//print ("TouchMainGame");
 			//TODO rendre plus linéaire on alors on met un maximum sur y (rb.gravityscale)
-			print ("Y velocity : " + rb.velocity.y );
-
 
 			// Pour rendre possible la remonté meme si on tombe trop vite
 			if (Mathf.Abs(rb.velocity.y) > 0.5) {
@@ -58,7 +60,6 @@ public class PlanePhysics : MonoBehaviour {
 			}
 
 		}
-		//Si on appuie plus on la remet a la valeur initiale
 		else {
 			//print ("NoTouch");
 			rb.gravityScale = initialGravity;
