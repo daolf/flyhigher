@@ -31,7 +31,7 @@ public class PlanePhysics : MonoBehaviour {
 	void Update () {
 		//Quand on appuie on alège la gravité
 		if (Input.GetMouseButton(0)) {
-			print ("TouchMainGame");
+			//print ("TouchMainGame");
 			//TODO rendre plus linéaire on alors on met un maximum sur y (rb.gravityscale)
 			bufferGravity = (float)( 0.3 / -Mathf.Abs(rb.velocity.y));
 			if (bufferGravity > -2 ) {
@@ -41,7 +41,7 @@ public class PlanePhysics : MonoBehaviour {
 		}
 		//Si on appuie plus on la remet a la valeur initiale
 		else {
-			print ("NoTouch");
+			//print ("NoTouch");
 			rb.gravityScale = initialGravity;
 		}
 
@@ -67,6 +67,11 @@ public class PlanePhysics : MonoBehaviour {
 
 	public float getDistanceFromOrigin() {
 		return Vector2.Distance(transform.position, this.origin);
+	}
+
+	public void onGoodCloud() {
+		print ("OnGOODCLOUD");
+		rb.gravityScale = -(float)3.15;
 	}
 
 
