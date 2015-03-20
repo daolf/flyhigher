@@ -19,9 +19,9 @@ public class PipesGeneratorScript : MonoBehaviour {
 	public Text toShow;
 
 	// constants for pipe grid size, and (x,y) of top-left corner
-	private const int GRID_SIZE = 8;
-	private const float ORIGIN_X = -4;
-	private const float ORIGIN_Y = -4;
+	private const int GRID_SIZE = 9;
+	private const float ORIGIN_X = 0;
+	private const float ORIGIN_Y = 0;
 
 	private PipeElement[,] grid;
 
@@ -34,6 +34,8 @@ public class PipesGeneratorScript : MonoBehaviour {
 	private int outputX;
 	private int outputY;
 	private PipeElement.Orientation outputOrientation;
+	
+	private Transform parentArea;
 
 	void Update() {
 		// really dirty proof of concept, check path every frame
@@ -97,44 +99,16 @@ public class PipesGeneratorScript : MonoBehaviour {
 		getNeighborCoordinates(inputX, inputY, inputOrientation, out firstX, out firstY);
 		return isValidPath(firstX, firstY, inputOrientation.opposite());
 	}
-
-	// true if a path from the given element come to a PIPE_OUT element
-	private bool isPathValid(PipeElement from, PipeElement.Orientation orgDirection) {
-		if (from == null)
-			return false;
-
-		if (from.type == PipeElement.Type.PIPE_OUT && from.orientation == orgDirection)
-			return true;
-
-		if (from.isConnected (orgDirection, PipeElement.Orientation.NORTH)
-		    	&& isPathValid (from.getNeighbor (PipeElement.Orientation.NORTH), PipeElement.Orientation.SOUTH))
-			return true;
-		if (from.isConnected (orgDirection, PipeElement.Orientation.SOUTH)
-		 	   && isPathValid (from.getNeighbor (PipeElement.Orientation.SOUTH), PipeElement.Orientation.NORTH))
-			return true;
-		if (from.isConnected (orgDirection, PipeElement.Orientation.EAST)
-		 	   && isPathValid (from.getNeighbor (PipeElement.Orientation.EAST), PipeElement.Orientation.WEST))
-			return true;
-		if (from.isConnected (orgDirection, PipeElement.Orientation.WEST)
-		    	&& isPathValid (from.getNeighbor (PipeElement.Orientation.WEST), PipeElement.Orientation.EAST))
-			return true;
-
-		return false;
-	}
+	
 	
 	// Use this for initialization
 	void Start () {
+		parentArea = GameObject.Find("/Container").transform;
 		grid = instanciateLevelFromXml (level);
 		instanciatePipeGrid (grid);
 		return;
 	}
-	
-	/**
-	 * Internal function used in instanciateLevelFromXml() to add neighbors.
-	 */
-	 private void setNeighborFromGrid(PipeElement[,] grid, int x, int y, PipeElement.Orientation dir) {
-	 	
-	 }
+
 	 
 	/**
 	 * Read a level from an XML document. 
@@ -243,31 +217,17 @@ public class PipesGeneratorScript : MonoBehaviour {
 						break;
 					}
 					
-					PipeElementScript pipeSprite;
-					pipeSprite = (PipeElementScript) 
-						Instantiate(prefab, new Vector3 (x + ORIGIN_X,
-						 		(GRID_SIZE - y - 1) + ORIGIN_Y, 0), Quaternion.identity);
+					PipeElementScript pipeSprite = (PipeElementScript) Instantiate(prefab);
 					
 					// set internal pipe element
 					pipeSprite.setPipeElement (origin);
+					
+					// set to the appropriate parent (Pipe Container) and position inside
+					pipeSprite.transform.parent = parentArea;
+					pipeSprite.transform.localPosition =
+						new Vector3 (x + ORIGIN_X, -y + ORIGIN_Y, 0);
 				}
 			}
 		}
-	}
-
-	/**
-	 * Temp function, not optimized : try to remove a "pipe", and to keep a valid
-	 * path between input and output. Pipes are represented here by an array of
-	 * booleans, their shape and orientation is not defined at this time.
-	 * return false when no more pipe seem to be possible to remove
-	 */
-	private bool oneStepErode(int[,] pipeMatrix) {
-		bool isValid = true;
-
-		return false;
-	}
-
-	private bool pipeMatrixIsValid(int[,] pipeMatrix) {
-		return false;
 	}
 }
