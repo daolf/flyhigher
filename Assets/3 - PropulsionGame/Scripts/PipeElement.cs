@@ -54,32 +54,60 @@ public class PipeElement
 	}
 
 	/**
-	 * Return true if orientations given are connected together by this pipe.
+	 * Set the output orientation, considering input comes from given direction.
+	 * Return false (and 'to' is not initalized) if given direction is not a valid
+	 * input... 
 	 */
-	public bool isConnected(Orientation a, Orientation b) {
-		// all pipes have their input oriented to the north by default
-		if(a != this.orientation) {
-			if(b != this.orientation)
-				return false;
-
-			// invert a and b, so we have always 'a' in the default direction
-			Orientation swap = a;
-			a = b;
-			b = swap;
-		}
-
-		// depending the pipe type, check if 'b' is in the good direction
+	public bool getDirectionConnected(Orientation from, out Orientation to) {
+		Orientation outDir = Orientation.NORTH;
+		
+		// depending the pipe type, get the 'output' direction (north is input)
 		switch(this.type) {
 		case Type.PIPE_I:
 			// two times 90° rotations
-			return b == a.opposite();
+			outDir = this.orientation.opposite();
+			break;
 		case Type.PIPE_L:
 			// 90° rotation
-			return b == a.rotateClockwise();
+			outDir = this.orientation.rotateClockwise();
+			break;
 		}
-
+		
+		// all pipes have their input oriented to the north by default
+		if(from == this.orientation) {
+			to = outDir;
+			return true;
+		}
+		else if(from == outDir) {
+			to = this.orientation;
+			return true;
+		}
+		
+		to = Orientation.NORTH;
 		return false;
 	}
+
+	/**
+	 * Return true if orientations given are connected together by this pipe.
+	 */
+	public bool isConnected(Orientation a, Orientation b) {
+		Orientation output;
+		if(getDirectionConnected(a, out output))
+			return output == b;
+		return false;
+	}
+	
+	/**
+	 * Return the connected neighbor if any (null otherwise).
+	 */
+	 public PipeElement getConnectedNeighbor(Orientation from) {
+	 	Orientation dir;
+	 	if(getDirectionConnected(from, out dir)) {
+	 		return getNeighbor(dir);
+	 	}
+	 	return null;
+	 }
+
 
 	/**
 	 * Get/set neighbors of this pipe.

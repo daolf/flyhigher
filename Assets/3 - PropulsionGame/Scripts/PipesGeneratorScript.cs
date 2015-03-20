@@ -23,17 +23,79 @@ public class PipesGeneratorScript : MonoBehaviour {
 	private const float ORIGIN_X = -4;
 	private const float ORIGIN_Y = -4;
 
-	private PipeElement origin = null;
+	private PipeElement[,] grid;
 
+	// input position and direction
+	private int inputX;
+	private int inputY;
+	private PipeElement.Orientation inputOrientation;
+	
+	// output (goal) position and direction
+	private int outputX;
+	private int outputY;
+	private PipeElement.Orientation outputOrientation;
 
 	void Update() {
 		// really dirty proof of concept, check path every frame
-		if (true) {//isPathValid (origin.getNeighbor(PipeElement.Orientation.SOUTH), origin.orientation.opposite())) {
+		if (checkReachDestination()) {//isPathValid (origin.getNeighbor(PipeElement.Orientation.SOUTH), origin.orientation.opposite())) {
 			toShow.text = "You win!";
 		}
 		else {
 			toShow.text = "Try again...";
 		}
+	}
+	
+	private PipeElement getPipeFromGrid(int x, int y) {
+		if(x >= 0 && x < GRID_SIZE && y >= 0 && y < GRID_SIZE)
+			return grid[x, y];
+		return null;
+	}
+	
+	private void getNeighborCoordinates(int x, int y, PipeElement.Orientation dir, out int newX, out int newY) {
+		newX = x;
+		newY = y;
+		switch(dir) {
+		case PipeElement.Orientation.NORTH:
+			newY--;
+			break;
+		case PipeElement.Orientation.SOUTH:
+			newY++;
+			break;
+		case PipeElement.Orientation.EAST:
+			newX++;
+			break;
+		case PipeElement.Orientation.WEST:
+			newX--;
+			break;
+		}
+	}
+	
+	private bool isValidPath(int x, int y, PipeElement.Orientation from) {
+		// before anything else, check if (x;y) is the valid output
+		if(x == outputX && y == outputY && from == outputOrientation)
+			return true;
+		
+		// check if the given (x;y) is a valid pipe
+		PipeElement target = getPipeFromGrid(x, y);
+		if(target == null)
+			return false;
+		
+		// check if the (x;y) pipe may be connected with the origin direction
+		PipeElement.Orientation outDir;
+		if(!target.getDirectionConnected(from, out outDir))
+			return false;
+		
+		// it's the time for... recursion \o/
+		int newX, newY;
+		getNeighborCoordinates(x, y, outDir, out newX, out newY);
+		return isValidPath(newX, newY, outDir.opposite());
+	}
+	
+	private bool checkReachDestination() {
+		// for now simple algorithm, supports only for single path
+		int firstX, firstY;
+		getNeighborCoordinates(inputX, inputY, inputOrientation, out firstX, out firstY);
+		return isValidPath(firstX, firstY, inputOrientation.opposite());
 	}
 
 	// true if a path from the given element come to a PIPE_OUT element
@@ -62,44 +124,18 @@ public class PipesGeneratorScript : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		PipeElement[,] grid = instanciateLevelFromXml (level);
+		grid = instanciateLevelFromXml (level);
 		instanciatePipeGrid (grid);
 		return;
-
-		// test level
-		origin = new PipeElement(PipeElement.Type.PIPE_IN, PipeElement.Orientation.SOUTH);
-		PipeElement cur, prev;
-
-		cur = new PipeElement(PipeElement.Type.PIPE_L, PipeElement.Orientation.NORTH);
-		origin.setNeighbor (PipeElement.Orientation.SOUTH, cur);
-		prev = cur;
-
-		cur = new PipeElement (PipeElement.Type.PIPE_I, PipeElement.Orientation.EAST);
-		prev.setNeighbor (PipeElement.Orientation.EAST, cur);
-		prev = cur;
-
-		cur = new PipeElement (PipeElement.Type.PIPE_L, PipeElement.Orientation.EAST);
-		prev.setNeighbor (PipeElement.Orientation.EAST, cur);
-		prev = cur;
-
-		cur = new PipeElement (PipeElement.Type.PIPE_I, PipeElement.Orientation.EAST);
-		prev.setNeighbor (PipeElement.Orientation.SOUTH, cur);
-		prev = cur;
-
-		cur = new PipeElement (PipeElement.Type.PIPE_OUT, PipeElement.Orientation.NORTH);
-		prev.setNeighbor (PipeElement.Orientation.SOUTH, cur);
-
-			
-
-		/*for (int i=0; i<GRID_SIZE; i++) {
-			for(int j=0; j<GRID_SIZE; j++) {
-				Instantiate(pipeL, new Vector3(i + ORIGIN_X, j + ORIGIN_Y, 0), Quaternion.identity);
-			}
-		}*/
-
-		instanciatePipePath (origin, 0, GRID_SIZE);
 	}
-
+	
+	/**
+	 * Internal function used in instanciateLevelFromXml() to add neighbors.
+	 */
+	 private void setNeighborFromGrid(PipeElement[,] grid, int x, int y, PipeElement.Orientation dir) {
+	 	
+	 }
+	 
 	/**
 	 * Read a level from an XML document. 
 	 */
@@ -111,6 +147,9 @@ public class PipesGeneratorScript : MonoBehaviour {
 		xml.LoadXml(document.text);
 		XmlNodeList levelNodes = xml.GetElementsByTagName("level");
 
+		// start and destination pipes
+		// TODO init
+		
 		XmlNodeList pipeNodes = levelNodes[0].ChildNodes;
 		foreach (XmlNode curNode in pipeNodes) {
 			if(curNode.Name == "pipe") {
@@ -137,12 +176,41 @@ public class PipesGeneratorScript : MonoBehaviour {
 					type = PipeElement.Type.PIPE_OUT;
 					break;
 				}
+				
+				switch(curNode.Attributes["dir"].Value) {
+				case "east":
+					orientation = PipeElement.Orientation.EAST;
+					break;
+				case "west":
+					orientation = PipeElement.Orientation.WEST;
+					break;
+				case "south":
+					orientation = PipeElement.Orientation.SOUTH;
+					break;
+				case "north":
+					orientation = PipeElement.Orientation.NORTH;
+					break;
+				}
 
 
 				if(x >= 0 && x < GRID_SIZE && y >= 0 && y < GRID_SIZE) {
 					// add the new pipe to the grid, and set its neighbors
 					PipeElement toAdd = new PipeElement(type, orientation);
 					grid[x, y] = toAdd;
+					
+					if(toAdd.type == PipeElement.Type.PIPE_IN) {
+						inputX = x;
+						inputY = y;
+						inputOrientation = orientation;
+					}
+					else if(toAdd.type == PipeElement.Type.PIPE_OUT) {
+						outputX = x;
+						outputY = y;
+						outputOrientation = orientation;
+					}
+						
+					// set neighbors
+					
 					// TODO neighbors
 				}
 			}
@@ -177,53 +245,14 @@ public class PipesGeneratorScript : MonoBehaviour {
 					
 					PipeElementScript pipeSprite;
 					pipeSprite = (PipeElementScript) 
-						Instantiate(prefab, new Vector3 (x + ORIGIN_X, y + ORIGIN_Y, 0), Quaternion.identity);
+						Instantiate(prefab, new Vector3 (x + ORIGIN_X,
+						 		(GRID_SIZE - y - 1) + ORIGIN_Y, 0), Quaternion.identity);
 					
 					// set internal pipe element
 					pipeSprite.setPipeElement (origin);
 				}
 			}
 		}
-	}
-
-	/**
-	 * Temporary, instanciate each pipe from the given one and all its neighbors.
-	 * (warning : this method will never return if there is a cycle in the path!)
-	 */
-	private void instanciatePipePath (PipeElement origin, int posx, int posy) {
-		if (origin == null || origin.isInstanciated)
-			return;
-		
-		PipeElementScript prefab = null;
-		switch(origin.type) {
-		case PipeElement.Type.PIPE_I:
-			prefab = pipeI;
-			break;
-		case PipeElement.Type.PIPE_L:
-			prefab = pipeL;
-			break;
-		case PipeElement.Type.PIPE_IN:
-			prefab = pipeIn;
-			break;
-		case PipeElement.Type.PIPE_OUT:
-			prefab = pipeOut;
-			break;
-		}
-
-		PipeElementScript pipeSprite;
-		pipeSprite = (PipeElementScript) 
-			Instantiate(prefab, new Vector3 (posx + ORIGIN_X, posy + ORIGIN_Y, 0), Quaternion.identity);
-
-		// set internal pipe element
-		pipeSprite.setPipeElement (origin);
-
-
-		origin.isInstanciated = true;
-		// recurcivity for each neighbor
-		instanciatePipePath (origin.getNeighbor (PipeElement.Orientation.NORTH), posx, posy + 1);
-		instanciatePipePath (origin.getNeighbor (PipeElement.Orientation.SOUTH), posx, posy - 1);
-		instanciatePipePath (origin.getNeighbor (PipeElement.Orientation.WEST), posx - 1, posy);
-		instanciatePipePath (origin.getNeighbor (PipeElement.Orientation.EAST), posx + 1, posy);
 	}
 
 	/**
