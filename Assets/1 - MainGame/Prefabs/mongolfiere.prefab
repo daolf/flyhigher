@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 434282}
   - 212: {fileID: 21231514}
   - 60: {fileID: 6008530}
-  - 114: {fileID: 11470178}
   m_Layer: 0
   m_Name: mongolfiere
   m_TagString: Untagged
@@ -162,17 +161,6 @@ PolygonCollider2D:
       - {x: .400000006, y: -2.98000002}
       - {x: .400000006, y: -3.17000008}
       - {x: .310000002, y: -3.17000008}
---- !u!114 &11470178
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 146694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74f3e7e2c02d04fe29026b6be6e7b7ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &21231514
 SpriteRenderer:
   m_ObjectHideFlags: 1

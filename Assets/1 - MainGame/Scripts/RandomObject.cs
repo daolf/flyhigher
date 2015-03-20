@@ -67,19 +67,19 @@ public class RandomObject : MonoBehaviour {
 		float r = Random.Range (0F, 1F);
 
 
-		print ("r= "+ r + "x = " + x + " paddleX = " + paddleX);
+		//print ("r= "+ r + "x = " + x + " paddleX = " + paddleX);
 		if (r < 0.25) {
-			print ("pop BallonPrefab");
+			//print ("pop BallonPrefab");
 			objects.Add ((Transform)Instantiate (balloonPrefab, new Vector3 (myX, y, -2), Quaternion.identity));
 		} else if (r < 0.5) {
-			print ("pop GoodCloud");
+			//print ("pop GoodCloud");
 			objects.Add ((Transform)Instantiate (goodCloudPrefab, new Vector3 (myX, y, -2), Quaternion.identity));
 		} else if (r < 0.75) {
-			print ("pop BadBloud");
+			//print ("pop BadBloud");
 			objects.Add ((Transform)Instantiate (goodCloudPrefab, new Vector3 (myX, y, -2), Quaternion.identity));
 		} else {
 			//nothing
-			print ("no pop");
+			//print ("no pop");
 		}
 	}
 }

@@ -33,7 +33,19 @@ public class PlanePhysics : MonoBehaviour {
 		if (Input.GetMouseButton(0)) {
 			//print ("TouchMainGame");
 			//TODO rendre plus linéaire on alors on met un maximum sur y (rb.gravityscale)
-			bufferGravity = (float)( 0.3 / -Mathf.Abs(rb.velocity.y));
+			print ("Y velocity : " + rb.velocity.y );
+
+
+			// Pour rendre possible la remonté meme si on tombe trop vite
+			if (Mathf.Abs(rb.velocity.y) > 0.5) {
+				print ("CAP T");
+				bufferGravity = (float)-1;
+			}
+			else {
+				bufferGravity = (float)( 0.3 / -Mathf.Abs(rb.velocity.y));
+			}
+
+
 			if (bufferGravity > -2 ) {
 				rb.gravityScale = bufferGravity;
 			}
@@ -70,7 +82,6 @@ public class PlanePhysics : MonoBehaviour {
 	}
 
 	public void onGoodCloud() {
-		print ("OnGOODCLOUD");
 		rb.gravityScale = -(float)3.15;
 	}
 
