@@ -10,6 +10,8 @@ GameObject:
   - 4: {fileID: 487660}
   - 212: {fileID: 21276018}
   - 60: {fileID: 6020782}
+  - 114: {fileID: 11426086}
+  - 114: {fileID: 11483364}
   m_Layer: 0
   m_Name: badCloud
   m_TagString: Untagged
@@ -161,6 +163,28 @@ PolygonCollider2D:
       - {x: .400000006, y: -2.98000002}
       - {x: .400000006, y: -3.17000008}
       - {x: .310000002, y: -3.17000008}
+--- !u!114 &11426086
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 133530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40884a7c0ba8246b1851271a354a7d65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11483364
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 133530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cebd90c8b2cc41c7a7b7bfc2fe49244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21276018
 SpriteRenderer:
   m_ObjectHideFlags: 1

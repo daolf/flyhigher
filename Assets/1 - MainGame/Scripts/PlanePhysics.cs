@@ -11,11 +11,18 @@ public class PlanePhysics : MonoBehaviour {
 	public Vector3 previousPos;
 	private float bufferGravity;
 
+	//Bonus
+	private float malusGravity;
+	private float bonusGravity;
+
 	// Use this for initialization
 	void Start () {
 		origin = transform.position;
 		initialGravity = (float)0.3;
 		previousPos = transform.position;
+
+		bonusGravity = -(float)3.15;
+		malusGravity = (float)2;
 	}
 
 	void OnEnable() {
@@ -82,7 +89,11 @@ public class PlanePhysics : MonoBehaviour {
 	}
 
 	public void onGoodCloud() {
-		rb.gravityScale = -(float)3.15;
+		rb.gravityScale = bonusGravity;
+	}
+
+	public void onBadCloud() {
+		rb.gravityScale = malusGravity;
 	}
 
 
