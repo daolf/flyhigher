@@ -1066,6 +1066,7 @@ MonoBehaviour:
   rotationSpeed: 0
   rb: {fileID: 1231583002}
   initialGravity: 0
+  previousPos: {x: 0, y: 0, z: 0}
 --- !u!1001 &1372437160
 Prefab:
   m_ObjectHideFlags: 0
@@ -1411,13 +1412,22 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1704847859}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86211819826b2444db1e5b88c65c37cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 22e4ac54895524f0280ab4534c7d6cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   balloonPrefab: {fileID: 434282, guid: 511670866aca514429568bcb4ed9a813, type: 2}
+  goodCloudPrefab: {fileID: 434282, guid: 511670866aca514429568bcb4ed9a813, type: 2}
+  badCloudPrefab: {fileID: 434282, guid: 511670866aca514429568bcb4ed9a813, type: 2}
+  _xMin: 0
+  _xMax: 0
+  _yMin: 0
+  _yMax: 0
   skyBG: {fileID: 1025964513}
+  rightBG: {fileID: 0}
+  plane: {fileID: 1231583000}
+  lastPos: 0
 --- !u!114 &1704847862
 MonoBehaviour:
   m_ObjectHideFlags: 0
