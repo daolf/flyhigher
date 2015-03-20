@@ -17,7 +17,7 @@ public class PivotGUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		borneSupAngle= 80;
+		borneSupAngle= 71;
 		borneInfAngle= 0;
 		pasAngle=2;
 	}
