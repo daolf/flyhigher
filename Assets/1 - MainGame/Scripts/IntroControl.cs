@@ -31,10 +31,10 @@ public class IntroControl : MonoBehaviour {
 			switch (state) 
 			{
 			case State.INIT:
-				state = State.ONECLICK;
 				power = powerBarGUIScript.barValue*1000;
 				powerBarGUIScript.state = PowerBarGUI.State.stop;
 				pivotGUIScript.state = PivotGUI.State.mov;
+				state = State.ONECLICK;
 
 				break;
 			case State.ONECLICK:
