@@ -1340,7 +1340,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11448784, guid: 0bd3443aecf484f97bd3633f712cb6b8, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11448784, guid: 0bd3443aecf484f97bd3633f712cb6b8, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -1354,6 +1354,18 @@ Prefab:
       propertyPath: buttonPause
       value: 
       objectReference: {fileID: 1019820696}
+    - target: {fileID: 11448784, guid: 0bd3443aecf484f97bd3633f712cb6b8, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11448784, guid: 0bd3443aecf484f97bd3633f712cb6b8, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: rollBackState
+      objectReference: {fileID: 0}
+    - target: {fileID: 11448784, guid: 0bd3443aecf484f97bd3633f712cb6b8, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0bd3443aecf484f97bd3633f712cb6b8, type: 2}
   m_IsPrefabParent: 0
@@ -2041,6 +2053,7 @@ GameObject:
   - 222: {fileID: 1393623413}
   - 114: {fileID: 1393623412}
   - 114: {fileID: 1393623411}
+  - 114: {fileID: 1393623414}
   m_Layer: 5
   m_Name: Reprendre
   m_TagString: Untagged
@@ -2116,6 +2129,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1393623414}
+        m_MethodName: rollBackState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1393623412
@@ -2145,6 +2170,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1393623409}
+--- !u!114 &1393623414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1393623409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92717c7514d0044b9ae11db458fabe9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainGame: {fileID: 1704847862}
 --- !u!1 &1421255777
 GameObject:
   m_PrefabParentObject: {fileID: 133688, guid: a3134788d18b01644974379de07a0cf2, type: 2}

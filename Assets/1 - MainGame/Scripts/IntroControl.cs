@@ -26,24 +26,13 @@ public class IntroControl : MonoBehaviour {
 		pivotGUIScript = GUIObject.GetComponentInChildren<PivotGUI>();
 	}
 
-	void goBackOneState() {
-		switch (state) {
-			case State.ONECLICK:
-				state = State.INIT;
-			break;
-		case State.TWOCLICK:
-			state = State.ONECLICK;
-			break;
-		}
-	}
+
 	
 	void Update () {
-		if(! GetComponentInParent<MainGame> ().isPause && Input.GetMouseButtonDown(0)  )
-		{
-			switch (state) 
-			{
+		if (! GetComponentInParent<MainGame> ().isPause && Input.GetMouseButtonDown (0)) {
+			switch (state) {
 			case State.INIT:
-				power = powerBarGUIScript.barValue*1000;
+				power = powerBarGUIScript.barValue * 1000;
 				powerBarGUIScript.state = PowerBarGUI.State.stop;
 				pivotGUIScript.state = PivotGUI.State.mov;
 				state = State.ONECLICK;
@@ -56,7 +45,22 @@ public class IntroControl : MonoBehaviour {
 				break;
 			case State.TWOCLICK:
 				state = State.TWOCLICK;
-					break;
+				break;
+			}
+		} else {
+			switch (state) {
+			case State.INIT:
+				powerBarGUIScript.state = PowerBarGUI.State.mov;
+				pivotGUIScript.state = PivotGUI.State.mov;
+				break;
+			case State.ONECLICK:
+				powerBarGUIScript.state = PowerBarGUI.State.stop;
+				pivotGUIScript.state = PivotGUI.State.mov;
+				break;
+			case State.TWOCLICK:
+				powerBarGUIScript.state = PowerBarGUI.State.stop;
+				pivotGUIScript.state = PivotGUI.State.stop;
+				break;
 			}
 		}
 	}
