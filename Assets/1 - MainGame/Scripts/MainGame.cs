@@ -8,9 +8,11 @@ public class MainGame : MonoBehaviour {
 	public GameObject guiComponent;
 	public GameObject scoreContainer;
 	public GameObject gui;
+	public GameObject endMenu;
 	public GameObject backgrounds;
 	public Score guiScore;
 	public Score guiBestScore;
+	public Button bouttonPause;
 
 	public enum State {INTRO,ANIM_LIFTOFF,MAIN,END_WIN,END_LOOSE};
 	public State state;
@@ -32,6 +34,9 @@ public class MainGame : MonoBehaviour {
 	public float prevY;
 	// Use this for initialization
 	void Start () {
+
+		Time.timeScale = 1;
+
 		scriptIntroControl = this.GetComponent<IntroControl> ();
 		scriptIntroControl.enabled = true;
 
@@ -87,6 +92,10 @@ public class MainGame : MonoBehaviour {
 				score = scriptPlanePhysics.getDistanceFromOrigin ();
 				setScore (score);
 
+			//Si on s'arrête sur la piste d'aterrisage
+				if (scriptPlanePhysics.rb.velocity.x <= 0.2) {
+					state = State.END_LOOSE;
+				}
 			//On passe a l'état main quand on arrete de monter
 
 				if (scriptPlanePhysics.transform.position.y < prevY) {
@@ -106,15 +115,18 @@ public class MainGame : MonoBehaviour {
 
 
 
-			//FIN du jeu
-				if (score == prevScore) {
-					state = State.END_WIN;
-				}
 				break;
 			case State.END_WIN:
 				Application.LoadLevel ("EndMain");
 				break;
 			case State.END_LOOSE:
+				//Fin du jeu
+				Time.timeScale = 0;
+
+				bouttonPause.image.enabled = false;
+				bouttonPause.enabled = false;
+				endMenu.GetComponent<Canvas>().enabled = true;
+
 				break;
 			}
 		} 
