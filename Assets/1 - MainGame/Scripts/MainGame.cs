@@ -10,6 +10,7 @@ public class MainGame : MonoBehaviour {
 	public GameObject gui;
 	public GameObject backgrounds;
 	public Score guiScore;
+	public Score guiBestScore;
 
 	public enum State {INTRO,ANIM_LIFTOFF,MAIN,END_WIN,END_LOOSE};
 	public State state;
@@ -53,6 +54,7 @@ public class MainGame : MonoBehaviour {
 
 		prevY = scriptPlanePhysics.transform.position.y;
 		isPause = false;
+		guiBestScore.value = PlayerPrefs.GetInt (Constants.MAIN_GAME_HIGH_SCORE);
 
 	}
 
@@ -121,6 +123,10 @@ public class MainGame : MonoBehaviour {
 	void setScore(float score)
 	{
 		guiScore.value = (int)score;
+		if (score > PlayerPrefs.GetInt (Constants.MAIN_GAME_HIGH_SCORE)) {
+			guiBestScore.value = (int)score;
+			PlayerPrefs.SetInt(Constants.MAIN_GAME_HIGH_SCORE,(int)score);
+		}
 	}
 
 }

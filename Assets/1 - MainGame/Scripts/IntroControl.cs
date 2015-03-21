@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public class IntroControl : MonoBehaviour {
 
@@ -23,6 +24,17 @@ public class IntroControl : MonoBehaviour {
 		state = State.INIT;
 		powerBarGUIScript = GUIObject.GetComponentInChildren<PowerBarGUI>();
 		pivotGUIScript = GUIObject.GetComponentInChildren<PivotGUI>();
+	}
+
+	void goBackOneState() {
+		switch (state) {
+			case State.ONECLICK:
+				state = State.INIT;
+			break;
+		case State.TWOCLICK:
+			state = State.ONECLICK;
+			break;
+		}
 	}
 	
 	void Update () {
