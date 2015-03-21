@@ -6,9 +6,10 @@ public class MainGame : MonoBehaviour {
 
 	public GameObject plane;
 	public GameObject guiComponent;
-	public GameObject scoreIntLabel;
+	public GameObject scoreContainer;
 	public GameObject gui;
 	public GameObject backgrounds;
+	public Score guiScore;
 
 	public enum State {INTRO,ANIM_LIFTOFF,MAIN,END_WIN,END_LOOSE};
 	public State state;
@@ -116,7 +117,7 @@ public class MainGame : MonoBehaviour {
 
 	void setScore(float score)
 	{
-		scoreIntLabel.GetComponent<Text>().text = ""+score;
+		guiScore.value = (int)score;
 	}
 
 }
