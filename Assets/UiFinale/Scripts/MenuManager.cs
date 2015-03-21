@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour {
 
 	PauseScript pause;
 	public GameObject game;
 	public string scene;
+	public Button bouttonPause;
 
 	public void OnResume() {
+		bouttonPause.image.enabled = true;
+		bouttonPause.enabled = true;
 		GetComponent<Canvas> ().enabled = false;
 		Time.timeScale = 1;
 		game.GetComponent<MainGame> ().isPause = false;

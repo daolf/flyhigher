@@ -1350,6 +1350,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11474034, guid: 0bd3443aecf484f97bd3633f712cb6b8, type: 2}
+      propertyPath: buttonPause
+      value: 
+      objectReference: {fileID: 1019820696}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0bd3443aecf484f97bd3633f712cb6b8, type: 2}
   m_IsPrefabParent: 0
@@ -1898,6 +1902,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   game: {fileID: 1704847859}
   scene: MainGame
+  bouttonPause: {fileID: 1019820696}
 --- !u!1001 &1372437160
 Prefab:
   m_ObjectHideFlags: 0
@@ -2199,6 +2204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   game: {fileID: 1704847859}
   scene: MainGame
+  bouttonPause: {fileID: 0}
 --- !u!114 &1454397243
 MonoBehaviour:
   m_ObjectHideFlags: 0
