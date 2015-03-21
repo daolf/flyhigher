@@ -13,6 +13,8 @@ public class FuelControl : MonoBehaviour {
 
 	bool empty { get {return fuelBarBehaviors.Count == 0;}}
 
+
+
 	void Start () {
 		planePhysic = plane.GetComponent<PlanePhysics>();
 		foreach (GameObject behavior in fuelBars) {
@@ -21,7 +23,7 @@ public class FuelControl : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		if(Input.GetMouseButton(0) && !empty)
+		if(Input.GetMouseButton(0) && !empty )
 		{
 			planePhysic.flappyState = PlanePhysics.FlappyState.BOUNCING;
 			useFuel();

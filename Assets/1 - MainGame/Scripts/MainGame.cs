@@ -26,6 +26,8 @@ public class MainGame : MonoBehaviour {
 
 	public GameObject ground;
 
+
+	public float prevY;
 	// Use this for initialization
 	void Start () {
 		scriptIntroControl = this.GetComponent<IntroControl> ();
@@ -46,6 +48,9 @@ public class MainGame : MonoBehaviour {
 
 		scriptFuelControl = GetComponent<FuelControl>();
 		scriptFuelControl.enabled = false;
+
+
+		prevY = scriptPlanePhysics.transform.position.y;
 
 	}
 
@@ -74,15 +79,28 @@ public class MainGame : MonoBehaviour {
 
 			scriptIntroControl.enabled = false ;
 			scriptRandomObject.enabled = true;
-			scriptFuelControl.enabled = true;
-			state = State.MAIN;
 
+
+			//On passe a l'état main quand on arrete de monter
+
+			if (scriptPlanePhysics.transform.position.y < prevY ) {
+				state = State.MAIN;
+			}
+			else {
+				prevY = scriptPlanePhysics.transform.position.y; 
+			}
 
 			break;
 		case State.MAIN :
+
+			//Wait for the fuel not to be consume with the first on touch
+			scriptFuelControl.enabled = true;
+			//On active l'intéraction fuel
 			score = scriptPlanePhysics.getDistanceFromOrigin();
 			setScore(score);
-			
+
+
+
 			//FIN du jeu
 			if (score == prevScore ){
 				state = State.END_WIN;
