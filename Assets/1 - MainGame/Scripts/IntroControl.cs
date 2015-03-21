@@ -26,7 +26,7 @@ public class IntroControl : MonoBehaviour {
 	}
 	
 	void Update () {
-		if(Input.GetMouseButtonDown(0))
+		if(! GetComponentInParent<MainGame> ().isPause && Input.GetMouseButtonDown(0)  )
 		{
 			switch (state) 
 			{
