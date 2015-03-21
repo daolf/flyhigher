@@ -80,7 +80,8 @@ public class MainGame : MonoBehaviour {
 
 			scriptIntroControl.enabled = false ;
 			scriptRandomObject.enabled = true;
-
+			score = scriptPlanePhysics.getDistanceFromOrigin();
+			setScore(score);
 
 			//On passe a l'état main quand on arrete de monter
 
