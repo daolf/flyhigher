@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class MainPaintScript : MonoBehaviour {
 
@@ -82,7 +83,8 @@ public class MainPaintScript : MonoBehaviour {
 	void Update () {
 		Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-		if (!GetComponentInParent<ManagerPaint> ().isPause) {
+		if (!GetComponentInParent<ManagerPaint> ().isPause &&
+		    !EventSystem.current.IsPointerOverGameObject()) {
 
 			if (Input.GetMouseButton (0) && 
 				GetComponent<Collider2D> () == Physics2D.OverlapPoint (new Vector2 (pz.x, pz.y))
