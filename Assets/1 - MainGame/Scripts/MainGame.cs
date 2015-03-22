@@ -8,8 +8,11 @@ public class MainGame : MonoBehaviour {
 	public GameObject guiComponent;
 	public GameObject scoreContainer;
 	public GameObject gui;
+	public GameObject endMenu;
 	public GameObject backgrounds;
 	public Score guiScore;
+	public Score guiBestScore;
+	public Button bouttonPause;
 
 	public enum State {INTRO,ANIM_LIFTOFF,MAIN,END_WIN,END_LOOSE};
 	public State state;
@@ -27,10 +30,13 @@ public class MainGame : MonoBehaviour {
 
 	public GameObject ground;
 
-
+	public bool isPause;
 	public float prevY;
 	// Use this for initialization
 	void Start () {
+
+		Time.timeScale = 1;
+
 		scriptIntroControl = this.GetComponent<IntroControl> ();
 		scriptIntroControl.enabled = true;
 
@@ -52,6 +58,8 @@ public class MainGame : MonoBehaviour {
 
 
 		prevY = scriptPlanePhysics.transform.position.y;
+		isPause = false;
+		guiBestScore.value = PlayerPrefs.GetInt (Constants.MAIN_GAME_HIGH_SCORE);
 
 	}
 
@@ -59,66 +67,78 @@ public class MainGame : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		switch (state) {
-		case State.INTRO :
+		if (!isPause) {
+			switch (state) {
+			case State.INTRO:
 			//If in the final state of introControl, leave the state
-			if(scriptIntroControl.state == IntroControl.State.TWOCLICK) {
-				scriptIntroState.enabled = false;
-				scriptPlanePhysics.enabled = true;
+				if (scriptIntroControl.state == IntroControl.State.TWOCLICK) {
+					scriptIntroState.enabled = false;
+					scriptPlanePhysics.enabled = true;
 
-				scriptPlanePhysics.decoller(scriptIntroControl.angle,scriptIntroControl.power);
-				ground.GetComponent<SlidingBackground>().swapGroundOnNextFrame();
-				scriptPlanePhysics.setOrigin();
-				state = State.ANIM_LIFTOFF;
-			}
-			break;
+					scriptPlanePhysics.decoller (scriptIntroControl.angle, scriptIntroControl.power);
+					ground.GetComponent<SlidingBackground> ().swapGroundOnNextFrame ();
+					scriptPlanePhysics.setOrigin ();
+					state = State.ANIM_LIFTOFF;
+				}
+				break;
 		
-		case State.ANIM_LIFTOFF :
+			case State.ANIM_LIFTOFF:
 			//Plane lift off with informations gotten in Intro sequence
 
 			//TODO do animation
 
-			scriptIntroControl.enabled = false ;
-			scriptRandomObject.enabled = true;
-			score = scriptPlanePhysics.getDistanceFromOrigin();
-			setScore(score);
+				scriptIntroControl.enabled = false;
+				scriptRandomObject.enabled = true;
+				score = scriptPlanePhysics.getDistanceFromOrigin ();
+				setScore (score);
 
+			//Si on s'arrête sur la piste d'aterrisage
+				if (scriptPlanePhysics.rb.velocity.x <= 0.2) {
+					state = State.END_LOOSE;
+				}
 			//On passe a l'état main quand on arrete de monter
 
-			if (scriptPlanePhysics.transform.position.y < prevY ) {
-				state = State.MAIN;
-			}
-			else {
-				prevY = scriptPlanePhysics.transform.position.y; 
-			}
+				if (scriptPlanePhysics.transform.position.y < prevY) {
+					state = State.MAIN;
+				} else {
+					prevY = scriptPlanePhysics.transform.position.y; 
+				}
 
-			break;
-		case State.MAIN :
+				break;
+			case State.MAIN:
 
 			//Wait for the fuel not to be consume with the first on touch
-			scriptFuelControl.enabled = true;
+				scriptFuelControl.enabled = true;
 			//On active l'intéraction fuel
-			score = scriptPlanePhysics.getDistanceFromOrigin();
-			setScore(score);
+				score = scriptPlanePhysics.getDistanceFromOrigin ();
+				setScore (score);
 
 
 
-			//FIN du jeu
-			if (score == prevScore ){
-				state = State.END_WIN;
+				break;
+			case State.END_WIN:
+				Application.LoadLevel ("EndMain");
+				break;
+			case State.END_LOOSE:
+				//Fin du jeu
+				Time.timeScale = 0;
+
+				bouttonPause.image.enabled = false;
+				bouttonPause.enabled = false;
+				endMenu.GetComponent<Canvas>().enabled = true;
+
+				break;
 			}
-			break;
-		case State.END_WIN :
-			Application.LoadLevel("EndMain");
-			break;
-		case State.END_LOOSE :
-			break;
-		}
+		} 
 	}
 
 	void setScore(float score)
 	{
 		guiScore.value = (int)score;
+		if (score > PlayerPrefs.GetInt (Constants.MAIN_GAME_HIGH_SCORE)) {
+			guiBestScore.value = (int)score;
+			PlayerPrefs.SetInt(Constants.MAIN_GAME_HIGH_SCORE,(int)score);
+		}
 	}
 
 }

@@ -44,15 +44,16 @@ public class PivotGUI : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		arrowPivot.transform.eulerAngles = new Vector3(0, 0, angle); 
-		switch (state) {
-		case State.mov:
-			incremAngle();
-			break;
+		if (! GetComponentInParent<MainGame> ().isPause) {
+			arrowPivot.transform.eulerAngles = new Vector3 (0, 0, angle); 
+			switch (state) {
+			case State.mov:
+				incremAngle ();
+				break;
 			
-		case State.stop:
-			break;
+			case State.stop:
+				break;
+			}
 		}
-
 	}
 }

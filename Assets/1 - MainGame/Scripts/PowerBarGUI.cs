@@ -54,17 +54,19 @@ public class PowerBarGUI : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		Bounds redBarBounds = redBar.GetComponent<Renderer>().bounds;
-		//redBarBounds.size = new Vector3(redBarBounds.size.x, defaultSize.y*barValue);
-		redBar.transform.localScale = new Vector3(redBar.transform.localScale.x, defaultSize.y*barValue);
-		switch (state) {
-		case State.mov:
-			incremValue();
-			break;
+		if (! GetComponentInParent<MainGame> ().isPause) {
+			Bounds redBarBounds = redBar.GetComponent<Renderer> ().bounds;
+			//redBarBounds.size = new Vector3(redBarBounds.size.x, defaultSize.y*barValue);
+			redBar.transform.localScale = new Vector3 (redBar.transform.localScale.x, defaultSize.y * barValue);
+			switch (state) {
+			case State.mov:
+				incremValue ();
+				break;
 			
-		case State.stop:
+			case State.stop:
 			
-			break;
+				break;
+			}
 		}
 	}
 }

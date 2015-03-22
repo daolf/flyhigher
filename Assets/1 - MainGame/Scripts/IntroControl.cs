@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public class IntroControl : MonoBehaviour {
 
@@ -24,17 +25,17 @@ public class IntroControl : MonoBehaviour {
 		powerBarGUIScript = GUIObject.GetComponentInChildren<PowerBarGUI>();
 		pivotGUIScript = GUIObject.GetComponentInChildren<PivotGUI>();
 	}
+
+
 	
 	void Update () {
-		if(Input.GetMouseButtonDown(0))
-		{
-			switch (state) 
-			{
+		if (! GetComponentInParent<MainGame> ().isPause && Input.GetMouseButtonDown (0)) {
+			switch (state) {
 			case State.INIT:
-				state = State.ONECLICK;
-				power = powerBarGUIScript.barValue*1000;
+				power = powerBarGUIScript.barValue * 1000;
 				powerBarGUIScript.state = PowerBarGUI.State.stop;
 				pivotGUIScript.state = PivotGUI.State.mov;
+				state = State.ONECLICK;
 
 				break;
 			case State.ONECLICK:
@@ -44,7 +45,22 @@ public class IntroControl : MonoBehaviour {
 				break;
 			case State.TWOCLICK:
 				state = State.TWOCLICK;
-					break;
+				break;
+			}
+		} else {
+			switch (state) {
+			case State.INIT:
+				powerBarGUIScript.state = PowerBarGUI.State.mov;
+				pivotGUIScript.state = PivotGUI.State.mov;
+				break;
+			case State.ONECLICK:
+				powerBarGUIScript.state = PowerBarGUI.State.stop;
+				pivotGUIScript.state = PivotGUI.State.mov;
+				break;
+			case State.TWOCLICK:
+				powerBarGUIScript.state = PowerBarGUI.State.stop;
+				pivotGUIScript.state = PivotGUI.State.stop;
+				break;
 			}
 		}
 	}

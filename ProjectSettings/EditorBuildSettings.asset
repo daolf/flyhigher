@@ -18,11 +18,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/4 - MecanoGame/Scenes/gameover.unity
   - enabled: 1
-    path: Assets/1 - MainGame/MainGame.unity
-  - enabled: 1
     path: Assets/3 - PropulsionGame/Scenes/IngameScene.unity
   - enabled: 1
     path: Assets/0 - Menu/Scenes/MenuMiniGames.unity
   - enabled: 1
     path: Assets/1 - MainGame/EndMain.unity
-    path: Assets/4 - MecanoGame/Scenes/mecano-win.unity
+  - enabled: 1
+    path: Assets/1 - MainGame/MainGame.unity
