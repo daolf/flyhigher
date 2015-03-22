@@ -39,18 +39,7 @@ public class MainPaintScript : MonoBehaviour {
 		score = score + scoreTemp;
 		textScore.text = "Score :" + score;
 	}
-	
-	void OnMouseExit() {
-		// Actif que si le script est actif
-		if (this.enabled == true) {
-						Vector3 pz = Camera.main.ScreenToWorldPoint (Input.mousePosition);	
-						if (Input.GetMouseButton (0)) {
-								drawTache (pz);
-								print ("perte sure" + this.perte);
-								updateScore (this.perte);
-						}
-				}
-	}
+
 	
 	
 	// Use this for initialization
@@ -87,17 +76,27 @@ public class MainPaintScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+		if (!GetComponentInParent<ManagerPaint> ().isPause) {
+
+			if (Input.GetMouseButton (0) && 
+				GetComponent<Collider2D> () == Physics2D.OverlapPoint (new Vector2 (pz.x, pz.y))
+		   ) {
+				drawPaint (pz);
+				print ("la");
+				updateScore (gain);
+				print (score);
+			} else if (Input.GetMouseButton (0) && 
+				GetComponent<Collider2D> () != Physics2D.OverlapPoint (new Vector2 (pz.x, pz.y))) {
+				drawTache (pz);
+				print ("la");
+				updateScore (perte);
+				print (score);
+			
 		
-		if(Input.GetMouseButton(0) && 
-		   GetComponent<Collider2D>() == Physics2D.OverlapPoint(new Vector2(pz.x,pz.y))
-		   ){
-			drawPaint(pz);
-			print ("la");
-			updateScore(gain);
-			print (score);
-		}		
+			}
 	
-	
+		}
 	
 	}
 }

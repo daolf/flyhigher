@@ -13,7 +13,12 @@ public class PauseScript : MonoBehaviour {
 		buttonPause.enabled = false;
 		Time.timeScale = 0;
 		menuPause.enabled = true;
-		game.GetComponent<MainGame> ().isPause = true;
+		if (game.GetComponent<MainGame> ()) {
+			game.GetComponent<MainGame> ().isPause = true;
+		}
+		if (game.GetComponent<ManagerPaint> ()) {
+			game.GetComponent<ManagerPaint> ().isPause = true;
+		}
 	}
 	// Use this for initialization
 	void Start () {
