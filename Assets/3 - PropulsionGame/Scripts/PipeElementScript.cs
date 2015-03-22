@@ -8,20 +8,28 @@ using System.Collections;
 public class PipeElementScript : MonoBehaviour {
 	private PipeElement element = null;
 	
-	private float rotationSpeed = 360;
-	
+	// for smooth rotation
+	private const float rotationSpeed = 360;
 	private bool inSmoothRotation = false;
 	private float targetedAngle;
+	
+	// state for activation on touch
+	private bool touchEnable = true;
 
 	// Use this for initialization
 	void Start () {
 	
 	}
 	
+	public void setTouchEnable(bool val) {
+		touchEnable = val;
+	}
+	
 	// Update is called once per frame
 	void Update () {
 		if(inSmoothRotation) {
 			float current = transform.localEulerAngles.z;
+			// TODO floating point == is not reliable, use abs(x)<epsilon
 			if(current == targetedAngle) {
 				inSmoothRotation = false;
 			}
@@ -49,7 +57,7 @@ public class PipeElementScript : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		if(element != null) {
+		if(element != null && touchEnable) {
 			element.orientation = element.orientation.rotateClockwise();
 			smoothRotate(element.orientation.toDegrees());
 		}

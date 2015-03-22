@@ -23,7 +23,9 @@ public class PipesGeneratorScript : MonoBehaviour {
 	private const float ORIGIN_X = 0;
 	private const float ORIGIN_Y = 0;
 
+	// PipeElement and PipeElementScript are stored in a stupid (x;y) array
 	private PipeElement[,] grid;
+	private PipeElementScript[,] objectGrid;
 
 	// input position and direction
 	private int inputX;
@@ -35,15 +37,24 @@ public class PipesGeneratorScript : MonoBehaviour {
 	private int outputY;
 	private PipeElement.Orientation outputOrientation;
 	
+	// object used as parent for every pipe object
 	private Transform parentArea;
+	
+	private bool hadWon = false;
+	
+	
 
 	void Update() {
 		// really dirty proof of concept, check path every frame
-		if (checkReachDestination()) {//isPathValid (origin.getNeighbor(PipeElement.Orientation.SOUTH), origin.orientation.opposite())) {
-			toShow.text = "You win!";
-		}
-		else {
-			toShow.text = "Try again...";
+		if(!hadWon) {
+			if (checkReachDestination()) {//isPathValid (origin.getNeighbor(PipeElement.Orientation.SOUTH), origin.orientation.opposite())) {
+				toShow.text = "You win!";
+				hadWon = true;
+				onWin();				
+			}
+			else {
+				toShow.text = "Try again...";
+			}
 		}
 	}
 	
@@ -51,6 +62,17 @@ public class PipesGeneratorScript : MonoBehaviour {
 		if(x >= 0 && x < GRID_SIZE && y >= 0 && y < GRID_SIZE)
 			return grid[x, y];
 		return null;
+	}
+	
+	// internal, called on game win event
+	private void onWin() {
+		// disable every pipe
+		for(int i=0; i<GRID_SIZE; i++) {
+			for(int j=0; j<GRID_SIZE; j++) {
+				if(objectGrid[i, j] != null)
+					objectGrid[i, j].setTouchEnable(false);
+			}
+		}
 	}
 	
 	private void getNeighborCoordinates(int x, int y, PipeElement.Orientation dir, out int newX, out int newY) {
@@ -197,6 +219,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 	}
 
 	private void instanciatePipeGrid(PipeElement[,] grid) {
+		objectGrid = new PipeElementScript[GRID_SIZE, GRID_SIZE];
 		for (int y=0; y<GRID_SIZE; y++) {
 			for (int x=0; x<GRID_SIZE; x++) {
 				if(grid[x, y] != null) {
@@ -226,6 +249,12 @@ public class PipesGeneratorScript : MonoBehaviour {
 					pipeSprite.transform.parent = parentArea;
 					pipeSprite.transform.localPosition =
 						new Vector3 (x + ORIGIN_X, -y + ORIGIN_Y, 0);
+					
+					// not very clever, allow/disallow rotation depending on pipe type
+					if(origin.type == PipeElement.Type.PIPE_IN || origin.type == PipeElement.Type.PIPE_OUT)
+						pipeSprite.setTouchEnable(false);
+					
+					objectGrid[x, y] = pipeSprite;
 				}
 			}
 		}
