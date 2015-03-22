@@ -12,9 +12,16 @@ public class Score : MonoBehaviour {
 
 	void OnGUI() {
 		int i = 0;
-		while (value > 0) {
-			t[i].value = value % 10;
-			value /= 10;
+		int temp = value;
+		if (value == 0) {
+			for (i=0;i<4;i++) {
+				t[i].value = 0;
+			}
+		}
+
+		while (temp > 0) {
+			t[i].value = temp % 10;
+			temp /= 10;
 			i++;
 		}
 

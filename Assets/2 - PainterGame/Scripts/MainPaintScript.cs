@@ -6,7 +6,7 @@ public class MainPaintScript : MonoBehaviour {
 
 	public Transform tachePrefab;
 	public Transform paintPrefab;
-	public Text textScore;
+	public Score guiScore;
 	public int score;
 	public int gain ;
 	public int perte ;
@@ -37,7 +37,12 @@ public class MainPaintScript : MonoBehaviour {
 	
 	public void updateScore(int scoreTemp) {
 		score = score + scoreTemp;
-		textScore.text = "Score :" + score;
+		print ("Score: " + score);
+		if (score < 0) {
+			score = 0;
+		}
+		print ("Score: " + score);
+		guiScore.value = score;
 	}
 
 	
