@@ -65,7 +65,7 @@ public class MainPaintScript : MonoBehaviour {
 		// end of the game we change the scene
 		else {
 
-			//Application.LoadLevel("MenuEndPaint");
+			endMenu.GetComponent<Canvas>().enabled = true;
 
 			//On passe le manager dans l'état fin
 			GetComponent<ManagerPaint>().state = ManagerPaint.State.END;
@@ -87,7 +87,7 @@ public class MainPaintScript : MonoBehaviour {
 				updateScore (gain);
 				print (score);
 			} else if (Input.GetMouseButton (0) && 
-				GetComponent<Collider2D> () != Physics2D.OverlapPoint (new Vector2 (pz.x, pz.y))) {
+				GetComponent<Collider2D> () != Physics2D.OverlapPoint (new Vector2 (pz.x, pz.y)) ) {
 				drawTache (pz);
 				print ("la");
 				updateScore (perte);
