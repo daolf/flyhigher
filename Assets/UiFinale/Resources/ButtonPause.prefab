@@ -79,12 +79,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 187680}
-        m_MethodName: 
+      - m_Target: {fileID: 11474034}
+        m_MethodName: OnPause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -103,6 +104,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332f59f45d91c48c8a4de3c407676081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuPause: {fileID: 0}
+  game: {fileID: 0}
+  buttonPause: {fileID: 11448784}
 --- !u!222 &22225588
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -121,10 +125,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 356, y: -195}
-  m_SizeDelta: {x: -735, y: -438}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -46, y: 60}
+  m_SizeDelta: {x: 69, y: 74}
   m_Pivot: {x: .5, y: .5}
 --- !u!1001 &100100000
 Prefab:
