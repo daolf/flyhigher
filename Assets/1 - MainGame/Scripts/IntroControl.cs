@@ -29,7 +29,9 @@ public class IntroControl : MonoBehaviour {
 
 	
 	void Update () {
-		if (! GetComponentInParent<MainGame> ().isPause && Input.GetMouseButtonDown (0)) {
+		if (! GetComponentInParent<MainGame> ().isPause && 
+		    Input.GetMouseButtonDown (0) && 
+		    !EventSystem.current.IsPointerOverGameObject()) {
 			switch (state) {
 			case State.INIT:
 				power = powerBarGUIScript.barValue * 1000;
@@ -51,7 +53,7 @@ public class IntroControl : MonoBehaviour {
 			switch (state) {
 			case State.INIT:
 				powerBarGUIScript.state = PowerBarGUI.State.mov;
-				pivotGUIScript.state = PivotGUI.State.mov;
+				pivotGUIScript.state = PivotGUI.State.stop;
 				break;
 			case State.ONECLICK:
 				powerBarGUIScript.state = PowerBarGUI.State.stop;

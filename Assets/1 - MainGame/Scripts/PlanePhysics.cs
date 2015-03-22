@@ -47,7 +47,6 @@ public class PlanePhysics : MonoBehaviour {
 
 			// Pour rendre possible la remonté meme si on tombe trop vite
 			if (Mathf.Abs(rb.velocity.y) > 0.5) {
-				print ("CAP T");
 				bufferGravity = (float)-1;
 			}
 			else {

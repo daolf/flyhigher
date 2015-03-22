@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 public class FuelControl : MonoBehaviour {
 
@@ -23,7 +24,7 @@ public class FuelControl : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		if(Input.GetMouseButton(0) && !empty )
+		if(Input.GetMouseButton(0) && !empty && !EventSystem.current.IsPointerOverGameObject())
 		{
 			planePhysic.flappyState = PlanePhysics.FlappyState.BOUNCING;
 			useFuel();
