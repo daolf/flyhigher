@@ -14,7 +14,12 @@ public class MenuManager : MonoBehaviour {
 		bouttonPause.enabled = true;
 		GetComponent<Canvas> ().enabled = false;
 		Time.timeScale = 1;
-		game.GetComponent<MainGame> ().isPause = false;
+		if (game.GetComponent<MainGame> ()) {
+			game.GetComponent<MainGame> ().isPause = false;
+		}
+		if (game.GetComponent<ManagerPaint> ()) {
+			game.GetComponent<ManagerPaint> ().isPause = false;
+		}
 		//pause.GetComponent<Sprite>().enabled = false;
 	}
 
