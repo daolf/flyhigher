@@ -58,7 +58,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public void cogSelected(PrimaryCog cog) {
 		if(cog.getCogId() == cogToFind.getCogId()) {
 			setGoodCogFind(cog);
-			cog.gameObject.GetComponent<SpriteRenderer> ().color = new Color (143/255, 235/255, 40/255);
+			cog.gameObject.GetComponent<SpriteRenderer> ().color = new Color (0/255, 255/255, 56/255);
 			//TODO wait 
 			Application.LoadLevel("mecano-win");
 		}
