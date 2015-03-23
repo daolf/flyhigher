@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/2 - PainterGame/Scenes/MenuEndPaint.unity
   - enabled: 1
     path: Assets/4 - MecanoGame/Scenes/main.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/4 - MecanoGame/Scenes/gameover.unity
   - enabled: 1
     path: Assets/3 - PropulsionGame/Scenes/IngameScene.unity
@@ -25,5 +25,5 @@ EditorBuildSettings:
     path: Assets/1 - MainGame/EndMain.unity
   - enabled: 1
     path: Assets/1 - MainGame/MainGame.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/4 - MecanoGame/Scenes/mecano-win.unity
