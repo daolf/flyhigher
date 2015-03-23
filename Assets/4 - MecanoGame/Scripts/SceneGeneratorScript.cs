@@ -10,7 +10,9 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public GameObject endMenu;
 	public GameObject looseMenu;
 	public SpriteRenderer gagné;
+	public SpriteRenderer gagnéBg;
 	public SpriteRenderer perdu;
+	public SpriteRenderer perduBg;
 	// position used to display an important cog...
 	public Transform importantCogPosition;
 	//Flag pour l'animation de fin 
@@ -24,6 +26,8 @@ public class SceneGeneratorScript : MonoBehaviour {
 		cogToFind.setCogId(Random.Range(0, cogs.Length));
 		gagné.enabled = false;
 		perdu.enabled = false;
+		gagnéBg.enabled = false;
+		perduBg.enabled = false;
 
 		// initialize all cogs with "random" ids (in fact each one need to be uniq, so its a shuffle)
 		int[] cogIds = new int[COGS_NB];
@@ -82,13 +86,10 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public void cogSelected(PrimaryCog cog) {
 		if(cog.getCogId() == cogToFind.getCogId()) {
 			setGoodCogFind(cog);
-			cog.gameObject.GetComponent<SpriteRenderer> ().color = new Color (0/255, 255/255, 56/255);
+			//cog.gameObject.GetComponent<SpriteRenderer> ().color = new Color (0/255, 255/255, 56/255);
 			//TODO wait 
 			// TODO mettre isSelectable a false pour tout les cogs
-			setAllUnselectable();
-			gagné.enabled = true;
-			timeBar.activated = false;
-			//Application.LoadLevel("mecano-win");
+			hasWon(true);
 		}
 		else {
 			// may change later : for now, remove all other cogs than the selected
@@ -109,14 +110,29 @@ public class SceneGeneratorScript : MonoBehaviour {
 				setGoodCogFind(goodOne);
 			}
 
-			// change bad one to red color
-			cog.gameObject.GetComponent<SpriteRenderer> ().color = new Color (255/255, 100/255, 0/255);
+			// change bad one to who color
+			//cog.gameObject.GetComponent<SpriteRenderer> ().color = new Color (255/255, 100/255, 0/255);
 			Destroy (cog);
 			// TODO mettre isSelectable a false pour tout les cogs
+			hasWon(false);
+		}
+	}
+
+	//1 if victory, else 0
+	public void hasWon(bool has) {
+		if (has) {
+			setAllUnselectable();
+			gagné.enabled = true;
+			timeBar.activated = false;
+			gagnéBg.enabled = true;
+		} else {
 			setAllUnselectable();
 			perdu.enabled = true;
 			timeBar.activated = false;
+			perduBg.enabled = true;
+
 		}
+	
 	}
 
 }

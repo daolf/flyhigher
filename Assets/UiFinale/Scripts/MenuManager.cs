@@ -31,7 +31,11 @@ public class MenuManager : MonoBehaviour {
 
 	public void OnQuit() {
 		Time.timeScale = 1;
-		Application.LoadLevel ("MainMenu");
+		if (Application.loadedLevelName == "MainGame") {
+			Application.LoadLevel ("MainMenu");
+		} else {
+			Application.LoadLevel ("MenuMiniGames");
+		}
 	}
 	// Use this for initialization
 	void Start () {
