@@ -13,9 +13,13 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public SpriteRenderer perdu;
 	// position used to display an important cog...
 	public Transform importantCogPosition;
+	//Flag pour l'animation de fin 
+	public bool isAnimEnd;
+	public TimeBarscript timeBar;
 
 	// Use this for initialization
 	void Start () {
+		isAnimEnd = false;
 		Time.timeScale = 1;
 		cogToFind.setCogId(Random.Range(0, cogs.Length));
 		gagné.enabled = false;
@@ -44,13 +48,19 @@ public class SceneGeneratorScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(isAnimEnd && gagné.enabled) {
+			endMenu.GetComponent<Canvas>().enabled = true;
+		}
+		else if(isAnimEnd && perdu.enabled) {
+			looseMenu.GetComponent<Canvas>().enabled = true;
+		}
 	}
 
 	private void setGoodCogFind(PrimaryCog goodOne) {
 		goodOne.setSelectable(false);
 		goodOne.gameObject.AddComponent<SmoothTranslation> ();
 		SmoothTranslation st = goodOne.GetComponent<SmoothTranslation> ();
+		st.sceneGenerator = this;
 		st.duration = 1;
 		st.from = goodOne.transform.position;
 		st.to = importantCogPosition.position;
@@ -77,7 +87,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 			// TODO mettre isSelectable a false pour tout les cogs
 			setAllUnselectable();
 			gagné.enabled = true;
-			endMenu.GetComponent<Canvas>().enabled = true;
+			timeBar.activated = false;
 			//Application.LoadLevel("mecano-win");
 		}
 		else {
@@ -105,7 +115,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 			// TODO mettre isSelectable a false pour tout les cogs
 			setAllUnselectable();
 			perdu.enabled = true;
-			looseMenu.GetComponent<Canvas>().enabled=true;
+			timeBar.activated = false;
 		}
 	}
 

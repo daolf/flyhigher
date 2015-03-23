@@ -310,6 +310,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 807271feccf05c649a1d18b70788c0fc,
         type: 3}
+    - target: {fileID: 11460400, guid: 842b1017dabc50d4192f4bfcb458a76d, type: 2}
+      propertyPath: generator
+      value: 
+      objectReference: {fileID: 943277482}
     m_RemovedComponents:
     - {fileID: 5846114, guid: 842b1017dabc50d4192f4bfcb458a76d, type: 2}
     - {fileID: 0}
@@ -1226,6 +1230,7 @@ MonoBehaviour:
   "gagn\xE9": {fileID: 468967699}
   perdu: {fileID: 942907795}
   importantCogPosition: {fileID: 1580898810}
+  isAnimEnd: 0
 --- !u!4 &943277483
 Transform:
   m_ObjectHideFlags: 0

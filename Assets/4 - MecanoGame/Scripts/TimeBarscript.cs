@@ -15,6 +15,8 @@ public class TimeBarscript : MonoBehaviour {
 	public Gradient g;
 	public GradientColorKey[] gck;
 	public GradientAlphaKey[] gak;
+	public bool activated;
+
 
 
 	private int CurrentTime {
@@ -27,6 +29,7 @@ public class TimeBarscript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		activated = true;
 		cachedY = timeTransform.position.y;
 		maxXValue = timeTransform.position.x;
 		minXValue = timeTransform.position.x - timeTransform.rect.width;
@@ -54,14 +57,13 @@ public class TimeBarscript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (CurrentTime > 0) {
-			CurrentTime -= 1;
-		} else {
-			// Game over
-			// Update is called once per frame
-			//Application.LoadLevel("gameover");
-			sceneGenerator.looseMenu.GetComponent<Canvas>().enabled = true;
-			//CurrentTime = (int) maxTime;
+		if (activated) {
+			if (CurrentTime > 0) {
+				CurrentTime -= 1;
+			} else {
+
+				sceneGenerator.looseMenu.GetComponent<Canvas> ().enabled = true;
+			}
 		}
 		
 	}

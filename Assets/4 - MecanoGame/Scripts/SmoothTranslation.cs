@@ -6,7 +6,7 @@ public class SmoothTranslation : MonoBehaviour {
 	public Vector3 to;
 	public float duration;
 	private float curTime;
-
+	public SceneGeneratorScript sceneGenerator;
 
 	// Use this for initialization
 	void Start () {
@@ -19,8 +19,8 @@ public class SmoothTranslation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(curTime < duration) {
-			float ratio = easeSineRatio(curTime / duration);
+		if (curTime < duration) {
+			float ratio = easeSineRatio (curTime / duration);
 
 
 			Vector3 newpos = gameObject.transform.position;
@@ -29,6 +29,8 @@ public class SmoothTranslation : MonoBehaviour {
 
 			gameObject.transform.position = newpos;
 			curTime += Time.deltaTime;
+		} else {
+			sceneGenerator.isAnimEnd = true;
 		}
 	}
 }
