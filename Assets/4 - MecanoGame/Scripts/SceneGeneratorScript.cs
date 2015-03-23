@@ -9,6 +9,8 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public PrimaryCog cogToFind;
 	public GameObject endMenu;
 	public GameObject looseMenu;
+	public SpriteRenderer gagné;
+	public SpriteRenderer perdu;
 	// position used to display an important cog...
 	public Transform importantCogPosition;
 
@@ -16,7 +18,9 @@ public class SceneGeneratorScript : MonoBehaviour {
 	void Start () {
 		Time.timeScale = 1;
 		cogToFind.setCogId(Random.Range(0, cogs.Length));
-		
+		gagné.enabled = false;
+		perdu.enabled = false;
+
 		// initialize all cogs with "random" ids (in fact each one need to be uniq, so its a shuffle)
 		int[] cogIds = new int[COGS_NB];
 		for(int i=0; i<COGS_NB; i++)
@@ -72,6 +76,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 			//TODO wait 
 			// TODO mettre isSelectable a false pour tout les cogs
 			setAllUnselectable();
+			gagné.enabled = true;
 			endMenu.GetComponent<Canvas>().enabled = true;
 			//Application.LoadLevel("mecano-win");
 		}
@@ -99,6 +104,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 			Destroy (cog);
 			// TODO mettre isSelectable a false pour tout les cogs
 			setAllUnselectable();
+			perdu.enabled = true;
 			looseMenu.GetComponent<Canvas>().enabled=true;
 		}
 	}
