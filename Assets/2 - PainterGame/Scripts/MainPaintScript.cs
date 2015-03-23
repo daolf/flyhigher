@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class MainPaintScript : MonoBehaviour {
 
 	public Transform tachePrefab;
 	public Transform paintPrefab;
-	public Text textScore;
+	public Score guiScore;
 	public int score;
 	public int gain ;
 	public int perte ;
@@ -37,20 +38,14 @@ public class MainPaintScript : MonoBehaviour {
 	
 	public void updateScore(int scoreTemp) {
 		score = score + scoreTemp;
-		textScore.text = "Score :" + score;
+		print ("Score: " + score);
+		if (score < 0) {
+			score = 0;
+		}
+		print ("Score: " + score);
+		guiScore.value = score;
 	}
-	
-	void OnMouseExit() {
-		// Actif que si le script est actif
-		if (this.enabled == true) {
-						Vector3 pz = Camera.main.ScreenToWorldPoint (Input.mousePosition);	
-						if (Input.GetMouseButton (0)) {
-								drawTache (pz);
-								print ("perte sure" + this.perte);
-								updateScore (this.perte);
-						}
-				}
-	}
+
 	
 	
 	// Use this for initialization
@@ -76,7 +71,7 @@ public class MainPaintScript : MonoBehaviour {
 		// end of the game we change the scene
 		else {
 
-			//Application.LoadLevel("MenuEndPaint");
+			endMenu.GetComponent<Canvas>().enabled = true;
 
 			//On passe le manager dans l'état fin
 			GetComponent<ManagerPaint>().state = ManagerPaint.State.END;
@@ -87,17 +82,28 @@ public class MainPaintScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+		if (!GetComponentInParent<ManagerPaint> ().isPause &&
+		    !EventSystem.current.IsPointerOverGameObject()) {
+
+			if (Input.GetMouseButton (0) && 
+				GetComponent<Collider2D> () == Physics2D.OverlapPoint (new Vector2 (pz.x, pz.y))
+		   ) {
+				drawPaint (pz);
+				print ("la");
+				updateScore (gain);
+				print (score);
+			} else if (Input.GetMouseButton (0) && 
+				GetComponent<Collider2D> () != Physics2D.OverlapPoint (new Vector2 (pz.x, pz.y)) ) {
+				drawTache (pz);
+				print ("la");
+				updateScore (perte);
+				print (score);
+			
 		
-		if(Input.GetMouseButton(0) && 
-		   GetComponent<Collider2D>() == Physics2D.OverlapPoint(new Vector2(pz.x,pz.y))
-		   ){
-			drawPaint(pz);
-			print ("la");
-			updateScore(gain);
-			print (score);
-		}		
+			}
 	
-	
+		}
 	
 	}
 }

@@ -8,10 +8,12 @@ public class ManagerPaint : MonoBehaviour {
 	public BeginPaintScript beginPaintScript ;
 	public MainPaintScript mainPaintScript ;
 	public EndPaintScript endPaintScript ;
+	public bool isPause;
 	// Use this for initialization
 	void Start () {
 
 		state = State.BEGIN;
+		isPause = false;
 		beginPaintScript.enabled = true;
 		mainPaintScript.enabled = false;
 		endPaintScript.enabled = false;
