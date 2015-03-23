@@ -61,7 +61,7 @@ public class TimeBarscript : MonoBehaviour {
 			if (CurrentTime > 0) {
 				CurrentTime -= 1;
 			} else {
-
+				sceneGenerator.setAllUnselectable();
 				sceneGenerator.looseMenu.GetComponent<Canvas> ().enabled = true;
 			}
 		}
