@@ -5,8 +5,8 @@ public class SmoothTranslation : MonoBehaviour {
 	public Vector3 from;
 	public Vector3 to;
 	public float duration;
-
 	private float curTime;
+
 
 	// Use this for initialization
 	void Start () {

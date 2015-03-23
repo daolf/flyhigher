@@ -11,6 +11,8 @@ public class TimeBarscript : MonoBehaviour {
 	private float maxXValue;
 	public float maxTime;
 	private float currentTime;
+	public SceneGeneratorScript sceneGenerator;
+
 
 	private int CurrentTime {
 		get { return (int)currentTime;}
@@ -35,7 +37,8 @@ public class TimeBarscript : MonoBehaviour {
 		} else {
 			// Game over
 			// Update is called once per frame
-			Application.LoadLevel("gameover");
+			//Application.LoadLevel("gameover");
+			sceneGenerator.looseMenu.GetComponent<Canvas>().enabled = true;
 			//CurrentTime = (int) maxTime;
 		}
 		
