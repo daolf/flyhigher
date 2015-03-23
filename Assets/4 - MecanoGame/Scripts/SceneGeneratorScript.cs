@@ -7,7 +7,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 	public PrimaryCog[] cogs = new PrimaryCog[COGS_NB];
 	public PrimaryCog cogToFind;
-
+	public GameObject endMenu;
 	// position used to display an important cog...
 	public Transform importantCogPosition;
 
@@ -60,7 +60,8 @@ public class SceneGeneratorScript : MonoBehaviour {
 			setGoodCogFind(cog);
 			cog.gameObject.GetComponent<SpriteRenderer> ().color = new Color (0/255, 255/255, 56/255);
 			//TODO wait 
-			Application.LoadLevel("mecano-win");
+			endMenu.GetComponent<Canvas>().enabled = true;
+			//Application.LoadLevel("mecano-win");
 		}
 		else {
 			// may change later : for now, remove all other cogs than the selected
