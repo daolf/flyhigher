@@ -14,6 +14,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Time.timeScale = 1;
 		cogToFind.setCogId(Random.Range(0, cogs.Length));
 		
 		// initialize all cogs with "random" ids (in fact each one need to be uniq, so its a shuffle)
