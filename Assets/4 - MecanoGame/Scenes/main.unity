@@ -1338,6 +1338,7 @@ MonoBehaviour:
   - {fileID: 1953305928}
   cogToFind: {fileID: 905173990}
   endMenu: {fileID: 816231521}
+  looseMenu: {fileID: 313477905}
   importantCogPosition: {fileID: 1580898810}
 --- !u!4 &943277483
 Transform:
@@ -1915,6 +1916,10 @@ Prefab:
       propertyPath: looseMenu
       value: 
       objectReference: {fileID: 313477905}
+    - target: {fileID: 11482384, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
+      propertyPath: sceneGenerator
+      value: 
+      objectReference: {fileID: 943277482}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
   m_IsPrefabParent: 0

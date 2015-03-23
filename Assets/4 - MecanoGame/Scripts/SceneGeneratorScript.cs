@@ -8,6 +8,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public PrimaryCog[] cogs = new PrimaryCog[COGS_NB];
 	public PrimaryCog cogToFind;
 	public GameObject endMenu;
+	public GameObject looseMenu;
 	// position used to display an important cog...
 	public Transform importantCogPosition;
 
@@ -38,7 +39,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
 
 	private void setGoodCogFind(PrimaryCog goodOne) {
@@ -54,12 +55,22 @@ public class SceneGeneratorScript : MonoBehaviour {
 		return cogToFind;
 	}
 
+	public void setAllUnselectable () {
+		cogToFind.setSelectable (false);
+		for(int i=0; i<COGS_NB; i++) {
+			cogs[i].setSelectable(false);
+		}
+
+	}
+
 	// called when a cog other than the cog to find is selected
 	public void cogSelected(PrimaryCog cog) {
 		if(cog.getCogId() == cogToFind.getCogId()) {
 			setGoodCogFind(cog);
 			cog.gameObject.GetComponent<SpriteRenderer> ().color = new Color (0/255, 255/255, 56/255);
 			//TODO wait 
+			// TODO mettre isSelectable a false pour tout les cogs
+			setAllUnselectable();
 			endMenu.GetComponent<Canvas>().enabled = true;
 			//Application.LoadLevel("mecano-win");
 		}
@@ -85,6 +96,9 @@ public class SceneGeneratorScript : MonoBehaviour {
 			// change bad one to red color
 			cog.gameObject.GetComponent<SpriteRenderer> ().color = new Color (255/255, 100/255, 0/255);
 			Destroy (cog);
+			// TODO mettre isSelectable a false pour tout les cogs
+			setAllUnselectable();
+			looseMenu.GetComponent<Canvas>().enabled=true;
 		}
 	}
 
