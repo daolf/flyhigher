@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.Text;
 using System.Xml;
 using System.IO;
+using System.Collections.Generic;
 
 public class PipesGeneratorScript : MonoBehaviour {
 
@@ -42,7 +43,8 @@ public class PipesGeneratorScript : MonoBehaviour {
 	
 	private bool hadWon = false;
 	
-	
+	// set after win, with the 'win path'
+	private LinkedList<PipeElementScript> winPath;
 
 	void Update() {
 		// really dirty proof of concept, check path every frame
@@ -73,6 +75,9 @@ public class PipesGeneratorScript : MonoBehaviour {
 					objectGrid[i, j].setTouchEnable(false);
 			}
 		}
+		
+		foreach(PipeElementScript pipe in winPath)
+			pipe.setWinPath(true);
 	}
 	
 	private void getNeighborCoordinates(int x, int y, PipeElement.Orientation dir, out int newX, out int newY) {
@@ -96,8 +101,11 @@ public class PipesGeneratorScript : MonoBehaviour {
 	
 	private bool isValidPath(int x, int y, PipeElement.Orientation from) {
 		// before anything else, check if (x;y) is the valid output
-		if(x == outputX && y == outputY && from == outputOrientation)
+		if(x == outputX && y == outputY && from == outputOrientation) {
+			// create the win path
+			winPath = new LinkedList<PipeElementScript>();
 			return true;
+		}
 		
 		// check if the given (x;y) is a valid pipe
 		PipeElement target = getPipeFromGrid(x, y);
@@ -112,7 +120,13 @@ public class PipesGeneratorScript : MonoBehaviour {
 		// it's the time for... recursion \o/
 		int newX, newY;
 		getNeighborCoordinates(x, y, outDir, out newX, out newY);
-		return isValidPath(newX, newY, outDir.opposite());
+		if(isValidPath(newX, newY, outDir.opposite())) {
+			// okay, we are part of the win path, add ourself on top
+			winPath.AddFirst(objectGrid[x, y]);
+			return true;
+		}
+		
+		return false;
 	}
 	
 	private bool checkReachDestination() {

@@ -6,6 +6,9 @@ using System.Collections;
  */
 [RequireComponent (typeof(BoxCollider2D))]
 public class PipeElementScript : MonoBehaviour {
+	// prefab used to display win path (yes... as a public attribute...)
+	public Transform winPathIndicator;
+
 	private PipeElement element = null;
 	
 	// for smooth rotation
@@ -67,5 +70,15 @@ public class PipeElementScript : MonoBehaviour {
 		this.element = element;
 		// set orientation
 		gameObject.transform.localEulerAngles = new Vector3(0, 0, element.orientation.toDegrees());
+	}
+	
+	public void setWinPath(bool winPath) {
+		if(winPath) {
+			/*Transform indicator = Instantiate(winPathIndicator).transform;
+			indicator.parent = transform;
+			indicator.localPosition = new Vector3(0, -0.3f, 0);*/
+			// for now, just change color of the pipe
+			GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.black, 0.3f);
+		}
 	}
 }
