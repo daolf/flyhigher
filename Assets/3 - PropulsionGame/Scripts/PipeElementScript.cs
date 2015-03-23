@@ -18,6 +18,12 @@ public class PipeElementScript : MonoBehaviour {
 	
 	// state for activation on touch
 	private bool touchEnable = true;
+	
+	// for smooth color transition (temp?)
+	private bool inSmoothFading = false;
+	private Color fadingColorIn = Color.white;
+	private Color fadingColorOut = Color.Lerp(Color.white, Color.black, 0.3f);
+	float fadingElapsed = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -52,6 +58,14 @@ public class PipeElementScript : MonoBehaviour {
 				transform.localEulerAngles =  new Vector3(0, 0, current + realDelta * wise);
 			}
 		}
+		
+		if(inSmoothFading) {
+			fadingElapsed += Time.deltaTime;
+			GetComponent<SpriteRenderer>().color = Color.Lerp(fadingColorIn, fadingColorOut, fadingElapsed/0.75f);
+			
+			if(fadingElapsed > 0.75f)
+				inSmoothFading = false;
+		}
 	}
 	
 	private void smoothRotate(float angle) {
@@ -77,8 +91,11 @@ public class PipeElementScript : MonoBehaviour {
 			/*Transform indicator = Instantiate(winPathIndicator).transform;
 			indicator.parent = transform;
 			indicator.localPosition = new Vector3(0, -0.3f, 0);*/
-			// for now, just change color of the pipe
-			GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.black, 0.3f);
+			
+			// for now, just change color of the pipe (delayed)
+			//GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.black, 0.3f);
+			fadingElapsed = 0;
+			inSmoothFading = true;
 		}
 	}
 }

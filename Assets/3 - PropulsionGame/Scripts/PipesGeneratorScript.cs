@@ -6,6 +6,7 @@ using System.Text;
 using System.Xml;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 
 public class PipesGeneratorScript : MonoBehaviour {
 
@@ -45,6 +46,14 @@ public class PipesGeneratorScript : MonoBehaviour {
 	
 	// set after win, with the 'win path'
 	private LinkedList<PipeElementScript> winPath;
+	
+	// used to track the state of 'win path' displaying
+	private bool inWinPathDisplaying = false;
+	private float winPathDisplayingElapsed = 0;
+	private int winPathDisplayingCurrent = -1;
+	
+	private const float WIN_PATH_DISPLAYING_TIME = 0.2f;
+	
 
 	void Update() {
 		// really dirty proof of concept, check path every frame
@@ -57,6 +66,25 @@ public class PipesGeneratorScript : MonoBehaviour {
 			else {
 				toShow.text = "Try again...";
 			}
+		}
+		
+		if(inWinPathDisplaying) {
+			// consecutively display every pipe of the win path, one by one
+			winPathDisplayingElapsed += Time.deltaTime;
+			
+			int nextVal = (int)(winPathDisplayingElapsed / WIN_PATH_DISPLAYING_TIME);
+			if(nextVal > winPathDisplayingCurrent) {
+				// display the next pipe
+				winPathDisplayingCurrent = nextVal;
+				if(nextVal > winPath.Count - 1) {
+					inWinPathDisplaying = false;
+				}
+				else {
+					// not good : accessing random item (but easier)
+					winPath.ElementAt(nextVal).setWinPath(true);
+				}
+			}
+			
 		}
 	}
 	
@@ -76,8 +104,11 @@ public class PipesGeneratorScript : MonoBehaviour {
 			}
 		}
 		
-		foreach(PipeElementScript pipe in winPath)
-			pipe.setWinPath(true);
+		inWinPathDisplaying = true;
+		winPathDisplayingElapsed = 0;
+		winPathDisplayingCurrent = -1;
+		//foreach(PipeElementScript pipe in winPath)
+		//	pipe.setWinPath(true);
 	}
 	
 	private void getNeighborCoordinates(int x, int y, PipeElement.Orientation dir, out int newX, out int newY) {
