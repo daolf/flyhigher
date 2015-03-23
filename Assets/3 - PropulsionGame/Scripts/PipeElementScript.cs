@@ -6,22 +6,39 @@ using System.Collections;
  */
 [RequireComponent (typeof(BoxCollider2D))]
 public class PipeElementScript : MonoBehaviour {
+	// prefab used to display win path (yes... as a public attribute...)
+	public Transform winPathIndicator;
+
 	private PipeElement element = null;
 	
-	private float rotationSpeed = 360;
-	
+	// for smooth rotation
+	private const float rotationSpeed = 360;
 	private bool inSmoothRotation = false;
 	private float targetedAngle;
+	
+	// state for activation on touch
+	private bool touchEnable = true;
+	
+	// for smooth color transition (temp?)
+	private bool inSmoothFading = false;
+	private Color fadingColorIn = Color.white;
+	private Color fadingColorOut = Color.Lerp(Color.white, Color.black, 0.3f);
+	float fadingElapsed = 0;
 
 	// Use this for initialization
 	void Start () {
 	
 	}
 	
+	public void setTouchEnable(bool val) {
+		touchEnable = val;
+	}
+	
 	// Update is called once per frame
 	void Update () {
 		if(inSmoothRotation) {
 			float current = transform.localEulerAngles.z;
+			// TODO floating point == is not reliable, use abs(x)<epsilon
 			if(current == targetedAngle) {
 				inSmoothRotation = false;
 			}
@@ -41,6 +58,14 @@ public class PipeElementScript : MonoBehaviour {
 				transform.localEulerAngles =  new Vector3(0, 0, current + realDelta * wise);
 			}
 		}
+		
+		if(inSmoothFading) {
+			fadingElapsed += Time.deltaTime;
+			GetComponent<SpriteRenderer>().color = Color.Lerp(fadingColorIn, fadingColorOut, fadingElapsed/0.75f);
+			
+			if(fadingElapsed > 0.75f)
+				inSmoothFading = false;
+		}
 	}
 	
 	private void smoothRotate(float angle) {
@@ -49,7 +74,7 @@ public class PipeElementScript : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		if(element != null) {
+		if(element != null && touchEnable) {
 			element.orientation = element.orientation.rotateClockwise();
 			smoothRotate(element.orientation.toDegrees());
 		}
@@ -59,5 +84,18 @@ public class PipeElementScript : MonoBehaviour {
 		this.element = element;
 		// set orientation
 		gameObject.transform.localEulerAngles = new Vector3(0, 0, element.orientation.toDegrees());
+	}
+	
+	public void setWinPath(bool winPath) {
+		if(winPath) {
+			/*Transform indicator = Instantiate(winPathIndicator).transform;
+			indicator.parent = transform;
+			indicator.localPosition = new Vector3(0, -0.3f, 0);*/
+			
+			// for now, just change color of the pipe (delayed)
+			//GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.black, 0.3f);
+			fadingElapsed = 0;
+			inSmoothFading = true;
+		}
 	}
 }

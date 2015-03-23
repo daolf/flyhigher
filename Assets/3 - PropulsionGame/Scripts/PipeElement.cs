@@ -39,8 +39,6 @@ public class PipeElement
 		}
 	}
 
-	public bool isInstanciated = false;
-
 	// neighbors, maybe a bit heavy, should be simplified
 	private PipeElement north;
 	private PipeElement south;
