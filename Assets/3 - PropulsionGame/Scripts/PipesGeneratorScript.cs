@@ -17,8 +17,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 	public PipeElementScript pipeOut;
 
 	public TextAsset level;
-
-	public Text toShow;
+	
 
 	// constants for pipe grid size, and (x,y) of top-left corner
 	private const int GRID_SIZE = 9;
@@ -58,13 +57,9 @@ public class PipesGeneratorScript : MonoBehaviour {
 	void Update() {
 		// really dirty proof of concept, check path every frame
 		if(!hadWon) {
-			if (checkReachDestination()) {//isPathValid (origin.getNeighbor(PipeElement.Orientation.SOUTH), origin.orientation.opposite())) {
-				toShow.text = "You win!";
+			if (checkReachDestination()) {
 				hadWon = true;
-				onWin();				
-			}
-			else {
-				toShow.text = "Try again...";
+				onWin();
 			}
 		}
 		
