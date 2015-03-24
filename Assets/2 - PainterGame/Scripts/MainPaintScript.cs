@@ -7,6 +7,7 @@ public class MainPaintScript : MonoBehaviour {
 
 	public Transform tachePrefab;
 	public Transform paintPrefab;
+	public Transform patternPrefab;
 	public Score guiScore;
 	public int score;
 	public int gain ;
