@@ -336,7 +336,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!4 &878482122
 Transform:
   m_PrefabParentObject: {fileID: 453956, guid: 578761621142fca478b6562ac079a4e1, type: 2}

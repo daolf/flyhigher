@@ -27,7 +27,6 @@ public class PipeElementScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
 	}
 	
 	public void setTouchEnable(bool val) {
@@ -61,8 +60,9 @@ public class PipeElementScript : MonoBehaviour {
 		
 		if(inSmoothFading) {
 			fadingElapsed += Time.deltaTime;
-			GetComponent<SpriteRenderer>().color = Color.Lerp(fadingColorIn, fadingColorOut, fadingElapsed/0.75f);
-			
+			transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+			transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.Lerp(fadingColorIn, fadingColorOut, fadingElapsed/0.75f);
+
 			if(fadingElapsed > 0.75f)
 				inSmoothFading = false;
 		}
