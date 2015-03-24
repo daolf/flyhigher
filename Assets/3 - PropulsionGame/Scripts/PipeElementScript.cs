@@ -22,7 +22,8 @@ public class PipeElementScript : MonoBehaviour {
 	// for smooth color transition (temp?)
 	private bool inSmoothFading = false;
 	private Color fadingColorIn = Color.white;
-	private Color fadingColorOut = Color.Lerp(Color.white, Color.black, 0.3f);
+	public Color fadingColorOut;
+
 	float fadingElapsed = 0;
 
 	// Use this for initialization
