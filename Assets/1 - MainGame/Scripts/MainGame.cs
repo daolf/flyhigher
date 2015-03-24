@@ -66,7 +66,7 @@ public class MainGame : MonoBehaviour {
 
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if (!isPause) {
 			switch (state) {
 			case State.INTRO:

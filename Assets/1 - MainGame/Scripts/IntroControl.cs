@@ -10,6 +10,7 @@ public class IntroControl : MonoBehaviour {
 	public State state;
 
 	public float power;
+	public float powerMax;
 	public float angle;
 	public Component GUIObject;
 	public PowerBarGUI powerBarGUIScript;
@@ -34,7 +35,7 @@ public class IntroControl : MonoBehaviour {
 		    !EventSystem.current.IsPointerOverGameObject()) {
 			switch (state) {
 			case State.INIT:
-				power = powerBarGUIScript.barValue * 1000;
+				power = powerBarGUIScript.barValue * powerMax;
 				powerBarGUIScript.state = PowerBarGUI.State.stop;
 				pivotGUIScript.state = PivotGUI.State.mov;
 				state = State.ONECLICK;

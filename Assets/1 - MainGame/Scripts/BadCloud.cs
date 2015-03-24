@@ -16,7 +16,13 @@ public class BadCloud : MonoBehaviour {
 	void OnTriggerStay2D (Collider2D c) {
 		PlanePhysics p = c.gameObject.GetComponent<PlanePhysics> ();
 		if (p) {
-			p.onBadCloud ();
+			p.bonusState = PlanePhysics.BonusState.DOWNCLOUD;
+		}
+	}
+	void OnTriggerExit2D (Collider2D c) {
+		PlanePhysics p = c.gameObject.GetComponent<PlanePhysics> ();
+		if (p) {
+			p.bonusState = PlanePhysics.BonusState.NONE;
 		}
 	}
 }

@@ -18,7 +18,6 @@ public class PowerBarGUI : MonoBehaviour {
 
 
 	void OnDisable() {
-		print ("lola");
 		Destroy(redBar.gameObject);
 		Destroy (whiteBG.gameObject);
 	}

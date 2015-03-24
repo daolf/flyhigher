@@ -9,7 +9,7 @@ public class FuelControl : MonoBehaviour {
 	public GameObject plane;
 
 	private PlanePhysics planePhysic;
-	float offsetProgress = 0.03f;
+	float offsetProgress = 0.01f;
 	private List<FuelBarScript> fuelBarBehaviors = new List<FuelBarScript>();
 
 	bool empty { get {return fuelBarBehaviors.Count == 0;}}

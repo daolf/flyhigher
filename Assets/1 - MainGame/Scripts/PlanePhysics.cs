@@ -15,8 +15,11 @@ public class PlanePhysics : MonoBehaviour {
 	public FlappyState flappyState;
 
 	//Bonus
+	public enum BonusState{DOWNCLOUD, UPCLOUD, NONE};
+	public BonusState bonusState;
 	private float malusGravity;
 	private float bonusGravity;
+
 
 	// Use this for initialization
 	void Start () {
@@ -25,8 +28,9 @@ public class PlanePhysics : MonoBehaviour {
 		initialGravity = (float)0.3;
 		previousPos = transform.position;
 
-		bonusGravity = -(float)3.95;
-		malusGravity = (float)2.5;
+		bonusState = BonusState.NONE;
+		bonusGravity = -(float)1.5;
+		malusGravity = (float)1.5;
 
 	}
 
@@ -34,12 +38,9 @@ public class PlanePhysics : MonoBehaviour {
 		GetComponent<Rigidbody2D>().gravityScale = 1;
 	}
 
-	void FixedUpdate() {
-	}
-
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		//Quand on appuie on alège la gravité
 		if (flappyState == FlappyState.BOUNCING) {
 			//print ("TouchMainGame");
@@ -63,6 +64,12 @@ public class PlanePhysics : MonoBehaviour {
 			//print ("NoTouch");
 			rb.gravityScale = initialGravity;
 		}
+
+		if(bonusState == BonusState.UPCLOUD)
+			onGoodCloud();
+		else if(bonusState == BonusState.DOWNCLOUD)
+			onBadCloud();
+
 
 		//To face direction
 		transform.right = rb.velocity;
