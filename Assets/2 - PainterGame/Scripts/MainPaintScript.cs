@@ -51,7 +51,7 @@ public class MainPaintScript : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {		
-		speed = (float)4.5;
+		speed = (float)3;
 		movement = 0;
 		previousX = this.transform.position.x;
 		// TODO modify calculation of maxMovement
