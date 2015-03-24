@@ -21,7 +21,7 @@ public class MainPaintScript : MonoBehaviour {
 	public GameObject endMenu;
 	
 	public void drawPaint(Vector3 pz) {
-		buffer = Instantiate(paintPrefab,new Vector3(pz.x,pz.y,-1), Quaternion.identity) as Transform;	
+		buffer = Instantiate(paintPrefab,new Vector3(pz.x,pz.y,this.GetComponent<Transform>().position.z), Quaternion.identity) as Transform;	
 		if (buffer == null) {
 			print("erreur buffer null");		
 		}
@@ -29,7 +29,7 @@ public class MainPaintScript : MonoBehaviour {
 	}
 	
 	public void drawTache(Vector3 pz) {
-		buffer = Instantiate(tachePrefab,new Vector3(pz.x,pz.y,-1), Quaternion.identity) as Transform;	
+		buffer = Instantiate(tachePrefab,new Vector3(pz.x,pz.y,this.GetComponent<Transform>().position.z), Quaternion.identity) as Transform;	
 		if (buffer == null) {
 			print("erreur buffer null");		
 		}
@@ -51,7 +51,7 @@ public class MainPaintScript : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {		
-		speed = 4;
+		speed = (float)4.5;
 		movement = 0;
 		previousX = this.transform.position.x;
 		// TODO modify calculation of maxMovement
