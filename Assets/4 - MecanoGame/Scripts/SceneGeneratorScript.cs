@@ -9,23 +9,20 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public PrimaryCog cogToFind;
 	public GameObject endMenu;
 	public GameObject looseMenu;
-	public SpriteRenderer gagné;
 	public SpriteRenderer gagnéBg;
-	public SpriteRenderer perdu;
 	public SpriteRenderer perduBg;
 	// position used to display an important cog...
 	public Transform importantCogPosition;
 	//Flag pour l'animation de fin 
 	public bool isAnimEnd;
 	public TimeBarscript timeBar;
+	public bool gagné;
 
 	// Use this for initialization
 	void Start () {
 		isAnimEnd = false;
 		Time.timeScale = 1;
 		cogToFind.setCogId(Random.Range(0, cogs.Length));
-		gagné.enabled = false;
-		perdu.enabled = false;
 		gagnéBg.enabled = false;
 		perduBg.enabled = false;
 
@@ -52,10 +49,10 @@ public class SceneGeneratorScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(isAnimEnd && gagné.enabled) {
+		if(isAnimEnd && gagné) {
 			endMenu.GetComponent<Canvas>().enabled = true;
 		}
-		else if(isAnimEnd && perdu.enabled) {
+		else if(isAnimEnd && !gagné) {
 			looseMenu.GetComponent<Canvas>().enabled = true;
 		}
 	}
@@ -86,9 +83,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public void cogSelected(PrimaryCog cog) {
 		if(cog.getCogId() == cogToFind.getCogId()) {
 			setGoodCogFind(cog);
-			//cog.gameObject.GetComponent<SpriteRenderer> ().color = new Color (0/255, 255/255, 56/255);
-			//TODO wait 
-			// TODO mettre isSelectable a false pour tout les cogs
+			Destroy (cog);
 			hasWon(true);
 		}
 		else {
@@ -98,8 +93,8 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 			for (int i=0; i<COGS_NB; i++) {
 				if(cogs[i] != cog && cogs[i].getCogId() != cogToFind.getCogId()) {
-					cogs[i].enabled = false;
-					Destroy(cogs[i].gameObject);
+					//cogs[i].enabled = false;
+					//Destroy(cogs[i].gameObject);
 				}
 				else if(cogs[i].getCogId() == cogToFind.getCogId()) {
 					goodOne = cogs[i];
@@ -109,10 +104,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 			if(goodOne) {
 				setGoodCogFind(goodOne);
 			}
-
-			// change bad one to who color
-			//cog.gameObject.GetComponent<SpriteRenderer> ().color = new Color (255/255, 100/255, 0/255);
-			Destroy (cog);
+				Destroy (cog);
 			// TODO mettre isSelectable a false pour tout les cogs
 			hasWon(false);
 		}
@@ -120,14 +112,13 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 	//1 if victory, else 0
 	public void hasWon(bool has) {
+		gagné = has;
 		if (has) {
 			setAllUnselectable();
-			gagné.enabled = true;
 			timeBar.activated = false;
 			gagnéBg.enabled = true;
 		} else {
 			setAllUnselectable();
-			perdu.enabled = true;
 			timeBar.activated = false;
 			perduBg.enabled = true;
 
