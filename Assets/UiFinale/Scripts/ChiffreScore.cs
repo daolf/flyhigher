@@ -14,7 +14,6 @@ public class ChiffreScore : MonoBehaviour {
 	}
 
 	public void OnGUI() {
-		print ("Values = " + value);
 			GetComponent<Image> ().sprite = myNumbers [value];
 	}
 

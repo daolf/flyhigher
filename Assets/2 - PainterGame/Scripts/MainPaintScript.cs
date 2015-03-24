@@ -39,11 +39,9 @@ public class MainPaintScript : MonoBehaviour {
 	
 	public void updateScore(int scoreTemp) {
 		score = score + scoreTemp;
-		print ("Score: " + score);
 		if (score < 0) {
 			score = 0;
 		}
-		print ("Score: " + score);
 		guiScore.value = score;
 	}
 
@@ -91,17 +89,12 @@ public class MainPaintScript : MonoBehaviour {
 				GetComponent<Collider2D> () == Physics2D.OverlapPoint (new Vector2 (pz.x, pz.y))
 		   ) {
 				drawPaint (pz);
-				print ("la");
 				updateScore (gain);
 				print (score);
 			} else if (Input.GetMouseButton (0) && 
 				GetComponent<Collider2D> () != Physics2D.OverlapPoint (new Vector2 (pz.x, pz.y)) ) {
 				drawTache (pz);
-				print ("la");
 				updateScore (perte);
-				print (score);
-			
-		
 			}
 	
 		}
