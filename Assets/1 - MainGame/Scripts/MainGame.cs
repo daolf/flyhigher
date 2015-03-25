@@ -66,7 +66,7 @@ public class MainGame : MonoBehaviour {
 
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if (!isPause) {
 			switch (state) {
 			case State.INTRO:
@@ -112,6 +112,9 @@ public class MainGame : MonoBehaviour {
 			//On active l'intéraction fuel
 				score = scriptPlanePhysics.getDistanceFromOrigin ();
 				setScore (score);
+				if (scriptPlanePhysics.myHeartBar.currLife == -1) {
+					state = State.END_LOOSE;
+				}
 
 
 

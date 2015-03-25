@@ -15,9 +15,15 @@ public class GoodCloud : MonoBehaviour {
 
 	void OnTriggerStay2D (Collider2D c) {
 		PlanePhysics p = c.gameObject.GetComponent<PlanePhysics> ();
-
 		if (p) {
-			p.onGoodCloud();
+			p.bonusState = PlanePhysics.BonusState.UPCLOUD;
+		}
+	}
+
+	void OnTriggerExit2D (Collider2D c) {
+		PlanePhysics p = c.gameObject.GetComponent<PlanePhysics> ();
+		if (p) {
+			p.bonusState = PlanePhysics.BonusState.NONE;
 		}
 	}
 }

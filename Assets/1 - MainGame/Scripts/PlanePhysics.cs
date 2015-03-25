@@ -10,13 +10,18 @@ public class PlanePhysics : MonoBehaviour {
 	public float initialGravity;
 	public Vector3 previousPos;
 	private float bufferGravity;
+	public SpriteRenderer mySprite;
 
 	public enum FlappyState {BOUNCING, NORMAL};
 	public FlappyState flappyState;
 
 	//Bonus
+	public enum BonusState{DOWNCLOUD, UPCLOUD, NONE};
+	public BonusState bonusState;
 	private float malusGravity;
 	private float bonusGravity;
+
+	public HeartBar myHeartBar;
 
 	// Use this for initialization
 	void Start () {
@@ -25,8 +30,9 @@ public class PlanePhysics : MonoBehaviour {
 		initialGravity = (float)0.3;
 		previousPos = transform.position;
 
-		bonusGravity = -(float)3.95;
-		malusGravity = (float)2.5;
+		bonusState = BonusState.NONE;
+		bonusGravity = -(float)1.5;
+		malusGravity = (float)1.5;
 
 	}
 
@@ -34,12 +40,9 @@ public class PlanePhysics : MonoBehaviour {
 		GetComponent<Rigidbody2D>().gravityScale = 1;
 	}
 
-	void FixedUpdate() {
-	}
-
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		//Quand on appuie on alège la gravité
 		if (flappyState == FlappyState.BOUNCING) {
 			//print ("TouchMainGame");
@@ -63,6 +66,12 @@ public class PlanePhysics : MonoBehaviour {
 			//print ("NoTouch");
 			rb.gravityScale = initialGravity;
 		}
+
+		if(bonusState == BonusState.UPCLOUD)
+			onGoodCloud();
+		else if(bonusState == BonusState.DOWNCLOUD)
+			onBadCloud();
+
 
 		//To face direction
 		transform.right = rb.velocity;
@@ -94,6 +103,40 @@ public class PlanePhysics : MonoBehaviour {
 
 	public void onBadCloud() {
 		rb.gravityScale = malusGravity;
+	}
+
+	IEnumerator myBlink() {
+		//Vraiment désolé mais j'ai essayé avec des boucles, j'ai pas réussi , ça ma saoulé
+		mySprite.enabled = false;
+		yield return new WaitForSeconds ((float)0.1);
+		mySprite.enabled = true;
+		yield return new WaitForSeconds ((float)0.1);
+		mySprite.enabled = false;
+		yield return new WaitForSeconds ((float)0.1);
+		mySprite.enabled = true;
+		yield return new WaitForSeconds ((float)0.1);
+		mySprite.enabled = false;
+		yield return new WaitForSeconds ((float)0.1);
+		mySprite.enabled = true;
+		yield return new WaitForSeconds ((float)0.1);
+		mySprite.enabled = false;
+		yield return new WaitForSeconds ((float)0.1);
+		mySprite.enabled = true;
+		yield return new WaitForSeconds ((float)0.1);
+		mySprite.enabled = false;
+		yield return new WaitForSeconds ((float)0.1);
+		mySprite.enabled = true;
+	}
+
+	public void Blink(){
+		StartCoroutine("myBlink");
+
+	}
+
+	public void handleMongolfiere(){
+		myHeartBar.looseLife ();
+		Blink ();
+		//On clignote
 	}
 
 
