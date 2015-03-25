@@ -19,7 +19,7 @@ public class CriticalPanelScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void OnGUI () {
-		Color tmpColor = transform.GetComponent<Image>().color;
+		Color tmpColor = transform.GetComponent<SpriteRenderer>().color;
 		if(criticalState == CriticalState.CRITICAL)
 		{
 			if(upDownState == UpDownState.UP && tmpColor.a < limAlpha)
@@ -36,11 +36,11 @@ public class CriticalPanelScript : MonoBehaviour {
 			else if(upDownState == UpDownState.UP)
 				upDownState = UpDownState.DOWN;
 
-			transform.GetComponent<Image>().color = tmpColor;
+			transform.GetComponent<SpriteRenderer>().color = tmpColor;
 		}
 		else {
 			tmpColor.a = 0;
-			transform.GetComponent<Image>().color = tmpColor;
+			transform.GetComponent<SpriteRenderer>().color = tmpColor;
 		}
 	}
 }
