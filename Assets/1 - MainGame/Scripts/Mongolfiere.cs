@@ -9,6 +9,7 @@ public class Mongolfiere : MonoBehaviour {
 			p.handleMongolfiere();
 		}
 	}
+	
 	// Use this for initialization
 	void Start () {
 	

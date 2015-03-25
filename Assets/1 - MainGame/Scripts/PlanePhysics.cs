@@ -10,6 +10,7 @@ public class PlanePhysics : MonoBehaviour {
 	public float initialGravity;
 	public Vector3 previousPos;
 	private float bufferGravity;
+	public SpriteRenderer mySprite;
 
 	public enum FlappyState {BOUNCING, NORMAL};
 	public FlappyState flappyState;
@@ -104,8 +105,38 @@ public class PlanePhysics : MonoBehaviour {
 		rb.gravityScale = malusGravity;
 	}
 
+	IEnumerator myBlink() {
+		//Vraiment désolé mais j'ai essayé avec des boucles, j'ai pas réussi , ça ma saoulé
+		mySprite.enabled = false;
+		yield return new WaitForSeconds ((float)0.1);
+		mySprite.enabled = true;
+		yield return new WaitForSeconds ((float)0.1);
+		mySprite.enabled = false;
+		yield return new WaitForSeconds ((float)0.1);
+		mySprite.enabled = true;
+		yield return new WaitForSeconds ((float)0.1);
+		mySprite.enabled = false;
+		yield return new WaitForSeconds ((float)0.1);
+		mySprite.enabled = true;
+		yield return new WaitForSeconds ((float)0.1);
+		mySprite.enabled = false;
+		yield return new WaitForSeconds ((float)0.1);
+		mySprite.enabled = true;
+		yield return new WaitForSeconds ((float)0.1);
+		mySprite.enabled = false;
+		yield return new WaitForSeconds ((float)0.1);
+		mySprite.enabled = true;
+	}
+
+	public void Blink(){
+		StartCoroutine("myBlink");
+
+	}
+
 	public void handleMongolfiere(){
 		myHeartBar.looseLife ();
+		Blink ();
+		//On clignote
 	}
 
 

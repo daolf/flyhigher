@@ -1837,6 +1837,7 @@ MonoBehaviour:
   rb: {fileID: 1231583002}
   initialGravity: 0
   previousPos: {x: 0, y: 0, z: 0}
+  mySprite: {fileID: 1231583003}
   flappyState: 0
   bonusState: 0
   myHeartBar: {fileID: 608123359}
