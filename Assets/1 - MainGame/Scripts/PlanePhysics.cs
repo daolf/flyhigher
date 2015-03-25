@@ -20,6 +20,7 @@ public class PlanePhysics : MonoBehaviour {
 	private float malusGravity;
 	private float bonusGravity;
 
+	public HeartBar myLife;
 
 	// Use this for initialization
 	void Start () {
@@ -101,6 +102,10 @@ public class PlanePhysics : MonoBehaviour {
 
 	public void onBadCloud() {
 		rb.gravityScale = malusGravity;
+	}
+
+	public void handleMongolfiere(){
+		myLife.looseLife ();
 	}
 
 

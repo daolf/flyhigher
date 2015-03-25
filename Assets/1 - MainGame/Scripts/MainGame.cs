@@ -112,6 +112,9 @@ public class MainGame : MonoBehaviour {
 			//On active l'intéraction fuel
 				score = scriptPlanePhysics.getDistanceFromOrigin ();
 				setScore (score);
+				if (scriptPlanePhysics.myLife.currLife == -1) {
+					state = State.END_LOOSE;
+				}
 
 
 
