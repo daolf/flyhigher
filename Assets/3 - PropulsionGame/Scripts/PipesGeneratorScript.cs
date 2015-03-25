@@ -59,6 +59,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 	private GradientAlphaKey[] gak;
 
 	public cameraScript myCamera;
+	public bool isPause;
 
 
 	void Update() {

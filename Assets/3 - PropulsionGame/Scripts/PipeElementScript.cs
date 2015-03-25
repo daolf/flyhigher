@@ -25,7 +25,7 @@ public class PipeElementScript : MonoBehaviour {
 	public Color fadingColorOut;
 
 	float fadingElapsed = 0;
-
+	
 	// Use this for initialization
 	void Start () {
 	}
@@ -75,7 +75,9 @@ public class PipeElementScript : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		if(element != null && touchEnable) {
+		GameObject pg = GameObject.Find ("Pipes Generator");
+		if(element != null && touchEnable && !pg.GetComponent<PipesGeneratorScript>().isPause)
+		{
 			element.orientation = element.orientation.rotateClockwise();
 			smoothRotate(element.orientation.toDegrees());
 		}
