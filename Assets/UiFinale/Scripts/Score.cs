@@ -18,13 +18,18 @@ public class Score : MonoBehaviour {
 				t[i].value = 0;
 			}
 		}
-
-		while (temp > 0) {
-			t[i].value = temp % 10;
-			temp /= 10;
+		i = 0;
+		while (i < 4) {
+			if (temp > 0)
+			{
+				t[i].value = temp % 10;
+				temp = temp/10;
+			}
+			else {
+				t[i].value = 0;
+			}
 			i++;
 		}
-
 	}
 
 

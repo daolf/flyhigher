@@ -7,6 +7,7 @@ public class MainPaintScript : MonoBehaviour {
 
 	public Transform tachePrefab;
 	public Transform paintPrefab;
+	public Transform patternPrefab;
 	public Score guiScore;
 	public int score;
 	public int gain ;
@@ -17,10 +18,12 @@ public class MainPaintScript : MonoBehaviour {
 	public float previousX;
 	public float maxMovement;
 	public bool endScroll = false;
+	public bool onCanvas ;
 	public GameObject endMenu;
-	
+	public CriticalPanelScript criticalPanel;
+
 	public void drawPaint(Vector3 pz) {
-		buffer = Instantiate(paintPrefab,new Vector3(pz.x,pz.y,-1), Quaternion.identity) as Transform;	
+		buffer = Instantiate(paintPrefab,new Vector3(pz.x,pz.y,this.GetComponent<Transform>().position.z), Quaternion.identity) as Transform;	
 		if (buffer == null) {
 			print("erreur buffer null");		
 		}
@@ -28,7 +31,7 @@ public class MainPaintScript : MonoBehaviour {
 	}
 	
 	public void drawTache(Vector3 pz) {
-		buffer = Instantiate(tachePrefab,new Vector3(pz.x,pz.y,-1), Quaternion.identity) as Transform;	
+		buffer = Instantiate(tachePrefab,new Vector3(pz.x,pz.y,this.GetComponent<Transform>().position.z), Quaternion.identity) as Transform;	
 		if (buffer == null) {
 			print("erreur buffer null");		
 		}
@@ -38,11 +41,9 @@ public class MainPaintScript : MonoBehaviour {
 	
 	public void updateScore(int scoreTemp) {
 		score = score + scoreTemp;
-		print ("Score: " + score);
 		if (score < 0) {
 			score = 0;
 		}
-		print ("Score: " + score);
 		guiScore.value = score;
 	}
 
@@ -50,11 +51,11 @@ public class MainPaintScript : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {		
-		speed = 4;
+		speed = (float)3;
 		movement = 0;
 		previousX = this.transform.position.x;
 		// TODO modify calculation of maxMovement
-		maxMovement = this.GetComponent<Renderer>().bounds.size.x - (float)10.5 ;
+		maxMovement = this.GetComponent<Renderer> ().bounds.size.x;
 		score = 0;
 		endMenu.GetComponent<Canvas> ().enabled = false;
 	}
@@ -82,25 +83,36 @@ public class MainPaintScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
+		foreach (Touch touch in Input.touches)
+		{
+			int pointerID = touch.fingerId;
+			if (EventSystem.current.IsPointerOverGameObject(pointerID))
+			{
+				// at least on touch is over a canvas UI
+				onCanvas = true;
+				return;
+			}
+			
+			else 
+			{
+				// here we don't know if the touch was over an canvas UI
+				onCanvas = false;
+			}
+		}
 		if (!GetComponentInParent<ManagerPaint> ().isPause &&
-		    !EventSystem.current.IsPointerOverGameObject()) {
+		     !onCanvas){
 
 			if (Input.GetMouseButton (0) && 
 				GetComponent<Collider2D> () == Physics2D.OverlapPoint (new Vector2 (pz.x, pz.y))
 		   ) {
 				drawPaint (pz);
-				print ("la");
 				updateScore (gain);
-				print (score);
+				criticalPanel.criticalState = CriticalPanelScript.CriticalState.NORMAL;
 			} else if (Input.GetMouseButton (0) && 
 				GetComponent<Collider2D> () != Physics2D.OverlapPoint (new Vector2 (pz.x, pz.y)) ) {
 				drawTache (pz);
-				print ("la");
+				criticalPanel.criticalState = CriticalPanelScript.CriticalState.CRITICAL;
 				updateScore (perte);
-				print (score);
-			
-		
 			}
 	
 		}
