@@ -58,6 +58,8 @@ public class PipesGeneratorScript : MonoBehaviour {
 	private GradientColorKey[] gck;
 	private GradientAlphaKey[] gak;
 
+	public cameraScript myCamera;
+
 
 	void Update() {
 		// really dirty proof of concept, check path every frame
@@ -168,9 +170,12 @@ public class PipesGeneratorScript : MonoBehaviour {
 		return isValidPath(firstX, firstY, inputOrientation.opposite());
 	}
 	
-	
+
 	// Use this for initialization
 	void Start () {
+		// On zoom
+		myCamera.to = 3.22f;
+
 		parentArea = GameObject.Find("/Container").transform;
 		grid = instanciateLevelFromXml (level);
 		instanciatePipeGrid (grid);
