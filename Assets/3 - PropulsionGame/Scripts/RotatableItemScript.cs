@@ -14,6 +14,6 @@ public class RotatableItemScript : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		gameObject.transform.Rotate (0, 0, 90);
+			gameObject.transform.Rotate (0, 0, 90);
 	}
 }

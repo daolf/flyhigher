@@ -52,7 +52,15 @@ public class PipesGeneratorScript : MonoBehaviour {
 	private int winPathDisplayingCurrent = -1;
 	
 	private const float WIN_PATH_DISPLAYING_TIME = 0.2f;
-	
+
+	// used to choose the right pipe color
+	private Gradient gradient;
+	private GradientColorKey[] gck;
+	private GradientAlphaKey[] gak;
+
+	public cameraScript myCamera;
+	public bool isPause;
+
 
 	void Update() {
 		// really dirty proof of concept, check path every frame
@@ -77,6 +85,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 				else {
 					// not good : accessing random item (but easier)
 					winPath.ElementAt(nextVal).setWinPath(true);
+					winPath.ElementAt(nextVal).fadingColorOut = gradient.Evaluate((float)nextVal/winPath.Count);
 				}
 			}
 			
@@ -162,13 +171,34 @@ public class PipesGeneratorScript : MonoBehaviour {
 		return isValidPath(firstX, firstY, inputOrientation.opposite());
 	}
 	
-	
+
 	// Use this for initialization
 	void Start () {
+		// On zoom
+		myCamera.to = 3.22f;
+
 		parentArea = GameObject.Find("/Container").transform;
 		grid = instanciateLevelFromXml (level);
 		instanciatePipeGrid (grid);
-		return;
+
+		// pipe gradient, very ugly
+		gradient = new Gradient();
+		// Populate the color keys at the relative time 0 and 1 (0 and 100%)
+		gck = new GradientColorKey[3];
+		gck[0].color = new Color32(0,228,255,1);
+		gck[0].time = 0.0f;
+		gck[1].color = new Color32(228,198,109,1);
+		gck[1].time = 0.5f;
+		gck[2].color = new Color32(219,101,63,1);
+		gck[2].time = 1.0f;
+		
+		// Populate the alpha  keys at relative time 0 and 1  (0 and 100%)
+		gak = new GradientAlphaKey[2];
+		gak[0].alpha = 1.0f;
+		gak[0].time = 0.0f;
+		gak[1].alpha = 1.0f;
+		gak[1].time = 1.0f;
+		gradient.SetKeys(gck, gak);
 	}
 
 	 

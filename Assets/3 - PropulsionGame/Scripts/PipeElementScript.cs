@@ -22,12 +22,12 @@ public class PipeElementScript : MonoBehaviour {
 	// for smooth color transition (temp?)
 	private bool inSmoothFading = false;
 	private Color fadingColorIn = Color.white;
-	private Color fadingColorOut = Color.Lerp(Color.white, Color.black, 0.3f);
-	float fadingElapsed = 0;
+	public Color fadingColorOut;
 
+	float fadingElapsed = 0;
+	
 	// Use this for initialization
 	void Start () {
-	
 	}
 	
 	public void setTouchEnable(bool val) {
@@ -61,8 +61,9 @@ public class PipeElementScript : MonoBehaviour {
 		
 		if(inSmoothFading) {
 			fadingElapsed += Time.deltaTime;
-			GetComponent<SpriteRenderer>().color = Color.Lerp(fadingColorIn, fadingColorOut, fadingElapsed/0.75f);
-			
+			transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+			transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.Lerp(fadingColorIn, fadingColorOut, fadingElapsed/0.75f);
+
 			if(fadingElapsed > 0.75f)
 				inSmoothFading = false;
 		}
@@ -74,7 +75,9 @@ public class PipeElementScript : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		if(element != null && touchEnable) {
+		GameObject pg = GameObject.Find ("Pipes Generator");
+		if(element != null && touchEnable && !pg.GetComponent<PipesGeneratorScript>().isPause)
+		{
 			element.orientation = element.orientation.rotateClockwise();
 			smoothRotate(element.orientation.toDegrees());
 		}
