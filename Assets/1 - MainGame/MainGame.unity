@@ -1839,7 +1839,7 @@ MonoBehaviour:
   previousPos: {x: 0, y: 0, z: 0}
   flappyState: 0
   bonusState: 0
-  myLife: {fileID: 608123359}
+  myHeartBar: {fileID: 608123359}
 --- !u!224 &1248586631
 RectTransform:
   m_PrefabParentObject: {fileID: 22404108, guid: 6af8f3b64ddde4063901bcabfa3e17fe,
