@@ -20,7 +20,7 @@ public class PlanePhysics : MonoBehaviour {
 	private float malusGravity;
 	private float bonusGravity;
 
-	public HeartBar myLife;
+	public HeartBar myHeartBar;
 
 	// Use this for initialization
 	void Start () {
@@ -105,7 +105,7 @@ public class PlanePhysics : MonoBehaviour {
 	}
 
 	public void handleMongolfiere(){
-		myLife.looseLife ();
+		myHeartBar.looseLife ();
 	}
 
 
