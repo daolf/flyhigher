@@ -2641,6 +2641,7 @@ MonoBehaviour:
   previousX: 0
   maxMovement: 0
   endScroll: 0
+  onCanvas: 0
   endMenu: {fileID: 216160298}
 --- !u!114 &1249071195
 MonoBehaviour:

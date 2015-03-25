@@ -18,6 +18,7 @@ public class MainPaintScript : MonoBehaviour {
 	public float previousX;
 	public float maxMovement;
 	public bool endScroll = false;
+	public bool onCanvas ;
 	public GameObject endMenu;
 	
 	public void drawPaint(Vector3 pz) {
@@ -81,9 +82,24 @@ public class MainPaintScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
+		foreach (Touch touch in Input.touches)
+		{
+			int pointerID = touch.fingerId;
+			if (EventSystem.current.IsPointerOverGameObject(pointerID))
+			{
+				// at least on touch is over a canvas UI
+				onCanvas = true;
+				return;
+			}
+			
+			else 
+			{
+				// here we don't know if the touch was over an canvas UI
+				onCanvas = false;
+			}
+		}
 		if (!GetComponentInParent<ManagerPaint> ().isPause &&
-		    !EventSystem.current.IsPointerOverGameObject()) {
+		     !onCanvas){
 
 			if (Input.GetMouseButton (0) && 
 				GetComponent<Collider2D> () == Physics2D.OverlapPoint (new Vector2 (pz.x, pz.y))
