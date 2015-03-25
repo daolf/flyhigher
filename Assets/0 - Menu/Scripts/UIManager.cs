@@ -6,7 +6,7 @@ public class UIManager : MonoBehaviour {
 	void onEnable() {
 		//Set the constant for the first time
 		PlayerPrefs.GetInt (Constants.MAIN_GAME_HIGH_SCORE, 0);
-		PlayerPrefs.GetInt (Constants.MAIN_GAME_BONUS_LIFE, 0);
+		PlayerPrefs.GetInt (Constants.MAIN_GAME_MAX_LIFE, 0);
 	}
 
 	public void Menu() {
