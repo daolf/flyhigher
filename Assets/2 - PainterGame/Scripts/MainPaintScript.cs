@@ -20,7 +20,8 @@ public class MainPaintScript : MonoBehaviour {
 	public bool endScroll = false;
 	public bool onCanvas ;
 	public GameObject endMenu;
-	
+	public CriticalPanelScript criticalPanel;
+
 	public void drawPaint(Vector3 pz) {
 		buffer = Instantiate(paintPrefab,new Vector3(pz.x,pz.y,this.GetComponent<Transform>().position.z), Quaternion.identity) as Transform;	
 		if (buffer == null) {
@@ -106,10 +107,11 @@ public class MainPaintScript : MonoBehaviour {
 		   ) {
 				drawPaint (pz);
 				updateScore (gain);
-				print (score);
+				criticalPanel.criticalState = CriticalPanelScript.CriticalState.NORMAL;
 			} else if (Input.GetMouseButton (0) && 
 				GetComponent<Collider2D> () != Physics2D.OverlapPoint (new Vector2 (pz.x, pz.y)) ) {
 				drawTache (pz);
+				criticalPanel.criticalState = CriticalPanelScript.CriticalState.CRITICAL;
 				updateScore (perte);
 			}
 	

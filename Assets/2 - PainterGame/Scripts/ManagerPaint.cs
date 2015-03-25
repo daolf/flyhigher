@@ -20,7 +20,7 @@ public class ManagerPaint : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		switch (state) {
 		case State.BEGIN :
 			state = State.MAIN;
