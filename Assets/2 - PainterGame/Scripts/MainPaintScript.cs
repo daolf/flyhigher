@@ -114,6 +114,9 @@ public class MainPaintScript : MonoBehaviour {
 				criticalPanel.criticalState = CriticalPanelScript.CriticalState.CRITICAL;
 				updateScore (perte);
 			}
+			else {
+				criticalPanel.criticalState = CriticalPanelScript.CriticalState.NORMAL;
+			}
 	
 		}
 	
