@@ -57,7 +57,7 @@ public class TimeBarscript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (activated) {
+		if (activated && !sceneGenerator.isPause) {
 			if (CurrentTime > 0) {
 				CurrentTime -= 1;
 			} else {
