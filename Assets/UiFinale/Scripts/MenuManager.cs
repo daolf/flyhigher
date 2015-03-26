@@ -20,6 +20,9 @@ public class MenuManager : MonoBehaviour {
 		if (game.GetComponent<ManagerPaint> ()) {
 			game.GetComponent<ManagerPaint> ().isPause = false;
 		}
+		if (game.GetComponent<SceneGeneratorScript> ()) {
+			game.GetComponent<SceneGeneratorScript> ().isPause = false;
+		}
 		//pause.GetComponent<Sprite>().enabled = false;
 	}
 

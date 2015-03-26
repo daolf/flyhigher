@@ -19,6 +19,9 @@ public class PauseScript : MonoBehaviour {
 		if (game.GetComponent<ManagerPaint> ()) {
 			game.GetComponent<ManagerPaint> ().isPause = true;
 		}
+		if (game.GetComponent<SceneGeneratorScript> ()) {
+			game.GetComponent<SceneGeneratorScript> ().isPause = true;
+		}
 	}
 	// Use this for initialization
 	void Start () {

@@ -22,6 +22,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public string scene;
 	public Score myscore;
 	public bool hasPlayed;
+	public bool isPause;
 
 	// Use this for initialization
 	void Start () {
@@ -30,6 +31,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		scoreNotUpdated = true;
 		updateSceneRoudFinish ();
 		hasPlayed = false;
+		isPause = false;
 	}
 
 	public void generateCogs () {

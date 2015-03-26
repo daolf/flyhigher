@@ -51,7 +51,7 @@ public class PrimaryCog : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		if (isSelectable) {
+		if (isSelectable && !generator.isPause) {
 			generator.cogSelected(this);
 		}
 	}
