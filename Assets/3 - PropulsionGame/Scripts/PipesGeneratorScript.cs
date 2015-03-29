@@ -59,8 +59,19 @@ public class PipesGeneratorScript : MonoBehaviour {
 	private GradientAlphaKey[] gak;
 
 	public cameraScript myCamera;
-	public bool isPause;
+	
+	private bool m_isPause = false;
 
+	public bool isPause {
+		get {
+			return m_isPause;
+		}
+		set {
+			m_isPause = value;
+			// disable the timer if needed
+			GameObject.Find("Canvas-Timer/frame").GetComponent<TimeBarscript>().enabled = !value;
+		}
+	}
 
 	void Update() {
 		// really dirty proof of concept, check path every frame
@@ -329,4 +340,5 @@ public class PipesGeneratorScript : MonoBehaviour {
 			}
 		}
 	}
+
 }
