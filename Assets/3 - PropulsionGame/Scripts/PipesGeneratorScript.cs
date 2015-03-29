@@ -51,7 +51,13 @@ public class PipesGeneratorScript : MonoBehaviour {
 	private float winPathDisplayingElapsed = 0;
 	private int winPathDisplayingCurrent = -1;
 	
+	// time between each pipe displaying
 	private const float WIN_PATH_DISPLAYING_TIME = 0.2f;
+
+	// used to wait a bit after win path display...
+	private bool inAlmostFinished = false;
+	private float almostFinishedElapsed = 0;
+	private const float ALMOST_FINISHED_TIME = 1.5f;
 
 	// used to choose the right pipe color
 	private Gradient gradient;
@@ -69,7 +75,8 @@ public class PipesGeneratorScript : MonoBehaviour {
 		set {
 			m_isPause = value;
 			// disable the timer if needed
-			GameObject.Find("Canvas-Timer/frame").GetComponent<TimeBarscript>().enabled = !value;
+			if(!inWinPathDisplaying && !inAlmostFinished)
+				GameObject.Find("Canvas-Timer/frame").GetComponent<TimeBarscript>().enabled = !value;
 		}
 	}
 
@@ -92,6 +99,8 @@ public class PipesGeneratorScript : MonoBehaviour {
 				winPathDisplayingCurrent = nextVal;
 				if(nextVal > winPath.Count - 1) {
 					inWinPathDisplaying = false;
+					// start waiting before "you win" message is displayed
+					inAlmostFinished = true;
 				}
 				else {
 					// not good : accessing random item (but easier)
@@ -100,6 +109,14 @@ public class PipesGeneratorScript : MonoBehaviour {
 				}
 			}
 			
+		}
+		
+		if(inAlmostFinished) {
+			almostFinishedElapsed += Time.deltaTime;
+			if(almostFinishedElapsed > ALMOST_FINISHED_TIME) {
+				inAlmostFinished = false;
+				onEffectiveWin();
+			}
 		}
 	}
 	
@@ -122,8 +139,15 @@ public class PipesGeneratorScript : MonoBehaviour {
 		inWinPathDisplaying = true;
 		winPathDisplayingElapsed = 0;
 		winPathDisplayingCurrent = -1;
-		//foreach(PipeElementScript pipe in winPath)
-		//	pipe.setWinPath(true);
+		
+		// disable the timer and the Pause button
+		GameObject.Find("Canvas-Timer/frame").GetComponent<TimeBarscript>().enabled = false;
+		GameObject.Find("ButtonPause").SetActive(false);
+	}
+	
+	// internal : called when "you win" message is ready to be displayed
+	private void onEffectiveWin() {
+		// TODO display a menu!
 	}
 	
 	private void getNeighborCoordinates(int x, int y, PipeElement.Orientation dir, out int newX, out int newY) {

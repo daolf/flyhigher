@@ -658,7 +658,6 @@ MonoBehaviour:
   pipeOut: {fileID: 11458174, guid: b62ad45c9cefe744e81d2d40aed9ac21, type: 2}
   level: {fileID: 4900000, guid: 7024c2ff8a9b8d044b6f45cb73cfbc42, type: 3}
   myCamera: {fileID: 1511921859}
-  isPause: 0
 --- !u!4 &979982273
 Transform:
   m_ObjectHideFlags: 0
