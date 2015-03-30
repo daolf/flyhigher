@@ -1,0 +1,30 @@
+<level estimatedTime="30" width="9" height="5">
+	<pipe type="in" dir="east" x="0" y="0"></pipe>
+	<pipe type="I" dir="south" x="1" y="0"></pipe>
+	<pipe type="L" dir="east" x="2" y="0"></pipe>
+	<pipe type="I" dir="north" x="2" y="1"></pipe>
+	<pipe type="L" dir="east" x="2" y="2"></pipe>
+	<pipe type="L" dir="south" x="3" y="2"></pipe>
+	<pipe type="L" dir="west" x="3" y="1"></pipe>
+	<pipe type="I" dir="east" x="4" y="1"></pipe>
+	<pipe type="L" dir="south" x="5" y="1"></pipe>
+	<pipe type="L" dir="east" x="5" y="2"></pipe>
+	<pipe type="L" dir="north" x="4" y="2"></pipe>
+	<pipe type="I" dir="west" x="4" y="3"></pipe>
+	<pipe type="L" dir="south" x="4" y="4"></pipe>
+	<pipe type="I" dir="north" x="5" y="4"></pipe>
+	<pipe type="L" dir="west" x="6" y="4"></pipe>
+	<pipe type="I" dir="east" x="6" y="3"></pipe>
+	<pipe type="L" dir="south" x="6" y="2"></pipe>
+	<pipe type="L" dir="north" x="7" y="2"></pipe>
+	<pipe type="I" dir="east" x="7" y="3"></pipe>
+	<pipe type="L" dir="east" x="7" y="4"></pipe>
+	<pipe type="out" dir="west" x="8" y="4"></pipe>
+	
+	<!-- annoying pipes... -->
+	<pipe type="I" dir="north" x="3" y="3"></pipe>
+	<pipe type="L" dir="east" x="5" y="3"></pipe>
+	<pipe type="I" dir="south" x="6" y="1"></pipe>
+	<pipe type="L" dir="east" x="7" y="1"></pipe>
+	<pipe type="L" dir="west" x="3" y="4"></pipe>
+</level>
