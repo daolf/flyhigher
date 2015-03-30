@@ -4,9 +4,13 @@ using System.Collections;
 public class cameraScript : MonoBehaviour {
 
 	public Camera myCamera;
-	public float to ;
+	public float to;
+	public float from;
 	
-	public float zoomVelocity = 0.8f;
+	public float duration = 2;
+	private float elapsed = 0;
+	
+	//public float zoomVelocity = 0.8f;
 	
 	// delegate called when the camera zoom finished
 	public delegate void EventCallback();
@@ -24,8 +28,9 @@ public class cameraScript : MonoBehaviour {
 
 	void FixedUpdate() {
 		if(inZoom) {
-			if (this.to < myCamera.orthographicSize) {
-				myCamera.orthographicSize -= zoomVelocity * Time.deltaTime;
+			elapsed += Time.deltaTime;
+			if (elapsed < duration) {
+				myCamera.orthographicSize = from - (from - to) * easeSineRatio(elapsed/duration);
 			}
 			else {
 				inZoom = false;
@@ -37,5 +42,9 @@ public class cameraScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+	
+	private float easeSineRatio(float ratio) {
+		return  (-0.5f) * (Mathf.Cos (ratio * Mathf.PI) - 1.0f);
 	}
 }
