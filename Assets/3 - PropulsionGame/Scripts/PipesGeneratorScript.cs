@@ -288,6 +288,11 @@ public class PipesGeneratorScript : MonoBehaviour {
 		xml.LoadXml(document.text);
 		XmlNodeList levelNodes = xml.GetElementsByTagName("level");
 
+		XmlAttribute levelEstimatedTime = levelNodes[0].Attributes["estimatedTime"];
+		if(levelEstimatedTime != null) {
+			// use it as the base time for countdown timer
+			timebar.maxTime = int.Parse(levelEstimatedTime.Value);
+		}
 		// start and destination pipes
 		// TODO init
 		
