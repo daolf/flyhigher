@@ -96,7 +96,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 11448784, guid: 0bd3443aecf484f97bd3633f712cb6b8, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22454922, guid: 0bd3443aecf484f97bd3633f712cb6b8, type: 2}
       propertyPath: m_LocalPosition.x
@@ -1296,7 +1296,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11482384, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
       propertyPath: maxTime
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 11485628, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
       propertyPath: m_Color.r
@@ -1627,6 +1627,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: aaefcd224190d4860be4e64cc83f08e2,
         type: 3}
+    - target: {fileID: 11404438, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
+      propertyPath: scene
+      value: IngameScene
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
   m_IsPrefabParent: 0

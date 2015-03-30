@@ -57,7 +57,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 	// used to wait a bit after win path display...
 	private bool inAlmostFinished = false;
 	private float almostFinishedElapsed = 0;
-	private const float ALMOST_FINISHED_TIME = 1.5f;
+	private const float ALMOST_FINISHED_TIME = 0.7f;
 
 	// used to choose the right pipe color
 	private Gradient gradient;
@@ -77,8 +77,8 @@ public class PipesGeneratorScript : MonoBehaviour {
 		set {
 			m_isPause = value;
 			// disable the timer if needed
-			if(!inWinPathDisplaying && !inAlmostFinished)
-				timebar.enabled = !value;
+			timebar.enabled = !value;
+			GameObject.Find("ButtonPause").GetComponentInParent<Canvas>().enabled = !value;
 		}
 	}
 
@@ -143,13 +143,12 @@ public class PipesGeneratorScript : MonoBehaviour {
 		winPathDisplayingCurrent = -1;
 		
 		// disable the timer and the Pause button
-		timebar.enabled = false;
-		GameObject.Find("ButtonPause").SetActive(false);
+		isPause = true;
 	}
 	
 	// internal : called when "you win" message is ready to be displayed
 	private void onEffectiveWin() {
-		// TODO display a menu!
+		GameObject.Find("WinMenu").GetComponent<Canvas>().enabled = true;
 	}
 	
 	// internal : used as a callback when the time is elapsed
