@@ -1,18 +1,18 @@
 <level estimatedTime="15" width="9" height="5">
 	<pipe type="in" dir="east" x="0" y="4"></pipe>
-	<pipe type="L" dir="east" x="1" y="4"></pipe>
-	<pipe type="I" dir="west" x="1" y="3"></pipe>
-	<pipe type="L" dir="north" x="1" y="2"></pipe>
-	<pipe type="I" dir="south" x="2" y="2"></pipe>
-	<pipe type="L" dir="south" x="3" y="2"></pipe>
-	<pipe type="L" dir="east" x="3" y="1"></pipe>
-	<pipe type="I" dir="north" x="4" y="1"></pipe>
-	<pipe type="L" dir="west" x="5" y="1"></pipe>
-	<pipe type="I" dir="east" x="5" y="2"></pipe>
-	<pipe type="L" dir="north" x="5" y="3"></pipe>
-	<pipe type="I" dir="west" x="6" y="3"></pipe>
-	<pipe type="L" dir="east" x="7" y="3"></pipe>
-	<pipe type="I" dir="south" x="7" y="2"></pipe>
-	<pipe type="L" dir="south" x="7" y="1"></pipe>
+	<pipe type="L" x="1" y="4"></pipe>
+	<pipe type="I" x="1" y="3"></pipe>
+	<pipe type="L" x="1" y="2"></pipe>
+	<pipe type="I" x="2" y="2"></pipe>
+	<pipe type="L" x="3" y="2"></pipe>
+	<pipe type="L" x="3" y="1"></pipe>
+	<pipe type="I" x="4" y="1"></pipe>
+	<pipe type="L" x="5" y="1"></pipe>
+	<pipe type="I" x="5" y="2"></pipe>
+	<pipe type="L" x="5" y="3"></pipe>
+	<pipe type="I" x="6" y="3"></pipe>
+	<pipe type="L" x="7" y="3"></pipe>
+	<pipe type="I" x="7" y="2"></pipe>
+	<pipe type="L" x="7" y="1"></pipe>
 	<pipe type="out" dir="west" x="8" y="1"></pipe>
 </level>
