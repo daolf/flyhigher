@@ -57,12 +57,19 @@ public class TimeBarscript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (activated) {
+		if (activated && !sceneGenerator.isPause) {
 			if (CurrentTime > 0) {
 				CurrentTime -= 1;
 			} else {
 				sceneGenerator.setAllUnselectable();
-				sceneGenerator.looseMenu.GetComponent<Canvas> ().enabled = true;
+				if ( sceneGenerator.myscore.value >= sceneGenerator.WIN_SCORE) {
+					//Game win 
+					sceneGenerator.endMenu.GetComponent<Canvas> ().enabled = true;
+				} else {
+					//Game lost
+					sceneGenerator.looseMenu.GetComponent<Canvas> ().enabled = true;
+				}
+
 			}
 		}
 		

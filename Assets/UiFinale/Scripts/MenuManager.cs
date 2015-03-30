@@ -23,6 +23,9 @@ public class MenuManager : MonoBehaviour {
 		if (game.GetComponent<PipesGeneratorScript> ()) {
 			game.GetComponent<PipesGeneratorScript> ().isPause = false;
 		}
+		if (game.GetComponent<SceneGeneratorScript> ()) {
+			game.GetComponent<SceneGeneratorScript> ().isPause = false;
+		}
 		//pause.GetComponent<Sprite>().enabled = false;
 	}
 

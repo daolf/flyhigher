@@ -22,6 +22,9 @@ public class PauseScript : MonoBehaviour {
 		if (game.GetComponent<PipesGeneratorScript> ()) {
 			game.GetComponent<PipesGeneratorScript> ().isPause = true;
 		}
+		if (game.GetComponent<SceneGeneratorScript> ()) {
+			game.GetComponent<SceneGeneratorScript> ().isPause = true;
+		}
 	}
 	// Use this for initialization
 	void Start () {

@@ -29,8 +29,21 @@ public class SmoothTranslation : MonoBehaviour {
 
 			gameObject.transform.position = newpos;
 			curTime += Time.deltaTime;
-		} else {
+		} else { // replace element 
+			Vector3 newpos = gameObject.transform.position;
+			newpos.x = from.x;
+			newpos.y = from.y;
+			gameObject.transform.position = newpos;
 			sceneGenerator.isAnimEnd = true;
+			curTime = 0;
+			Destroy(this);
 		}
+
+		/*if (!sceneGenerator.hasPlayed) {
+			sceneGenerator.isAnimEnd = true;//Delete
+			curTime = 0;
+		} else {
+			sceneGenerator.isAnimEnd = false;
+		}*/
 	}
 }
