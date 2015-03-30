@@ -183,5 +183,31 @@ public static class OrientationMethods
 		}
 		return 0f;
 	}
+	
+	public static PipeElement.Orientation randomOrientation() {
+		switch (Random.Range(0, 4)) {
+		case 0:
+			return PipeElement.Orientation.EAST;
+		case 1:
+			return PipeElement.Orientation.SOUTH;
+		case 2:
+			return PipeElement.Orientation.WEST;
+		default:
+			return PipeElement.Orientation.NORTH;
+		}
+	}
+	
+	public static PipeElement.Orientation fromString(string str) {
+		switch(str) {
+		case "east":
+			return PipeElement.Orientation.EAST;
+		case "west":
+			return PipeElement.Orientation.WEST;
+		case "south":
+			return PipeElement.Orientation.SOUTH;
+		default:
+			return PipeElement.Orientation.NORTH;
+		}
+	}
 }
 

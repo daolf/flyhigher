@@ -323,19 +323,12 @@ public class PipesGeneratorScript : MonoBehaviour {
 					break;
 				}
 				
-				switch(curNode.Attributes["dir"].Value) {
-				case "east":
-					orientation = PipeElement.Orientation.EAST;
-					break;
-				case "west":
-					orientation = PipeElement.Orientation.WEST;
-					break;
-				case "south":
-					orientation = PipeElement.Orientation.SOUTH;
-					break;
-				case "north":
-					orientation = PipeElement.Orientation.NORTH;
-					break;
+				XmlAttribute dirAttribute = curNode.Attributes["dir"];
+				if(dirAttribute == null) {
+					orientation = OrientationMethods.randomOrientation();
+				}
+				else {
+					orientation = OrientationMethods.fromString(dirAttribute.Value);
 				}
 
 

@@ -658,11 +658,13 @@ MonoBehaviour:
   pipeOut: {fileID: 11458174, guid: b62ad45c9cefe744e81d2d40aed9ac21, type: 2}
   levelsDifficulty1:
   - {fileID: 4900000, guid: b11e9cc9cc2145c478d26b358219d50e, type: 3}
-  levelsDifficulty2: []
+  - {fileID: 4900000, guid: fd7d291454ee24c44b6d746dac96b880, type: 3}
+  levelsDifficulty2:
+  - {fileID: 4900000, guid: 1dba07592349ed347ba393bc09e17ff4, type: 3}
   levelsDifficulty3:
   - {fileID: 4900000, guid: 768f32877944c944cb0ce04c7f851fb8, type: 3}
   - {fileID: 4900000, guid: 889afb9f81623b44aa45010b72610748, type: 3}
-  currentDifficulty: 3
+  currentDifficulty: 2
   myCamera: {fileID: 1511921859}
   timebar: {fileID: 1742145601}
   score: {fileID: 2135121436}
