@@ -5,6 +5,15 @@ public class cameraScript : MonoBehaviour {
 
 	public Camera myCamera;
 	public float to ;
+	
+	public float zoomVelocity = 0.8f;
+	
+	// delegate called when the camera zoom finished
+	public delegate void EventCallback();
+	public EventCallback zoomFinishedCallback;
+	
+	private bool inZoom = true;
+	
 
 	void onEnabled() {
 		to = myCamera.orthographicSize;
@@ -14,8 +23,14 @@ public class cameraScript : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if (this.to < myCamera.orthographicSize) {
-			myCamera.orthographicSize -= 0.01f;
+		if(inZoom) {
+			if (this.to < myCamera.orthographicSize) {
+				myCamera.orthographicSize -= zoomVelocity * Time.deltaTime;
+			}
+			else {
+				inZoom = false;
+				zoomFinishedCallback();
+			}
 		}
 	}
 	

@@ -1107,6 +1107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myCamera: {fileID: 1511921856}
   to: 0
+  zoomVelocity: .800000012
 --- !u!1 &1555390622
 GameObject:
   m_ObjectHideFlags: 0
