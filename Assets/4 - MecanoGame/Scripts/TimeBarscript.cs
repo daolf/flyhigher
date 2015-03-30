@@ -62,7 +62,7 @@ public class TimeBarscript : MonoBehaviour {
 				CurrentTime -= 1;
 			} else {
 				sceneGenerator.setAllUnselectable();
-				if ( sceneGenerator.myscore.value >= 30 ) {
+				if ( sceneGenerator.myscore.value >= sceneGenerator.WIN_SCORE) {
 					//Game win 
 					sceneGenerator.endMenu.GetComponent<Canvas> ().enabled = true;
 				} else {

@@ -4,6 +4,11 @@ using System.Collections;
 public class SceneGeneratorScript : MonoBehaviour {
 
 	public const int COGS_NB = 8;
+	public int WIN;
+	public int LOST; 
+	public int WIN_SCORE; 
+	public Score win_score;
+	public Score myscore;
 
 	public PrimaryCog[] cogs;
 	public PrimaryCog cogToFind;
@@ -20,10 +25,9 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public bool scoreNotUpdated;
 	public bool check;
 	public string scene;
-	public Score myscore;
+
 	public bool hasPlayed;
 	public bool isPause;
-	public int level = 1; // 1 a 3 
 	public GameObject cogsLevel;
 	private int NbRealcogs;
 
@@ -36,7 +40,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		scoreNotUpdated = true;
 		updateSceneRoudFinish ();
 		hasPlayed = false;
-
+		win_score.value = WIN_SCORE;
 	}
 
 	private void initCogsLevel () {
@@ -91,14 +95,14 @@ public class SceneGeneratorScript : MonoBehaviour {
 	void roundFinished() {
 		if (isAnimEnd && gagné && !hasPlayed) {
 			scoreNotUpdated = false;
-			myscore.value += 10;
+			myscore.value += WIN;
 			//TODO Menu or anim "great job !"
 			updateSceneRoudFinish();
 			scoreNotUpdated = true;
 		} else if(isAnimEnd && !gagné && !hasPlayed) {
 			scoreNotUpdated = false;
-			if (myscore.value > 5) {
-				myscore.value -= 5;
+			if (myscore.value > LOST) {
+				myscore.value -= LOST;
 			} else {
 				myscore.value = 0;
 			}
