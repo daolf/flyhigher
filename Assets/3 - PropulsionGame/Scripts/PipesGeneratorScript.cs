@@ -16,7 +16,11 @@ public class PipesGeneratorScript : MonoBehaviour {
 	public PipeElementScript pipeIn;
 	public PipeElementScript pipeOut;
 
-	public TextAsset level;
+	public TextAsset[] levelsDifficulty1;
+	public TextAsset[] levelsDifficulty2;
+	public TextAsset[] levelsDifficulty3;
+	
+	public int currentDifficulty = 3;
 	
 
 	// constants for pipe grid size, and (x,y) of top-left corner
@@ -222,7 +226,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 		myCamera.to = 3.22f;
 
 		parentArea = GameObject.Find("/Container").transform;
-		grid = instanciateLevelFromXml (level);
+		grid = instanciateLevelFromXml (getRandomLevel(currentDifficulty));
 		instanciatePipeGrid (grid);
 
 		// pipe gradient, very ugly
@@ -253,9 +257,27 @@ public class PipesGeneratorScript : MonoBehaviour {
 			isPause = false;
 		};
 	}
-
-	 
+	
 	/**
+	 * choose randomly a level, matching the given difficulty
+	 */
+	private TextAsset getRandomLevel(int difficulty) {
+		TextAsset[] currentDifficultyLevels;
+		switch(difficulty) {
+		case 1:
+			currentDifficultyLevels = levelsDifficulty1;
+			break;
+		case 2:
+			currentDifficultyLevels = levelsDifficulty2;
+			break;
+		default:
+			currentDifficultyLevels = levelsDifficulty3;
+			break;
+		}
+		return currentDifficultyLevels[Random.Range(0, currentDifficultyLevels.Length)];
+	}
+		
+		/**
 	 * Read a level from an XML document. 
 	 */
 	private PipeElement[,] instanciateLevelFromXml(TextAsset document) {
