@@ -5,7 +5,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 	public const int COGS_NB = 8;
 
-	public PrimaryCog[] cogs = new PrimaryCog[COGS_NB];
+	public PrimaryCog[] cogs;
 	public PrimaryCog cogToFind;
 	public GameObject endMenu;
 	public GameObject looseMenu;
@@ -23,34 +23,51 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public Score myscore;
 	public bool hasPlayed;
 	public bool isPause;
+	public int level = 1; // 1 a 3 
+	public GameObject cogsLevel;
+	private int NbRealcogs;
 
 	// Use this for initialization
 	void Start () {
+		isPause = false;
 		Time.timeScale = 1;
+		initCogsLevel ();
 		generateCogs ();
 		scoreNotUpdated = true;
 		updateSceneRoudFinish ();
 		hasPlayed = false;
-		isPause = false;
+
+	}
+
+	private void initCogsLevel () {
+		NbRealcogs = cogsLevel.transform.childCount;
+		cogs = new PrimaryCog[NbRealcogs];
+		if(cogsLevel != null) {
+			int i = 0;
+			foreach (Transform child in cogsLevel.transform) {
+				cogs[i] = child.GetComponent<PrimaryCog>();
+				i++;
+			}
+		}
 	}
 
 	public void generateCogs () {
 		cogToFind.setCogId(Random.Range(0, cogs.Length));
 		// initialize all cogs with "random" ids (in fact each one need to be uniq, so its a shuffle)
-		int[] cogIds = new int[COGS_NB];
-		for(int i=0; i<COGS_NB; i++)
+		int[] cogIds = new int[cogs.Length];
+		for(int i=0; i<cogs.Length; i++)
 			cogIds[i] = i;
 		// swap 20 times
 		for(int step=0; step<20; step++) {
-			int a = Random.Range(0, COGS_NB);
-			int b = Random.Range(0, COGS_NB);
+			int a = Random.Range(0, cogs.Length);
+			int b = Random.Range(0, cogs.Length);
 			int swap = cogIds[a];
 			cogIds[a] = cogIds[b];
 			cogIds[b] = swap;
 		}
 		
 		// set cog ids and speed
-		for(int i=0; i<COGS_NB; i++) {
+		for(int i=0; i<cogs.Length; i++) {
 			cogs[i].setCogId(cogIds[i]);
 			cogs[i].setSpeedRatio(3.0f);
 			cogs[i].generator = this;
@@ -114,7 +131,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 	public void setAllUnselectable () {
 		cogToFind.setSelectable (false);
-		for(int i=0; i<COGS_NB; i++) {
+		for(int i=0; i<cogs.Length; i++) {
 			cogs[i].setSelectable(false);
 		}
 
@@ -123,14 +140,14 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public void destroySmothTranslation () {
 		Destroy(cogToFind.gameObject.GetComponent("SmoothTranslation"));
 		cogToFind.setSelectable (false);
-		for(int i=0; i<COGS_NB; i++) {
+		for(int i=0; i<cogs.Length; i++) {
 			Destroy(cogs[i].gameObject.GetComponent("SmoothTranslation"));
 		}
 	}
 
 	public void setAllSelectable () {
 		cogToFind.setSelectable (false);
-		for(int i=0; i<COGS_NB; i++) {
+		for(int i=0; i<cogs.Length; i++) {
 			cogs[i].setSelectable(true);
 		}
 		
@@ -146,7 +163,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 			// and the good one
 			PrimaryCog goodOne = null;
 
-			for (int i=0; i<COGS_NB; i++) {
+			for (int i=0; i<cogs.Length; i++) {
 				if(cogs[i].getCogId() == cogToFind.getCogId()) {
 					goodOne = cogs[i];
 				}
