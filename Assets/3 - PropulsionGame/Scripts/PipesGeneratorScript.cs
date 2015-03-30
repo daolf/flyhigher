@@ -16,7 +16,11 @@ public class PipesGeneratorScript : MonoBehaviour {
 	public PipeElementScript pipeIn;
 	public PipeElementScript pipeOut;
 
-	public TextAsset level;
+	public TextAsset[] levelsDifficulty1;
+	public TextAsset[] levelsDifficulty2;
+	public TextAsset[] levelsDifficulty3;
+	
+	public int currentDifficulty = 3;
 	
 
 	// constants for pipe grid size, and (x,y) of top-left corner
@@ -51,7 +55,13 @@ public class PipesGeneratorScript : MonoBehaviour {
 	private float winPathDisplayingElapsed = 0;
 	private int winPathDisplayingCurrent = -1;
 	
+	// time between each pipe displaying
 	private const float WIN_PATH_DISPLAYING_TIME = 0.2f;
+
+	// used to wait a bit after win path display...
+	private bool inAlmostFinished = false;
+	private float almostFinishedElapsed = 0;
+	private const float ALMOST_FINISHED_TIME = 0.7f;
 
 	// used to choose the right pipe color
 	private Gradient gradient;
@@ -59,12 +69,28 @@ public class PipesGeneratorScript : MonoBehaviour {
 	private GradientAlphaKey[] gak;
 
 	public cameraScript myCamera;
-	public bool isPause;
+	
+	public TimeBarscript timebar;
+	public Score score;
+	
+	private bool m_isPause = false;
 
+	public bool isPause {
+		get {
+			return m_isPause;
+		}
+		set {
+			m_isPause = value;
+			// disable the timer if needed
+			timebar.activated = !value;
+			GameObject.Find("ButtonPause").GetComponentInParent<Canvas>().enabled = !value;
+		}
+	}
 
 	void Update() {
 		// really dirty proof of concept, check path every frame
 		if(!hadWon) {
+			score.value = (int)(timebar.CurrentTime * 100);
 			if (checkReachDestination()) {
 				hadWon = true;
 				onWin();
@@ -81,6 +107,8 @@ public class PipesGeneratorScript : MonoBehaviour {
 				winPathDisplayingCurrent = nextVal;
 				if(nextVal > winPath.Count - 1) {
 					inWinPathDisplaying = false;
+					// start waiting before "you win" message is displayed
+					inAlmostFinished = true;
 				}
 				else {
 					// not good : accessing random item (but easier)
@@ -89,6 +117,14 @@ public class PipesGeneratorScript : MonoBehaviour {
 				}
 			}
 			
+		}
+		
+		if(inAlmostFinished) {
+			almostFinishedElapsed += Time.deltaTime;
+			if(almostFinishedElapsed > ALMOST_FINISHED_TIME) {
+				inAlmostFinished = false;
+				onEffectiveWin();
+			}
 		}
 	}
 	
@@ -111,8 +147,20 @@ public class PipesGeneratorScript : MonoBehaviour {
 		inWinPathDisplaying = true;
 		winPathDisplayingElapsed = 0;
 		winPathDisplayingCurrent = -1;
-		//foreach(PipeElementScript pipe in winPath)
-		//	pipe.setWinPath(true);
+		
+		// disable the timer and the Pause button
+		isPause = true;
+	}
+	
+	// internal : called when "you win" message is ready to be displayed
+	private void onEffectiveWin() {
+		GameObject.Find("WinMenu").GetComponent<Canvas>().enabled = true;
+	}
+	
+	// internal : used as a callback when the time is elapsed
+	private void onTimerEnd() {
+		isPause = true;
+		GameObject.Find("LoseMenu").GetComponent<Canvas>().enabled = true;
 	}
 	
 	private void getNeighborCoordinates(int x, int y, PipeElement.Orientation dir, out int newX, out int newY) {
@@ -178,7 +226,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 		myCamera.to = 3.22f;
 
 		parentArea = GameObject.Find("/Container").transform;
-		grid = instanciateLevelFromXml (level);
+		grid = instanciateLevelFromXml (getRandomLevel(currentDifficulty));
 		instanciatePipeGrid (grid);
 
 		// pipe gradient, very ugly
@@ -199,10 +247,37 @@ public class PipesGeneratorScript : MonoBehaviour {
 		gak[1].alpha = 1.0f;
 		gak[1].time = 1.0f;
 		gradient.SetKeys(gck, gak);
+		
+		// manage timer
+		timebar.endCallback = onTimerEnd;
+		
+		// start camera zoom (the game is virtually paused before zoom is done)
+		isPause = true;
+		myCamera.zoomFinishedCallback = delegate() {
+			isPause = false;
+		};
 	}
-
-	 
+	
 	/**
+	 * choose randomly a level, matching the given difficulty
+	 */
+	private TextAsset getRandomLevel(int difficulty) {
+		TextAsset[] currentDifficultyLevels;
+		switch(difficulty) {
+		case 1:
+			currentDifficultyLevels = levelsDifficulty1;
+			break;
+		case 2:
+			currentDifficultyLevels = levelsDifficulty2;
+			break;
+		default:
+			currentDifficultyLevels = levelsDifficulty3;
+			break;
+		}
+		return currentDifficultyLevels[Random.Range(0, currentDifficultyLevels.Length)];
+	}
+		
+		/**
 	 * Read a level from an XML document. 
 	 */
 	private PipeElement[,] instanciateLevelFromXml(TextAsset document) {
@@ -213,6 +288,11 @@ public class PipesGeneratorScript : MonoBehaviour {
 		xml.LoadXml(document.text);
 		XmlNodeList levelNodes = xml.GetElementsByTagName("level");
 
+		XmlAttribute levelEstimatedTime = levelNodes[0].Attributes["estimatedTime"];
+		if(levelEstimatedTime != null) {
+			// use it as the base time for countdown timer
+			timebar.maxTime = int.Parse(levelEstimatedTime.Value);
+		}
 		// start and destination pipes
 		// TODO init
 		
@@ -329,4 +409,5 @@ public class PipesGeneratorScript : MonoBehaviour {
 			}
 		}
 	}
+
 }

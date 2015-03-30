@@ -27,9 +27,19 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public string scene;
 
 	public bool hasPlayed;
-	public bool isPause;
 	public GameObject cogsLevel;
 	private int NbRealcogs;
+	
+	private bool m_isPause;
+	public bool isPause {
+		get {
+			return m_isPause;
+		}
+		set {
+			m_isPause = value;
+			timeBar.activated = !value;
+		}
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -41,6 +51,8 @@ public class SceneGeneratorScript : MonoBehaviour {
 		updateSceneRoudFinish ();
 		hasPlayed = false;
 		win_score.value = WIN_SCORE;
+		
+		timeBar.endCallback = timerEndHandler;
 	}
 
 	private void initCogsLevel () {
@@ -116,6 +128,17 @@ public class SceneGeneratorScript : MonoBehaviour {
 	void Update () {
 		if (scoreNotUpdated) {
 			roundFinished();
+		}
+	}
+	
+	private void timerEndHandler() {
+		setAllUnselectable();
+		if (myscore.value >= WIN_SCORE) {
+			//Game win 
+			endMenu.GetComponent<Canvas> ().enabled = true;
+		} else {
+			//Game lost
+			looseMenu.GetComponent<Canvas> ().enabled = true;
 		}
 	}
 

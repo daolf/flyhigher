@@ -11,16 +11,17 @@ public class TimeBarscript : MonoBehaviour {
 	private float maxXValue;
 	public float maxTime;
 	private float currentTime;
-	public SceneGeneratorScript sceneGenerator;
 	public Gradient g;
 	public GradientColorKey[] gck;
 	public GradientAlphaKey[] gak;
-	public bool activated;
+	public bool activated = true;
+
+	public delegate void TimerEndCallback();
+	public TimerEndCallback endCallback = null;
 
 
-
-	private int CurrentTime {
-		get { return (int)currentTime;}
+	public float CurrentTime {
+		get { return currentTime;}
 		set { currentTime = value;
 			HandleTime();
 		}
@@ -29,11 +30,13 @@ public class TimeBarscript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		activated = true;
+		//activated = true;
 		cachedY = timeTransform.position.y;
-		maxXValue = timeTransform.position.x;
-		minXValue = timeTransform.position.x - timeTransform.rect.width;
-		currentTime = maxTime;
+		
+		minXValue = 0;
+		maxXValue = timeTransform.rect.width;
+		
+		//currentTime = maxTime;
 		g = new Gradient();
 
 		// Populate the color keys at the relative time 0 and 1 (0 and 100%)
@@ -53,33 +56,26 @@ public class TimeBarscript : MonoBehaviour {
 		gak[1].time = 1.0f;
 		g.SetKeys(gck, gak);
 
+		CurrentTime = maxTime;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (activated && !sceneGenerator.isPause) {
+		if (activated) {
 			if (CurrentTime > 0) {
-				CurrentTime -= 1;
+				CurrentTime -= Time.deltaTime;
 			} else {
-				sceneGenerator.setAllUnselectable();
-				if ( sceneGenerator.myscore.value >= sceneGenerator.WIN_SCORE) {
-					//Game win 
-					sceneGenerator.endMenu.GetComponent<Canvas> ().enabled = true;
-				} else {
-					//Game lost
-					sceneGenerator.looseMenu.GetComponent<Canvas> ().enabled = true;
-				}
-
+				endCallback();
+				activated = false;
 			}
 		}
 		
 	}
 
 	private void HandleTime () {
-		float currentXValue = MapValues (currentTime, 0, maxTime, minXValue, maxXValue);
-		timeTransform.position = new Vector3 (currentXValue, cachedY);
-		visualtimebar.color = g.Evaluate ((maxTime -currentTime)/maxTime);		
-		
+		float currentXValue = MapValues (currentTime, 0, maxTime, maxXValue, minXValue);
+		timeTransform.offsetMax = new Vector2(-currentXValue , timeTransform.offsetMax.y);
+		visualtimebar.color = g.Evaluate ((maxTime -currentTime)/maxTime);
 	}
 
 	private float MapValues (float x, float inMin, float inMax, float outMin, float outMax) {

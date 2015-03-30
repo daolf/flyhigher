@@ -84,6 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winPathIndicator: {fileID: 408144, guid: 9ddf90aabd8219a4abda1ea8ea105546, type: 2}
+  fadingColorOut: {r: 0, g: 0, b: 0, a: 0}
 --- !u!212 &21200848
 SpriteRenderer:
   m_ObjectHideFlags: 1
