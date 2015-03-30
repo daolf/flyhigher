@@ -32,9 +32,11 @@ public class TimeBarscript : MonoBehaviour {
 	void Start () {
 		//activated = true;
 		cachedY = timeTransform.position.y;
-		maxXValue = timeTransform.position.x;
-		minXValue = timeTransform.position.x - timeTransform.rect.width;
-		currentTime = maxTime;
+		
+		minXValue = 0;
+		maxXValue = timeTransform.rect.width;
+		
+		//currentTime = maxTime;
 		g = new Gradient();
 
 		// Populate the color keys at the relative time 0 and 1 (0 and 100%)
@@ -54,6 +56,7 @@ public class TimeBarscript : MonoBehaviour {
 		gak[1].time = 1.0f;
 		g.SetKeys(gck, gak);
 
+		CurrentTime = maxTime;
 	}
 	
 	// Update is called once per frame
@@ -70,13 +73,9 @@ public class TimeBarscript : MonoBehaviour {
 	}
 
 	private void HandleTime () {
-		float currentXValue = MapValues (currentTime, 0, maxTime, minXValue, maxXValue);
-		/*Rect newRect = new Rect(timeTransform.rect);
-		newRect.width = currentXValue;
-		timeTransform.right = timeTransform.rect.x + currentXValue;*/
-		timeTransform.position = new Vector3 (currentXValue, cachedY);
-		visualtimebar.color = g.Evaluate ((maxTime -currentTime)/maxTime);		
-		
+		float currentXValue = MapValues (currentTime, 0, maxTime, maxXValue, minXValue);
+		timeTransform.offsetMax = new Vector2(-currentXValue , timeTransform.offsetMax.y);
+		visualtimebar.color = g.Evaluate ((maxTime -currentTime)/maxTime);
 	}
 
 	private float MapValues (float x, float inMin, float inMax, float outMin, float outMax) {

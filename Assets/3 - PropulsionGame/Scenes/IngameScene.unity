@@ -1435,7 +1435,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22400270, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -5.30999994
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22400270, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
       propertyPath: m_SizeDelta.x
@@ -1551,7 +1551,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22487212, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 2.47000003
+      value: .720000029
       objectReference: {fileID: 0}
     - target: {fileID: 22487212, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
       propertyPath: m_SizeDelta.y
@@ -1583,7 +1583,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22429764, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: .988512158
       objectReference: {fileID: 0}
     - target: {fileID: 22429764, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
       propertyPath: m_AnchorMax.y
@@ -1595,11 +1595,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22400270, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22400270, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22400270, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
       propertyPath: m_LocalScale.z
@@ -1607,7 +1607,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22358858, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
       propertyPath: m_RenderMode
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22487212, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
       propertyPath: m_LocalScale.x
@@ -1621,6 +1621,22 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1511921856}
+    - target: {fileID: 11474382, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
+      propertyPath: m_ScaleFactor
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 11474382, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11474382, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
+      propertyPath: m_ReferenceResolution.x
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 11474382, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
+      propertyPath: m_ReferenceResolution.y
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
   m_IsPrefabParent: 0

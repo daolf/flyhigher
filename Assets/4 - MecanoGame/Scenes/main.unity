@@ -1829,6 +1829,10 @@ Prefab:
       propertyPath: maxTime
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 11482384, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
+      propertyPath: activated
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 10d62273dfc4d134a8620e7d35e6e645, type: 2}
   m_IsPrefabParent: 0
