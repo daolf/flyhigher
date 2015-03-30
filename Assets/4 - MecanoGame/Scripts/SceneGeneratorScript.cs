@@ -25,6 +25,8 @@ public class SceneGeneratorScript : MonoBehaviour {
 		cogToFind.setCogId(Random.Range(0, cogs.Length));
 		gagnéBg.enabled = false;
 		perduBg.enabled = false;
+		
+		timeBar.endCallback = timerEndHandler;
 
 		// initialize all cogs with "random" ids (in fact each one need to be uniq, so its a shuffle)
 		int[] cogIds = new int[COGS_NB];
@@ -55,6 +57,11 @@ public class SceneGeneratorScript : MonoBehaviour {
 		else if(isAnimEnd && !gagné) {
 			looseMenu.GetComponent<Canvas>().enabled = true;
 		}
+	}
+	
+	private void timerEndHandler() {
+		setAllUnselectable();
+		looseMenu.GetComponent<Canvas> ().enabled = true;
 	}
 
 	private void setGoodCogFind(PrimaryCog goodOne) {

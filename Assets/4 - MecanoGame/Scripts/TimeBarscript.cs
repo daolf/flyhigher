@@ -11,14 +11,13 @@ public class TimeBarscript : MonoBehaviour {
 	private float maxXValue;
 	public float maxTime;
 	private float currentTime;
-	public SceneGeneratorScript sceneGenerator;
 	public Gradient g;
 	public GradientColorKey[] gck;
 	public GradientAlphaKey[] gak;
 	public bool activated;
 
 	public delegate void TimerEndCallback();
-	public TimerEndCallback endCallback;
+	public TimerEndCallback endCallback = null;
 
 
 	private float CurrentTime {
@@ -63,8 +62,7 @@ public class TimeBarscript : MonoBehaviour {
 			if (CurrentTime > 0) {
 				CurrentTime -= Time.deltaTime;
 			} else {
-				sceneGenerator.setAllUnselectable();
-				sceneGenerator.looseMenu.GetComponent<Canvas> ().enabled = true;
+				endCallback();
 				activated = false;
 			}
 		}

@@ -66,6 +66,8 @@ public class PipesGeneratorScript : MonoBehaviour {
 
 	public cameraScript myCamera;
 	
+	public TimeBarscript timebar;
+	
 	private bool m_isPause = false;
 
 	public bool isPause {
@@ -76,7 +78,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 			m_isPause = value;
 			// disable the timer if needed
 			if(!inWinPathDisplaying && !inAlmostFinished)
-				GameObject.Find("Canvas-Timer/frame").GetComponent<TimeBarscript>().enabled = !value;
+				timebar.enabled = !value;
 		}
 	}
 
@@ -141,13 +143,19 @@ public class PipesGeneratorScript : MonoBehaviour {
 		winPathDisplayingCurrent = -1;
 		
 		// disable the timer and the Pause button
-		GameObject.Find("Canvas-Timer/frame").GetComponent<TimeBarscript>().enabled = false;
+		timebar.enabled = false;
 		GameObject.Find("ButtonPause").SetActive(false);
 	}
 	
 	// internal : called when "you win" message is ready to be displayed
 	private void onEffectiveWin() {
 		// TODO display a menu!
+	}
+	
+	// internal : used as a callback when the time is elapsed
+	private void onTimerEnd() {
+		isPause = true;
+		GameObject.Find("LoseMenu").GetComponent<Canvas>().enabled = true;
 	}
 	
 	private void getNeighborCoordinates(int x, int y, PipeElement.Orientation dir, out int newX, out int newY) {
@@ -234,6 +242,9 @@ public class PipesGeneratorScript : MonoBehaviour {
 		gak[1].alpha = 1.0f;
 		gak[1].time = 1.0f;
 		gradient.SetKeys(gck, gak);
+		
+		// manage timer
+		timebar.endCallback = onTimerEnd;
 	}
 
 	 
