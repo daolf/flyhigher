@@ -17,10 +17,12 @@ public class TimeBarscript : MonoBehaviour {
 	public GradientAlphaKey[] gak;
 	public bool activated;
 
+	public delegate void TimerEndCallback();
+	public TimerEndCallback endCallback;
 
 
-	private int CurrentTime {
-		get { return (int)currentTime;}
+	private float CurrentTime {
+		get { return currentTime;}
 		set { currentTime = value;
 			HandleTime();
 		}
@@ -59,10 +61,11 @@ public class TimeBarscript : MonoBehaviour {
 	void Update () {
 		if (activated) {
 			if (CurrentTime > 0) {
-				CurrentTime -= 1;
+				CurrentTime -= Time.deltaTime;
 			} else {
 				sceneGenerator.setAllUnselectable();
 				sceneGenerator.looseMenu.GetComponent<Canvas> ().enabled = true;
+				activated = false;
 			}
 		}
 		
