@@ -14,13 +14,13 @@ public class TimeBarscript : MonoBehaviour {
 	public Gradient g;
 	public GradientColorKey[] gck;
 	public GradientAlphaKey[] gak;
-	public bool activated;
+	public bool activated = true;
 
 	public delegate void TimerEndCallback();
 	public TimerEndCallback endCallback = null;
 
 
-	private float CurrentTime {
+	public float CurrentTime {
 		get { return currentTime;}
 		set { currentTime = value;
 			HandleTime();
@@ -30,7 +30,7 @@ public class TimeBarscript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		activated = true;
+		//activated = true;
 		cachedY = timeTransform.position.y;
 		maxXValue = timeTransform.position.x;
 		minXValue = timeTransform.position.x - timeTransform.rect.width;
@@ -71,6 +71,9 @@ public class TimeBarscript : MonoBehaviour {
 
 	private void HandleTime () {
 		float currentXValue = MapValues (currentTime, 0, maxTime, minXValue, maxXValue);
+		/*Rect newRect = new Rect(timeTransform.rect);
+		newRect.width = currentXValue;
+		timeTransform.right = timeTransform.rect.x + currentXValue;*/
 		timeTransform.position = new Vector3 (currentXValue, cachedY);
 		visualtimebar.color = g.Evaluate ((maxTime -currentTime)/maxTime);		
 		

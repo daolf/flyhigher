@@ -35,7 +35,6 @@ public class Score : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		value = 0;
 		t = new ChiffreScore[4];
 		t[0] = unite;
 		t [1] = dizaine;

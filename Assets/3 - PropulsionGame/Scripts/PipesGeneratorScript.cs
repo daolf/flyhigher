@@ -67,6 +67,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 	public cameraScript myCamera;
 	
 	public TimeBarscript timebar;
+	public Score score;
 	
 	private bool m_isPause = false;
 
@@ -77,7 +78,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 		set {
 			m_isPause = value;
 			// disable the timer if needed
-			timebar.enabled = !value;
+			timebar.activated = !value;
 			GameObject.Find("ButtonPause").GetComponentInParent<Canvas>().enabled = !value;
 		}
 	}
@@ -85,6 +86,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 	void Update() {
 		// really dirty proof of concept, check path every frame
 		if(!hadWon) {
+			score.value = (int)(timebar.CurrentTime * 100);
 			if (checkReachDestination()) {
 				hadWon = true;
 				onWin();
