@@ -1,5 +1,5 @@
 <level estimatedTime="30" width="9" height="5">
-	<pipe type="in" x="0" y="0"></pipe>
+	<pipe type="in" dir="east" x="0" y="0"></pipe>
 	<pipe type="I" x="1" y="0"></pipe>
 	<pipe type="L" x="2" y="0"></pipe>
 	<pipe type="I" x="2" y="1"></pipe>
