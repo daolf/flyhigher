@@ -1,0 +1,33 @@
+<level estimatedTime="25" width="9" height="5">
+	<pipe type="in" dir="south" x="0" y="0"></pipe>
+	<pipe type="L" x="0" y="1"></pipe>
+	<pipe type="I" x="1" y="1"></pipe>
+	<pipe type="L" x="2" y="1"></pipe>
+	<pipe type="L" x="2" y="0"></pipe>
+	<pipe type="L" x="3" y="0"></pipe>
+	<pipe type="I" x="3" y="1"></pipe>
+	<pipe type="I" x="3" y="2"></pipe>
+	<pipe type="L" x="3" y="3"></pipe>
+	<pipe type="L" x="2" y="3"></pipe>
+	<pipe type="L" x="2" y="4"></pipe>
+	<pipe type="I" x="3" y="4"></pipe>
+	<pipe type="I" x="4" y="4"></pipe>
+	<pipe type="I" x="5" y="4"></pipe>
+	<pipe type="L" x="6" y="4"></pipe>
+	<pipe type="I" x="6" y="3"></pipe>
+	<pipe type="L" x="6" y="2"></pipe>
+	<pipe type="L" x="5" y="2"></pipe>
+	<pipe type="L" x="5" y="1"></pipe>
+	<pipe type="I" x="6" y="1"></pipe>
+	<pipe type="I" x="7" y="1"></pipe>
+	<pipe type="L" x="8" y="1"></pipe>
+	<pipe type="I" x="8" y="2"></pipe>
+	<pipe type="L" x="8" y="3"></pipe>
+	<pipe type="L" x="7" y="3"></pipe>
+	<pipe type="L" x="7" y="4"></pipe>
+	<pipe type="out" dir="west" x="8" y="4"></pipe>
+	
+	<!-- annoying pipes... -->
+	<pipe type="I" x="7" y="2"></pipe>
+	<pipe type="I" x="4" y="0"></pipe>
+</level>

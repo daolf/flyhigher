@@ -154,6 +154,14 @@ public class PipesGeneratorScript : MonoBehaviour {
 	
 	// internal : called when "you win" message is ready to be displayed
 	private void onEffectiveWin() {
+		// save the maximum level allowed if needed
+		int currentMaxLevel = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY);
+		if(currentMaxLevel < (currentDifficulty + 1) && currentMaxLevel < 3) {
+			PlayerPrefs.SetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, currentDifficulty + 1);
+			// FIXME not a good place to be called?
+			PlayerPrefs.Save();
+		}
+	
 		GameObject.Find("WinMenu").GetComponent<Canvas>().enabled = true;
 	}
 	
@@ -224,6 +232,9 @@ public class PipesGeneratorScript : MonoBehaviour {
 	void Start () {
 		// On zoom
 		myCamera.to = 3.22f;
+		
+		// TODO ser may select a lower difficulty level?
+		currentDifficulty = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, 1);
 
 		parentArea = GameObject.Find("/Container").transform;
 		grid = instanciateLevelFromXml (getRandomLevel(currentDifficulty));
@@ -323,19 +334,12 @@ public class PipesGeneratorScript : MonoBehaviour {
 					break;
 				}
 				
-				switch(curNode.Attributes["dir"].Value) {
-				case "east":
-					orientation = PipeElement.Orientation.EAST;
-					break;
-				case "west":
-					orientation = PipeElement.Orientation.WEST;
-					break;
-				case "south":
-					orientation = PipeElement.Orientation.SOUTH;
-					break;
-				case "north":
-					orientation = PipeElement.Orientation.NORTH;
-					break;
+				XmlAttribute dirAttribute = curNode.Attributes["dir"];
+				if(dirAttribute == null) {
+					orientation = OrientationMethods.randomOrientation();
+				}
+				else {
+					orientation = OrientationMethods.fromString(dirAttribute.Value);
 				}
 
 
