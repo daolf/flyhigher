@@ -1,0 +1,20 @@
+<level>
+	<size>10</size>
+	<pipe type="in" dir="east" x="0" y="2"></pipe>
+
+	<pipe type="I" dir="east" x="1" y="2"></pipe>
+
+	<pipe type="I" dir="north" x="2" y="2"></pipe>
+	<pipe type="L" dir="north" x="2" y="3"></pipe>
+
+	<pipe type="L" dir="north" x="3" y="1"></pipe>
+	<pipe type="L" dir="north" x="3" y="2"></pipe>
+	<pipe type="I" dir="north" x="3" y="3"></pipe>
+	
+	<pipe type="I" dir="north" x="4" y="1"></pipe>
+
+	<pipe type="I" dir="north" x="5" y="1"></pipe>
+	<pipe type="T" dir="north" x="5" y="2"></pipe>
+
+	<pipe type="out" dir="west" x="10" y="3"></pipe>
+</level>

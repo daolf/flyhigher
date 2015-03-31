@@ -3,6 +3,8 @@ using System.Collections;
 
 public class UIManager : MonoBehaviour {
 
+	public GameObject buttonMecano;
+
 	void onEnable() {
 		//Set the constant for the first time
 		PlayerPrefs.GetInt (Constants.MAIN_GAME_HIGH_SCORE, 0);
@@ -30,7 +32,8 @@ public class UIManager : MonoBehaviour {
 	}
 	
 	public void Mecano () {
-		Application.LoadLevel("main");
+		//Application.LoadLevel("main");
+		LeanTween.moveX(buttonMecano, 10000, 1.5f).setEase(LeanTweenType.easeInOutQuint);
 	}
 
 }
