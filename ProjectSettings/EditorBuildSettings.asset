@@ -27,3 +27,9 @@ EditorBuildSettings:
     path: Assets/1 - MainGame/MainGame.unity
   - enabled: 0
     path: Assets/4 - MecanoGame/Scenes/mecano-win.unity
+  - enabled: 1
+    path: Assets/4 - MecanoGame/Scenes/Mecano1.unity
+  - enabled: 1
+    path: Assets/4 - MecanoGame/Scenes/Mecano2.unity
+  - enabled: 1
+    path: Assets/4 - MecanoGame/Scenes/Mecano3.unity
