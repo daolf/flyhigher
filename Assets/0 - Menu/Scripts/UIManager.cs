@@ -12,8 +12,8 @@ public class UIManager : MonoBehaviour {
 	public GameObject jeuPropulsionButton;
 	public GameObject levelProplusionButton;
 
-	//public GameObject jeuMecanoButton;
-
+	//public SceneGenerator sg; // for Mecano
+	
 	void onEnable() {
 		//Set the constant for the first time
 		PlayerPrefs.GetInt (Constants.MAIN_GAME_HIGH_SCORE, 0);
@@ -33,58 +33,57 @@ public class UIManager : MonoBehaviour {
 	}
 	
 	public void Painter () {
-		//Application.LoadLevel("PainterGameLvl0");
+
 		LeanTween.moveX(jeuPeintreButton, 10000, 1.5f).setEase(LeanTweenType.easeInOutQuint);
 		LeanTween.moveX(levelPeintreButton, 337, 1.5f).setEase(LeanTweenType.easeInOutQuint);
 	}
 
 	public void Painterlevel1 () {
-	
+		Application.LoadLevel("PainterGameLvl0");
 	}
 
 	public void Painterlevel2 () {
-		
+		Application.LoadLevel("PainterGameLvl0");
 	}
 
 	public void Painterlevel3 () {
-		
+		Application.LoadLevel("PainterGameLvl0");
 	}
 
 	public void Propulsion () {
-		//Application.LoadLevel("IngameScene");
 		LeanTween.moveX(jeuPropulsionButton, 10000, 1.5f).setEase(LeanTweenType.easeInOutQuint);
 		LeanTween.moveX(levelProplusionButton, 337, 1.5f).setEase(LeanTweenType.easeInOutQuint);
 	}
 
 	public void Propulsionlevel1 () {
-		
+		Application.LoadLevel("IngameScene");
 	}
 
 	public void Propulsionlevel2 () {
-		
+		Application.LoadLevel("IngameScene");
 	}
 
 	public void Propulsionlevel3 () {
-		
+		Application.LoadLevel("IngameScene");
 	}
 
 	public void Mecano () {
-		//Application.LoadLevel("main");
 		LeanTween.moveX(jeuMecanoButton, 10000, 1.5f).setEase(LeanTweenType.easeInOutQuint);
 		LeanTween.moveX(levelMecanoButton, 337, 1.5f).setEase(LeanTweenType.easeInOutQuint);
 
 	}
 
 	public void Mecanolevel1 () {
-		
+		// sg.cogsLevel = cog
+		Application.LoadLevel("Mecano1");
 	}
 
 	public void Mecanolevel2 () {
-		
+		Application.LoadLevel("Mecano2");
 	}
 
 	public void Mecanolevel3 () {
-		
+		Application.LoadLevel("Mecano3");
 	}
 
 }
