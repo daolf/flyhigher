@@ -1985,6 +1985,8 @@ MonoBehaviour:
   scene: main
   hasPlayed: 0
   cogsLevel: {fileID: 341961042}
+  role: {fileID: 0}
+  tuto: 0
 --- !u!4 &943277483
 Transform:
   m_ObjectHideFlags: 0
@@ -2428,7 +2430,7 @@ Prefab:
       objectReference: {fileID: 1720108259}
     - target: {fileID: 11457946, guid: 2a5c2079b970b418b96b824ac6629ff8, type: 2}
       propertyPath: scene
-      value: main
+      value: Mecano2
       objectReference: {fileID: 0}
     - target: {fileID: 11457946, guid: 2a5c2079b970b418b96b824ac6629ff8, type: 2}
       propertyPath: game

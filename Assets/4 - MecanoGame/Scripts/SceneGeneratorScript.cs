@@ -28,6 +28,8 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 	public bool hasPlayed;
 	public GameObject cogsLevel;
+	public GameObject role;
+	public bool tuto;
 	private int NbRealcogs;
 	
 	private bool m_isPause;
@@ -41,18 +43,25 @@ public class SceneGeneratorScript : MonoBehaviour {
 		}
 	}
 
-	// Use this for initialization
-	void Start () {
+	void Awake() {
 		isPause = false;
 		Time.timeScale = 1;
 		initCogsLevel ();
 		generateCogs ();
 		scoreNotUpdated = true;
-		updateSceneRoudFinish ();
-		hasPlayed = false;
+
 		win_score.value = WIN_SCORE;
 		
 		timeBar.endCallback = timerEndHandler;
+	}
+
+	// Use this for initialization
+	void Start () {
+		tuto = true;// to DELETE
+		updateSceneRoudFinish ();
+		hasPlayed = false;
+		role.active = tuto;
+		isPause = tuto;
 	}
 
 	private void initCogsLevel () {
@@ -130,7 +139,14 @@ public class SceneGeneratorScript : MonoBehaviour {
 			roundFinished();
 		}
 	}
-	
+
+	void getoutOfTuto() {
+			tuto = false;
+			role.active = tuto;
+			isPause = tuto;
+			//updateSceneRoudFinish ();
+	}
+
 	private void timerEndHandler() {
 		setAllUnselectable();
 		if (myscore.value >= WIN_SCORE) {
