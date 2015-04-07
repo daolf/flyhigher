@@ -138,6 +138,9 @@ public class SceneGeneratorScript : MonoBehaviour {
 		if (scoreNotUpdated) {
 			roundFinished();
 		}
+		if (Input.GetButtonDown ("Fire1") ){
+			getoutOfTuto();
+		}
 	}
 
 	void getoutOfTuto() {
