@@ -60,7 +60,9 @@ public class SceneGeneratorScript : MonoBehaviour {
 		tuto = true;// to DELETE
 		updateSceneRoudFinish ();
 		hasPlayed = false;
-		role.active = tuto;
+		if (role != null) {
+			role.active = tuto;
+		}
 		isPause = tuto;
 	}
 
@@ -145,7 +147,9 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 	void getoutOfTuto() {
 			tuto = false;
+		if (role != null) {
 			role.active = tuto;
+		}
 			isPause = tuto;
 			//updateSceneRoudFinish ();
 	}

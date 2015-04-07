@@ -2436,6 +2436,10 @@ Prefab:
       propertyPath: game
       value: 
       objectReference: {fileID: 943277481}
+    - target: {fileID: 22492174, guid: 2a5c2079b970b418b96b824ac6629ff8, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 24
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a5c2079b970b418b96b824ac6629ff8, type: 2}
   m_IsPrefabParent: 0
