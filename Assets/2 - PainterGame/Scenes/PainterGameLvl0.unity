@@ -2343,7 +2343,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ceacdc4a6caeb4043854bfa0b46071bc, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: .404411793, g: .404411793, b: .404411793, a: 1}
 --- !u!60 &1249071192
 PolygonCollider2D:
   m_ObjectHideFlags: 0
