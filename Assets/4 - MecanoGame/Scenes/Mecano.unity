@@ -2711,7 +2711,7 @@ Prefab:
       objectReference: {fileID: 1720108259}
     - target: {fileID: 11457946, guid: 2a5c2079b970b418b96b824ac6629ff8, type: 2}
       propertyPath: scene
-      value: Mecano1
+      value: Mecano
       objectReference: {fileID: 0}
     - target: {fileID: 11457946, guid: 2a5c2079b970b418b96b824ac6629ff8, type: 2}
       propertyPath: game
