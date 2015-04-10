@@ -79,8 +79,11 @@ public class SceneGeneratorScript : MonoBehaviour {
 		case 2:
 			cogsLevel = cogsLevel2;
 			break;
+		case 3:
+			cogsLevel = cogsLevel2;
+			break;
 		default:
-			cogsLevel = cogsLevel3;
+			cogsLevel = cogsLevel1;
 			break;
 		}
 		cogsLevel.SetActive(true);
