@@ -27,7 +27,10 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public string scene;
 
 	public bool hasPlayed;
-	public GameObject cogsLevel;
+	public GameObject cogsLevel1;
+	public GameObject cogsLevel2;
+	public GameObject cogsLevel3;
+	private GameObject cogsLevel;
 	public GameObject role;
 	public bool tuto;
 	private int NbRealcogs;
@@ -62,11 +65,25 @@ public class SceneGeneratorScript : MonoBehaviour {
 		hasPlayed = false;
 		if (role != null) {
 			role.active = tuto;
+		} else {
+			tuto = false;
 		}
 		isPause = tuto;
 	}
 
 	private void initCogsLevel () {
+		switch (MecanoLevelConfiguration.level) {
+		case 1: 
+			cogsLevel = cogsLevel1;
+			break;
+		case 2:
+			cogsLevel = cogsLevel2;
+			break;
+		default:
+			cogsLevel = cogsLevel3;
+			break;
+		}
+		cogsLevel.SetActive(true);
 		NbRealcogs = cogsLevel.transform.childCount;
 		cogs = new PrimaryCog[NbRealcogs];
 		if(cogsLevel != null) {
@@ -149,7 +166,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 			tuto = false;
 		if (role != null) {
 			role.active = tuto;
-		}
+			}
 			isPause = tuto;
 			//updateSceneRoudFinish ();
 	}

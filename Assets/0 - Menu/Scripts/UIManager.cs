@@ -74,16 +74,19 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void Mecanolevel1 () {
-		// sg.cogsLevel = cog
-		Application.LoadLevel("Mecano1");
+		// TODO change accesibility to level when win
+		MecanoLevelConfiguration.level = 1;
+		Application.LoadLevel("Mecano2");
 	}
 
 	public void Mecanolevel2 () {
+		MecanoLevelConfiguration.level = 2;
 		Application.LoadLevel("Mecano2");
 	}
 
 	public void Mecanolevel3 () {
-		Application.LoadLevel("Mecano3");
+		MecanoLevelConfiguration.level = 3;
+		Application.LoadLevel("Mecano2");
 	}
 
 }
