@@ -1151,6 +1151,10 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1931424373}
   m_Script: {fileID: 11500000, guid: 514c4a5882ecb44fcadf3e4af16b3d1f, type: 3}
+--- !u!1 &542856692
+GameObject:
+  m_PrefabParentObject: {fileID: 187680, guid: 0bd3443aecf484f97bd3633f712cb6b8, type: 2}
+  m_PrefabInternal: {fileID: 1796107245}
 --- !u!1 &609393735
 GameObject:
   m_ObjectHideFlags: 0
@@ -1648,7 +1652,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &770885532
 Transform:
   m_ObjectHideFlags: 0
@@ -2245,6 +2249,7 @@ MonoBehaviour:
   cogsLevel1: {fileID: 770885531}
   cogsLevel2: {fileID: 341961042}
   cogsLevel3: {fileID: 1239299316}
+  menupause: {fileID: 542856692}
   role: {fileID: 839831564}
   tuto: 0
 --- !u!4 &943277483

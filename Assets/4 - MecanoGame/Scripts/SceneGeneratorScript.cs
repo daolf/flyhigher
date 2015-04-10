@@ -31,6 +31,8 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public GameObject cogsLevel2;
 	public GameObject cogsLevel3;
 	private GameObject cogsLevel;
+	// TODO put in prefab tuto
+	public GameObject menupause;
 	public GameObject role;
 	public bool tuto;
 	private int NbRealcogs;
@@ -67,6 +69,9 @@ public class SceneGeneratorScript : MonoBehaviour {
 			role.active = tuto;
 		} else {
 			tuto = false;
+		}
+		if (tuto) {
+			menupause.SetActive(false);
 		}
 		isPause = tuto;
 	}
@@ -169,7 +174,8 @@ public class SceneGeneratorScript : MonoBehaviour {
 			tuto = false;
 		if (role != null) {
 			role.active = tuto;
-			}
+			menupause.SetActive(true);
+		}
 			isPause = tuto;
 			//updateSceneRoudFinish ();
 	}
