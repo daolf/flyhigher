@@ -8,8 +8,9 @@ public class MainPaintScript : MonoBehaviour {
 	public Transform tachePrefab;
 	public Transform paintPrefab;
 	public Transform patternPrefab;
-	public Score guiScore;
-	public int score;
+	public Pourcent guiScore;
+	public float objectif;
+	public float score;
 	public int gain ;
 	public int perte ;
 	public Transform buffer;
@@ -44,7 +45,8 @@ public class MainPaintScript : MonoBehaviour {
 		if (score < 0) {
 			score = 0;
 		}
-		guiScore.value = score;
+		float pct = (score / objectif) * 100;
+		guiScore.value = (int) pct;
 	}
 
 	
