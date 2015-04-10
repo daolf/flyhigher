@@ -76,17 +76,20 @@ public class UIManager : MonoBehaviour {
 	public void Mecanolevel1 () {
 		// TODO change accesibility to level when win
 		MecanoLevelConfiguration.level = 1;
-		Application.LoadLevel("Mecano2");
+		MecanoLevelConfiguration.tuto = true;
+		Application.LoadLevel("Mecano");
 	}
 
 	public void Mecanolevel2 () {
 		MecanoLevelConfiguration.level = 2;
-		Application.LoadLevel("Mecano2");
+		MecanoLevelConfiguration.tuto = false;
+		Application.LoadLevel("Mecano");
 	}
 
 	public void Mecanolevel3 () {
 		MecanoLevelConfiguration.level = 3;
-		Application.LoadLevel("Mecano2");
+		MecanoLevelConfiguration.tuto = false;
+		Application.LoadLevel("Mecano");
 	}
 
 }

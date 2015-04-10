@@ -1648,7 +1648,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &770885532
 Transform:
   m_ObjectHideFlags: 0
@@ -2242,7 +2242,9 @@ MonoBehaviour:
   check: 0
   scene: main
   hasPlayed: 0
-  cogsLevel: {fileID: 770885531}
+  cogsLevel1: {fileID: 770885531}
+  cogsLevel2: {fileID: 341961042}
+  cogsLevel3: {fileID: 1239299316}
   role: {fileID: 839831564}
   tuto: 0
 --- !u!4 &943277483

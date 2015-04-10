@@ -60,7 +60,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		tuto = true;// to DELETE
+		tuto = MecanoLevelConfiguration.tuto;
 		updateSceneRoudFinish ();
 		hasPlayed = false;
 		if (role != null) {
