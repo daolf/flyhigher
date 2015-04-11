@@ -26,8 +26,20 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public bool check;
 	public string scene;
 
+	public Color normal;
+	public Color win;
+	public Color lost;
+	public Color cogToFindColor;
+	public Color goodCogColor;
 	public bool hasPlayed;
-	public GameObject cogsLevel;
+	public GameObject cogsLevel1;
+	public GameObject cogsLevel2;
+	public GameObject cogsLevel3;
+	private GameObject cogsLevel;
+	// TODO put in prefab tuto
+	public GameObject menupause;
+	public GameObject role;
+	public bool tuto;
 	private int NbRealcogs;
 	
 	private bool m_isPause;
@@ -41,21 +53,50 @@ public class SceneGeneratorScript : MonoBehaviour {
 		}
 	}
 
-	// Use this for initialization
-	void Start () {
+	void Awake() {
 		isPause = false;
 		Time.timeScale = 1;
 		initCogsLevel ();
 		generateCogs ();
 		scoreNotUpdated = true;
-		updateSceneRoudFinish ();
-		hasPlayed = false;
+
 		win_score.value = WIN_SCORE;
 		
 		timeBar.endCallback = timerEndHandler;
 	}
 
+	// Use this for initialization
+	void Start () {
+		tuto = MecanoLevelConfiguration.tuto;
+		updateSceneRoudFinish ();
+		hasPlayed = false;
+		if (role != null) {
+			role.active = tuto;
+		} else {
+			tuto = false;
+		}
+		if (tuto) {
+			menupause.SetActive(false);
+		}
+		isPause = tuto;
+	}
+
 	private void initCogsLevel () {
+		switch (MecanoLevelConfiguration.level) {
+		case 1: 
+			cogsLevel = cogsLevel1;
+			break;
+		case 2:
+			cogsLevel = cogsLevel2;
+			break;
+		case 3:
+			cogsLevel = cogsLevel2;
+			break;
+		default:
+			cogsLevel = cogsLevel1;
+			break;
+		}
+		cogsLevel.SetActive(true);
 		NbRealcogs = cogsLevel.transform.childCount;
 		cogs = new PrimaryCog[NbRealcogs];
 		if(cogsLevel != null) {
@@ -69,10 +110,12 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 	public void generateCogs () {
 		cogToFind.setCogId(Random.Range(0, cogs.Length));
+		cogToFind.GetComponent<SpriteRenderer>().color = cogToFindColor;
 		// initialize all cogs with "random" ids (in fact each one need to be uniq, so its a shuffle)
 		int[] cogIds = new int[cogs.Length];
-		for(int i=0; i<cogs.Length; i++)
+		for (int i=0; i<cogs.Length; i++) {
 			cogIds[i] = i;
+		}
 		// swap 20 times
 		for(int step=0; step<20; step++) {
 			int a = Random.Range(0, cogs.Length);
@@ -82,8 +125,9 @@ public class SceneGeneratorScript : MonoBehaviour {
 			cogIds[b] = swap;
 		}
 		
-		// set cog ids and speed
+		// set cog ids and speed and color
 		for(int i=0; i<cogs.Length; i++) {
+			cogs[i].GetComponent<SpriteRenderer>().color = normal;
 			cogs[i].setCogId(cogIds[i]);
 			cogs[i].setSpeedRatio(3.0f);
 			cogs[i].generator = this;
@@ -129,8 +173,21 @@ public class SceneGeneratorScript : MonoBehaviour {
 		if (scoreNotUpdated) {
 			roundFinished();
 		}
+		if (Input.GetButtonDown ("Fire1") ){
+			getoutOfTuto();
+		}
 	}
-	
+
+	void getoutOfTuto() {
+			tuto = false;
+		if (role != null) {
+			role.active = tuto;
+			menupause.SetActive(true);
+		}
+			isPause = tuto;
+			//updateSceneRoudFinish ();
+	}
+
 	private void timerEndHandler() {
 		setAllUnselectable();
 		if (myscore.value >= WIN_SCORE) {
@@ -143,13 +200,14 @@ public class SceneGeneratorScript : MonoBehaviour {
 	}
 
 	private void setGoodCogFind(PrimaryCog goodOne) {
-			goodOne.setSelectable (false);
-			goodOne.gameObject.AddComponent<SmoothTranslation> ();
-			SmoothTranslation st = goodOne.GetComponent<SmoothTranslation> ();
-			st.sceneGenerator = this;
-			st.duration = 1;
-			st.from = goodOne.transform.position;
-			st.to = importantCogPosition.position;
+
+		goodOne.setSelectable (false);
+		goodOne.gameObject.AddComponent<SmoothTranslation> ();
+		SmoothTranslation st = goodOne.GetComponent<SmoothTranslation> ();
+		st.sceneGenerator = this;
+		st.duration = 1;
+		st.from = goodOne.transform.position;
+		st.to = importantCogPosition.position;
 	}
 
 	public PrimaryCog getCogToFind() {
@@ -184,6 +242,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public void cogSelected(PrimaryCog cog) {
 		if(cog.getCogId() == cogToFind.getCogId()) {
 			setGoodCogFind(cog);
+			cog.GetComponent<SpriteRenderer>().color = win;
 			hasWon(true);
 		} else {
 			// may change later : for now, remove all other cogs than the selected
@@ -198,7 +257,9 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 			if(goodOne) {
 				setGoodCogFind(goodOne);
+				goodOne.GetComponent<SpriteRenderer>().color = goodCogColor;
 			}
+			cog.GetComponent<SpriteRenderer>().color = lost;
 			// TODO mettre isSelectable a false pour tout les cogs
 			hasWon(false);
 			//hasPlayed = true;

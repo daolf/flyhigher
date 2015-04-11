@@ -55,14 +55,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cogs:
-  - {fileID: 21300000, guid: e959b69ae8c46b943884acf3fefc5604, type: 3}
-  - {fileID: 21300000, guid: 4868f30b58a52414ebcc4827228eec0d, type: 3}
-  - {fileID: 21300000, guid: 2c3a1882e6dbcd442aaef6a49ab0ddb4, type: 3}
-  - {fileID: 21300000, guid: 1363bda16e6f53349b679f7e39270b04, type: 3}
-  - {fileID: 21300000, guid: c7696903a2b41d84aa2ccbe05edb9c95, type: 3}
-  - {fileID: 21300000, guid: 64b4b0ee630d9a94b9a268a15e80025c, type: 3}
-  - {fileID: 21300000, guid: 578cff57039b34b4ea15634b6b9bd9ab, type: 3}
-  - {fileID: 21300000, guid: 289493afeb70b9b4a84180fddce949e1, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   generator: {fileID: 0}
 --- !u!212 &21299660
 SpriteRenderer:
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
