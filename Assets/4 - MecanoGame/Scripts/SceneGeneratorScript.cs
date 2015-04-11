@@ -66,6 +66,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 	void Awake() {
 		state = State.Before;
+		tuto = false; // for DEBUG
 		isPause = false; //TODO verify 
 		Time.timeScale = 1;
 		initCogsLevel ();
@@ -91,11 +92,14 @@ public class SceneGeneratorScript : MonoBehaviour {
 		if (tuto) {
 			state = State.Tuto;
 			menupause.SetActive(false);
-			isPause = false;//TODO semantique
+			isPause = true;//TODO semantique
 		} else {
 			state = State.Before;
+			if (role != null) {
+				role.active = false;
+			} 
 			menupause.SetActive(true);
-			isPause = true;
+			isPause = false;
 			startRound ();
 		}
 	}
@@ -111,7 +115,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 			cogsLevel = cogsLevel2;
 			break;
 		case 3:
-			cogsLevel = cogsLevel2;
+			cogsLevel = cogsLevel3;
 			break;
 		default:
 			cogsLevel = cogsLevel1;
@@ -166,8 +170,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		// replace cog
 		generateCogs ();
 		setAllSelectable ();
-		// timer 
-		timeBar.activated = true;
+		isPause = false;
 	}
 	
 	// Update is called once per frame
@@ -191,6 +194,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public void cogSelected(PrimaryCog cog) {
 		//State: StartRound -> EndRound
 		state = State.EndofRound;
+		isPause = true;
 		if(cog.getCogId() == cogToFind.getCogId()) {
 
 			// Update cogs 
@@ -225,9 +229,9 @@ public class SceneGeneratorScript : MonoBehaviour {
 	
 	public void hasWon(bool has) {
 		state = State.EndofRound;
+		isPause = true;
 		won = has;
 		setAllUnselectable();
-		timeBar.activated = false;
 		setScore (has);
 		if (has) {
 			winBg.enabled = true;
@@ -260,8 +264,8 @@ public class SceneGeneratorScript : MonoBehaviour {
 		//TODO some where else menu.SetActive(false);
 		yield return new WaitForSeconds (0.5f);
 		menu.SetActive(false);
+		yield return new WaitForSeconds (1f);
 		state = State.RestartRound;	
-		yield return new WaitForSeconds (0f);
 	}
 
 	// TODO put in prefab tuto
@@ -277,7 +281,8 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 	private void endGameHandler() {
 		state = State.EndofGame;
-
+		winRound.SetActive (false);
+		lostRound.SetActive (false);
 		setAllUnselectable();
 		if (myscore.value >= WIN_SCORE) {
 			//Game win 
@@ -325,8 +330,5 @@ public class SceneGeneratorScript : MonoBehaviour {
 		}
 		
 	}
-
-
-
 
 }
