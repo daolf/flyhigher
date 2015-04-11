@@ -50,11 +50,11 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void Painterlevel2 () {
-		Application.LoadLevel("PainterGameLvl0");
+		Application.LoadLevel("PainterGameLvl1");
 	}
 
 	public void Painterlevel3 () {
-		Application.LoadLevel("PainterGameLvl0");
+		Application.LoadLevel("PainterGameLvl2");
 	}
 
 	public void Propulsion () {
