@@ -1197,7 +1197,6 @@ GameObject:
   - 124: {fileID: 1511921854}
   - 81: {fileID: 1511921853}
   - 20: {fileID: 1511921856}
-  - 114: {fileID: 1511921858}
   - 114: {fileID: 1511921859}
   m_Layer: 0
   m_Name: Main Camera
@@ -1276,24 +1275,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
---- !u!114 &1511921858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1511921852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3ee8b1d6ce18084a91b7a1af1f2821b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jeuPeintreButton: {fileID: 0}
-  levelPeintreButtons: {fileID: 0}
-  jeuMecanoButton: {fileID: 0}
-  levelMecanoButtons: {fileID: 0}
-  jeuPropulsionButton: {fileID: 0}
-  levelPropulsionButtons: {fileID: 0}
-  panel: {fileID: 0}
 --- !u!114 &1511921859
 MonoBehaviour:
   m_ObjectHideFlags: 0

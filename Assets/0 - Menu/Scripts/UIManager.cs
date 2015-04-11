@@ -14,17 +14,32 @@ public class UIManager : MonoBehaviour {
 
 	public GameObject panel;
 
+	// TO REMOVE later, initialize saved values...
+	static bool isInitialized = false;
 
 	void Start(){
 		Time.timeScale = 1;
+		
+		// TO REMOVE later, initialize saved values...
+		if(!isInitialized) {
+			onEnable();
+			isInitialized = true;
+		}
+		
+		// only allow to choose unlocked levels
+		int propulsionMaxLevel = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, 1);
+		for(int i=propulsionMaxLevel; i<3; i++) {
+			levelPropulsionButtons.transform.GetChild(i).gameObject.SetActive(false);
+		}
 	}
 	//public SceneGenerator sg; // for Mecano
 	
 	void onEnable() {
 
 		//Set the constant for the first time
-		PlayerPrefs.GetInt (Constants.MAIN_GAME_HIGH_SCORE, 0);
-		PlayerPrefs.GetInt (Constants.MAIN_GAME_MAX_LIFE, 0);
+		PlayerPrefs.SetInt (Constants.MAIN_GAME_HIGH_SCORE, 0);
+		PlayerPrefs.SetInt (Constants.MAIN_GAME_MAX_LIFE, 0);
+		PlayerPrefs.SetInt (Constants.PROPULSION_GAME_MAX_DIFFICULTY, 1);
 	}
 
 	public void Menu() {
