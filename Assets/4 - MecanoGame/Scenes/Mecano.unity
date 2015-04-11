@@ -1142,6 +1142,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11404438, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
+      propertyPath: scene
+      value: Mecano
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
   m_IsPrefabParent: 0
@@ -2246,8 +2250,10 @@ MonoBehaviour:
   check: 0
   scene: main
   normal: {r: .46274513, g: .46274513, b: .454901993, a: 1}
-  win: {r: .278330445, g: .860294104, b: .278330445, a: 1}
-  lost: {r: .977941155, g: .0431444459, b: .0431444459, a: 1}
+  win: {r: .678431392, g: .90196085, b: .749019623, a: 1}
+  lost: {r: .796078503, g: .329411775, b: .329411775, a: 1}
+  cogToFindColor: {r: .903427422, g: .897058845, b: .903654873, a: 1}
+  goodCogColor: {r: .90196085, g: .898039281, b: .90196085, a: 1}
   hasPlayed: 0
   cogsLevel1: {fileID: 770885531}
   cogsLevel2: {fileID: 341961042}
@@ -2561,6 +2567,10 @@ Prefab:
     - target: {fileID: 11440348, guid: 4ff5339be284f40d1b1e2a756c941f2a, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11472482, guid: 4ff5339be284f40d1b1e2a756c941f2a, type: 2}
+      propertyPath: scene
+      value: Mecano
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ff5339be284f40d1b1e2a756c941f2a, type: 2}

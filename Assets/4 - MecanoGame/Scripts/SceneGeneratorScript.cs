@@ -25,9 +25,12 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public bool scoreNotUpdated;
 	public bool check;
 	public string scene;
+
 	public Color normal;
 	public Color win;
 	public Color lost;
+	public Color cogToFindColor;
+	public Color goodCogColor;
 	public bool hasPlayed;
 	public GameObject cogsLevel1;
 	public GameObject cogsLevel2;
@@ -107,6 +110,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 	public void generateCogs () {
 		cogToFind.setCogId(Random.Range(0, cogs.Length));
+		cogToFind.GetComponent<SpriteRenderer>().color = cogToFindColor;
 		// initialize all cogs with "random" ids (in fact each one need to be uniq, so its a shuffle)
 		int[] cogIds = new int[cogs.Length];
 		for (int i=0; i<cogs.Length; i++) {
@@ -196,13 +200,14 @@ public class SceneGeneratorScript : MonoBehaviour {
 	}
 
 	private void setGoodCogFind(PrimaryCog goodOne) {
-			goodOne.setSelectable (false);
-			goodOne.gameObject.AddComponent<SmoothTranslation> ();
-			SmoothTranslation st = goodOne.GetComponent<SmoothTranslation> ();
-			st.sceneGenerator = this;
-			st.duration = 1;
-			st.from = goodOne.transform.position;
-			st.to = importantCogPosition.position;
+
+		goodOne.setSelectable (false);
+		goodOne.gameObject.AddComponent<SmoothTranslation> ();
+		SmoothTranslation st = goodOne.GetComponent<SmoothTranslation> ();
+		st.sceneGenerator = this;
+		st.duration = 1;
+		st.from = goodOne.transform.position;
+		st.to = importantCogPosition.position;
 	}
 
 	public PrimaryCog getCogToFind() {
@@ -252,6 +257,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 			if(goodOne) {
 				setGoodCogFind(goodOne);
+				goodOne.GetComponent<SpriteRenderer>().color = goodCogColor;
 			}
 			cog.GetComponent<SpriteRenderer>().color = lost;
 			// TODO mettre isSelectable a false pour tout les cogs
