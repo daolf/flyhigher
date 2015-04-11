@@ -2332,9 +2332,9 @@ MonoBehaviour:
   check: 0
   scene: main
   normal: {r: .46274513, g: .46274513, b: .454901993, a: 1}
-  win: {r: .678431392, g: .90196085, b: .749019623, a: 1}
+  win: {r: 1, g: 1, b: 1, a: 1}
   lost: {r: .796078503, g: .329411775, b: .329411775, a: 1}
-  cogToFindColor: {r: .903427422, g: .897058845, b: .903654873, a: 1}
+  cogToFindColor: {r: 1, g: 1, b: 1, a: 1}
   goodCogColor: {r: 1, g: 1, b: 1, a: 1}
   hasPlayed: 0
   cogsLevel1: {fileID: 770885531}
