@@ -14,9 +14,14 @@ public class UIManager : MonoBehaviour {
 
 	public GameObject panel;
 
+
+	void Start(){
+		Time.timeScale = 1;
+	}
 	//public SceneGenerator sg; // for Mecano
 	
 	void onEnable() {
+
 		//Set the constant for the first time
 		PlayerPrefs.GetInt (Constants.MAIN_GAME_HIGH_SCORE, 0);
 		PlayerPrefs.GetInt (Constants.MAIN_GAME_MAX_LIFE, 0);

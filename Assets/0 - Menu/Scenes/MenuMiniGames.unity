@@ -617,11 +617,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jeuPeintreButton: {fileID: 994285606}
-  levelPeintreButton: {fileID: 1272182163}
+  levelPeintreButtons: {fileID: 1272182163}
   jeuMecanoButton: {fileID: 1824733388}
-  levelMecanoButton: {fileID: 1933614163}
+  levelMecanoButtons: {fileID: 1933614163}
   jeuPropulsionButton: {fileID: 1768383704}
-  levelProplusionButton: {fileID: 690244573}
+  levelPropulsionButtons: {fileID: 690244573}
+  panel: {fileID: 1336990507}
 --- !u!4 &921544189
 Transform:
   m_ObjectHideFlags: 0
@@ -1264,6 +1265,10 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1312226170}
+--- !u!1 &1336990507
+GameObject:
+  m_PrefabParentObject: {fileID: 144608, guid: 28bcec18b670548a98ccf9140a81ff3e, type: 2}
+  m_PrefabInternal: {fileID: 578919734}
 --- !u!1 &1391183300
 GameObject:
   m_ObjectHideFlags: 0
