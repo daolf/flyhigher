@@ -4,13 +4,15 @@ using System.Collections;
 public class UIManager : MonoBehaviour {
 
 	public GameObject jeuPeintreButton;
-	public GameObject levelPeintreButton;
+	public GameObject levelPeintreButtons;
 
 	public GameObject jeuMecanoButton;
-	public GameObject levelMecanoButton;
+	public GameObject levelMecanoButtons;
 
 	public GameObject jeuPropulsionButton;
-	public GameObject levelProplusionButton;
+	public GameObject levelPropulsionButtons;
+
+	public GameObject panel;
 
 	//public SceneGenerator sg; // for Mecano
 	
@@ -33,9 +35,9 @@ public class UIManager : MonoBehaviour {
 	}
 	
 	public void Painter () {
-
+		RectTransform rectPanel = panel.GetComponent<RectTransform>();
 		LeanTween.moveX(jeuPeintreButton, 10000, 1.5f).setEase(LeanTweenType.easeInOutQuint);
-		LeanTween.moveX(levelPeintreButton, 337, 1.5f).setEase(LeanTweenType.easeInOutQuint);
+		LeanTween.moveX(levelPeintreButtons, rectPanel.transform.position.x, 1.5f).setEase(LeanTweenType.easeInOutQuint);
 	}
 
 	public void Painterlevel1 () {
@@ -51,8 +53,9 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void Propulsion () {
+		RectTransform rectPanel = panel.GetComponent<RectTransform>();
 		LeanTween.moveX(jeuPropulsionButton, 10000, 1.5f).setEase(LeanTweenType.easeInOutQuint);
-		LeanTween.moveX(levelProplusionButton, 337, 1.5f).setEase(LeanTweenType.easeInOutQuint);
+		LeanTween.moveX(levelPropulsionButtons, rectPanel.transform.position.x, 1.5f).setEase(LeanTweenType.easeInOutQuint);
 	}
 
 	public void Propulsionlevel1 () {
@@ -68,9 +71,9 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void Mecano () {
+		RectTransform rectPanel = panel.GetComponent<RectTransform>();
 		LeanTween.moveX(jeuMecanoButton, 10000, 1.5f).setEase(LeanTweenType.easeInOutQuint);
-		LeanTween.moveX(levelMecanoButton, 337, 1.5f).setEase(LeanTweenType.easeInOutQuint);
-
+		LeanTween.moveX(levelMecanoButtons, rectPanel.transform.position.x, 1.5f).setEase(LeanTweenType.easeInOutQuint);
 	}
 
 	public void Mecanolevel1 () {
