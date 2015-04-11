@@ -8,8 +8,9 @@ public class MainPaintScript : MonoBehaviour {
 	public Transform tachePrefab;
 	public Transform paintPrefab;
 	public Transform patternPrefab;
-	public Score guiScore;
-	public int score;
+	public Pourcent guiScore;
+	public float objectif;
+	public float score;
 	public int gain ;
 	public int perte ;
 	public Transform buffer;
@@ -44,14 +45,14 @@ public class MainPaintScript : MonoBehaviour {
 		if (score < 0) {
 			score = 0;
 		}
-		guiScore.value = score;
+		float pct = (score / objectif) * 100;
+		guiScore.value = (int) pct;
 	}
 
 	
 	
 	// Use this for initialization
 	void Start () {		
-		speed = (float)3;
 		movement = 0;
 		previousX = this.transform.position.x;
 		// TODO modify calculation of maxMovement
@@ -75,7 +76,12 @@ public class MainPaintScript : MonoBehaviour {
 			endMenu.GetComponent<Canvas>().enabled = true;
 
 			//On passe le manager dans l'état fin
-			GetComponent<ManagerPaint>().state = ManagerPaint.State.END;
+			if(score < objectif ) {
+				GetComponent<ManagerPaint>().state = ManagerPaint.State.ENDLOOSE;
+			}
+			else {
+				GetComponent<ManagerPaint>().state = ManagerPaint.State.ENDWIN;
+			}
 		}
 	}
 
@@ -113,6 +119,9 @@ public class MainPaintScript : MonoBehaviour {
 				drawTache (pz);
 				criticalPanel.criticalState = CriticalPanelScript.CriticalState.CRITICAL;
 				updateScore (perte);
+			}
+			else {
+				criticalPanel.criticalState = CriticalPanelScript.CriticalState.NORMAL;
 			}
 	
 		}
