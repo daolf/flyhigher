@@ -13,6 +13,7 @@ public class MainPaintScript : MonoBehaviour {
 	public float score;
 	public int gain ;
 	public int perte ;
+	public int niveau;
 	public Transform buffer;
 	public float speed;
 	public float movement;
@@ -80,6 +81,7 @@ public class MainPaintScript : MonoBehaviour {
 				GetComponent<ManagerPaint>().state = ManagerPaint.State.ENDLOOSE;
 			}
 			else {
+				PlayerPrefs.SetInt("PAINT_GAME_LVL"+(niveau+1).ToString()+"_UNLOCK",1);
 				GetComponent<ManagerPaint>().state = ManagerPaint.State.ENDWIN;
 			}
 		}

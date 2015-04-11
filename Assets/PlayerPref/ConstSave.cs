@@ -12,4 +12,10 @@ public static class Constants {
 	// Propulsion game
 	public const string PROPULSION_GAME_MAX_DIFFICULTY = "PROPULSION_GAME_MAX_DIFFICULTY";	
 
+
+	// Paint game
+	public const string PAINT_GAME_LVL1_UNLOCK = "PAINT_GAME_LVL1_UNLOCK";
+	public const string PAINT_GAME_LVL2_UNLOCK = "PAINT_GAME_LVL2_UNLOCK";
+	public const string PAINT_GAME_LVL3_UNLOCK = "PAINT_GAME_LVL3_UNLOCK";
+
 }
