@@ -1847,7 +1847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   game: {fileID: 1249071188}
-  scene: PainterGameLvl0
+  scene: PainterGameLvl1
   bouttonPause: {fileID: 1249328004}
 --- !u!114 &1409614188
 MonoBehaviour:
@@ -2506,6 +2506,10 @@ Prefab:
       propertyPath: bouttonPause
       value: 
       objectReference: {fileID: 1249328004}
+    - target: {fileID: 11472478, guid: fe4717875b9e349c68147a7094a76bca, type: 2}
+      propertyPath: scene
+      value: PainterGameLvl1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fe4717875b9e349c68147a7094a76bca, type: 2}
   m_IsPrefabParent: 0
@@ -2596,6 +2600,10 @@ Prefab:
       propertyPath: bouttonPause
       value: 
       objectReference: {fileID: 1249328004}
+    - target: {fileID: 11405458, guid: 8b06514daeb8a4529aeb2b6e86172fa0, type: 2}
+      propertyPath: scene
+      value: PainterGameLvl1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8b06514daeb8a4529aeb2b6e86172fa0, type: 2}
   m_IsPrefabParent: 0
