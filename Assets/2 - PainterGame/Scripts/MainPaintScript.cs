@@ -77,7 +77,12 @@ public class MainPaintScript : MonoBehaviour {
 			endMenu.GetComponent<Canvas>().enabled = true;
 
 			//On passe le manager dans l'état fin
-			GetComponent<ManagerPaint>().state = ManagerPaint.State.END;
+			if(score < objectif ) {
+				GetComponent<ManagerPaint>().state = ManagerPaint.State.ENDLOOSE;
+			}
+			else {
+				GetComponent<ManagerPaint>().state = ManagerPaint.State.ENDWIN;
+			}
 		}
 	}
 

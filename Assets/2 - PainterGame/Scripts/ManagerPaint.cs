@@ -3,11 +3,12 @@ using System.Collections;
 
 public class ManagerPaint : MonoBehaviour {
 	
-	public enum State {BEGIN,MAIN,END};
+	public enum State {BEGIN,MAIN,ENDWIN,ENDLOOSE};
 	public State state;
 	public BeginPaintScript beginPaintScript ;
 	public MainPaintScript mainPaintScript ;
-	public EndPaintScript endPaintScript ;
+	public Canvas endLooseMenu;
+	public Canvas endWinMenu;
 	public bool isPause;
 	// Use this for initialization
 	void Start () {
@@ -16,7 +17,8 @@ public class ManagerPaint : MonoBehaviour {
 		isPause = false;
 		beginPaintScript.enabled = true;
 		mainPaintScript.enabled = false;
-		endPaintScript.enabled = false;
+		endLooseMenu.enabled = false;
+		endWinMenu.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -29,13 +31,22 @@ public class ManagerPaint : MonoBehaviour {
 		case State.MAIN :
 			beginPaintScript.enabled = false;
 			mainPaintScript.enabled = true;
-			endPaintScript.enabled = false;
+			endLooseMenu.enabled = false;
+			endWinMenu.enabled = false;
 			break;
 
-		case State.END :
+		case State.ENDLOOSE :
 			beginPaintScript.enabled = false;
 			mainPaintScript.enabled = false;
-			endPaintScript.enabled = true;
+			endLooseMenu.enabled = true;
+			endWinMenu.enabled = false;
+			break;
+
+		case State.ENDWIN :
+			beginPaintScript.enabled = false;
+			mainPaintScript.enabled = false;
+			endLooseMenu.enabled = false;
+			endWinMenu.enabled = true;
 			break;
 		}
 	}
