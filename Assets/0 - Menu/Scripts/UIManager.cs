@@ -64,14 +64,17 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void Propulsionlevel1 () {
+		PropulsionLevelConfiguration.currentLevel = 1;
 		Application.LoadLevel("IngameScene");
 	}
 
 	public void Propulsionlevel2 () {
+		PropulsionLevelConfiguration.currentLevel = 2;
 		Application.LoadLevel("IngameScene");
 	}
 
 	public void Propulsionlevel3 () {
+		PropulsionLevelConfiguration.currentLevel = 3;
 		Application.LoadLevel("IngameScene");
 	}
 

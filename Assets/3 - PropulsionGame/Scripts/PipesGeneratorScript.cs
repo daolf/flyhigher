@@ -241,8 +241,11 @@ public class PipesGeneratorScript : MonoBehaviour {
 		// On zoom
 		myCamera.to = 3.22f;
 		
-		// TODO ser may select a lower difficulty level?
-		currentDifficulty = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, 1);
+		// TODO will not be needed to check max level later...
+		int maxDifficulty = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, 1);
+		currentDifficulty = PropulsionLevelConfiguration.currentLevel;
+		currentDifficulty = currentDifficulty < 1 ? 1 : 
+				(currentDifficulty > maxDifficulty ? maxDifficulty : currentDifficulty);
 
 		parentArea = GameObject.Find("/Container").transform;
 		grid = instanciateLevelFromXml (getRandomLevel(currentDifficulty));
