@@ -272,6 +272,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 		
 		// start camera zoom (the game is virtually paused before zoom is done)
 		isPause = true;
+		Time.timeScale = 1;
 		myCamera.zoomFinishedCallback = delegate() {
 			isPause = false;
 		};

@@ -1287,6 +1287,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ee8b1d6ce18084a91b7a1af1f2821b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jeuPeintreButton: {fileID: 0}
+  levelPeintreButtons: {fileID: 0}
+  jeuMecanoButton: {fileID: 0}
+  levelMecanoButtons: {fileID: 0}
+  jeuPropulsionButton: {fileID: 0}
+  levelPropulsionButtons: {fileID: 0}
+  panel: {fileID: 0}
 --- !u!114 &1511921859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1878,6 +1885,10 @@ Prefab:
     - target: {fileID: 11404438, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
       propertyPath: scene
       value: IngameScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 105290, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
+      propertyPath: m_Name
+      value: WinMenu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
