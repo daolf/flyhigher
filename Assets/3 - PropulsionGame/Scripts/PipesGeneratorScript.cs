@@ -150,6 +150,14 @@ public class PipesGeneratorScript : MonoBehaviour {
 		
 		// disable the timer and the Pause button
 		isPause = true;
+		
+		// play the sound, with duration of total time needed to display the path
+		GameObject winSound = GameObject.Find("WinSoundSource");
+		if(winSound != null) {
+			float soundDuration = WIN_PATH_DISPLAYING_TIME * winPath.Count;
+			winSound.GetComponent<SineVariableAudioSource>().setDuration(soundDuration);
+			winSound.GetComponent<AudioSource>().Play ();
+		}
 	}
 	
 	// internal : called when "you win" message is ready to be displayed
