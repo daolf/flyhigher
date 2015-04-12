@@ -10,6 +10,7 @@ public class ManagerPaint : MonoBehaviour {
 	public Canvas endLooseMenu;
 	public Canvas endWinMenu;
 	public bool isPause;
+	public GenericTutoScript tutoScript;
 	// Use this for initialization
 	void Start () {
 
@@ -20,13 +21,13 @@ public class ManagerPaint : MonoBehaviour {
 		endLooseMenu.enabled = false;
 		endWinMenu.enabled = false;
 		Time.timeScale = 1;
+		firstPlayTuto();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		switch (state) {
 		case State.BEGIN :
-			state = State.MAIN;
 			break;
 
 		case State.MAIN :
@@ -50,5 +51,23 @@ public class ManagerPaint : MonoBehaviour {
 			endWinMenu.enabled = true;
 			break;
 		}
+	}
+
+	/**
+	 * First tutorial
+	 */
+	private void firstPlayTuto() {
+		tutoScript.setBubbleVisibility(false);
+		
+		tutoScript.readyCallback = delegate() {
+			tutoScript.setBubbleVisibility(true);
+			tutoScript.say("Bonjour, je m'appelle Victor et je suis peintre aéronautique.. Mon métier consiste à peindre toutes les parties de l'avion. Attention, ce métier n'est pas aussi simple qu'il n'y parait.");
+		};
+		
+		tutoScript.outCallback = delegate() {
+			state = State.MAIN;
+		};
+		
+		tutoScript.getIn();
 	}
 }
