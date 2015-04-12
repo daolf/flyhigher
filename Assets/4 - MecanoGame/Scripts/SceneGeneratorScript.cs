@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SceneGeneratorScript : MonoBehaviour {
 
+	// Test git
+
 	// States of game
 	enum State {Before, Tuto, StartRound, EndofRound, RestartRound, EndofGame };
 	State state;
