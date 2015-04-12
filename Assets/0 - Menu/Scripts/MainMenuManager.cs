@@ -4,7 +4,7 @@ using System.Collections;
 public class MainMenuManager : MonoBehaviour {
 	
 	// TO REMOVE later, initialize saved values...
-	private bool isInitialized = false;
+	private static bool isInitialized = false;
 
 	void Start() {
 		
