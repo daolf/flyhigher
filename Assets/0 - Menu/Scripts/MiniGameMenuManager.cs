@@ -20,37 +20,30 @@ public class MiniGameMenuManager : MonoBehaviour {
 
 		// only allow to choose unlocked levels
 		// FIXME should probably mark locked level instead of de-activating them
-		int propulsionMaxLevel = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, 1);
-		for(int i=propulsionMaxLevel; i<3; i++) {
-			levelPropulsionButtons.transform.GetChild(i).gameObject.SetActive(false);
-		//Set the constant for the first time
-		PlayerPrefs.GetInt (Constants.MAIN_GAME_HIGH_SCORE, 0);
-		PlayerPrefs.GetInt (Constants.MAIN_GAME_MAX_LIFE, 0);
-		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL1_UNLOCK, 1);
-		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL2_UNLOCK, 0);
-		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL3_UNLOCK, 0);
+		int propulsionMaxLevel = PlayerPrefs.GetInt (Constants.PROPULSION_GAME_MAX_DIFFICULTY, 1);
+		for (int i=propulsionMaxLevel; i<3; i++) {
+			levelPropulsionButtons.transform.GetChild (i).gameObject.SetActive (false);
+			//Set the constant for the first time
+			PlayerPrefs.GetInt (Constants.MAIN_GAME_HIGH_SCORE, 0);
+			PlayerPrefs.GetInt (Constants.MAIN_GAME_MAX_LIFE, 0);
+			PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL1_UNLOCK, 1);
+			PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL2_UNLOCK, 0);
+			PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL3_UNLOCK, 0);
 
 
 
 
-		//Make button disabled if level not unlocked
-		if (PlayerPrefs.GetInt(Constants.PAINT_GAME_LVL2_UNLOCK) == 0) {
-			levelPeintreButtons.transform.FindChild ("LevelPeintre2").GetComponent<Button>().interactable = false;
-		}
-		if (PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL3_UNLOCK) == 0) {
-			levelPeintreButtons.transform.FindChild ("LevelPeintre3").GetComponent<Button>().interactable = false;
+			//Make button disabled if level not unlocked
+			if (PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL2_UNLOCK) == 0) {
+				levelPeintreButtons.transform.FindChild ("LevelPeintre2").GetComponent<Button> ().interactable = false;
+			}
+			if (PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL3_UNLOCK) == 0) {
+				levelPeintreButtons.transform.FindChild ("LevelPeintre3").GetComponent<Button> ().interactable = false;
+			}
 		}
 	}
 	//public SceneGenerator sg; // for Mecano
 
-<<<<<<< HEAD:Assets/0 - Menu/Scripts/MiniGameMenuManager.cs
-=======
-
-
-
-
-	}
->>>>>>> PaintGame:Assets/0 - Menu/Scripts/UIManager.cs
 
 	public void Menu() {
 		Application.LoadLevel("MainMenu");
