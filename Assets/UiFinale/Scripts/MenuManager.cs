@@ -43,6 +43,11 @@ public class MenuManager : MonoBehaviour {
 			Application.LoadLevel ("MenuMiniGames");
 		}
 	}
+
+	public void OnBonusFromMiniGames() {
+		Time.timeScale = 1;
+		Application.LoadLevel ("MainGame");
+	}
 	// Use this for initialization
 	void Start () {
 	

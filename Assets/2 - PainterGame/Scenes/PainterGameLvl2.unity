@@ -1762,6 +1762,7 @@ MonoBehaviour:
   score: 0
   gain: 5
   perte: -10
+  niveau: 3
   buffer: {fileID: 0}
   speed: 1.79999995
   movement: 0
