@@ -13,6 +13,7 @@ public class ManagerPaint : MonoBehaviour {
 	public bool isPause;
 	public PausePaintScript pauseButton;
 	public GenericTutoScript tutoScript;
+	public TutoHandScript hand;
 	// Use this for initialization
 	void Start () {
 
@@ -23,7 +24,11 @@ public class ManagerPaint : MonoBehaviour {
 		endLooseMenu.enabled = false;
 		endWinMenu.enabled = false;
 		Time.timeScale = 1;
-		firstPlayTuto();
+		if (PlayerPrefs.GetInt (Constants.PAINT_GAME_ALREADY_PLAYED) == 0) {
+			tutoFirstPlayed ();
+		} else {
+			tuto ();
+		}
 	}
 	
 	// Update is called once per frame
@@ -57,17 +62,58 @@ public class ManagerPaint : MonoBehaviour {
 		}
 	}
 
+
 	/**
-	 * First tutorial
+	 * Tuto
 	 */
-	private void firstPlayTuto() {
+	private void tutoFirstPlayed() {
+
 		tutoScript.setBubbleVisibility(false);
+		tutoScript.readyCallback = delegate() {
+			tutoScript.setBubbleVisibility(true);
+			
+			string[] messages = new string[] {
+				"Le but du jeu, c'est de peindre la carlingue de l'avion.",
+				"Pour cela, ton doigt doit rester sur le trait à peindre. L'objectif est d'avoir un taux de réussite de 100%.",
+				" Attention, si tu dépassesl'écran, ton taux de réussite diminuera !"
+			};
+			tutoScript.say(messages);
+		};
+
+		tutoScript.dialogueEndCallback = delegate() {
+			tutoScript.dialogueEndCallback = null;
+			tutoScript.setBubbleVisibility(false);
+			tutoScript.hand.moveToWorldPosition(new Vector3(0,0,0), 1.8f);
+			StartCoroutine(testCoroutine());
+		};
 		
+		tutoScript.outCallback = delegate() {
+			state = State.MAIN;
+		};
+		
+		tutoScript.getIn();
+	}
+
+	private IEnumerator testCoroutine() {
+		yield return new WaitForSeconds(2);
+		tutoScript.hand.setHandKind(TutoHandScript.HandKind.HandClick);
+		yield return new WaitForSeconds(0.3f);
+		tutoScript.hand.setHandKind(TutoHandScript.HandKind.HandNormal);
+		yield return new WaitForSeconds(0.5f);
+		tutoScript.hand.setVisibility(false);
+		tutoScript.getOut();
+	}
+
+	/**
+	 * Information
+	 */
+	private void tuto() {
+		tutoScript.setBubbleVisibility(false);
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
 			//si c'est la première fois présentation , 
 			if(PlayerPrefs.GetInt (Constants.PAINT_GAME_ALREADY_PLAYED) == 0 ) {
-			tutoScript.say("Bonjour, je m'appelle Victor et je suis peintre aéronautique.. Mon métier consiste à peindre toutes les parties de l'avion. Attention, ce métier n'est pas aussi simple qu'il n'y parait.");
+				tutoScript.say("Bonjour, je m'appelle Victor et je suis peintre aéronautique.. Mon métier consiste à peindre toutes les parties de l'avion. Attention, ce métier n'est pas aussi simple qu'il n'y parait.");
 			}
 			else {
 				float r = Random.value;
@@ -80,7 +126,7 @@ public class ManagerPaint : MonoBehaviour {
 				}
 			}
 			PlayerPrefs.SetInt(Constants.PAINT_GAME_ALREADY_PLAYED,1);
-
+			
 		};
 		
 		tutoScript.outCallback = delegate() {
