@@ -9,13 +9,19 @@ public class AutoType : MonoBehaviour {
 	
 	private string message;
 	private IEnumerator currentCoroutine = null;
+	private bool messageComplete = false;
 	
 
 	// Use this for initialization
 	void Start () {
 		message = GetComponent<Text>().text;
+		resetText();
 		if(autoStart)
 			startTyping();
+	}
+	
+	public bool isComplete() {
+		return messageComplete;
 	}
 	
 	// set a new message to display
@@ -26,14 +32,24 @@ public class AutoType : MonoBehaviour {
 	// reset the content of Text area to be able to type it again
 	public void resetText() {
 		GetComponent<Text>().text = "";
+		messageComplete = false;
 		// stop typing!
-		StopCoroutine(currentCoroutine);
+		if(currentCoroutine != null) {
+			StopCoroutine(currentCoroutine);
+			currentCoroutine = null;
+		}
 	}
 	
 	public void startTyping() {
 		GetComponent<Text>().text = "";
 		currentCoroutine = TypeText();
 		StartCoroutine(currentCoroutine);
+	}
+	
+	public void instantDisplay() {
+		resetText();
+		GetComponent<Text>().text = message;
+		messageComplete = true;
 	}
 	
 	IEnumerator TypeText () {
@@ -43,5 +59,6 @@ public class AutoType : MonoBehaviour {
 			yield return new WaitForSeconds(letterPause);
 		}
 		currentCoroutine = null;
+		messageComplete = true;
 	}
 }
