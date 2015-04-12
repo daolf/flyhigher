@@ -326,7 +326,12 @@ public class PipesGeneratorScript : MonoBehaviour {
 		
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
-			tutoScript.say("Salut, moi c'est Yassine!\nJe travaille comme ingénieur aux systèmes de propulsion, blablabla!");
+			
+			string[] messages = new string[] {
+				"Salut, moi c'est Yassine!\nJe travaille comme ingénieur aux systèmes de propulsion, blablabla!",
+				"Maintenant je te montre comment faire, blablabla."
+			};
+			tutoScript.say(messages);
 		};
 		
 		tutoScript.dialogueEndCallback = delegate() {

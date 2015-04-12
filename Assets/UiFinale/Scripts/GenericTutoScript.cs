@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GenericTutoScript : MonoBehaviour {
 
@@ -14,6 +15,8 @@ public class GenericTutoScript : MonoBehaviour {
 	
 	private enum TutoState { Hidden, Ready, Talking, Waiting, Finish };
 	TutoState state = TutoState.Hidden;
+	
+	private IEnumerable<string> textsToSay = null;
 
 	// Use this for initialization
 	void Start () {
@@ -25,10 +28,9 @@ public class GenericTutoScript : MonoBehaviour {
 		if( (state == TutoState.Talking || state == TutoState.Waiting)
 		   && Input.GetButtonDown("Fire1"))
 		{
-			if(state == TutoState.Talking && !textField.isComplete()) {
-				// instant display of the rest of the message
+			if(state == TutoState.Talking) {
+				// instant display of the rest of the current message (coroutine handle that!)
 				textField.instantDisplay();
-				state = TutoState.Waiting;
 			}
 			else {
 				state = TutoState.Finish;
@@ -50,10 +52,34 @@ public class GenericTutoScript : MonoBehaviour {
 	 * Start 'speaking' the given text, removing the old content if any.
 	 */
 	public void say(string text) {
-		textField.setMessage(text);
-		textField.resetText();
-		textField.startTyping();
+		string[] textArray = new string[1];
+		textArray[0] = text;
+		say(textArray);
+	}
+	
+	public void say(IEnumerable<string> texts) {
+		textsToSay = texts;
+		StartCoroutine(coroutineSayAll());
+	}
+	
+	public IEnumerator coroutineSayAll() {
 		state = TutoState.Talking;
+		
+		foreach(string message in textsToSay) {
+			textField.setMessage(message);
+			textField.resetText();
+			textField.startTyping();
+			
+			while(!textField.isComplete())
+				yield return null;
+				
+			// wait before displaying next message
+			yield return new WaitForSeconds(0.1f);
+			while(!Input.GetButtonDown("Fire1"))
+				yield return null;
+		}
+		
+		state = TutoState.Waiting;
 	}
 	
 	/**
