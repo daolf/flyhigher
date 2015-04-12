@@ -95,6 +95,27 @@ public class PipesGeneratorScript : MonoBehaviour {
 			GameObject.Find("ButtonPause").GetComponentInParent<Canvas>().enabled = !value;
 		}
 	}
+	
+	
+	/**
+	 * Texts used in tutorial, and other persuasive aspects of the game.
+	 */
+	private string[] msgPresentation1 = new string[] { 
+		"Salut, je m'appelle Emilie et je suis ingénieur en propulsion aéronautique.",
+		"Je suis chargé de concevoir l'ensemble des équipements qui permettent à l'avion de voler,"
+		 + " comme par exemple les réacteurs d'un avion."
+	};
+	
+	private string[] msgTuto1 = new string[] {
+		"Ici, le but du jeu est de résoudre un casse-tête.",
+		"Tu dois tourner les bons tuyaux d'aération pour connecter l'entrée d'air du réacteur"
+		 + " à sa sortie dans le temps imparti.",
+		"Pour tourner un tuyau, il te suffit de le toucher.\nBon, là c'est facile, je te montre!"
+	};
+	
+	private string[] msgTuto2 = new string[] {
+		"Et voilà, ce réacteur devrait fonctionner correctement!\nA toi de jouer maintenant."
+	};
 
 	void Update() {
 		// really dirty proof of concept, check path every frame
@@ -189,7 +210,17 @@ public class PipesGeneratorScript : MonoBehaviour {
 	}
 	
 	private IEnumerator prepareEndOfTutorial() {
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(0.5f);
+		
+		tutoScript.setBubbleVisibility(true);
+		tutoScript.say(msgTuto2);
+		while(tutoScript.state != GenericTutoScript.TutoState.Finish)
+			yield return null;
+		
+		tutoScript.setBubbleVisibility(false);
+		tutoScript.getOut();
+		while(tutoScript.state != GenericTutoScript.TutoState.Hidden)
+			yield return null;
 		
 		// TODO cleaner way?
 		PropulsionLevelConfiguration.showTutorial = false;
@@ -326,21 +357,15 @@ public class PipesGeneratorScript : MonoBehaviour {
 		
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
-			
-			string[] messages = new string[] {
-				"Salut, moi c'est Yassine!\nJe travaille comme ingénieur aux systèmes de propulsion, blablabla!",
-				"Maintenant je te montre comment faire, blablabla."
-			};
-			tutoScript.say(messages);
+
+			tutoScript.say(msgPresentation1.Concat(msgTuto1));
 		};
 		
 		tutoScript.dialogueEndCallback = delegate() {
 			tutoScript.dialogueEndCallback = null;
 			tutoScript.setBubbleVisibility(false);
 			
-			Vector3 worldPos = objectGrid[(int)tutoBadPipePosition.x, (int)tutoBadPipePosition.y].transform.position;
-			tutoScript.hand.moveToWorldPosition(worldPos, 1.8f);
-			StartCoroutine(testCoroutine());
+			StartCoroutine(playTutoCoroutine());
 		};
 		
 		tutoScript.outCallback = delegate() {
@@ -350,18 +375,30 @@ public class PipesGeneratorScript : MonoBehaviour {
 		tutoScript.getIn();
 	}
 	
-	private IEnumerator testCoroutine() {
+	
+	/**
+	 * Play the 'fake game', using the tutorial hand to display how to finish a level...
+	 */
+	private IEnumerator playTutoCoroutine() {
+		// move hand over the pipe to turn
+		Vector3 worldPos = objectGrid[(int)tutoBadPipePosition.x, (int)tutoBadPipePosition.y].transform.position;
+		tutoScript.hand.moveToWorldPosition(worldPos, 1.8f);
+	
+		// when the hand is over the pipe, display a 'click', and turn the pipe as if it was touched
 		yield return new WaitForSeconds(2);
 		tutoScript.hand.setHandKind(TutoHandScript.HandKind.HandClick);
-		yield return new WaitForSeconds(0.3f);
-		tutoScript.hand.setHandKind(TutoHandScript.HandKind.HandNormal);
+		yield return new WaitForSeconds(0.1f);
 		
 		PipeElementScript badPipe = objectGrid[(int)tutoBadPipePosition.x, (int)tutoBadPipePosition.y];
 		badPipe.rotateClockwiseOnce();
 		
+		yield return new WaitForSeconds(0.2f);
+		tutoScript.hand.setHandKind(TutoHandScript.HandKind.HandNormal);
+		
+		// hide the hand, the rest of the tutorial is handled by onEffectiveWin() ;)
 		yield return new WaitForSeconds(0.5f);
 		tutoScript.hand.setVisibility(false);
-		tutoScript.getOut();
+		//tutoScript.getOut();
 	}
 	
 	/**
