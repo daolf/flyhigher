@@ -12,7 +12,7 @@ public class GenericTutoScript : MonoBehaviour {
 	
 	public TutoHandScript hand;
 	
-	private enum TutoState { Hidden, Ready, Talking, Waiting };
+	private enum TutoState { Hidden, Ready, Talking, Waiting, Finish };
 	TutoState state = TutoState.Hidden;
 
 	// Use this for initialization
@@ -31,6 +31,7 @@ public class GenericTutoScript : MonoBehaviour {
 				state = TutoState.Waiting;
 			}
 			else {
+				state = TutoState.Finish;
 				if(dialogueEndCallback != null)
 					dialogueEndCallback();
 				else

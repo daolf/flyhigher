@@ -171,15 +171,29 @@ public class PipesGeneratorScript : MonoBehaviour {
 	
 	// internal : called when "you win" message is ready to be displayed
 	private void onEffectiveWin() {
-		// save the maximum level allowed if needed
-		int currentMaxLevel = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY);
-		if(currentMaxLevel < (currentDifficulty + 1) && currentMaxLevel < 3) {
-			PlayerPrefs.SetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, currentDifficulty + 1);
-			// FIXME not a good place to be called?
-			PlayerPrefs.Save();
+		if(inTuto) {
+			// the goal is to reload the scene without tuto enable!
+			StartCoroutine(prepareEndOfTutorial());
 		}
+		else {
+			// save the maximum level allowed if needed
+			int currentMaxLevel = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY);
+			if(currentMaxLevel < (currentDifficulty + 1) && currentMaxLevel < 3) {
+				PlayerPrefs.SetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, currentDifficulty + 1);
+				// FIXME not a good place to be called?
+				PlayerPrefs.Save();
+			}
+		
+			GameObject.Find("WinMenu").GetComponent<Canvas>().enabled = true;
+		}
+	}
 	
-		GameObject.Find("WinMenu").GetComponent<Canvas>().enabled = true;
+	private IEnumerator prepareEndOfTutorial() {
+		yield return new WaitForSeconds(1);
+		
+		// TODO cleaner way?
+		PropulsionLevelConfiguration.showTutorial = false;
+		Application.LoadLevel("IngameScene");
 	}
 	
 	// internal : used as a callback when the time is elapsed
@@ -250,6 +264,8 @@ public class PipesGeneratorScript : MonoBehaviour {
 		// On zoom
 		myCamera.to = 3.22f;
 		
+		inTuto = PropulsionLevelConfiguration.showTutorial;
+		
 		// TODO will not be needed to check max level later...
 		int maxDifficulty = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, 1);
 		currentDifficulty = PropulsionLevelConfiguration.currentLevel;
@@ -294,8 +310,9 @@ public class PipesGeneratorScript : MonoBehaviour {
 		myCamera.zoomFinishedCallback = delegate() {
 			isPause = false;
 			
-			// FIXME temp to test tuto
-			firstPlayTuto();
+			if(inTuto) {
+				firstPlayTuto();
+			}
 		};
 	}
 	
@@ -322,7 +339,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 		};
 		
 		tutoScript.outCallback = delegate() {
-			isPause = false;
+			//isPause = false;
 		};
 		
 		tutoScript.getIn();
@@ -339,6 +356,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 		
 		yield return new WaitForSeconds(0.5f);
 		tutoScript.hand.setVisibility(false);
+		tutoScript.getOut();
 	}
 	
 	/**
