@@ -124,12 +124,12 @@ public class SceneGeneratorScript : MonoBehaviour {
 		
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
-			tutoScript.say(Dialogue.dilogue1[0]);
+			tutoScript.say(Dialogue.dialogue1);
 		};
 		
 		tutoScript.outCallback = delegate() {
 			isPause = false;
-			//TODO Start Tuoto
+			// Start Tuoto
 			menupause.SetActive(true);
 			tuto = false;
 		};
@@ -144,7 +144,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
-			tutoScript.say(Dialogue.dilogue2[0]);
+			tutoScript.say(Dialogue.dialogue2);
 		};
 		
 		tutoScript.outCallback = delegate() {
@@ -163,7 +163,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
-			tutoScript.say(Dialogue.dilogue3[0]);
+			tutoScript.say(Dialogue.dialogue3);
 		};
 		
 		tutoScript.outCallback = delegate() {
