@@ -166,9 +166,6 @@ public class SceneGeneratorScript : MonoBehaviour {
 		PlayTuto ();
 		myscore.value = 0;
 		winBg.enabled = false;
-		// timer 
-		Time.timeScale = 1;
-		
 	}
 
 	// Tuto dialogue.
@@ -184,6 +181,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		tutoScript.outCallback = delegate() {
 			// Reset timer and cogs
 			Time.timeScale = 1;
+			timeBar.CurrentTime = timeBar.maxTime;
 			initCogsLevel ();
 			generateCogs ();
 			setAllSelectable ();
