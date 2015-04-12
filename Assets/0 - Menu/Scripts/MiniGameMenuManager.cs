@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UIManager : MonoBehaviour {
+public class MiniGameMenuManager : MonoBehaviour {
 
 	public GameObject jeuPeintreButton;
 	public GameObject levelPeintreButtons;
@@ -12,50 +12,26 @@ public class UIManager : MonoBehaviour {
 	public GameObject jeuPropulsionButton;
 	public GameObject levelPropulsionButtons;
 
-	public GameObject panel;
-
-	// TO REMOVE later, initialize saved values...
-	static bool isInitialized = false;
+	public RectTransform rectPanel;
 
 	void Start(){
 		Time.timeScale = 1;
 		
-		// TO REMOVE later, initialize saved values...
-		if(!isInitialized) {
-			onEnable();
-			isInitialized = true;
-		}
-		
 		// only allow to choose unlocked levels
+		// FIXME should probably mark locked level instead of de-activating them
 		int propulsionMaxLevel = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, 1);
 		for(int i=propulsionMaxLevel; i<3; i++) {
 			levelPropulsionButtons.transform.GetChild(i).gameObject.SetActive(false);
 		}
 	}
 	//public SceneGenerator sg; // for Mecano
-	
-	void onEnable() {
 
-		//Set the constant for the first time
-		PlayerPrefs.SetInt (Constants.MAIN_GAME_HIGH_SCORE, 0);
-		PlayerPrefs.SetInt (Constants.MAIN_GAME_MAX_LIFE, 0);
-		PlayerPrefs.SetInt (Constants.PROPULSION_GAME_MAX_DIFFICULTY, 1);
-	}
 
 	public void Menu() {
 		Application.LoadLevel("MainMenu");
 	}
-
-	public void MainGame () {
-		Application.LoadLevel("MainGame");
-	}
-
-	public void MiniGame () {
-		Application.LoadLevel("MenuMiniGames");
-	}
 	
 	public void Painter () {
-		RectTransform rectPanel = panel.GetComponent<RectTransform>();
 		LeanTween.moveX(jeuPeintreButton, 10000, 1.5f).setEase(LeanTweenType.easeInOutQuint);
 		LeanTween.moveX(levelPeintreButtons, rectPanel.transform.position.x, 1.5f).setEase(LeanTweenType.easeInOutQuint);
 	}
@@ -73,7 +49,6 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void Propulsion () {
-		RectTransform rectPanel = panel.GetComponent<RectTransform>();
 		LeanTween.moveX(jeuPropulsionButton, 10000, 1.5f).setEase(LeanTweenType.easeInOutQuint);
 		LeanTween.moveX(levelPropulsionButtons, rectPanel.transform.position.x, 1.5f).setEase(LeanTweenType.easeInOutQuint);
 	}
@@ -94,7 +69,6 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void Mecano () {
-		RectTransform rectPanel = panel.GetComponent<RectTransform>();
 		LeanTween.moveX(jeuMecanoButton, 10000, 1.5f).setEase(LeanTweenType.easeInOutQuint);
 		LeanTween.moveX(levelMecanoButtons, rectPanel.transform.position.x, 1.5f).setEase(LeanTweenType.easeInOutQuint);
 	}

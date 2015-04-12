@@ -622,7 +622,7 @@ MonoBehaviour:
   levelMecanoButtons: {fileID: 1933614163}
   jeuPropulsionButton: {fileID: 1768383704}
   levelPropulsionButtons: {fileID: 690244573}
-  panel: {fileID: 1336990507}
+  rectPanel: {fileID: 578919735}
 --- !u!4 &921544189
 Transform:
   m_ObjectHideFlags: 0
@@ -1265,10 +1265,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1312226170}
---- !u!1 &1336990507
-GameObject:
-  m_PrefabParentObject: {fileID: 144608, guid: 28bcec18b670548a98ccf9140a81ff3e, type: 2}
-  m_PrefabInternal: {fileID: 578919734}
 --- !u!1 &1391183300
 GameObject:
   m_ObjectHideFlags: 0
