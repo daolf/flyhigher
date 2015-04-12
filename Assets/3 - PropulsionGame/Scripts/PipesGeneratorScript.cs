@@ -24,6 +24,10 @@ public class PipesGeneratorScript : MonoBehaviour {
 	
 	public int currentDifficulty = 3;
 	
+	// for tuto
+	public TextAsset levelTuto;
+	public Vector2 tutoBadPipePosition;
+	
 
 	// constants for pipe grid size, and (x,y) of top-left corner
 	private const int GRID_SIZE = 9;
@@ -74,6 +78,9 @@ public class PipesGeneratorScript : MonoBehaviour {
 	
 	public TimeBarscript timebar;
 	public Score score;
+	
+	// is in tutorial mode?
+	private bool inTuto = true;
 	
 	private bool m_isPause = false;
 
@@ -250,7 +257,13 @@ public class PipesGeneratorScript : MonoBehaviour {
 				(currentDifficulty > maxDifficulty ? maxDifficulty : currentDifficulty);
 
 		parentArea = GameObject.Find("/Container").transform;
-		grid = instanciateLevelFromXml (getRandomLevel(currentDifficulty));
+		// load Tutorial level if needed
+		if(inTuto) {
+			grid = instanciateLevelFromXml(levelTuto);
+		}
+		else {
+			grid = instanciateLevelFromXml (getRandomLevel(currentDifficulty));
+		}
 		instanciatePipeGrid (grid);
 
 		// pipe gradient, very ugly
