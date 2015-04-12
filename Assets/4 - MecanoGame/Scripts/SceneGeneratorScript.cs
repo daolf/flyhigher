@@ -2,9 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class SceneGeneratorScript : MonoBehaviour {
-
-	// Test git
-
+	
 	// States of game
 	enum State {Before, Tuto, StartRound, EndofRound, RestartRound, EndofGame };
 	State state;
@@ -91,6 +89,8 @@ public class SceneGeneratorScript : MonoBehaviour {
 	void Start () {
 		state = State.Before;
 		tuto = MecanoLevelConfiguration.tuto;
+		winBg.enabled = false;
+		lostBg.enabled = false;
 
 		if (tuto) {
 			state = State.Tuto;
@@ -125,7 +125,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
-			tutoScript.say("Salut, je suis le mécanicien aéronautique, c'est grâce à moi que ton avion fonctionne ! Tu m\'aides à retrouver la bonne pièce ?");
+			tutoScript.say("Salut, je suis le mécanicien\n aéronautique, c'est grâce à moi\n que ton avion fonctionne !\n Tu m\'aides à retrouver la bonne \n pièce ?");
 		};
 		
 		tutoScript.outCallback = delegate() {

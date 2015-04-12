@@ -6,7 +6,7 @@ public class TimeBarscript : MonoBehaviour {
 
 	public RectTransform timeTransform;
 	public Sprite gameHover;
-	private float cachedY;
+	//private float cachedY;
 	private float minXValue;
 	private float maxXValue;
 	public float maxTime;
@@ -31,7 +31,7 @@ public class TimeBarscript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//activated = true;
-		cachedY = timeTransform.position.y;
+		//cachedY = timeTransform.position.y;
 		
 		minXValue = 0;
 		maxXValue = timeTransform.rect.width;
