@@ -56,6 +56,15 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public GenericTutoScript tutoScript;
 	public GameObject menupause;
 	public bool tuto;
+	// TODO put in a commun file
+	private string[] dilogue1 = new string[]
+	{"Bonjour, je suis Yassine, et je suis mécanicien" +
+		"de maintenance aéronautique. Tout les jours, " +
+		"je vérifie que tout les éléments servant à faire",
+		"voler l'avion sont en bon état."
+	};
+	private string[] dilogue2 = new string[] {};
+	private string[] dilogue3 = new string[] {};
 
 	private bool m_isPause;
 
@@ -72,7 +81,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 	void Awake() {
 		state = State.Before;
 		// Default
-		tuto = false; 
+		tuto = true; 
 		isPause = false;
 		Time.timeScale = 1;
 		initCogsLevel ();
@@ -101,7 +110,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 					firstPlayTuto();
 					break;
 				case 2:
-					firstPlayTuto();
+					secondPlayTuto();
 					break;
 				case 3:
 					firstPlayTuto();
@@ -120,6 +129,25 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 	// First tutorial.
 	private void firstPlayTuto() {
+		isPause = true;
+		tutoScript.setBubbleVisibility(false);
+		
+		tutoScript.readyCallback = delegate() {
+			tutoScript.setBubbleVisibility(true);
+			tutoScript.say(dilogue1[0]);
+		};
+		
+		tutoScript.outCallback = delegate() {
+			isPause = false;
+			menupause.SetActive(true);
+			tuto = false;
+		};
+		
+		tutoScript.getIn();
+	}
+
+	// Second tutorial.
+	private void secondPlayTuto() {
 		isPause = true;
 		tutoScript.setBubbleVisibility(false);
 		
