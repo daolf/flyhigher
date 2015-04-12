@@ -12,7 +12,7 @@ public class PipeElementScript : MonoBehaviour {
 	private PipeElement element = null;
 	
 	// for smooth rotation
-	private const float rotationSpeed = 360;
+	private const float rotationSpeed = 720;
 	private bool inSmoothRotation = false;
 	private float targetedAngle;
 	
@@ -23,11 +23,14 @@ public class PipeElementScript : MonoBehaviour {
 	private bool inSmoothFading = false;
 	private Color fadingColorIn = new Color(1, 1, 1, 0);
 	public Color fadingColorOut;
+	
+	private PipesGeneratorScript generator;
 
 	float fadingElapsed = 0;
 	
 	// Use this for initialization
 	void Start () {
+		generator = GameObject.Find ("Pipes Generator").GetComponent<PipesGeneratorScript>();
 	}
 	
 	public void setTouchEnable(bool val) {
@@ -75,8 +78,7 @@ public class PipeElementScript : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		GameObject pg = GameObject.Find ("Pipes Generator");
-		if(element != null && touchEnable && !pg.GetComponent<PipesGeneratorScript>().isPause)
+		if(element != null && touchEnable && !generator.isPause)
 		{
 			rotateClockwiseOnce();
 		}
@@ -85,6 +87,7 @@ public class PipeElementScript : MonoBehaviour {
 	public void rotateClockwiseOnce() {
 		element.orientation = element.orientation.rotateClockwise();
 		smoothRotate(element.orientation.toDegrees());
+		generator.mainAudio.Play();
 	}
 
 	public void setPipeElement(PipeElement element) {

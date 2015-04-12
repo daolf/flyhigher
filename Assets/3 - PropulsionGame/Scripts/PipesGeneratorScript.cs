@@ -18,6 +18,8 @@ public class PipesGeneratorScript : MonoBehaviour {
 	
 	public GenericTutoScript tutoScript;
 	
+	public AudioSource mainAudio;
+	
 	public TextAsset[] levelsDifficulty1;
 	public TextAsset[] levelsDifficulty2;
 	public TextAsset[] levelsDifficulty3;
