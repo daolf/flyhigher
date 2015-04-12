@@ -13,6 +13,7 @@ public class MainGame : MonoBehaviour {
 	public Score guiScore;
 	public Score guiBestScore;
 	public Button bouttonPause;
+	public CriticalPanelScript criticalPanel;
 
 	public enum State {INTRO,ANIM_LIFTOFF,MAIN,END_WIN,END_LOOSE};
 	public State state;
@@ -84,7 +85,6 @@ public class MainGame : MonoBehaviour {
 		
 			case State.ANIM_LIFTOFF:
 			//Plane lift off with informations gotten in Intro sequence
-
 			//TODO do animation
 
 				scriptIntroControl.enabled = false;
@@ -106,6 +106,14 @@ public class MainGame : MonoBehaviour {
 
 				break;
 			case State.MAIN:
+				if (Camera.main.WorldToScreenPoint(plane.transform.position)[1] > Screen.height) {
+					criticalPanel.criticalState = CriticalPanelScript.CriticalState.CRITICAL;
+				}
+				else {
+					criticalPanel.criticalState = CriticalPanelScript.CriticalState.NORMAL;
+				}
+			
+			
 
 			//Wait for the fuel not to be consume with the first on touch
 				scriptFuelControl.enabled = true;
