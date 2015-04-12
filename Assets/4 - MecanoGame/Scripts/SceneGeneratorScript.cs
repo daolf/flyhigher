@@ -7,48 +7,51 @@ public class SceneGeneratorScript : MonoBehaviour {
 	enum State {Before, Tuto, StartRound, EndofRound, RestartRound, EndofGame };
 	State state;
 
+	// Cogs
 	public const int COGS_MAX_NB = 8;
 	private int NbRealcogs;
+	public PrimaryCog[] cogs;
+	public PrimaryCog cogToFind;
+
+	// Players 
 	public int WIN_ROUND;
 	public int LOST_ROUND; 
 	public int WIN_SCORE; 
 	public Score win_score;
 	public Score myscore;
+	public bool won;  // TODO DELETE ?
 
-	public PrimaryCog[] cogs;
-	public PrimaryCog cogToFind;
-
+	// Menus
 	public GameObject winRound;
 	public GameObject lostRound;
 	public GameObject looseMenu;
 	public GameObject endMenu;
-
-	public SpriteRenderer winBg;
-	public SpriteRenderer lostBg;
-	// end position of cog (the good one)
-	public Transform cogFinalPosition;
-
-	//Flag of the animation end
-	public bool isAnimEnd;
-	private float nextRound;
-
 	public TimeBarscript timeBar;
-	public bool won;
-	public bool check;
 	public string scene;
 
+	// End position of cog (the good one)
+	public Transform cogFinalPosition;
+	public SpriteRenderer winBg;
+	public SpriteRenderer lostBg;
+
+	// Flag of the animation end
+	public bool isAnimEnd; // TODO DELETE ?
+
+
+	// Colors
 	public Color normal;
 	public Color win;
 	public Color lost;
 	public Color cogToFindColor;
 	public Color goodCogColor;
 
+	// Levels
 	public GameObject cogsLevel1;
 	public GameObject cogsLevel2;
 	public GameObject cogsLevel3;
 	private GameObject cogsLevel;
 
-	// TODO put in prefab tuto
+	// TODO tuto
 	public GameObject menupause;
 	public GameObject role;
 	public bool tuto;
@@ -67,8 +70,9 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 	void Awake() {
 		state = State.Before;
-		tuto = false; // for DEBUG
-		isPause = false; //TODO verify 
+		// Default
+		tuto = false; 
+		isPause = false;
 		Time.timeScale = 1;
 		initCogsLevel ();
 		generateCogs ();
@@ -78,13 +82,12 @@ public class SceneGeneratorScript : MonoBehaviour {
 		timeBar.endCallback = endGameHandler;
 	}
 
-	// Use this for initialization
+	// Use this for initialization.
 	void Start () {
 		state = State.Before;
 		tuto = MecanoLevelConfiguration.tuto;
-		nextRound = 0.0f;
 
-		//TODO TODELETE
+		//TODO tuto
 		if (role != null && tuto) {
 			role.active = true;
 		} else {
@@ -94,7 +97,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		if (tuto) {
 			state = State.Tuto;
 			menupause.SetActive(false);
-			isPause = true;//TODO semantique
+			isPause = true;
 		} else {
 			state = State.Before;
 			if (role != null) {
@@ -106,7 +109,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		}
 	}
 
-	// only useful at start to initalise the cogs with the right level
+	// Only useful at start to initalise the cogs with the right level.
 	private void initCogsLevel () {
 		state = State.Before;
 		switch (MecanoLevelConfiguration.level) {
@@ -134,16 +137,18 @@ public class SceneGeneratorScript : MonoBehaviour {
 			}
 		}
 	}
-
+	
 	public void generateCogs () {
 		cogToFind.setCogId(Random.Range(0, cogs.Length));
 		cogToFind.GetComponent<SpriteRenderer>().color = cogToFindColor;
-		// initialize all cogs with "random" ids (in fact each one need to be uniq, so its a shuffle)
+		// Initialize all cogs with "random" ids 
+		// (in fact each one need to be uniq, so its a shuffle).
 		int[] cogIds = new int[cogs.Length];
 		for (int i=0; i<cogs.Length; i++) {
 			cogIds[i] = i;
 		}
-		// swap 20 times
+
+		// Swap 20 times.
 		for(int step=0; step<20; step++) {
 			int a = Random.Range(0, cogs.Length);
 			int b = Random.Range(0, cogs.Length);
@@ -152,7 +157,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 			cogIds[b] = swap;
 		}
 		
-		// set cog ids and speed and color
+		// Set cog ids and speed and color.
 		for(int i=0; i<cogs.Length; i++) {
 			cogs[i].GetComponent<SpriteRenderer>().color = normal;
 			cogs[i].setCogId(cogIds[i]);
@@ -161,42 +166,40 @@ public class SceneGeneratorScript : MonoBehaviour {
 		}
 	}
 
-	// Start or ReStart Round
+	// Start or ReStart Round.
 	void startRound () {
 		state = State.StartRound;
-		//nextRound = 0.0f;
-
 		destroySmothTranslation ();
 		winBg.enabled = false;
 		lostBg.enabled = false;
 		isAnimEnd = false;
 		won = false;
-		// replace cog
 		generateCogs ();
 		setAllSelectable ();
 		isPause = false;
 	}
 	
-	// Update is called once per frame
+	// Update is called once per frame.
 	void Update () {
-		// end tuto
+		// End tuto.
 		// State: Tuto -> StartRound
 		if (Input.GetButtonDown ("Fire1") && state == State.Tuto ){
 			getoutOfTuto();
 		}
-		// played click (cogSelected)
+
+		// Played click handeled in the PrimaryCog.cs (cogSelected)
 		// State: StartRound -> EndRound
 
-		// annimation finished 
+		// Annimation finished.
 		// State: EndRound -> StartRound
 		if (state == State.RestartRound ) {
 			startRound ();
 		}
 	}
 
-	// called when a cog is selected by user
+	// Called when a cog is selected by user.
 	public void cogSelected(PrimaryCog cog) {
-		//State: StartRound -> EndRound
+		// State: StartRound -> EndRound
 		state = State.EndofRound;
 		isPause = true;
 		if(cog.getCogId() == cogToFind.getCogId()) {
@@ -205,7 +208,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 			setGoodCogFind(cog);
 			cog.GetComponent<SpriteRenderer>().color = win;
 
-			// user won the round 
+			// User won the round 
 			hasWon(true);
 
 		} else { 
@@ -226,11 +229,10 @@ public class SceneGeneratorScript : MonoBehaviour {
 			// user lost the round 
 			hasWon(false);
 
-			// TODO mettre isSelectable a false pour tout les cogs
-			//hasPlayed = true;
 		}
 	}
-	
+
+	// Actions after the user has finished a round.
 	public void hasWon(bool has) {
 		state = State.EndofRound;
 		isPause = true;
@@ -246,7 +248,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		}
 
 	}
-
+	
 	public void setScore(bool has) {
 		if (has) {
 			myscore.value += WIN_ROUND;
@@ -259,6 +261,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		}
 	}
 
+	// Annimation after the user has selected a cog.
 	IEnumerator fadOut(GameObject menu ) {
 		isPause = true;
 
@@ -286,31 +289,32 @@ public class SceneGeneratorScript : MonoBehaviour {
 		state = State.RestartRound;	
 	}
 
-	// TODO put in prefab tuto
+	// TODO tuto
 	void getoutOfTuto() {
 			tuto = false;
 		if (role != null) {
-			role.active = tuto;
+			role.active = false;
 			menupause.SetActive(true);
 		}
-			isPause = tuto;// TODO refactor
-			//updateSceneRoudFinish ();
+			isPause = false;
 	}
 
+	// Called at the end of the game.
 	private void endGameHandler() {
 		state = State.EndofGame;
 		winRound.SetActive (false);
 		lostRound.SetActive (false);
 		setAllUnselectable();
 		if (myscore.value >= WIN_SCORE) {
-			//Game win 
+			// Game win 
 			endMenu.GetComponent<Canvas> ().enabled = true;
 		} else {
-			//Game lost
+			// Game lost
 			looseMenu.GetComponent<Canvas> ().enabled = true;
 		}
 	}
 
+	// Applise a smooth transition to the goodOne. 
 	private void setGoodCogFind(PrimaryCog goodOne) {
 		goodOne.setSelectable (false);
 		goodOne.gameObject.AddComponent<SmoothTranslation> ();
@@ -325,6 +329,15 @@ public class SceneGeneratorScript : MonoBehaviour {
 		return cogToFind;
 	}
 
+	// Make all cogs clickable for the user.
+	public void setAllSelectable () {
+		cogToFind.setSelectable (false);
+		for(int i=0; i<cogs.Length; i++) {
+			cogs[i].setSelectable(true);
+		}
+	}
+
+	// Make all cogs unclickable for the user.
 	public void setAllUnselectable () {
 		cogToFind.setSelectable (false);
 		for(int i=0; i<cogs.Length; i++) {
@@ -333,6 +346,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 	}
 
+	// Puts the cogs in there original position.
 	public void destroySmothTranslation () {
 		Destroy(cogToFind.gameObject.GetComponent("SmoothTranslation"));
 		cogToFind.setSelectable (false);
@@ -340,13 +354,5 @@ public class SceneGeneratorScript : MonoBehaviour {
 			Destroy(cogs[i].gameObject.GetComponent("SmoothTranslation"));
 		}
 	}
-
-	public void setAllSelectable () {
-		cogToFind.setSelectable (false);
-		for(int i=0; i<cogs.Length; i++) {
-			cogs[i].setSelectable(true);
-		}
 		
-	}
-
 }
