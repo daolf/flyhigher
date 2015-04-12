@@ -66,9 +66,15 @@ public class MainGame : MonoBehaviour {
 		guiBestScore.value = PlayerPrefs.GetInt (Constants.MAIN_GAME_HIGH_SCORE);
 
 		tutoScript = tutoPref.GetComponent<GenericTutoScript>();
-		firstPlayTuto();
-
+		
+		if(hackToHaveTutoOnce) {
+			hackToHaveTutoOnce = false;
+			firstPlayTuto();
+		}
 	}
+	
+	// FIXME clean that!
+	private static bool hackToHaveTutoOnce = true;
 
 	private void firstPlayTuto() {
 		isPause = true;
@@ -92,6 +98,8 @@ public class MainGame : MonoBehaviour {
 		tutoScript.dialogueEndCallback = delegate() {
 			tutoScript.dialogueEndCallback = null;
 			tutoScript.setBubbleVisibility(false);
+			tutoScript.getOut();
+			isPause = false;
 			/*
 			Vector3 worldPos = objectGrid[(int)tutoBadPipePosition.x, (int)tutoBadPipePosition.y].transform.position;
 			tutoScript.hand.moveToWorldPosition(worldPos, 1.8f);
