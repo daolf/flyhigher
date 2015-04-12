@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ChoiceSprite : MonoBehaviour {
+public class Bonus : MonoBehaviour {
 
 	public Sprite lvl0;
 	public Sprite lvl1;

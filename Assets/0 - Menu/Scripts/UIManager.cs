@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour {
 
 
 		//Make button disabled if level not unlocked
-		if (PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL2_UNLOCK) == 0) {
+		if (PlayerPrefs.GetInt(Constants.PAINT_GAME_LVL2_UNLOCK) == 0) {
 			levelPeintreButtons.transform.FindChild ("LevelPeintre2").GetComponent<Button>().interactable = false;
 		}
 		if (PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL3_UNLOCK) == 0) {
