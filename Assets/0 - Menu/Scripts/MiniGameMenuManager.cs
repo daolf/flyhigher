@@ -82,13 +82,13 @@ public class MiniGameMenuManager : MonoBehaviour {
 
 	public void Mecanolevel2 () {
 		MecanoLevelConfiguration.level = 2;
-		MecanoLevelConfiguration.tuto = false;
+		MecanoLevelConfiguration.tuto = true;
 		Application.LoadLevel("Mecano");
 	}
 
 	public void Mecanolevel3 () {
 		MecanoLevelConfiguration.level = 3;
-		MecanoLevelConfiguration.tuto = false;
+		MecanoLevelConfiguration.tuto = true;
 		Application.LoadLevel("Mecano");
 	}
 

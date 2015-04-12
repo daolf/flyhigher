@@ -63,7 +63,14 @@ public class SceneGeneratorScript : MonoBehaviour {
 		"je vérifie que tout les éléments servant à faire",
 		"voler l'avion sont en bon état."
 	};
-	private string[] dilogue2 = new string[] {};
+	private string[] dilogue2 = new string[] 
+	{"Dans mon métier, je mène des essais d'entretien " +
+		"et je recherche les pannes. A la moindre anomalie, " +
+		"je suis chargé du remplacement",
+		" de la pièce defectueuse. " +
+		"La rigueur est indispensable car la sécurité des" +
+		"passagers dépend de moi."
+	};
 	private string[] dilogue3 = new string[] {};
 
 	private bool m_isPause;
@@ -153,7 +160,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
-			tutoScript.say("Salut, je suis le mécanicien\n aéronautique, c'est grâce à moi\n que ton avion fonctionne !\n Tu m\'aides à retrouver la bonne \n pièce ?");
+			tutoScript.say(dilogue2[0]);
 		};
 		
 		tutoScript.outCallback = delegate() {
