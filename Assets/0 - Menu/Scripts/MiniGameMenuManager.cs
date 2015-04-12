@@ -42,15 +42,8 @@ public class MiniGameMenuManager : MonoBehaviour {
 		}
 	}
 	//public SceneGenerator sg; // for Mecano
-
-<<<<<<< HEAD:Assets/0 - Menu/Scripts/MiniGameMenuManager.cs
-=======
-
-
-
-
 	}
->>>>>>> PaintGame:Assets/0 - Menu/Scripts/UIManager.cs
+
 
 	public void Menu() {
 		Application.LoadLevel("MainMenu");
