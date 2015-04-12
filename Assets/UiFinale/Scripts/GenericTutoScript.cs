@@ -10,7 +10,7 @@ public class GenericTutoScript : MonoBehaviour {
 	public StateChangeDelegate readyCallback = null;
 	public StateChangeDelegate outCallback = null;
 	
-	private enum TutoState { Hidden, Talking, Waiting };
+	private enum TutoState { Hidden, Ready, Talking, Waiting };
 	TutoState state = TutoState.Hidden;
 
 	// Use this for initialization
@@ -42,15 +42,16 @@ public class GenericTutoScript : MonoBehaviour {
 		transform.GetChild(0).gameObject.SetActive(visibility);
 	}
 	
-	/*private IEnumerator simpleTest() {
-		yield return null;
+	
+	/**
+	 * Start 'speaking' the given text, removing the old content if any.
+	 */
+	public void say(string text) {
+		textField.setMessage(text);
 		textField.resetText();
-		yield return new WaitForSeconds(2);
-		getIn();
-		yield return new WaitForSeconds(2);
-		state = TutoState.Talking;
 		textField.startTyping();
-	}*/
+		state = TutoState.Talking;
+	}
 	
 	/**
 	 * Get the tutorial on the screen...
@@ -58,11 +59,13 @@ public class GenericTutoScript : MonoBehaviour {
 	public void getIn() {
 		LeanTween.move(gameObject.GetComponent<RectTransform>(), new Vector2(258, 152), 1.5f)
 			.setEase(LeanTweenType.easeOutQuint);
-		StartCoroutine(waitForReady());		
+		StartCoroutine(waitForReady());
 	}
 	
 	private IEnumerator waitForReady() {
 		yield return new WaitForSeconds(1.7f);
+		
+		state = TutoState.Ready;
 		if(readyCallback != null)
 			readyCallback();
 	}
@@ -70,6 +73,8 @@ public class GenericTutoScript : MonoBehaviour {
 	public void getOut() {
 		LeanTween.move(gameObject.GetComponent<RectTransform>(), new Vector2(-197, 152), 1.5f)
 			.setEase(LeanTweenType.easeInQuint);
+		state = TutoState.Hidden;
+		StartCoroutine(waitForOut());
 	}
 	
 	private IEnumerator waitForOut() {

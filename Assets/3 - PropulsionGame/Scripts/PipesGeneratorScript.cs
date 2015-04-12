@@ -15,7 +15,9 @@ public class PipesGeneratorScript : MonoBehaviour {
 	public PipeElementScript pipeL;
 	public PipeElementScript pipeIn;
 	public PipeElementScript pipeOut;
-
+	
+	public GenericTutoScript tutoScript;
+	
 	public TextAsset[] levelsDifficulty1;
 	public TextAsset[] levelsDifficulty2;
 	public TextAsset[] levelsDifficulty3;
@@ -278,7 +280,30 @@ public class PipesGeneratorScript : MonoBehaviour {
 		Time.timeScale = 1;
 		myCamera.zoomFinishedCallback = delegate() {
 			isPause = false;
+			
+			// FIXME temp to test tuto
+			firstPlayTuto();
 		};
+	}
+	
+	
+	/**
+	 * First tutorial
+	 */
+	private void firstPlayTuto() {
+		isPause = true;
+		tutoScript.setBubbleVisibility(false);
+		
+		tutoScript.readyCallback = delegate() {
+			tutoScript.setBubbleVisibility(true);
+			tutoScript.say("Salut, moi c'est Yassine!\nJe travaille comme ingénieur aux systèmes de propulsion, blablabla!");
+		};
+		
+		tutoScript.outCallback = delegate() {
+			isPause = false;
+		};
+		
+		tutoScript.getIn();
 	}
 	
 	/**
