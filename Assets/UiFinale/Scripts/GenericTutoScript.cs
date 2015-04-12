@@ -13,8 +13,14 @@ public class GenericTutoScript : MonoBehaviour {
 	
 	public TutoHandScript hand;
 	
-	private enum TutoState { Hidden, Ready, Talking, Waiting, Finish };
-	TutoState state = TutoState.Hidden;
+	public enum TutoState { Hidden, Ready, Talking, Waiting, Finish };
+	private TutoState m_state = TutoState.Hidden;
+	
+	public TutoState state {
+		get {
+			return m_state;
+		}
+	}
 	
 	private IEnumerable<string> textsToSay = null;
 
@@ -25,21 +31,16 @@ public class GenericTutoScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if( (state == TutoState.Talking || state == TutoState.Waiting)
+		if( (m_state == TutoState.Talking || m_state == TutoState.Waiting)
 		   && Input.GetButtonDown("Fire1"))
 		{
-			if(state == TutoState.Talking) {
+			if(m_state == TutoState.Talking) {
 				// instant display of the rest of the current message (coroutine handle that!)
 				textField.instantDisplay();
 			}
 			else {
-				state = TutoState.Finish;
-				if(dialogueEndCallback != null)
-					dialogueEndCallback();
-				else
-					getOut();
+				m_state = TutoState.Talking;
 			}
-				
 		}
 	}
 	
@@ -63,7 +64,7 @@ public class GenericTutoScript : MonoBehaviour {
 	}
 	
 	public IEnumerator coroutineSayAll() {
-		state = TutoState.Talking;
+		m_state = TutoState.Talking;
 		
 		foreach(string message in textsToSay) {
 			textField.setMessage(message);
@@ -74,12 +75,17 @@ public class GenericTutoScript : MonoBehaviour {
 				yield return null;
 				
 			// wait before displaying next message
-			yield return new WaitForSeconds(0.1f);
-			while(!Input.GetButtonDown("Fire1"))
+			m_state = TutoState.Waiting;
+			//yield return new WaitForSeconds(0.1f);
+			while(m_state == TutoState.Waiting)
 				yield return null;
 		}
 		
-		state = TutoState.Waiting;
+		m_state = TutoState.Finish;
+		if(dialogueEndCallback != null)
+			dialogueEndCallback();
+		else
+			getOut();
 	}
 	
 	/**
@@ -94,7 +100,7 @@ public class GenericTutoScript : MonoBehaviour {
 	private IEnumerator waitForReady() {
 		yield return new WaitForSeconds(1.7f);
 		
-		state = TutoState.Ready;
+		m_state = TutoState.Ready;
 		if(readyCallback != null)
 			readyCallback();
 	}
@@ -102,12 +108,12 @@ public class GenericTutoScript : MonoBehaviour {
 	public void getOut() {
 		LeanTween.move(gameObject.GetComponent<RectTransform>(), new Vector2(-197, 152), 1.5f)
 			.setEase(LeanTweenType.easeInQuint);
-		state = TutoState.Hidden;
 		StartCoroutine(waitForOut());
 	}
 	
 	private IEnumerator waitForOut() {
 		yield return new WaitForSeconds(1.7f);
+		m_state = TutoState.Hidden;
 		if(outCallback != null)
 			outCallback();
 	}
