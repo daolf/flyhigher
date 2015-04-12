@@ -10,6 +10,8 @@ public class GenericTutoScript : MonoBehaviour {
 	public StateChangeDelegate readyCallback = null;
 	public StateChangeDelegate outCallback = null;
 	
+	public TutoHandScript hand;
+	
 	private enum TutoState { Hidden, Ready, Talking, Waiting };
 	TutoState state = TutoState.Hidden;
 
