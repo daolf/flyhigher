@@ -666,6 +666,8 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 768f32877944c944cb0ce04c7f851fb8, type: 3}
   - {fileID: 4900000, guid: 889afb9f81623b44aa45010b72610748, type: 3}
   currentDifficulty: 1
+  levelTuto: {fileID: 4900000, guid: 022bf4eee0bb586458cb6db96943fc14, type: 3}
+  tutoBadPipePosition: {x: 3, y: 1}
   myCamera: {fileID: 1511921859}
   timebar: {fileID: 1742145601}
   score: {fileID: 2135121436}
