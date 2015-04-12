@@ -30,6 +30,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 	//Flag of the animation end
 	public bool isAnimEnd;
+	private float nextRound;
 
 	public TimeBarscript timeBar;
 	public bool won;
@@ -81,6 +82,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 	void Start () {
 		state = State.Before;
 		tuto = MecanoLevelConfiguration.tuto;
+		nextRound = 0.0f;
 
 		//TODO TODELETE
 		if (role != null && tuto) {
@@ -162,6 +164,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 	// Start or ReStart Round
 	void startRound () {
 		state = State.StartRound;
+		//nextRound = 0.0f;
 		destroySmothTranslation ();
 		winBg.enabled = false;
 		lostBg.enabled = false;
@@ -177,7 +180,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 	void Update () {
 		// end tuto
 		// State: Tuto -> StartRound
-		if (Input.GetButtonDown ("Fire1") ){
+		if (Input.GetButtonDown ("Fire1") && state == State.Tuto ){
 			getoutOfTuto();
 		}
 		// played click (cogSelected)
@@ -185,7 +188,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 		// annimation finished 
 		// State: EndRound -> StartRound
-		if (state == State.RestartRound) {
+		if (state == State.RestartRound ) {
 			startRound ();
 		}
 	}
@@ -255,16 +258,15 @@ public class SceneGeneratorScript : MonoBehaviour {
 		}
 	}
 
-	IEnumerator fadOut(GameObject menu ){
+	IEnumerator fadOut(GameObject menu ) {
+		isPause = true;
 		menu.SetActive(true);
 		yield return new WaitForSeconds (0.5f);
-		//winRound.GetComponent<CanvasRenderer>().SetAlpha(0.5f); DELETE
-		LeanTween.moveY(menu, 10000, 1.5f).setEase(LeanTweenType.easeInOutQuint);
-		//LeanTween.alpha(menu,0f,1f).setEase(LeanTweenType.easeInOutQuint);  DELETE
-		//TODO some where else menu.SetActive(false);
-		yield return new WaitForSeconds (0.5f);
-		menu.SetActive(false);
+		Vector3 oldPos = menu.transform.position;
+		LeanTween.moveY(menu, 900, 0.9f).setEase(LeanTweenType.easeInOutQuint);
 		yield return new WaitForSeconds (1f);
+		menu.SetActive(false);
+		menu.transform.position = oldPos;
 		state = State.RestartRound;	
 	}
 
@@ -275,7 +277,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 			role.active = tuto;
 			menupause.SetActive(true);
 		}
-			isPause = tuto;
+			isPause = tuto;// TODO refactor
 			//updateSceneRoudFinish ();
 	}
 
