@@ -24,6 +24,10 @@ public class PipesGeneratorScript : MonoBehaviour {
 	
 	public int currentDifficulty = 3;
 	
+	// for tuto
+	public TextAsset levelTuto;
+	public Vector2 tutoBadPipePosition;
+	
 
 	// constants for pipe grid size, and (x,y) of top-left corner
 	private const int GRID_SIZE = 9;
@@ -74,6 +78,9 @@ public class PipesGeneratorScript : MonoBehaviour {
 	
 	public TimeBarscript timebar;
 	public Score score;
+	
+	// is in tutorial mode?
+	private bool inTuto = true;
 	
 	private bool m_isPause = false;
 
@@ -164,15 +171,29 @@ public class PipesGeneratorScript : MonoBehaviour {
 	
 	// internal : called when "you win" message is ready to be displayed
 	private void onEffectiveWin() {
-		// save the maximum level allowed if needed
-		int currentMaxLevel = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY);
-		if(currentMaxLevel < (currentDifficulty + 1) && currentMaxLevel < 3) {
-			PlayerPrefs.SetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, currentDifficulty + 1);
-			// FIXME not a good place to be called?
-			PlayerPrefs.Save();
+		if(inTuto) {
+			// the goal is to reload the scene without tuto enable!
+			StartCoroutine(prepareEndOfTutorial());
 		}
+		else {
+			// save the maximum level allowed if needed
+			int currentMaxLevel = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY);
+			if(currentMaxLevel < (currentDifficulty + 1) && currentMaxLevel < 3) {
+				PlayerPrefs.SetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, currentDifficulty + 1);
+				// FIXME not a good place to be called?
+				PlayerPrefs.Save();
+			}
+		
+			GameObject.Find("WinMenu").GetComponent<Canvas>().enabled = true;
+		}
+	}
 	
-		GameObject.Find("WinMenu").GetComponent<Canvas>().enabled = true;
+	private IEnumerator prepareEndOfTutorial() {
+		yield return new WaitForSeconds(1);
+		
+		// TODO cleaner way?
+		PropulsionLevelConfiguration.showTutorial = false;
+		Application.LoadLevel("IngameScene");
 	}
 	
 	// internal : used as a callback when the time is elapsed
@@ -243,6 +264,8 @@ public class PipesGeneratorScript : MonoBehaviour {
 		// On zoom
 		myCamera.to = 3.22f;
 		
+		inTuto = PropulsionLevelConfiguration.showTutorial;
+		
 		// TODO will not be needed to check max level later...
 		int maxDifficulty = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, 1);
 		currentDifficulty = PropulsionLevelConfiguration.currentLevel;
@@ -250,7 +273,13 @@ public class PipesGeneratorScript : MonoBehaviour {
 				(currentDifficulty > maxDifficulty ? maxDifficulty : currentDifficulty);
 
 		parentArea = GameObject.Find("/Container").transform;
-		grid = instanciateLevelFromXml (getRandomLevel(currentDifficulty));
+		// load Tutorial level if needed
+		if(inTuto) {
+			grid = instanciateLevelFromXml(levelTuto);
+		}
+		else {
+			grid = instanciateLevelFromXml (getRandomLevel(currentDifficulty));
+		}
 		instanciatePipeGrid (grid);
 
 		// pipe gradient, very ugly
@@ -281,8 +310,9 @@ public class PipesGeneratorScript : MonoBehaviour {
 		myCamera.zoomFinishedCallback = delegate() {
 			isPause = false;
 			
-			// FIXME temp to test tuto
-			firstPlayTuto();
+			if(inTuto) {
+				firstPlayTuto();
+			}
 		};
 	}
 	
@@ -296,14 +326,42 @@ public class PipesGeneratorScript : MonoBehaviour {
 		
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
-			tutoScript.say("Salut, moi c'est Yassine!\nJe travaille comme ingénieur aux systèmes de propulsion, blablabla!");
+			
+			string[] messages = new string[] {
+				"Salut, moi c'est Yassine!\nJe travaille comme ingénieur aux systèmes de propulsion, blablabla!",
+				"Maintenant je te montre comment faire, blablabla."
+			};
+			tutoScript.say(messages);
+		};
+		
+		tutoScript.dialogueEndCallback = delegate() {
+			tutoScript.dialogueEndCallback = null;
+			tutoScript.setBubbleVisibility(false);
+			
+			Vector3 worldPos = objectGrid[(int)tutoBadPipePosition.x, (int)tutoBadPipePosition.y].transform.position;
+			tutoScript.hand.moveToWorldPosition(worldPos, 1.8f);
+			StartCoroutine(testCoroutine());
 		};
 		
 		tutoScript.outCallback = delegate() {
-			isPause = false;
+			//isPause = false;
 		};
 		
 		tutoScript.getIn();
+	}
+	
+	private IEnumerator testCoroutine() {
+		yield return new WaitForSeconds(2);
+		tutoScript.hand.setHandKind(TutoHandScript.HandKind.HandClick);
+		yield return new WaitForSeconds(0.3f);
+		tutoScript.hand.setHandKind(TutoHandScript.HandKind.HandNormal);
+		
+		PipeElementScript badPipe = objectGrid[(int)tutoBadPipePosition.x, (int)tutoBadPipePosition.y];
+		badPipe.rotateClockwiseOnce();
+		
+		yield return new WaitForSeconds(0.5f);
+		tutoScript.hand.setVisibility(false);
+		tutoScript.getOut();
 	}
 	
 	/**
