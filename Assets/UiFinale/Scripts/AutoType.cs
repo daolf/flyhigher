@@ -8,6 +8,7 @@ public class AutoType : MonoBehaviour {
 	public bool autoStart = true;
 	
 	private string message;
+	private IEnumerator currentCoroutine = null;
 	
 
 	// Use this for initialization
@@ -24,13 +25,15 @@ public class AutoType : MonoBehaviour {
 	
 	// reset the content of Text area to be able to type it again
 	public void resetText() {
-		// TODO find a way to stop coroutine???
 		GetComponent<Text>().text = "";
+		// stop typing!
+		StopCoroutine(currentCoroutine);
 	}
 	
 	public void startTyping() {
 		GetComponent<Text>().text = "";
-		StartCoroutine(TypeText ());
+		currentCoroutine = TypeText();
+		StartCoroutine(currentCoroutine);
 	}
 	
 	IEnumerator TypeText () {
@@ -38,6 +41,7 @@ public class AutoType : MonoBehaviour {
 			GetComponent<Text>().text += letter;
 			yield return 0;
 			yield return new WaitForSeconds(letterPause);
-		}      
+		}
+		currentCoroutine = null;
 	}
 }
