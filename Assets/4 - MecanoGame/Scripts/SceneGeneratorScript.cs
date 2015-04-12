@@ -260,12 +260,22 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 	IEnumerator fadOut(GameObject menu ) {
 		isPause = true;
+
+		// Scale
+		Vector3 oldscale = menu.transform.localScale;
 		menu.SetActive(true);
+		Vector3 scale = new Vector3 (oldscale.x*1.2f,oldscale.y*1.2f,oldscale.z*1.2f);
+		LeanTween.scale (menu,scale,0.2f);
 		yield return new WaitForSeconds (0.5f);
+
+		// Position
 		Vector3 oldPos = menu.transform.position;
 		LeanTween.moveY(menu, 900, 0.9f).setEase(LeanTweenType.easeInOutQuint);
 		yield return new WaitForSeconds (1f);
+
+		// Reset
 		menu.SetActive(false);
+		menu.transform.localScale= oldscale;
 		menu.transform.position = oldPos;
 		state = State.RestartRound;	
 	}
