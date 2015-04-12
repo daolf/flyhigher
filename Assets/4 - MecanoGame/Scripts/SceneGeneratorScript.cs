@@ -19,6 +19,8 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public int WIN_SCORE; 
 	public Score win_score;
 	public Score myscore;
+	public Score scoreLostRound;
+	public Score scoreWinRound;
 	public bool won;  // TODO DELETE ?
 
 	// Menus
@@ -76,8 +78,10 @@ public class SceneGeneratorScript : MonoBehaviour {
 		Time.timeScale = 1;
 		initCogsLevel ();
 		generateCogs ();
-		// diplay the score to win
+		// set all score
 		win_score.value = WIN_SCORE;
+		scoreWinRound.value = WIN_ROUND ; 
+		scoreLostRound.value = LOST_ROUND;
 		// set end of game
 		timeBar.endCallback = endGameHandler;
 	}
@@ -89,7 +93,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 		//TODO tuto
 		if (role != null && tuto) {
-			role.active = true;
+			role.SetActive(true);
 		} else {
 			tuto = false;
 		}
@@ -101,7 +105,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		} else {
 			state = State.Before;
 			if (role != null) {
-				role.active = false;
+				role.SetActive(false);
 			} 
 			menupause.SetActive(true);
 			isPause = false;
@@ -241,9 +245,13 @@ public class SceneGeneratorScript : MonoBehaviour {
 		setScore (has);
 		if (has) {
 			winBg.enabled = true;
+			// TODO score en rouge 
+			StartCoroutine (showScore(scoreWinRound.gameObject));
 			StartCoroutine (fadOut (winRound));
+
 		} else {
 			lostBg.enabled = true;
+			StartCoroutine (showScore(scoreLostRound.gameObject));
 			StartCoroutine (fadOut (lostRound));
 		}
 
@@ -289,11 +297,34 @@ public class SceneGeneratorScript : MonoBehaviour {
 		state = State.RestartRound;	
 	}
 
+	// Annimation that showes if the evolution of the score
+	IEnumerator showScore (GameObject score) {
+
+		// Scale
+		Vector3 oldscale = score.transform.localScale;
+		score.SetActive(true);
+		Vector3 scale = new Vector3 (oldscale.x*1.2f,oldscale.y*1.2f,oldscale.z*1.2f);
+		LeanTween.scale (score,scale,0.2f);
+
+		// Position
+		/*
+		Vector3 oldPos = score.transform.position;
+		LeanTween.moveX(score, -5, 0.7f).setEase(LeanTweenType.easeInOutQuint);
+		LeanTween.moveY(score, -5, 0.7f).setEase(LeanTweenType.easeInOutQuint);
+		*/
+		yield return new WaitForSeconds (0.5f);
+
+		// Reset
+		score.SetActive(false);
+		score.transform.localScale= oldscale;
+		//score.transform.position = oldPos;
+	}
+
 	// TODO tuto
 	void getoutOfTuto() {
 			tuto = false;
 		if (role != null) {
-			role.active = false;
+			role.SetActive(false);
 			menupause.SetActive(true);
 		}
 			isPause = false;
