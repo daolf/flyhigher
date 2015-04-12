@@ -3,46 +3,63 @@ using System.Collections;
 
 public class SceneGeneratorScript : MonoBehaviour {
 
-	public const int COGS_NB = 8;
-	public int WIN;
-	public int LOST; 
+	// States of game
+	enum State {Before, Tuto, StartRound, EndofRound, RestartRound, EndofGame };
+	State state;
+
+	// Cogs
+	public const int COGS_MAX_NB = 8;
+	private int NbRealcogs;
+	public PrimaryCog[] cogs;
+	public PrimaryCog cogToFind;
+
+	// Players 
+	public int WIN_ROUND;
+	public int LOST_ROUND; 
 	public int WIN_SCORE; 
 	public Score win_score;
 	public Score myscore;
+	public Score scoreLostRound;
+	public Score scoreWinRound;
+	public bool won;  // TODO DELETE ?
 
-	public PrimaryCog[] cogs;
-	public PrimaryCog cogToFind;
-	public GameObject endMenu;
+	// Menus
+	public GameObject winRound;
+	public GameObject lostRound;
 	public GameObject looseMenu;
-	public SpriteRenderer gagnéBg;
-	public SpriteRenderer perduBg;
-	// position used to display an important cog...
-	public Transform importantCogPosition;
-	//Flag pour l'animation de fin 
-	public bool isAnimEnd;
+	public GameObject endMenu;
 	public TimeBarscript timeBar;
-	public bool gagné;
-	public bool scoreNotUpdated;
-	public bool check;
 	public string scene;
 
+	// End position of cog (the good one)
+	public Transform cogFinalPosition;
+	public SpriteRenderer winBg;
+	public SpriteRenderer lostBg;
+
+	// Flag of the animation end
+	public bool isAnimEnd; // TODO DELETE ?
+
+
+	// Colors
 	public Color normal;
 	public Color win;
 	public Color lost;
 	public Color cogToFindColor;
 	public Color goodCogColor;
-	public bool hasPlayed;
+
+	// Levels
 	public GameObject cogsLevel1;
 	public GameObject cogsLevel2;
 	public GameObject cogsLevel3;
 	private GameObject cogsLevel;
-	// TODO put in prefab tuto
+
+	// TODO tuto
 	public GameObject menupause;
 	public GameObject role;
 	public bool tuto;
-	private int NbRealcogs;
-	
+
 	private bool m_isPause;
+
 	public bool isPause {
 		get {
 			return m_isPause;
@@ -54,34 +71,51 @@ public class SceneGeneratorScript : MonoBehaviour {
 	}
 
 	void Awake() {
+		state = State.Before;
+		// Default
+		tuto = false; 
 		isPause = false;
 		Time.timeScale = 1;
 		initCogsLevel ();
 		generateCogs ();
-		scoreNotUpdated = true;
-
+		// set all score
 		win_score.value = WIN_SCORE;
-		
-		timeBar.endCallback = timerEndHandler;
+		scoreWinRound.value = WIN_ROUND ; 
+		scoreLostRound.value = LOST_ROUND;
+		// set end of game
+		timeBar.endCallback = endGameHandler;
 	}
 
-	// Use this for initialization
+	// Use this for initialization.
 	void Start () {
+		state = State.Before;
 		tuto = MecanoLevelConfiguration.tuto;
-		updateSceneRoudFinish ();
-		hasPlayed = false;
-		if (role != null) {
-			role.active = tuto;
+
+		//TODO tuto
+		if (role != null && tuto) {
+			role.SetActive(true);
 		} else {
 			tuto = false;
 		}
+
 		if (tuto) {
+			state = State.Tuto;
 			menupause.SetActive(false);
+			isPause = true;
+		} else {
+			state = State.Before;
+			if (role != null) {
+				role.SetActive(false);
+			} 
+			menupause.SetActive(true);
+			isPause = false;
+			startRound ();
 		}
-		isPause = tuto;
 	}
 
+	// Only useful at start to initalise the cogs with the right level.
 	private void initCogsLevel () {
+		state = State.Before;
 		switch (MecanoLevelConfiguration.level) {
 		case 1: 
 			cogsLevel = cogsLevel1;
@@ -90,7 +124,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 			cogsLevel = cogsLevel2;
 			break;
 		case 3:
-			cogsLevel = cogsLevel2;
+			cogsLevel = cogsLevel3;
 			break;
 		default:
 			cogsLevel = cogsLevel1;
@@ -107,16 +141,18 @@ public class SceneGeneratorScript : MonoBehaviour {
 			}
 		}
 	}
-
+	
 	public void generateCogs () {
 		cogToFind.setCogId(Random.Range(0, cogs.Length));
 		cogToFind.GetComponent<SpriteRenderer>().color = cogToFindColor;
-		// initialize all cogs with "random" ids (in fact each one need to be uniq, so its a shuffle)
+		// Initialize all cogs with "random" ids 
+		// (in fact each one need to be uniq, so its a shuffle).
 		int[] cogIds = new int[cogs.Length];
 		for (int i=0; i<cogs.Length; i++) {
 			cogIds[i] = i;
 		}
-		// swap 20 times
+
+		// Swap 20 times.
 		for(int step=0; step<20; step++) {
 			int a = Random.Range(0, cogs.Length);
 			int b = Random.Range(0, cogs.Length);
@@ -125,7 +161,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 			cogIds[b] = swap;
 		}
 		
-		// set cog ids and speed and color
+		// Set cog ids and speed and color.
 		for(int i=0; i<cogs.Length; i++) {
 			cogs[i].GetComponent<SpriteRenderer>().color = normal;
 			cogs[i].setCogId(cogIds[i]);
@@ -134,86 +170,205 @@ public class SceneGeneratorScript : MonoBehaviour {
 		}
 	}
 
-	void updateSceneRoudFinish () {
+	// Start or ReStart Round.
+	void startRound () {
+		state = State.StartRound;
 		destroySmothTranslation ();
-		gagnéBg.enabled = false;
-		perduBg.enabled = false;
+		winBg.enabled = false;
+		lostBg.enabled = false;
 		isAnimEnd = false;
-		gagné = false;
-		// replace cog
+		won = false;
 		generateCogs ();
 		setAllSelectable ();
-		// timer 
-		timeBar.activated = true;
-		hasPlayed = false;
+		isPause = false;
+	}
+	
+	// Update is called once per frame.
+	void Update () {
+		// End tuto.
+		// State: Tuto -> StartRound
+		if (Input.GetButtonDown ("Fire1") && state == State.Tuto ){
+			getoutOfTuto();
+		}
+
+		// Played click handeled in the PrimaryCog.cs (cogSelected)
+		// State: StartRound -> EndRound
+
+		// Annimation finished.
+		// State: EndRound -> StartRound
+		if (state == State.RestartRound ) {
+			startRound ();
+		}
 	}
 
-	void roundFinished() {
-		if (isAnimEnd && gagné && !hasPlayed) {
-			scoreNotUpdated = false;
-			myscore.value += WIN;
-			//TODO Menu or anim "great job !"
-			updateSceneRoudFinish();
-			scoreNotUpdated = true;
-		} else if(isAnimEnd && !gagné && !hasPlayed) {
-			scoreNotUpdated = false;
-			if (myscore.value > LOST) {
-				myscore.value -= LOST;
+	// Called when a cog is selected by user.
+	public void cogSelected(PrimaryCog cog) {
+		// State: StartRound -> EndRound
+		state = State.EndofRound;
+		isPause = true;
+		if(cog.getCogId() == cogToFind.getCogId()) {
+
+			// Update cogs 
+			setGoodCogFind(cog);
+			cog.GetComponent<SpriteRenderer>().color = win;
+
+			// User won the round 
+			hasWon(true);
+
+		} else { 
+
+			// Update cogs 
+			PrimaryCog goodOne = null;
+			for (int i=0; i<cogs.Length; i++) {
+				if(cogs[i].getCogId() == cogToFind.getCogId()) {
+					goodOne = cogs[i];
+				}
+			}
+			if(goodOne) {
+				setGoodCogFind(goodOne);
+				goodOne.GetComponent<SpriteRenderer>().color = goodCogColor;
+			}
+			cog.GetComponent<SpriteRenderer>().color = lost;
+
+			// user lost the round 
+			hasWon(false);
+
+		}
+	}
+
+	// Actions after the user has finished a round.
+	public void hasWon(bool has) {
+		state = State.EndofRound;
+		isPause = true;
+		won = has;
+		setAllUnselectable();
+		setScore (has);
+		if (has) {
+			winBg.enabled = true;
+			// TODO score en rouge 
+			StartCoroutine (showScore(scoreWinRound.gameObject));
+			StartCoroutine (fadOut (winRound));
+
+		} else {
+			lostBg.enabled = true;
+			StartCoroutine (showScore(scoreLostRound.gameObject));
+			StartCoroutine (fadOut (lostRound));
+		}
+
+	}
+	
+	public void setScore(bool has) {
+		if (has) {
+			myscore.value += WIN_ROUND;
+		} else {
+			if (myscore.value > LOST_ROUND) {
+				myscore.value -= LOST_ROUND;
 			} else {
 				myscore.value = 0;
 			}
-			//TODO score in red ?
-			updateSceneRoudFinish();
-			scoreNotUpdated = true;
 		}
 	}
 
-	// Update is called once per frame
-	void Update () {
-		if (scoreNotUpdated) {
-			roundFinished();
+	// Annimation after the user has selected a cog.
+	IEnumerator fadOut(GameObject menu ) {
+		isPause = true;
+
+		// Scale
+		Vector3 oldscale = menu.transform.localScale;
+		menu.SetActive(true);
+		Vector3 scale = new Vector3 (oldscale.x*1.2f,oldscale.y*1.2f,oldscale.z*1.2f);
+		LeanTween.scale (menu,scale,0.2f);
+		yield return new WaitForSeconds (0.5f);
+
+		// Position
+		Vector3 oldPos = menu.transform.position;
+		LeanTween.moveY(menu, 900, 0.9f).setEase(LeanTweenType.easeInOutQuint);
+
+		yield return new WaitForSeconds (0.5f);
+		for (int i=0; i<cogs.Length; i++) {
+			cogs [i].GetComponent<SpriteRenderer> ().color = normal;
 		}
-		if (Input.GetButtonDown ("Fire1") ){
-			getoutOfTuto();
-		}
+		yield return new WaitForSeconds (0.5f);
+
+		// Reset
+		menu.SetActive(false);
+		menu.transform.localScale= oldscale;
+		menu.transform.position = oldPos;
+		state = State.RestartRound;	
 	}
 
+	// Annimation that showes if the evolution of the score
+	IEnumerator showScore (GameObject score) {
+
+		// Scale
+		Vector3 oldscale = score.transform.localScale;
+		score.SetActive(true);
+		Vector3 scale = new Vector3 (oldscale.x*1.2f,oldscale.y*1.2f,oldscale.z*1.2f);
+		LeanTween.scale (score,scale,0.2f);
+
+		// Position
+		/*
+		Vector3 oldPos = score.transform.position;
+		LeanTween.moveX(score, -5, 0.7f).setEase(LeanTweenType.easeInOutQuint);
+		LeanTween.moveY(score, -5, 0.7f).setEase(LeanTweenType.easeInOutQuint);
+		*/
+		yield return new WaitForSeconds (0.5f);
+
+		// Reset
+		score.SetActive(false);
+		score.transform.localScale= oldscale;
+		//score.transform.position = oldPos;
+	}
+
+	// TODO tuto
 	void getoutOfTuto() {
 			tuto = false;
 		if (role != null) {
-			role.active = tuto;
+			role.SetActive(false);
 			menupause.SetActive(true);
 		}
-			isPause = tuto;
-			//updateSceneRoudFinish ();
+			isPause = false;
 	}
 
-	private void timerEndHandler() {
+	// Called at the end of the game.
+	private void endGameHandler() {
+		state = State.EndofGame;
+		winRound.SetActive (false);
+		lostRound.SetActive (false);
 		setAllUnselectable();
 		if (myscore.value >= WIN_SCORE) {
-			//Game win 
+			// Game win 
 			endMenu.GetComponent<Canvas> ().enabled = true;
 		} else {
-			//Game lost
+			// Game lost
 			looseMenu.GetComponent<Canvas> ().enabled = true;
 		}
 	}
 
+	// Applise a smooth transition to the goodOne. 
 	private void setGoodCogFind(PrimaryCog goodOne) {
-
 		goodOne.setSelectable (false);
 		goodOne.gameObject.AddComponent<SmoothTranslation> ();
 		SmoothTranslation st = goodOne.GetComponent<SmoothTranslation> ();
 		st.sceneGenerator = this;
 		st.duration = 1;
 		st.from = goodOne.transform.position;
-		st.to = importantCogPosition.position;
+		st.to = cogFinalPosition.position;
 	}
 
 	public PrimaryCog getCogToFind() {
 		return cogToFind;
 	}
 
+	// Make all cogs clickable for the user.
+	public void setAllSelectable () {
+		cogToFind.setSelectable (false);
+		for(int i=0; i<cogs.Length; i++) {
+			cogs[i].setSelectable(true);
+		}
+	}
+
+	// Make all cogs unclickable for the user.
 	public void setAllUnselectable () {
 		cogToFind.setSelectable (false);
 		for(int i=0; i<cogs.Length; i++) {
@@ -222,6 +377,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 
 	}
 
+	// Puts the cogs in there original position.
 	public void destroySmothTranslation () {
 		Destroy(cogToFind.gameObject.GetComponent("SmoothTranslation"));
 		cogToFind.setSelectable (false);
@@ -229,57 +385,5 @@ public class SceneGeneratorScript : MonoBehaviour {
 			Destroy(cogs[i].gameObject.GetComponent("SmoothTranslation"));
 		}
 	}
-
-	public void setAllSelectable () {
-		cogToFind.setSelectable (false);
-		for(int i=0; i<cogs.Length; i++) {
-			cogs[i].setSelectable(true);
-		}
 		
-	}
-
-	// called when a cog other than the cog to find is selected
-	public void cogSelected(PrimaryCog cog) {
-		if(cog.getCogId() == cogToFind.getCogId()) {
-			setGoodCogFind(cog);
-			cog.GetComponent<SpriteRenderer>().color = win;
-			hasWon(true);
-		} else {
-			// may change later : for now, remove all other cogs than the selected
-			// and the good one
-			PrimaryCog goodOne = null;
-
-			for (int i=0; i<cogs.Length; i++) {
-				if(cogs[i].getCogId() == cogToFind.getCogId()) {
-					goodOne = cogs[i];
-				}
-			}
-
-			if(goodOne) {
-				setGoodCogFind(goodOne);
-				goodOne.GetComponent<SpriteRenderer>().color = goodCogColor;
-			}
-			cog.GetComponent<SpriteRenderer>().color = lost;
-			// TODO mettre isSelectable a false pour tout les cogs
-			hasWon(false);
-			//hasPlayed = true;
-		}
-	}
-
-	//1 if victory, else 0
-	public void hasWon(bool has) {
-		gagné = has;
-		if (has) {
-			setAllUnselectable();
-			timeBar.activated = false;
-			gagnéBg.enabled = true;
-		} else {
-			setAllUnselectable();
-			timeBar.activated = false;
-			perduBg.enabled = true;
-
-		}
-	
-	}
-
 }
