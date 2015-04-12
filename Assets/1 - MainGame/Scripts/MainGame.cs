@@ -10,6 +10,8 @@ public class MainGame : MonoBehaviour {
 	public GameObject gui;
 	public GameObject endMenu;
 	public GameObject backgrounds;
+	public GameObject tutoPref;
+
 	public Score guiScore;
 	public Score guiBestScore;
 	public Button bouttonPause;
@@ -25,6 +27,7 @@ public class MainGame : MonoBehaviour {
 	public RandomObject scriptRandomObject;
 	public FuelControl scriptFuelControl;
 
+	public GenericTutoScript tutoScript;
 
 	public float score;
 	public float prevScore;
@@ -62,8 +65,45 @@ public class MainGame : MonoBehaviour {
 		isPause = false;
 		guiBestScore.value = PlayerPrefs.GetInt (Constants.MAIN_GAME_HIGH_SCORE);
 
+		tutoScript = tutoPref.GetComponent<GenericTutoScript>();
+		firstPlayTuto();
+
 	}
 
+	private void firstPlayTuto() {
+		isPause = true;
+		tutoScript.setBubbleVisibility(false);
+		
+		tutoScript.readyCallback = delegate() {
+			tutoScript.setBubbleVisibility(true);
+			
+			string[] messages = new string[] {
+				"Le but du jeu est de faire voler l'avion le plus loin possible.",
+				"Pour cela, tu dois régler la jauge de puissance de propulsion de l'avion en touchant l\'écran au bon moment..",
+				"Tu dois ensuite régler l'orientation au décollage de l'avion en touchant l\'écran au bon moment !",
+				"Attention, des obstacles se glisseront dans ton parcours : Essaies d'éviter les montgolfières !",
+				" Tu pourras aussi te servir des nuages d'air chaud qui relèvent ton avion, ainsi que les nuages d'air froid qui rabaissent ton avion.",
+				"Pendant ton vol, n'oublies pas qu'en appuyant sur ton écran, tu peux propulser ton avion en brulant ton kérosène, désigné par la jauge ci-contre.",
+				"Essaies pour l'instant d'atteindre X mètres."
+			};
+			tutoScript.say(messages);
+		};
+		
+		tutoScript.dialogueEndCallback = delegate() {
+			tutoScript.dialogueEndCallback = null;
+			tutoScript.setBubbleVisibility(false);
+			/*
+			Vector3 worldPos = objectGrid[(int)tutoBadPipePosition.x, (int)tutoBadPipePosition.y].transform.position;
+			tutoScript.hand.moveToWorldPosition(worldPos, 1.8f);
+			StartCoroutine(testCoroutine()); */
+		};
+		
+		tutoScript.outCallback = delegate() {
+			//isPause = false;
+		};
+		
+		tutoScript.getIn();
+	}
 
 
 	// Update is called once per frame

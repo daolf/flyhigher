@@ -21,8 +21,6 @@ public class Bonus : MonoBehaviour {
 		else {
 			GetComponent<SpriteRenderer>().sprite = lvl0;
 		}
-		Destroy(GetComponent<PolygonCollider2D>());
-		gameObject.AddComponent<PolygonCollider2D>();
 	}
 	
 	// Update is called once per frame
