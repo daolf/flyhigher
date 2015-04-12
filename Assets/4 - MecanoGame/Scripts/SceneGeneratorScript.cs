@@ -71,7 +71,12 @@ public class SceneGeneratorScript : MonoBehaviour {
 		"La rigueur est indispensable car la sécurité des" +
 		"passagers dépend de moi."
 	};
-	private string[] dilogue3 = new string[] {};
+	private string[] dilogue3 = new string[] 
+	{"Je travaille directement avec d'autre" +
+		" spécialistes comme Emilie, l'ingenieur aéronautique," +
+		" pour comprendre comment assembler " +
+		"et réparer " ,"les pièces de l'avion."
+	};
 
 	private bool m_isPause;
 
@@ -120,7 +125,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 					secondPlayTuto();
 					break;
 				case 3:
-					firstPlayTuto();
+					thurdPlayTuto();
 					break;
 				default:
 					firstPlayTuto();
@@ -172,6 +177,24 @@ public class SceneGeneratorScript : MonoBehaviour {
 		tutoScript.getIn();
 	}
 
+	// Thurd tutorial.
+	private void thurdPlayTuto() {
+		isPause = true;
+		tutoScript.setBubbleVisibility(false);
+		
+		tutoScript.readyCallback = delegate() {
+			tutoScript.setBubbleVisibility(true);
+			tutoScript.say(dilogue3[0]);
+		};
+		
+		tutoScript.outCallback = delegate() {
+			isPause = false;
+			menupause.SetActive(true);
+			tuto = false;
+		};
+		
+		tutoScript.getIn();
+	}
 
 	// Only useful at start to initalise the cogs with the right level.
 	private void initCogsLevel () {
