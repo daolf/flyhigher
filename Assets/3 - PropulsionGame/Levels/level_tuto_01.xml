@@ -1,0 +1,20 @@
+<!-- Almost-done level (for tutorial purpose!)
+	 Only one bad positionned : (3;1) -->
+
+<level estimatedTime="15" width="9" height="5">
+	<pipe type="in" dir="east" x="0" y="2"></pipe>
+	<pipe type="L" dir="south" x="1" y="2"></pipe>
+	<pipe type="L" dir="north" x="1" y="3"></pipe>
+	<pipe type="I" dir="east" x="2" y="3"></pipe>
+	<pipe type="L" dir="west" x="3" y="3"></pipe>
+	<pipe type="I" dir="north" x="3" y="2"></pipe>
+	<pipe type="L" dir="north" x="3" y="1"></pipe> <!-- bad one -->
+	<pipe type="I" dir="east" x="4" y="1"></pipe>
+	<pipe type="L" dir="south" x="5" y="1"></pipe>
+	<pipe type="I" dir="north" x="5" y="2"></pipe>
+	<pipe type="I" dir="north" x="5" y="3"></pipe>
+	<pipe type="L" dir="north" x="5" y="4"></pipe>
+	<pipe type="I" dir="east" x="6" y="4"></pipe>
+	<pipe type="I" dir="east" x="7" y="4"></pipe>
+	<pipe type="out" dir="west" x="8" y="4"></pipe>
+</level>

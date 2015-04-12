@@ -78,9 +78,13 @@ public class PipeElementScript : MonoBehaviour {
 		GameObject pg = GameObject.Find ("Pipes Generator");
 		if(element != null && touchEnable && !pg.GetComponent<PipesGeneratorScript>().isPause)
 		{
-			element.orientation = element.orientation.rotateClockwise();
-			smoothRotate(element.orientation.toDegrees());
+			rotateClockwiseOnce();
 		}
+	}
+	
+	public void rotateClockwiseOnce() {
+		element.orientation = element.orientation.rotateClockwise();
+		smoothRotate(element.orientation.toDegrees());
 	}
 
 	public void setPipeElement(PipeElement element) {
