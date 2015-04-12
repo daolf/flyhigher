@@ -50,7 +50,7 @@ public class PlanePhysics : MonoBehaviour {
 
 			// Pour rendre possible la remonté meme si on tombe trop vite
 			if (Mathf.Abs(rb.velocity.y) > 0.5) {
-				bufferGravity = (float)-1;
+				bufferGravity = -1;
 			}
 			else {
 				bufferGravity = (float)( 0.3 / -Mathf.Abs(rb.velocity.y));
