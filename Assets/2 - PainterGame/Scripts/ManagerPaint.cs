@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ManagerPaint : MonoBehaviour {
 	
@@ -10,6 +11,7 @@ public class ManagerPaint : MonoBehaviour {
 	public Canvas endLooseMenu;
 	public Canvas endWinMenu;
 	public bool isPause;
+	public PausePaintScript pauseButton;
 	public GenericTutoScript tutoScript;
 	// Use this for initialization
 	void Start () {
@@ -28,9 +30,11 @@ public class ManagerPaint : MonoBehaviour {
 	void FixedUpdate () {
 		switch (state) {
 		case State.BEGIN :
+			pauseButton.GetComponent<Button>().interactable = false;
 			break;
 
 		case State.MAIN :
+			pauseButton.GetComponent<Button>().interactable = true;
 			beginPaintScript.enabled = false;
 			mainPaintScript.enabled = true;
 			endLooseMenu.enabled = false;

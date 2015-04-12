@@ -1757,6 +1757,7 @@ MonoBehaviour:
   endLooseMenu: {fileID: 405318781}
   endWinMenu: {fileID: 216160303}
   isPause: 0
+  pauseButton: {fileID: 1249328003}
   tutoScript: {fileID: 197830235}
 --- !u!1 &1249328001
 GameObject:
