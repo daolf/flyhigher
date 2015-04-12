@@ -21,7 +21,6 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public Score myscore;
 	public Score scoreLostRound;
 	public Score scoreWinRound;
-	public bool won;  // TODO DELETE ?
 
 	// Menus
 	public GameObject winRound;
@@ -53,9 +52,9 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public GameObject cogsLevel3;
 	private GameObject cogsLevel;
 
-	// TODO tuto
+	// Tutorial
+	public GenericTutoScript tutoScript;
 	public GameObject menupause;
-	public GameObject role;
 	public bool tuto;
 
 	private bool m_isPause;
@@ -91,27 +90,51 @@ public class SceneGeneratorScript : MonoBehaviour {
 		state = State.Before;
 		tuto = MecanoLevelConfiguration.tuto;
 
-		//TODO tuto
-		if (role != null && tuto) {
-			role.SetActive(true);
-		} else {
-			tuto = false;
-		}
-
 		if (tuto) {
 			state = State.Tuto;
 			menupause.SetActive(false);
 			isPause = true;
+			switch (MecanoLevelConfiguration.level) {
+				case 1: 
+					firstPlayTuto();
+					break;
+				case 2:
+					firstPlayTuto();
+					break;
+				case 3:
+					firstPlayTuto();
+					break;
+				default:
+					firstPlayTuto();
+					break;
+			}
 		} else {
 			state = State.Before;
-			if (role != null) {
-				role.SetActive(false);
-			} 
 			menupause.SetActive(true);
 			isPause = false;
 			startRound ();
 		}
 	}
+
+	// First tutorial.
+	private void firstPlayTuto() {
+		isPause = true;
+		tutoScript.setBubbleVisibility(false);
+		
+		tutoScript.readyCallback = delegate() {
+			tutoScript.setBubbleVisibility(true);
+			tutoScript.say("Salut, je suis le mécanicien aéronautique, c'est grâce à moi que ton avion fonctionne ! Tu m\'aides à retrouver la bonne pièce ?");
+		};
+		
+		tutoScript.outCallback = delegate() {
+			isPause = false;
+			menupause.SetActive(true);
+			tuto = false;
+		};
+		
+		tutoScript.getIn();
+	}
+
 
 	// Only useful at start to initalise the cogs with the right level.
 	private void initCogsLevel () {
@@ -177,7 +200,6 @@ public class SceneGeneratorScript : MonoBehaviour {
 		winBg.enabled = false;
 		lostBg.enabled = false;
 		isAnimEnd = false;
-		won = false;
 		generateCogs ();
 		setAllSelectable ();
 		isPause = false;
@@ -185,11 +207,6 @@ public class SceneGeneratorScript : MonoBehaviour {
 	
 	// Update is called once per frame.
 	void Update () {
-		// End tuto.
-		// State: Tuto -> StartRound
-		if (Input.GetButtonDown ("Fire1") && state == State.Tuto ){
-			getoutOfTuto();
-		}
 
 		// Played click handeled in the PrimaryCog.cs (cogSelected)
 		// State: StartRound -> EndRound
@@ -240,12 +257,10 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public void hasWon(bool has) {
 		state = State.EndofRound;
 		isPause = true;
-		won = has;
 		setAllUnselectable();
 		setScore (has);
 		if (has) {
 			winBg.enabled = true;
-			// TODO score en rouge 
 			StartCoroutine (showScore(scoreWinRound.gameObject));
 			StartCoroutine (fadOut (winRound));
 
@@ -306,7 +321,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		Vector3 scale = new Vector3 (oldscale.x*1.2f,oldscale.y*1.2f,oldscale.z*1.2f);
 		LeanTween.scale (score,scale,0.2f);
 
-		// Position
+		// Position TODO
 		/*
 		Vector3 oldPos = score.transform.position;
 		LeanTween.moveX(score, -5, 0.7f).setEase(LeanTweenType.easeInOutQuint);
@@ -319,16 +334,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		score.transform.localScale= oldscale;
 		//score.transform.position = oldPos;
 	}
-
-	// TODO tuto
-	void getoutOfTuto() {
-			tuto = false;
-		if (role != null) {
-			role.SetActive(false);
-			menupause.SetActive(true);
-		}
-			isPause = false;
-	}
+	
 
 	// Called at the end of the game.
 	private void endGameHandler() {
