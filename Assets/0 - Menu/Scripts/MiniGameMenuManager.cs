@@ -29,6 +29,8 @@ public class MiniGameMenuManager : MonoBehaviour {
 			PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL1_UNLOCK, 1);
 			PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL2_UNLOCK, 0);
 			PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL3_UNLOCK, 0);
+			PlayerPrefs.GetInt (Constants.PAINT_GAME_ALREADY_PLAYED, 0);
+
 
 
 

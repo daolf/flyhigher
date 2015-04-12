@@ -61,7 +61,22 @@ public class ManagerPaint : MonoBehaviour {
 		
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
+			//si c'est la première fois présentation , 
+			if(PlayerPrefs.GetInt (Constants.PAINT_GAME_ALREADY_PLAYED) == 0 ) {
 			tutoScript.say("Bonjour, je m'appelle Victor et je suis peintre aéronautique.. Mon métier consiste à peindre toutes les parties de l'avion. Attention, ce métier n'est pas aussi simple qu'il n'y parait.");
+			}
+			else {
+				float r = Random.value;
+				print (r);
+				if (r < 0.5) {
+					tutoScript.say("Cas 1");
+				}
+				else {
+					tutoScript.say("Cas 2");
+				}
+			}
+			PlayerPrefs.SetInt(Constants.PAINT_GAME_ALREADY_PLAYED,1);
+
 		};
 		
 		tutoScript.outCallback = delegate() {
