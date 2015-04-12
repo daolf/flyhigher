@@ -18,7 +18,6 @@ public class UIManager : MonoBehaviour {
 
 	void Start(){
 		Time.timeScale = 1;
-
 		//Set the constant for the first time
 		PlayerPrefs.GetInt (Constants.MAIN_GAME_HIGH_SCORE, 0);
 		PlayerPrefs.GetInt (Constants.MAIN_GAME_MAX_LIFE, 0);
