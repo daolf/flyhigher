@@ -71,7 +71,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 	void Awake() {
 		state = State.Before;
 		// Default
-		tuto = true; 
+		tuto = true; // TO DELETE
 		isPause = false;
 		Time.timeScale = 1;
 		initCogsLevel ();
@@ -117,34 +117,93 @@ public class SceneGeneratorScript : MonoBehaviour {
 		}
 	}
 
-	// First tutorial.
+	// First dialogue and tutorial.
 	private void firstPlayTuto() {
 		isPause = true;
 		tutoScript.setBubbleVisibility(false);
 		
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
-			tutoScript.say(Dialogue.dilogue1[0]);
+			tutoScript.say(Dialogue.dialogue1);
 		};
 		
 		tutoScript.outCallback = delegate() {
+			// Unset game
 			isPause = false;
-			//TODO Start Tuoto
-			menupause.SetActive(true);
-			tuto = false;
+
+			// Tuto
+			PrimaryCog goodOne = cogs[0];
+			for (int i=0; i<cogs.Length; i++) {
+				if(cogs[i].getCogId() == cogToFind.getCogId()) {
+					goodOne = cogs[i];
+				}
+			}
+			Vector3 worldPos = goodOne.transform.position;
+			tutoScript.hand.moveToWorldPosition(worldPos, 1.8f);
+			StartCoroutine(tutoCoroutine());
 		};
 		
 		tutoScript.getIn();
 	}
 
-	// Second tutorial.
+	// Coroutine for tuto (hand)
+	private IEnumerator tutoCoroutine() {
+		yield return new WaitForSeconds (2);
+		tutoScript.hand.setHandKind (TutoHandScript.HandKind.HandClick);
+		yield return new WaitForSeconds (0.3f);
+		tutoScript.hand.setHandKind (TutoHandScript.HandKind.HandNormal);
+		PrimaryCog goodOne = cogs[0];
+		for (int i=0; i<cogs.Length; i++) {
+			if(cogs[i].getCogId() == cogToFind.getCogId()) {
+				goodOne = cogs[i];
+			}
+		}
+		goodOne.GetComponent<SpriteRenderer>().color = win;
+		setGoodCogFind(goodOne);
+		hasWon(true);
+		isPause = true;
+		tutoScript.hand.gameObject.SetActive (false);
+		PlayTuto ();
+		myscore.value = 0;
+		winBg.enabled = false;
+	}
+
+	// Tuto dialogue.
+	private void PlayTuto() {
+		isPause = true;
+		tutoScript.setBubbleVisibility(false);
+		
+		tutoScript.readyCallback = delegate() {
+			tutoScript.setBubbleVisibility(true);
+			tutoScript.say(Dialogue.tuto);
+		};
+		
+		tutoScript.outCallback = delegate() {
+			// Reset timer and cogs
+			Time.timeScale = 1;
+			timeBar.CurrentTime = timeBar.maxTime;
+			initCogsLevel ();
+			generateCogs ();
+			setAllSelectable ();
+			// TODO Add ready
+			menupause.SetActive(true);
+			isPause = false;
+			menupause.SetActive(true);
+			tuto = false;
+
+		};
+		
+		tutoScript.getIn();
+	}
+
+	// Second dialogue.
 	private void secondPlayTuto() {
 		isPause = true;
 		tutoScript.setBubbleVisibility(false);
 		
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
-			tutoScript.say(Dialogue.dilogue2[0]);
+			tutoScript.say(Dialogue.dialogue2);
 		};
 		
 		tutoScript.outCallback = delegate() {
@@ -156,20 +215,21 @@ public class SceneGeneratorScript : MonoBehaviour {
 		tutoScript.getIn();
 	}
 
-	// Thurd tutorial.
+	// Thurd dialogue.
 	private void thurdPlayTuto() {
 		isPause = true;
 		tutoScript.setBubbleVisibility(false);
 		
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
-			tutoScript.say(Dialogue.dilogue3[0]);
+			tutoScript.say(Dialogue.dialogue3);
 		};
 		
 		tutoScript.outCallback = delegate() {
 			isPause = false;
 			menupause.SetActive(true);
 			tuto = false;
+
 		};
 		
 		tutoScript.getIn();
@@ -253,7 +313,11 @@ public class SceneGeneratorScript : MonoBehaviour {
 		// Annimation finished.
 		// State: EndRound -> StartRound
 		if (state == State.RestartRound ) {
-			startRound ();
+			if (tuto) {
+				isPause = true;
+			} else {
+				startRound ();
+			}
 		}
 	}
 
