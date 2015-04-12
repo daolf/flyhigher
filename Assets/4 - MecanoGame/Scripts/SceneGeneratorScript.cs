@@ -165,6 +165,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 	void startRound () {
 		state = State.StartRound;
 		//nextRound = 0.0f;
+
 		destroySmothTranslation ();
 		winBg.enabled = false;
 		lostBg.enabled = false;
@@ -271,7 +272,12 @@ public class SceneGeneratorScript : MonoBehaviour {
 		// Position
 		Vector3 oldPos = menu.transform.position;
 		LeanTween.moveY(menu, 900, 0.9f).setEase(LeanTweenType.easeInOutQuint);
-		yield return new WaitForSeconds (1f);
+
+		yield return new WaitForSeconds (0.5f);
+		for (int i=0; i<cogs.Length; i++) {
+			cogs [i].GetComponent<SpriteRenderer> ().color = normal;
+		}
+		yield return new WaitForSeconds (0.5f);
 
 		// Reset
 		menu.SetActive(false);
