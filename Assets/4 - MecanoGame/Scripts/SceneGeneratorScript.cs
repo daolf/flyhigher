@@ -56,28 +56,6 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public GenericTutoScript tutoScript;
 	public GameObject menupause;
 	public bool tuto;
-	// TODO put in a commun file
-	private string[] dilogue1 = new string[]
-	{"Bonjour, je suis Yassine, et je suis mécanicien" +
-		"de maintenance aéronautique. Tout les jours, " +
-		"je vérifie que tout les éléments servant à faire",
-		"voler l'avion sont en bon état."
-	};
-	private string[] dilogue2 = new string[] 
-	{"Dans mon métier, je mène des essais d'entretien " +
-		"et je recherche les pannes. A la moindre anomalie, " +
-		"je suis chargé du remplacement",
-		" de la pièce defectueuse. " +
-		"La rigueur est indispensable car la sécurité des" +
-		"passagers dépend de moi."
-	};
-	private string[] dilogue3 = new string[] 
-	{"Je travaille directement avec d'autre" +
-		" spécialistes comme Emilie, l'ingenieur aéronautique," +
-		" pour comprendre comment assembler " +
-		"et réparer " ,"les pièces de l'avion."
-	};
-
 	private bool m_isPause;
 
 	public bool isPause {
@@ -146,11 +124,12 @@ public class SceneGeneratorScript : MonoBehaviour {
 		
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
-			tutoScript.say(dilogue1[0]);
+			tutoScript.say(Dialogue.dilogue1[0]);
 		};
 		
 		tutoScript.outCallback = delegate() {
 			isPause = false;
+			//TODO Start Tuoto
 			menupause.SetActive(true);
 			tuto = false;
 		};
@@ -165,7 +144,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
-			tutoScript.say(dilogue2[0]);
+			tutoScript.say(Dialogue.dilogue2[0]);
 		};
 		
 		tutoScript.outCallback = delegate() {
@@ -184,7 +163,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
-			tutoScript.say(dilogue3[0]);
+			tutoScript.say(Dialogue.dilogue3[0]);
 		};
 		
 		tutoScript.outCallback = delegate() {
