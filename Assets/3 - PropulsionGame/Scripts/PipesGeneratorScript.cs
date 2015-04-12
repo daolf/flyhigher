@@ -312,11 +312,33 @@ public class PipesGeneratorScript : MonoBehaviour {
 			tutoScript.say("Salut, moi c'est Yassine!\nJe travaille comme ingénieur aux systèmes de propulsion, blablabla!");
 		};
 		
+		tutoScript.dialogueEndCallback = delegate() {
+			tutoScript.dialogueEndCallback = null;
+			tutoScript.setBubbleVisibility(false);
+			
+			Vector3 worldPos = objectGrid[(int)tutoBadPipePosition.x, (int)tutoBadPipePosition.y].transform.position;
+			tutoScript.hand.moveToWorldPosition(worldPos, 1.8f);
+			StartCoroutine(testCoroutine());
+		};
+		
 		tutoScript.outCallback = delegate() {
 			isPause = false;
 		};
 		
 		tutoScript.getIn();
+	}
+	
+	private IEnumerator testCoroutine() {
+		yield return new WaitForSeconds(2);
+		tutoScript.hand.setHandKind(TutoHandScript.HandKind.HandClick);
+		yield return new WaitForSeconds(0.3f);
+		tutoScript.hand.setHandKind(TutoHandScript.HandKind.HandNormal);
+		
+		PipeElementScript badPipe = objectGrid[(int)tutoBadPipePosition.x, (int)tutoBadPipePosition.y];
+		badPipe.rotateClockwiseOnce();
+		
+		yield return new WaitForSeconds(0.5f);
+		tutoScript.hand.setVisibility(false);
 	}
 	
 	/**
