@@ -38,7 +38,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 	private GameObject cogsLevel;
 	// TODO put in prefab tuto
 	public GameObject menupause;
-	public GameObject role;
+	public GenericTutoScript tutoScript;
 	public bool tuto;
 	private int NbRealcogs;
 	
@@ -70,15 +70,28 @@ public class SceneGeneratorScript : MonoBehaviour {
 		tuto = MecanoLevelConfiguration.tuto;
 		updateSceneRoudFinish ();
 		hasPlayed = false;
-		if (role != null) {
-			role.active = tuto;
-		} else {
-			tuto = false;
-		}
 		if (tuto) {
-			menupause.SetActive(false);
+			startFirstTuto();
 		}
 		isPause = tuto;
+	}
+	
+	private void startFirstTuto() {
+		menupause.SetActive(false);
+		isPause = true;
+		tutoScript.setBubbleVisibility(false);
+		
+		tutoScript.readyCallback = delegate() {
+			tutoScript.setBubbleVisibility(true);
+			tutoScript.say("Salut, je suis le mécanicien aéronautique, c'est grâce à moi que ton avion fonctionne ! Tu m'aides à retrouver la bonne pièce ?");
+		};
+		
+		tutoScript.outCallback = delegate() {
+			isPause = false;
+			menupause.SetActive(true);
+		};
+		
+		tutoScript.getIn();
 	}
 
 	private void initCogsLevel () {
@@ -173,12 +186,12 @@ public class SceneGeneratorScript : MonoBehaviour {
 		if (scoreNotUpdated) {
 			roundFinished();
 		}
-		if (Input.GetButtonDown ("Fire1") ){
-			getoutOfTuto();
-		}
+		//if (Input.GetButtonDown ("Fire1") ){
+		//	getoutOfTuto();
+		//}
 	}
 
-	void getoutOfTuto() {
+	/*void getoutOfTuto() {
 			tuto = false;
 		if (role != null) {
 			role.active = tuto;
@@ -186,7 +199,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		}
 			isPause = tuto;
 			//updateSceneRoudFinish ();
-	}
+	}*/
 
 	private void timerEndHandler() {
 		setAllUnselectable();
