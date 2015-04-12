@@ -17,5 +17,6 @@ public static class Constants {
 	public const string PAINT_GAME_LVL1_UNLOCK = "PAINT_GAME_LVL1_UNLOCK";
 	public const string PAINT_GAME_LVL2_UNLOCK = "PAINT_GAME_LVL2_UNLOCK";
 	public const string PAINT_GAME_LVL3_UNLOCK = "PAINT_GAME_LVL3_UNLOCK";
-
+	public const string PAINT_GAME_LVL4_UNLOCK = "PAINT_GAME_LVL4_UNLOCK";
+	public const string PAINT_GAME_ALREADY_PLAYED = "PAINT_GAME_ALREADY_PLAYED";
 }

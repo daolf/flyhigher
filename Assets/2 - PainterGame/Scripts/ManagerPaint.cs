@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ManagerPaint : MonoBehaviour {
 	
@@ -10,6 +11,8 @@ public class ManagerPaint : MonoBehaviour {
 	public Canvas endLooseMenu;
 	public Canvas endWinMenu;
 	public bool isPause;
+	public PausePaintScript pauseButton;
+	public GenericTutoScript tutoScript;
 	// Use this for initialization
 	void Start () {
 
@@ -20,16 +23,18 @@ public class ManagerPaint : MonoBehaviour {
 		endLooseMenu.enabled = false;
 		endWinMenu.enabled = false;
 		Time.timeScale = 1;
+		firstPlayTuto();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		switch (state) {
 		case State.BEGIN :
-			state = State.MAIN;
+			pauseButton.GetComponent<Button>().interactable = false;
 			break;
 
 		case State.MAIN :
+			pauseButton.GetComponent<Button>().interactable = true;
 			beginPaintScript.enabled = false;
 			mainPaintScript.enabled = true;
 			endLooseMenu.enabled = false;
@@ -50,5 +55,38 @@ public class ManagerPaint : MonoBehaviour {
 			endWinMenu.enabled = true;
 			break;
 		}
+	}
+
+	/**
+	 * First tutorial
+	 */
+	private void firstPlayTuto() {
+		tutoScript.setBubbleVisibility(false);
+		
+		tutoScript.readyCallback = delegate() {
+			tutoScript.setBubbleVisibility(true);
+			//si c'est la première fois présentation , 
+			if(PlayerPrefs.GetInt (Constants.PAINT_GAME_ALREADY_PLAYED) == 0 ) {
+			tutoScript.say("Bonjour, je m'appelle Victor et je suis peintre aéronautique.. Mon métier consiste à peindre toutes les parties de l'avion. Attention, ce métier n'est pas aussi simple qu'il n'y parait.");
+			}
+			else {
+				float r = Random.value;
+				print (r);
+				if (r < 0.5) {
+					tutoScript.say("Cas 1");
+				}
+				else {
+					tutoScript.say("Cas 2");
+				}
+			}
+			PlayerPrefs.SetInt(Constants.PAINT_GAME_ALREADY_PLAYED,1);
+
+		};
+		
+		tutoScript.outCallback = delegate() {
+			state = State.MAIN;
+		};
+		
+		tutoScript.getIn();
 	}
 }

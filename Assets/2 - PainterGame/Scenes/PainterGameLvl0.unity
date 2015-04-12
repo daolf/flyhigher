@@ -136,6 +136,107 @@ MonoBehaviour:
   rightForeground: {fileID: 703134916}
   mainCamera: {fileID: 1164293642}
   xFactor: 0
+--- !u!114 &197830235
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11423922, guid: ed87bb1813feed2469eb2fd557a4d25f,
+    type: 2}
+  m_PrefabInternal: {fileID: 205558738}
+  m_Script: {fileID: 11500000, guid: 34b3a18c04de5ef4381c1592ee018364, type: 3}
+--- !u!1001 &205558738
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 22458986, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22458986, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22458986, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22458986, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22458986, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22458986, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22458986, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22458986, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 22458986, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22458986, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22458986, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22458986, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22458986, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22458986, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22458986, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22458986, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22458986, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22458986, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11449264, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+      propertyPath: m_Text
+      value: "Bonjour, je m'appelle Victor et je suis peintre a\xE9ronautique.. Mon
+        m\xE9tier consiste \xE0 peindre toutes les parties de l'avion. Attention,
+        ce m\xE9tier n'est pas aussi simple qu'il n'y parait.    En effet, je dois
+        effectuer les op\xE9rations de pr\xE9paration, de traitement et de finition
+        de la surface de l'avion. J'effectue aussi les finitions de l'a\xE9ronef."
+      objectReference: {fileID: 0}
+    - target: {fileID: 11479978, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f4dd14a32cc974d16b01dabe682e4e19,
+        type: 3}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: ed87bb1813feed2469eb2fd557a4d25f, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &216160298
 GameObject:
   m_PrefabParentObject: {fileID: 177560, guid: 8b06514daeb8a4529aeb2b6e86172fa0, type: 2}
@@ -1661,6 +1762,8 @@ MonoBehaviour:
   endLooseMenu: {fileID: 405318781}
   endWinMenu: {fileID: 216160303}
   isPause: 0
+  pauseButton: {fileID: 1249328003}
+  tutoScript: {fileID: 197830235}
 --- !u!1 &1249328001
 GameObject:
   m_PrefabParentObject: {fileID: 187680, guid: 0bd3443aecf484f97bd3633f712cb6b8, type: 2}
