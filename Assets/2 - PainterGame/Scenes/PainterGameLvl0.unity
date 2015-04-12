@@ -1764,6 +1764,7 @@ MonoBehaviour:
   isPause: 0
   pauseButton: {fileID: 1249328003}
   tutoScript: {fileID: 197830235}
+  hand: {fileID: 1504569836}
 --- !u!1 &1249328001
 GameObject:
   m_PrefabParentObject: {fileID: 187680, guid: 0bd3443aecf484f97bd3633f712cb6b8, type: 2}
@@ -2101,6 +2102,12 @@ RectTransform:
   m_AnchoredPosition: {x: 100, y: 99}
   m_SizeDelta: {x: 449, y: 83}
   m_Pivot: {x: .5, y: .5}
+--- !u!114 &1504569836
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11497976, guid: ed87bb1813feed2469eb2fd557a4d25f,
+    type: 2}
+  m_PrefabInternal: {fileID: 205558738}
+  m_Script: {fileID: 11500000, guid: c97c2800e524dd943a6aa567810f6066, type: 3}
 --- !u!1001 &1574248732
 Prefab:
   m_ObjectHideFlags: 0
