@@ -92,6 +92,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		lostBg.enabled = false;
 
 		if (tuto) {
+			setAllUnselectable();
 			state = State.Tuto;
 			menupause.SetActive(false);
 			isPause = true;
@@ -130,7 +131,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		tutoScript.outCallback = delegate() {
 			// Unset game
 			isPause = false;
-
+			setAllUnselectable();
 			// Tuto
 			PrimaryCog goodOne = cogs[0];
 			for (int i=0; i<cogs.Length; i++) {
