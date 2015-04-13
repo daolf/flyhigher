@@ -12,8 +12,15 @@ public class HeartBar : MonoBehaviour {
 	private Heart[] heartBar;
 	// Use this for initialization
 	void Start () {
-		PlayerPrefs.SetInt (Constants.MAIN_GAME_MAX_LIFE,2);
-		maxLife = PlayerPrefs.GetInt (Constants.MAIN_GAME_MAX_LIFE);
+		if (PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL3_UNLOCK) == 1) {
+			maxLife = 3;
+		} else if (PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL2_UNLOCK) == 1) {
+			maxLife = 2;
+		} else if (PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL2_UNLOCK) == 1) {
+			maxLife = 1;
+		} else {
+			maxLife = 0;
+		}
 		currLife = maxLife;
 		heartBar = new Heart[3];
 		heartBar [0] = h1;
