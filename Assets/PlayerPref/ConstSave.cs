@@ -10,7 +10,12 @@ public static class Constants {
 	public const string	MAIN_GAME_MAX_LIFE = "MAIN_GAME_MAX_LIFE";
 	
 	// Propulsion game
-	public const string PROPULSION_GAME_MAX_DIFFICULTY = "PROPULSION_GAME_MAX_DIFFICULTY";	
+	public const string PROPULSION_GAME_MAX_DIFFICULTY = "PROPULSION_GAME_MAX_DIFFICULTY";
+	// integer used to indicate the more important difficulty already played once
+	// (used for tutorial and message at the beginning of each level)
+	public const string PROPULSION_GAME_MAX_PLAYED = "PROPULSION_GAME_MAX_PLAYED";
+	// integer set to the maximum level succeed once (needed in order to manage last level message...)
+	public const string PROPULSION_GAME_MAX_WON = "PROPULSION_GAME_MAX_WON";
 
 
 	// Paint game

@@ -122,7 +122,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 		},
 		new string[] {
 			"Le métier d'ingénieur aéronautique demande le sens des responsabilités ainsi que"
-			  + " le sang-froids.",
+			  + " d'avoir le sang-froid.",
 			 "Il faut aussi savoir faire preuve de beaucoup de patience car certains projets peuvent mettre"
 			  + " plus de 15 ans avant d'aboutir réellement!",
 			 "Attention, ça se corse un peu maintenant, mais je suis sûre que tu vas très bien t'en sortir."
@@ -205,10 +205,12 @@ public class PipesGeneratorScript : MonoBehaviour {
 	
 	// internal : called when "you win" message is ready to be displayed
 	private void onEffectiveWin() {
+		// FIXME move that in Main Game to unlock a level
 		// save the maximum level allowed if needed
-		int currentMaxLevel = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY);
+		int currentMaxLevel = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, 1);
 		if(currentMaxLevel < (currentDifficulty + 1) && currentMaxLevel < 3) {
 			PlayerPrefs.SetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, currentDifficulty + 1);
+			
 			// FIXME not a good place to be called?
 			PlayerPrefs.Save();
 		}
@@ -217,16 +219,23 @@ public class PipesGeneratorScript : MonoBehaviour {
 	}
 	
 	private void beforeEffectiveWin() {
+		int maxWon = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_WON, 0);
+		
 		if(inTuto) {
 			// the goal is to reload the scene without tuto enable!
 			StartCoroutine(prepareEndOfTutorial());
 		}
-		else if(msgLevelFinished[currentDifficulty-1] != null) {
-			displayFinishedMessages(msgLevelFinished[currentDifficulty-1]);
+		// display succeed message if needed
+		else if(maxWon < currentDifficulty) {
+			PlayerPrefs.SetInt(Constants.PROPULSION_GAME_MAX_WON, currentDifficulty);
+			
+			if(msgLevelFinished[currentDifficulty-1] != null)
+				displayFinishedMessages(msgLevelFinished[currentDifficulty-1]);
+			else
+				onEffectiveWin();
 		}
-		else {
+		else
 			onEffectiveWin();
-		}
 	}
 	
 	private IEnumerator prepareEndOfTutorial() {
@@ -243,7 +252,8 @@ public class PipesGeneratorScript : MonoBehaviour {
 			yield return null;
 		
 		// TODO cleaner way?
-		PropulsionLevelConfiguration.showTutorial = false;
+		PlayerPrefs.SetInt(Constants.PROPULSION_GAME_MAX_PLAYED, 1);
+		//PropulsionLevelConfiguration.showTutorial = false;
 		Application.LoadLevel("IngameScene");
 	}
 	
@@ -315,7 +325,8 @@ public class PipesGeneratorScript : MonoBehaviour {
 		// On zoom
 		myCamera.to = 3.22f;
 		
-		inTuto = PropulsionLevelConfiguration.showTutorial;
+		inTuto = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_PLAYED, 0) < 1;
+		//inTuto = PropulsionLevelConfiguration.showTutorial;
 		
 		// TODO will not be needed to check max level later...
 		int maxDifficulty = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, 1);
@@ -374,8 +385,16 @@ public class PipesGeneratorScript : MonoBehaviour {
 		}
 		else {
 			// maybe something else to say?
-			if(msgLevelBeginning[currentDifficulty-1] != null)
-				displayBeginningMessages(msgLevelBeginning[currentDifficulty-1]);
+			
+			int maxPlayed = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_PLAYED, 0);
+			if(maxPlayed < currentDifficulty) {
+				PlayerPrefs.SetInt(Constants.PROPULSION_GAME_MAX_PLAYED, currentDifficulty);
+				
+				if(msgLevelBeginning[currentDifficulty-1] != null)
+					displayBeginningMessages(msgLevelBeginning[currentDifficulty-1]);
+				else
+					isPause = false;
+			}
 			else
 				isPause = false;
 		}
@@ -463,6 +482,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 		// hide the hand, the rest of the tutorial is handled by onEffectiveWin() ;)
 		yield return new WaitForSeconds(0.5f);
 		tutoScript.hand.setVisibility(false);
+		
 		//tutoScript.getOut();
 	}
 	
