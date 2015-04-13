@@ -12,6 +12,7 @@ public class MainGame : MonoBehaviour {
 	public GameObject backgrounds;
 	public GameObject tutoPref;
 
+
 	public Score guiScore;
 	public Score guiBestScore;
 	public Button bouttonPause;
@@ -41,33 +42,24 @@ public class MainGame : MonoBehaviour {
 	public float prevY;
 	// Use this for initialization
 	void Start () {
-
 		scenario = new Scenario ();
-		objectif = scenario.getObjectif;
-
+		objectif = scenario.getObjectif();
 		bouttonPause.interactable = false;
-
 		Time.timeScale = 1;
 
 		scriptIntroControl = this.GetComponent<IntroControl> ();
 		scriptIntroControl.enabled = true;
-
 		scriptIntroState = plane.GetComponent<IntroState> ();
 		scriptIntroState.enabled = true;
 		//intro script activation
 		state = State.INTRO;
-
 		scriptPlanePhysics = plane.GetComponent<PlanePhysics> ();
 		scriptPlanePhysics.enabled = false;
-
 		scriptSlidingBackground = backgrounds.GetComponent<SlidingBackground>();
-
 		scriptRandomObject = this.GetComponent<RandomObject> ();
 		scriptRandomObject.enabled = false;
-
 		scriptFuelControl = GetComponent<FuelControl>();
 		scriptFuelControl.enabled = false;
-
 
 		prevY = scriptPlanePhysics.transform.position.y;
 		isPause = false;
@@ -75,14 +67,50 @@ public class MainGame : MonoBehaviour {
 
 		tutoScript = tutoPref.GetComponent<GenericTutoScript>();
 		
-		if(hackToHaveTutoOnce) {
-			hackToHaveTutoOnce = false;
-			firstPlayTuto();
+		if (PlayerPrefs.GetInt (Constants.MAIN_GAME_ALREADY_PLAYED) == 0) {
+			firstPlayTuto ();
+			PlayerPrefs.SetInt (Constants.MAIN_GAME_ALREADY_PLAYED, 1);
+		} else {
+			displayObjectif();
 		}
 	}
-	
-	// FIXME clean that!
-	private static bool hackToHaveTutoOnce = true;
+
+	private void displayObjectif() {
+		isPause = true;
+		tutoScript.setBubbleVisibility(false);
+		
+		tutoScript.readyCallback = delegate() {
+			tutoScript.setBubbleVisibility(true);
+			string[] messages = new string[] {
+				"L'objectif et de: "+objectif+" mètres."
+			};
+			tutoScript.say(messages);
+		};
+
+		tutoScript.outCallback = delegate() {
+			isPause = false;
+		};
+		
+		tutoScript.getIn();
+	}
+
+	private void displayWin() {
+		isPause = true;
+		tutoScript.setBubbleVisibility(false);
+		
+		tutoScript.readyCallback = delegate() {
+			tutoScript.setBubbleVisibility(true);
+			string message = "Bravo tu as réussi l'objectif, va voir du côté des jeux "+scenario.getGameUnlocked()+"";
+			tutoScript.say(message);
+		};
+
+		tutoScript.outCallback = delegate() {
+			isPause = false;
+		};
+		
+		tutoScript.getIn();
+	}
+
 
 	private void firstPlayTuto() {
 		isPause = true;
@@ -98,7 +126,7 @@ public class MainGame : MonoBehaviour {
 				"Attention, des obstacles se glisseront dans ton parcours : Essaies d'éviter les montgolfières !",
 				" Tu pourras aussi te servir des nuages d'air chaud qui relèvent ton avion, ainsi que les nuages d'air froid qui rabaissent ton avion.",
 				"Pendant ton vol, n'oublies pas qu'en appuyant sur ton écran, tu peux propulser ton avion en brulant ton kérosène, désigné par la jauge verte en haut",
-				"Essaies pour l'instant d'atteindre X mètres."
+				"Essaies pour l'instant d'atteindre "+objectif+" mètres."
 			};
 			tutoScript.say(messages);
 		};
@@ -179,8 +207,6 @@ public class MainGame : MonoBehaviour {
 					criticalPanel.criticalState = CriticalPanelScript.CriticalState.NORMAL;
 				}
 			
-			
-
 			//Wait for the fuel not to be consume with the first on touch
 				scriptFuelControl.enabled = true;
 			//On active l'intéraction fuel
@@ -190,8 +216,6 @@ public class MainGame : MonoBehaviour {
 					state = State.END_LOOSE;
 				}
 
-
-
 				break;
 			case State.END_WIN:
 				Application.LoadLevel ("EndMain");
@@ -199,11 +223,13 @@ public class MainGame : MonoBehaviour {
 			case State.END_LOOSE:
 				//Fin du jeu
 				Time.timeScale = 0;
-
+				if (score > objectif ) {
+					scenario.unlockNext();
+					displayWin();
+				}
 				bouttonPause.image.enabled = false;
 				bouttonPause.enabled = false;
 				endMenu.GetComponent<Canvas>().enabled = true;
-
 				break;
 			}
 		} 

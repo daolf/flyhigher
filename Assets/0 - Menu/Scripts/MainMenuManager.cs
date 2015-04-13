@@ -10,6 +10,8 @@ public class MainMenuManager : MonoBehaviour {
 		//Set the constant for the first time
 		PlayerPrefs.GetInt (Constants.MAIN_GAME_HIGH_SCORE, 0);
 		PlayerPrefs.GetInt (Constants.MAIN_GAME_MAX_LIFE, 0);
+		PlayerPrefs.GetInt (Constants.MAIN_GAME_ALREADY_PLAYED, 0);
+		PlayerPrefs.GetInt (Constants.MAIN_GAME_LVL, 0);
 		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL1_UNLOCK, 1);
 		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL2_UNLOCK, 0);
 		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL3_UNLOCK, 0);

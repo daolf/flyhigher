@@ -35,4 +35,19 @@ public class Scenario  {
 		return scenario [niveau].getObjectif ();
 	}
 
+	public string getGameUnlocked() {
+		string r;
+		if (scenario [niveau].getString ().Contains ("PAINT")) {
+			r = "Peintre";
+		} else if (scenario [niveau].getString ().Contains ("MECANO")) {
+			r = "Mecano";
+		} else if (scenario [niveau].getString ().Contains ("PROPUL")) {
+			r = "Propulsion";
+		} else {
+			r = "Mystère";
+		}
+
+		return r;
+	}
+
 }

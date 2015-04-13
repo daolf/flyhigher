@@ -14,7 +14,7 @@ public class GenericTutoScript : MonoBehaviour {
 	public TutoHandScript hand;
 	
 	public enum TutoState { Hidden, Ready, Talking, Waiting, Finish };
-	private TutoState m_state = TutoState.Hidden;
+	public TutoState m_state = TutoState.Hidden;
 	
 	public TutoState state {
 		get {

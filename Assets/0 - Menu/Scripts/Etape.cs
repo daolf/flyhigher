@@ -21,4 +21,8 @@ public class Etape {
 	public int getObjectif() {
 		return _objectif;
 	}
+
+	public string getString() {
+		return _unlock;
+	}
 }

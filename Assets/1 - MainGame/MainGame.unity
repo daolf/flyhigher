@@ -3305,6 +3305,7 @@ MonoBehaviour:
   score: 0
   prevScore: 0
   ground: {fileID: 376984386}
+  objectif: 0
   isPause: 0
   prevY: 0
 --- !u!114 &1704847863
