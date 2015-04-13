@@ -90,7 +90,7 @@ public class MainGame : MonoBehaviour {
 				"Tu dois ensuite régler l'orientation au décollage de l'avion en touchant l\'écran au bon moment !",
 				"Attention, des obstacles se glisseront dans ton parcours : Essaies d'éviter les montgolfières !",
 				" Tu pourras aussi te servir des nuages d'air chaud qui relèvent ton avion, ainsi que les nuages d'air froid qui rabaissent ton avion.",
-				"Pendant ton vol, n'oublies pas qu'en appuyant sur ton écran, tu peux propulser ton avion en brulant ton kérosène, désigné par la jauge ci-contre.",
+				"Pendant ton vol, n'oublies pas qu'en appuyant sur ton écran, tu peux propulser ton avion en brulant ton kérosène, désigné par la jauge verte en haut",
 				"Essaies pour l'instant d'atteindre X mètres."
 			};
 			tutoScript.say(messages);
