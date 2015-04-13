@@ -38,6 +38,7 @@ public class MainGame : MonoBehaviour {
 	public float prevY;
 	// Use this for initialization
 	void Start () {
+		bouttonPause.interactable = false;
 
 		Time.timeScale = 1;
 
@@ -100,10 +101,8 @@ public class MainGame : MonoBehaviour {
 			tutoScript.setBubbleVisibility(false);
 			tutoScript.getOut();
 			isPause = false;
-			/*
-			Vector3 worldPos = objectGrid[(int)tutoBadPipePosition.x, (int)tutoBadPipePosition.y].transform.position;
-			tutoScript.hand.moveToWorldPosition(worldPos, 1.8f);
-			StartCoroutine(testCoroutine()); */
+			tutoScript.hand.moveToWorldPosition(new Vector3(0,0,0), 1.8f);
+			StartCoroutine(testCoroutine()); 
 		};
 		
 		tutoScript.outCallback = delegate() {
@@ -113,6 +112,16 @@ public class MainGame : MonoBehaviour {
 		tutoScript.getIn();
 	}
 
+	private IEnumerator testCoroutine() {
+		yield return new WaitForSeconds(2);
+		tutoScript.hand.setHandKind(TutoHandScript.HandKind.HandClick);
+		yield return new WaitForSeconds(0.3f);
+		tutoScript.hand.setHandKind(TutoHandScript.HandKind.HandNormal);
+		yield return new WaitForSeconds(0.5f);
+		tutoScript.hand.setVisibility(false);
+		tutoScript.getOut();
+	}
+
 
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -120,6 +129,8 @@ public class MainGame : MonoBehaviour {
 			switch (state) {
 			case State.INTRO:
 			//If in the final state of introControl, leave the state
+				bouttonPause.interactable = true;
+
 				if (scriptIntroControl.state == IntroControl.State.TWOCLICK) {
 					scriptIntroState.enabled = false;
 					scriptPlanePhysics.enabled = true;
