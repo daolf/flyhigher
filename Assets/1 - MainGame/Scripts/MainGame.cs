@@ -186,10 +186,11 @@ public class MainGame : MonoBehaviour {
 				score = scriptPlanePhysics.getDistanceFromOrigin ();
 				setScore (score);
 
-			//Si on s'arrête sur la piste d'aterrisage
-				if (scriptPlanePhysics.rb.velocity.x <= 0.2) {
+				//Si on s'arrête sur la piste d'aterrisage
+				if (scriptPlanePhysics.rb.velocity.x <= 0.3) {
 					state = State.END_LOOSE;
 				}
+
 			//On passe a l'état main quand on arrete de monter
 
 				if (scriptPlanePhysics.transform.position.y < prevY) {
@@ -207,6 +208,11 @@ public class MainGame : MonoBehaviour {
 					criticalPanel.criticalState = CriticalPanelScript.CriticalState.NORMAL;
 				}
 			
+				//Si on s'arrête sur la piste d'aterrisage
+				if (scriptPlanePhysics.rb.velocity.x <= 0.3) {
+					state = State.END_LOOSE;
+				}
+
 			//Wait for the fuel not to be consume with the first on touch
 				scriptFuelControl.enabled = true;
 			//On active l'intéraction fuel
