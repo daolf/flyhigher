@@ -118,6 +118,18 @@ public class PipesGeneratorScript : MonoBehaviour {
 	private string[] msgTuto2 = new string[] {
 		"Et voilà, ce réacteur devrait fonctionner correctement!\nA toi de jouer maintenant."
 	};
+	
+	private string[][] msgLevelBeginning = new string[][] {
+		null,
+		new string[] { "TODO begin level2" },
+		new string[] { "TODO begin level3" }
+	};
+	
+	private string[][] msgLevelFinished = new string[][] {
+		new string[] { "Bravo, tu viens de débloquer une nouvelle jauge de kérosène pour propulser ton avion encore plus longtemps !" },
+		new string[] { "TODO end level2" },
+		new string[] { "TODO end level3" }
+	};
 
 	void Update() {
 		// really dirty proof of concept, check path every frame
@@ -341,12 +353,48 @@ public class PipesGeneratorScript : MonoBehaviour {
 		isPause = true;
 		Time.timeScale = 1;
 		myCamera.zoomFinishedCallback = delegate() {
-			isPause = false;
-			
-			if(inTuto) {
-				firstPlayTuto();
-			}
+			emilieSpeakTime();
 		};
+	}
+	
+	
+	/**
+	 * Manage messages said by Emilie at the beginning of a level.
+	 */
+	private void emilieSpeakTime() {
+		// tutorial if needed
+		if(inTuto) {
+			firstPlayTuto();
+		}
+		else {
+			// maybe something else to say?
+			if(msgLevelBeginning[currentDifficulty-1] != null)
+				displayBeginningMessages(msgLevelBeginning[currentDifficulty-1]);
+			else
+				isPause = false;
+		}
+	}
+	
+	
+	private void displayBeginningMessages(string[] messages) {
+		tutoScript.setBubbleVisibility(false);
+		
+		tutoScript.readyCallback = delegate() {
+			tutoScript.setBubbleVisibility(true);
+			
+			tutoScript.say(messages);
+		};
+		
+		tutoScript.dialogueEndCallback = delegate() {
+			tutoScript.setBubbleVisibility(false);
+			tutoScript.getOut();
+		};
+		
+		tutoScript.outCallback = delegate() {
+			isPause = false;
+		};
+		
+		tutoScript.getIn();
 	}
 	
 	
@@ -354,7 +402,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 	 * First tutorial
 	 */
 	private void firstPlayTuto() {
-		isPause = true;
+		//isPause = true;
 		tutoScript.setBubbleVisibility(false);
 		
 		tutoScript.readyCallback = delegate() {
