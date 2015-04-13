@@ -150,7 +150,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 		}
 		
 		yield return new WaitForSeconds(ALMOST_FINISHED_TIME);
-		onEffectiveWin();
+		beforeEffectiveWin();
 	}
 	
 	private PipeElement getPipeFromGrid(int x, int y) {
@@ -185,20 +185,27 @@ public class PipesGeneratorScript : MonoBehaviour {
 	
 	// internal : called when "you win" message is ready to be displayed
 	private void onEffectiveWin() {
+		// save the maximum level allowed if needed
+		int currentMaxLevel = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY);
+		if(currentMaxLevel < (currentDifficulty + 1) && currentMaxLevel < 3) {
+			PlayerPrefs.SetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, currentDifficulty + 1);
+			// FIXME not a good place to be called?
+			PlayerPrefs.Save();
+		}
+	
+		GameObject.Find("WinMenu").GetComponent<Canvas>().enabled = true;
+	}
+	
+	private void beforeEffectiveWin() {
 		if(inTuto) {
 			// the goal is to reload the scene without tuto enable!
 			StartCoroutine(prepareEndOfTutorial());
 		}
+		else if(msgLevelFinished[currentDifficulty-1] != null) {
+			displayFinishedMessages(msgLevelFinished[currentDifficulty-1]);
+		}
 		else {
-			// save the maximum level allowed if needed
-			int currentMaxLevel = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY);
-			if(currentMaxLevel < (currentDifficulty + 1) && currentMaxLevel < 3) {
-				PlayerPrefs.SetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, currentDifficulty + 1);
-				// FIXME not a good place to be called?
-				PlayerPrefs.Save();
-			}
-		
-			GameObject.Find("WinMenu").GetComponent<Canvas>().enabled = true;
+			onEffectiveWin();
 		}
 	}
 	
@@ -356,6 +363,17 @@ public class PipesGeneratorScript : MonoBehaviour {
 	
 	
 	private void displayBeginningMessages(string[] messages) {
+		GenericTutoScript.StateChangeDelegate unpause = delegate {
+			isPause = false;
+		};
+		displayMessages(messages, unpause);
+	}
+	
+	private void displayFinishedMessages(string[] messages) {
+		displayMessages(messages, onEffectiveWin);
+	}
+	
+	private void displayMessages(string[] messages, GenericTutoScript.StateChangeDelegate outCallback) {
 		tutoScript.setBubbleVisibility(false);
 		
 		tutoScript.readyCallback = delegate() {
@@ -369,9 +387,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 			tutoScript.getOut();
 		};
 		
-		tutoScript.outCallback = delegate() {
-			isPause = false;
-		};
+		tutoScript.outCallback = outCallback;
 		
 		tutoScript.getIn();
 	}
