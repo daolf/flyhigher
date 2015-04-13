@@ -101,7 +101,7 @@ public class MainGame : MonoBehaviour {
 			tutoScript.setBubbleVisibility(false);
 			tutoScript.getOut();
 			isPause = false;
-			tutoScript.hand.moveToWorldPosition(new Vector3(0,0,0), 1.8f);
+			tutoScript.hand.moveToWorldPosition(criticalPanel.transform.position, 1.8f);
 			StartCoroutine(testCoroutine()); 
 		};
 		
