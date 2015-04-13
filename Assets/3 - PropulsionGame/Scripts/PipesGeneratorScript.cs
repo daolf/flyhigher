@@ -96,15 +96,15 @@ public class PipesGeneratorScript : MonoBehaviour {
 	 * Texts used in tutorial, and other persuasive aspects of the game.
 	 */
 	private string[] msgPresentation1 = new string[] { 
-		"Salut, je m'appelle Emilie et je suis ingénieur en propulsion aéronautique.",
-		"Je suis chargé de concevoir l'ensemble des équipements qui permettent à l'avion de voler,"
-		 + " comme par exemple les réacteurs d'un avion."
+		"Salut, je m'appelle Emilie et je suis ingénieure en propulsion aéronautique.",
+		"Je suis chargée de concevoir une grande partie des équipements qui permettent à l'avion de voler,"
+		 + " comme par exemple ses réacteurs."
 	};
 	
 	private string[] msgTuto1 = new string[] {
 		"Ici, le but du jeu est de résoudre un casse-tête.",
 		"Tu dois tourner les bons tuyaux d'aération pour connecter l'entrée d'air du réacteur"
-		 + " à sa sortie dans le temps imparti.",
+		 + " à sa sortie, dans le temps imparti.",
 		"Pour tourner un tuyau, il te suffit de le toucher.\nBon, là c'est facile, je te montre!"
 	};
 	
@@ -114,14 +114,34 @@ public class PipesGeneratorScript : MonoBehaviour {
 	
 	private string[][] msgLevelBeginning = new string[][] {
 		null,
-		new string[] { "TODO begin level2" },
-		new string[] { "TODO begin level3" }
+		new string[] { 
+			"Il y a plusieurs types de moteur d'avion, celui présenté en fond sur le jeu est"
+			 + " celui d'un moteur à réaction, aussi appellé turbo-réacteur.",
+			"Le but est, grace au carburant, de transformer l'air froid rentrant en air chaud"
+			 + " pour produire de l'energie servant à pousser l'avion."
+		},
+		new string[] {
+			"Le métier d'ingénieur aéronautique demande le sens des responsabilités ainsi que"
+			  + " le sang-froids.",
+			 "Il faut aussi savoir faire preuve de beaucoup de patience car certains projets peuvent mettre"
+			  + " plus de 15 ans avant d'aboutir réellement!",
+			 "Attention, ça se corse un peu maintenant, mais je suis sûre que tu vas très bien t'en sortir."
+		}
 	};
 	
 	private string[][] msgLevelFinished = new string[][] {
-		new string[] { "Bravo, tu viens de débloquer une nouvelle jauge de kérosène pour propulser ton avion encore plus longtemps !" },
-		new string[] { "TODO end level2" },
-		new string[] { "TODO end level3" }
+		new string[] {
+			"Bravo, tu viens de débloquer une nouvelle jauge de kérosène pour propulser ton"
+			 + " avion encore plus longtemps !"
+		},
+		new string[] {
+			"Excellent, une troisième jauge de kérosène va être disponible grâce à toi!"
+		},
+		new string[] {
+			"Je savais bien que tu y arriverais!",
+			"Tu as amélioré le réacteur du mieux que l'on puisse faire avec nos moyens, mais"
+			 + " n'hésite pas à t'entrainer à nouveau."
+		}
 	};
 
 	void Update() {
