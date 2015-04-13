@@ -34,10 +34,17 @@ public class MainGame : MonoBehaviour {
 
 	public GameObject ground;
 
+
+	public Scenario scenario;
+	public int objectif;
 	public bool isPause;
 	public float prevY;
 	// Use this for initialization
 	void Start () {
+
+		scenario = new Scenario ();
+		objectif = scenario.getObjectif;
+
 		bouttonPause.interactable = false;
 
 		Time.timeScale = 1;
