@@ -18,7 +18,7 @@ public class Dialogue {
 		"et je recherche les pannes. A la moindre anomalie, " +
 		"je suis chargé du remplacement",
 		" de la pièce defectueuse. " +
-		"La rigueur est indispensable car la sécurité des" +
+		"La rigueur est indispensable car la sécurité des " +
 		"passagers dépend de moi."
 	};
 	public static string[] dialogue3 = new string[] 
@@ -29,6 +29,7 @@ public class Dialogue {
 	};
 
 	public static string[] tuto = new string[] {
-	"Trouve le maximum d'engrenages ! A toi de jouer !"
+	"Trouve le maximum d'engrenages ! Pour avoir ton bonus il faut que tu " +
+	"fasses un score d'au moins 300. A toi de jouer !"
 	};
 }
