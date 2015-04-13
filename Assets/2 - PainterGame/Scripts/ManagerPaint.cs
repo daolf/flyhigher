@@ -27,7 +27,7 @@ public class ManagerPaint : MonoBehaviour {
 		if (PlayerPrefs.GetInt (Constants.PAINT_GAME_ALREADY_PLAYED) == 0) {
 			tutoFirstPlayed ();
 		} else {
-			tutoFirstPlayed ();
+			tuto();
 		}
 	}
 	
