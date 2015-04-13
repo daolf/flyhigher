@@ -58,17 +58,10 @@ public class PipesGeneratorScript : MonoBehaviour {
 	// set after win, with the 'win path'
 	private LinkedList<PipeElementScript> winPath;
 	
-	// used to track the state of 'win path' displaying
-	private bool inWinPathDisplaying = false;
-	private float winPathDisplayingElapsed = 0;
-	private int winPathDisplayingCurrent = -1;
-	
 	// time between each pipe displaying
 	private const float WIN_PATH_DISPLAYING_TIME = 0.2f;
 
 	// used to wait a bit after win path display...
-	private bool inAlmostFinished = false;
-	private float almostFinishedElapsed = 0;
 	private const float ALMOST_FINISHED_TIME = 0.7f;
 
 	// used to choose the right pipe color
@@ -140,36 +133,24 @@ public class PipesGeneratorScript : MonoBehaviour {
 				onWin();
 			}
 		}
-		
-		if(inWinPathDisplaying) {
-			// consecutively display every pipe of the win path, one by one
-			winPathDisplayingElapsed += Time.deltaTime;
-			
-			int nextVal = (int)(winPathDisplayingElapsed / WIN_PATH_DISPLAYING_TIME);
-			if(nextVal > winPathDisplayingCurrent) {
-				// display the next pipe
-				winPathDisplayingCurrent = nextVal;
-				if(nextVal > winPath.Count - 1) {
-					inWinPathDisplaying = false;
-					// start waiting before "you win" message is displayed
-					inAlmostFinished = true;
-				}
-				else {
-					// not good : accessing random item (but easier)
-					winPath.ElementAt(nextVal).setWinPath(true);
-					winPath.ElementAt(nextVal).fadingColorOut = gradient.Evaluate((float)nextVal/winPath.Count);
-				}
-			}
-			
+	}
+	
+	/**
+	 * Display the win path, wait when needed, play sound, etc...
+	 */
+	private IEnumerator endGameCoroutine() {
+		int curIndex = 0;
+	
+		// consecutively display every pipe of the win path, one by one
+		foreach(PipeElementScript current in winPath) {
+			current.setWinPath(true);
+			current.fadingColorOut = gradient.Evaluate((float)curIndex/winPath.Count);
+			curIndex++;
+			yield return new WaitForSeconds(WIN_PATH_DISPLAYING_TIME);
 		}
 		
-		if(inAlmostFinished) {
-			almostFinishedElapsed += Time.deltaTime;
-			if(almostFinishedElapsed > ALMOST_FINISHED_TIME) {
-				inAlmostFinished = false;
-				onEffectiveWin();
-			}
-		}
+		yield return new WaitForSeconds(ALMOST_FINISHED_TIME);
+		onEffectiveWin();
 	}
 	
 	private PipeElement getPipeFromGrid(int x, int y) {
@@ -188,10 +169,6 @@ public class PipesGeneratorScript : MonoBehaviour {
 			}
 		}
 		
-		inWinPathDisplaying = true;
-		winPathDisplayingElapsed = 0;
-		winPathDisplayingCurrent = -1;
-		
 		// disable the timer and the Pause button
 		isPause = true;
 		
@@ -202,6 +179,8 @@ public class PipesGeneratorScript : MonoBehaviour {
 			winSound.GetComponent<SineVariableAudioSource>().setDuration(soundDuration);
 			winSound.GetComponent<AudioSource>().Play ();
 		}
+		
+		StartCoroutine(endGameCoroutine());
 	}
 	
 	// internal : called when "you win" message is ready to be displayed
