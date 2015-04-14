@@ -1889,6 +1889,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11447406, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 22444584, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1977,6 +1981,27 @@ Prefab:
     - target: {fileID: 105290, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
       propertyPath: m_Name
       value: WinMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 11447406, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11447406, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11447406, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11405458, guid: 8b06514daeb8a4529aeb2b6e86172fa0,
+        type: 2}
+    - target: {fileID: 11447406, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnBonusFromMiniGames
+      objectReference: {fileID: 0}
+    - target: {fileID: 11447406, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
