@@ -69,16 +69,16 @@ public class MainGame : MonoBehaviour {
 		
 		if (PlayerPrefs.GetInt (Constants.MAIN_GAME_ALREADY_PLAYED) == 0) {
 			firstPlayTuto ();
+
 			PlayerPrefs.SetInt (Constants.MAIN_GAME_ALREADY_PLAYED, 1);
 		} else {
 			displayObjectif();
+
 		}
 	}
 
 	private void displayObjectif() {
 		isPause = true;
-		tutoScript.setBubbleVisibility(false);
-		
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
 			string[] messages = new string[] {
@@ -90,14 +90,12 @@ public class MainGame : MonoBehaviour {
 		tutoScript.outCallback = delegate() {
 			isPause = false;
 		};
-		
 		tutoScript.getIn();
 	}
 
 	private void displayWin() {
 		isPause = true;
 		tutoScript.setBubbleVisibility(false);
-		
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
 			string message = "Bravo tu as réussi l'objectif, va voir du côté des jeux "+scenario.getGameUnlocked()+"";
@@ -121,7 +119,6 @@ public class MainGame : MonoBehaviour {
 	private void firstPlayTuto() {
 		isPause = true;
 		tutoScript.setBubbleVisibility(false);
-		
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
 			
@@ -149,7 +146,6 @@ public class MainGame : MonoBehaviour {
 		tutoScript.outCallback = delegate() {
 			//isPause = false;
 		};
-		
 		tutoScript.getIn();
 	}
 
