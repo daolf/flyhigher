@@ -94,55 +94,26 @@ public class SceneGeneratorScript : MonoBehaviour {
 		lostBg.enabled = false;
 
 		//FIXME i m ogly !
-		if (tuto) {
-			setAllUnselectable();
+		if (tuto 
+		    //&& PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED"+(MecanoLevelConfiguration.level).ToString()) == 0 
+		    ) {
 			state = State.Tuto;
+			PlayerPrefs.SetInt("MECANO_GAME_ALREADY_PLAYED"+(MecanoLevelConfiguration.level).ToString(),1);
+			setAllUnselectable();
 			menupause.SetActive(false);
 			isPause = true;
 			switch (MecanoLevelConfiguration.level) {
 				case 1: 
-					if (PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED1") == 0) {
-						PlayerPrefs.SetInt("MECANO_GAME_ALREADY_PLAYED1",1);
-						firstPlayTuto();
-					} else {
-						state = State.Before;
-						menupause.SetActive(true);
-						isPause = false;
-						startRound ();
-					}
+					firstPlayTuto();
 					break;
 				case 2:
-				if (PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED2") == 0) {
-					PlayerPrefs.SetInt("MECANO_GAME_ALREADY_PLAYED2",1);
-						secondPlayTuto();
-					} else {
-						state = State.Before;
-						menupause.SetActive(true);
-						isPause = false;
-						startRound ();
-					}
+					secondPlayTuto();
 					break;
 				case 3:
-				if (PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED3") == 0) {
-					PlayerPrefs.SetInt("MECANO_GAME_ALREADY_PLAYED3",1);
-						thurdPlayTuto();
-					} else {
-						state = State.Before;
-						menupause.SetActive(true);
-						isPause = false;
-						startRound ();
-					}
+					thurdPlayTuto();
 					break;
 				default:
-					if (PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED1") == 0) {
-						PlayerPrefs.SetInt("MECANO_GAME_ALREADY_PLAYED1",1);
-						firstPlayTuto();
-					} else {
-						state = State.Before;
-						menupause.SetActive(true);
-						isPause = false;
-						startRound ();
-					}
+					firstPlayTuto();
 					break;
 			}
 		} else {
@@ -488,7 +459,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 			if (MecanoLevelConfiguration.level < NUMBER_OF_LEVEL 
 			    && PlayerPrefs.GetInt("MECANO_GAME_LVL"+(MecanoLevelConfiguration.level+1).ToString()+"_UNLOCK") == 0 ) {
 				// Game win + bonus 
-				PlayerPrefs.SetInt("MECANO_GAME_LVL"+(MecanoLevelConfiguration.level).ToString()+"_SUCCES",1);
+
 				PlayerPrefs.SetInt("MECANO_GAME_LVL"+(MecanoLevelConfiguration.level+1).ToString()+"_UNLOCK",1);
 				endMenu.GetComponent<Canvas> ().enabled = true;
 			} else {
