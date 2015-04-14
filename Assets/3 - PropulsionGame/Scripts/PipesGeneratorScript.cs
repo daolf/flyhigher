@@ -58,17 +58,10 @@ public class PipesGeneratorScript : MonoBehaviour {
 	// set after win, with the 'win path'
 	private LinkedList<PipeElementScript> winPath;
 	
-	// used to track the state of 'win path' displaying
-	private bool inWinPathDisplaying = false;
-	private float winPathDisplayingElapsed = 0;
-	private int winPathDisplayingCurrent = -1;
-	
 	// time between each pipe displaying
 	private const float WIN_PATH_DISPLAYING_TIME = 0.2f;
 
 	// used to wait a bit after win path display...
-	private bool inAlmostFinished = false;
-	private float almostFinishedElapsed = 0;
 	private const float ALMOST_FINISHED_TIME = 0.7f;
 
 	// used to choose the right pipe color
@@ -103,20 +96,52 @@ public class PipesGeneratorScript : MonoBehaviour {
 	 * Texts used in tutorial, and other persuasive aspects of the game.
 	 */
 	private string[] msgPresentation1 = new string[] { 
-		"Salut, je m'appelle Emilie et je suis ingénieur en propulsion aéronautique.",
-		"Je suis chargé de concevoir l'ensemble des équipements qui permettent à l'avion de voler,"
-		 + " comme par exemple les réacteurs d'un avion."
+		"Salut, je m'appelle Emilie et je suis ingénieure en propulsion aéronautique.",
+		"Je suis chargée de concevoir une grande partie des équipements qui permettent à l'avion de voler,"
+		 + " comme par exemple ses réacteurs."
 	};
 	
 	private string[] msgTuto1 = new string[] {
 		"Ici, le but du jeu est de résoudre un casse-tête.",
 		"Tu dois tourner les bons tuyaux d'aération pour connecter l'entrée d'air du réacteur"
-		 + " à sa sortie dans le temps imparti.",
+		 + " à sa sortie, dans le temps imparti.",
 		"Pour tourner un tuyau, il te suffit de le toucher.\nBon, là c'est facile, je te montre!"
 	};
 	
 	private string[] msgTuto2 = new string[] {
 		"Et voilà, ce réacteur devrait fonctionner correctement!\nA toi de jouer maintenant."
+	};
+	
+	private string[][] msgLevelBeginning = new string[][] {
+		null,
+		new string[] { 
+			"Il y a plusieurs types de moteur d'avion, celui présenté en fond sur le jeu est"
+			 + " celui d'un moteur à réaction, aussi appellé turbo-réacteur.",
+			"Le but est, grace au carburant, de transformer l'air froid rentrant en air chaud"
+			 + " pour produire de l'energie servant à pousser l'avion."
+		},
+		new string[] {
+			"Le métier d'ingénieur aéronautique demande le sens des responsabilités ainsi que"
+			  + " d'avoir le sang-froid.",
+			 "Il faut aussi savoir faire preuve de beaucoup de patience car certains projets peuvent mettre"
+			  + " plus de 15 ans avant d'aboutir réellement!",
+			 "Attention, ça se corse un peu maintenant, mais je suis sûre que tu vas très bien t'en sortir."
+		}
+	};
+	
+	private string[][] msgLevelFinished = new string[][] {
+		new string[] {
+			"Bravo, tu viens de débloquer une nouvelle jauge de kérosène pour propulser ton"
+			 + " avion encore plus longtemps !"
+		},
+		new string[] {
+			"Excellent, une troisième jauge de kérosène va être disponible grâce à toi!"
+		},
+		new string[] {
+			"Je savais bien que tu y arriverais!",
+			"Tu as amélioré le réacteur du mieux que l'on puisse faire avec nos moyens, mais"
+			 + " n'hésite pas à t'entrainer à nouveau."
+		}
 	};
 
 	void Update() {
@@ -128,36 +153,24 @@ public class PipesGeneratorScript : MonoBehaviour {
 				onWin();
 			}
 		}
-		
-		if(inWinPathDisplaying) {
-			// consecutively display every pipe of the win path, one by one
-			winPathDisplayingElapsed += Time.deltaTime;
-			
-			int nextVal = (int)(winPathDisplayingElapsed / WIN_PATH_DISPLAYING_TIME);
-			if(nextVal > winPathDisplayingCurrent) {
-				// display the next pipe
-				winPathDisplayingCurrent = nextVal;
-				if(nextVal > winPath.Count - 1) {
-					inWinPathDisplaying = false;
-					// start waiting before "you win" message is displayed
-					inAlmostFinished = true;
-				}
-				else {
-					// not good : accessing random item (but easier)
-					winPath.ElementAt(nextVal).setWinPath(true);
-					winPath.ElementAt(nextVal).fadingColorOut = gradient.Evaluate((float)nextVal/winPath.Count);
-				}
-			}
-			
+	}
+	
+	/**
+	 * Display the win path, wait when needed, play sound, etc...
+	 */
+	private IEnumerator endGameCoroutine() {
+		int curIndex = 0;
+	
+		// consecutively display every pipe of the win path, one by one
+		foreach(PipeElementScript current in winPath) {
+			current.setWinPath(true);
+			current.fadingColorOut = gradient.Evaluate((float)curIndex/winPath.Count);
+			curIndex++;
+			yield return new WaitForSeconds(WIN_PATH_DISPLAYING_TIME);
 		}
 		
-		if(inAlmostFinished) {
-			almostFinishedElapsed += Time.deltaTime;
-			if(almostFinishedElapsed > ALMOST_FINISHED_TIME) {
-				inAlmostFinished = false;
-				onEffectiveWin();
-			}
-		}
+		yield return new WaitForSeconds(ALMOST_FINISHED_TIME);
+		beforeEffectiveWin();
 	}
 	
 	private PipeElement getPipeFromGrid(int x, int y) {
@@ -176,10 +189,6 @@ public class PipesGeneratorScript : MonoBehaviour {
 			}
 		}
 		
-		inWinPathDisplaying = true;
-		winPathDisplayingElapsed = 0;
-		winPathDisplayingCurrent = -1;
-		
 		// disable the timer and the Pause button
 		isPause = true;
 		
@@ -190,25 +199,43 @@ public class PipesGeneratorScript : MonoBehaviour {
 			winSound.GetComponent<SineVariableAudioSource>().setDuration(soundDuration);
 			winSound.GetComponent<AudioSource>().Play ();
 		}
+		
+		StartCoroutine(endGameCoroutine());
 	}
 	
 	// internal : called when "you win" message is ready to be displayed
 	private void onEffectiveWin() {
+		// FIXME move that in Main Game to unlock a level
+		// save the maximum level allowed if needed
+		int currentMaxLevel = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, 1);
+		if(currentMaxLevel < (currentDifficulty + 1) && currentMaxLevel < 3) {
+			PlayerPrefs.SetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, currentDifficulty + 1);
+			
+			// FIXME not a good place to be called?
+			PlayerPrefs.Save();
+		}
+	
+		GameObject.Find("WinMenu").GetComponent<Canvas>().enabled = true;
+	}
+	
+	private void beforeEffectiveWin() {
+		int maxWon = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_WON, 0);
+		
 		if(inTuto) {
 			// the goal is to reload the scene without tuto enable!
 			StartCoroutine(prepareEndOfTutorial());
 		}
-		else {
-			// save the maximum level allowed if needed
-			int currentMaxLevel = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY);
-			if(currentMaxLevel < (currentDifficulty + 1) && currentMaxLevel < 3) {
-				PlayerPrefs.SetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, currentDifficulty + 1);
-				// FIXME not a good place to be called?
-				PlayerPrefs.Save();
-			}
-		
-			GameObject.Find("WinMenu").GetComponent<Canvas>().enabled = true;
+		// display succeed message if needed
+		else if(maxWon < currentDifficulty) {
+			PlayerPrefs.SetInt(Constants.PROPULSION_GAME_MAX_WON, currentDifficulty);
+			
+			if(msgLevelFinished[currentDifficulty-1] != null)
+				displayFinishedMessages(msgLevelFinished[currentDifficulty-1]);
+			else
+				onEffectiveWin();
 		}
+		else
+			onEffectiveWin();
 	}
 	
 	private IEnumerator prepareEndOfTutorial() {
@@ -225,7 +252,8 @@ public class PipesGeneratorScript : MonoBehaviour {
 			yield return null;
 		
 		// TODO cleaner way?
-		PropulsionLevelConfiguration.showTutorial = false;
+		PlayerPrefs.SetInt(Constants.PROPULSION_GAME_MAX_PLAYED, 1);
+		//PropulsionLevelConfiguration.showTutorial = false;
 		Application.LoadLevel("IngameScene");
 	}
 	
@@ -297,7 +325,8 @@ public class PipesGeneratorScript : MonoBehaviour {
 		// On zoom
 		myCamera.to = 3.22f;
 		
-		inTuto = PropulsionLevelConfiguration.showTutorial;
+		inTuto = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_PLAYED, 0) < 1;
+		//inTuto = PropulsionLevelConfiguration.showTutorial;
 		
 		// TODO will not be needed to check max level later...
 		int maxDifficulty = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_DIFFICULTY, 1);
@@ -341,12 +370,65 @@ public class PipesGeneratorScript : MonoBehaviour {
 		isPause = true;
 		Time.timeScale = 1;
 		myCamera.zoomFinishedCallback = delegate() {
-			isPause = false;
-			
-			if(inTuto) {
-				firstPlayTuto();
-			}
+			emilieSpeakTime();
 		};
+	}
+	
+	
+	/**
+	 * Manage messages said by Emilie at the beginning of a level.
+	 */
+	private void emilieSpeakTime() {
+		// tutorial if needed
+		if(inTuto) {
+			firstPlayTuto();
+		}
+		else {
+			// maybe something else to say?
+			
+			int maxPlayed = PlayerPrefs.GetInt(Constants.PROPULSION_GAME_MAX_PLAYED, 0);
+			if(maxPlayed < currentDifficulty) {
+				PlayerPrefs.SetInt(Constants.PROPULSION_GAME_MAX_PLAYED, currentDifficulty);
+				
+				if(msgLevelBeginning[currentDifficulty-1] != null)
+					displayBeginningMessages(msgLevelBeginning[currentDifficulty-1]);
+				else
+					isPause = false;
+			}
+			else
+				isPause = false;
+		}
+	}
+	
+	
+	private void displayBeginningMessages(string[] messages) {
+		GenericTutoScript.StateChangeDelegate unpause = delegate {
+			isPause = false;
+		};
+		displayMessages(messages, unpause);
+	}
+	
+	private void displayFinishedMessages(string[] messages) {
+		displayMessages(messages, onEffectiveWin);
+	}
+	
+	private void displayMessages(string[] messages, GenericTutoScript.StateChangeDelegate outCallback) {
+		tutoScript.setBubbleVisibility(false);
+		
+		tutoScript.readyCallback = delegate() {
+			tutoScript.setBubbleVisibility(true);
+			
+			tutoScript.say(messages);
+		};
+		
+		tutoScript.dialogueEndCallback = delegate() {
+			tutoScript.setBubbleVisibility(false);
+			tutoScript.getOut();
+		};
+		
+		tutoScript.outCallback = outCallback;
+		
+		tutoScript.getIn();
 	}
 	
 	
@@ -354,7 +436,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 	 * First tutorial
 	 */
 	private void firstPlayTuto() {
-		isPause = true;
+		//isPause = true;
 		tutoScript.setBubbleVisibility(false);
 		
 		tutoScript.readyCallback = delegate() {
@@ -400,6 +482,7 @@ public class PipesGeneratorScript : MonoBehaviour {
 		// hide the hand, the rest of the tutorial is handled by onEffectiveWin() ;)
 		yield return new WaitForSeconds(0.5f);
 		tutoScript.hand.setVisibility(false);
+		
 		//tutoScript.getOut();
 	}
 	

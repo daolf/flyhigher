@@ -16,6 +16,13 @@ public static class Constants {
 	public const string PROPULSION_GAME_LVL2_UNLOCK = "PROPULSION_GAME_LVL2_UNLOCK";
 	public const string PROPULSION_GAME_LVL3_UNLOCK = "PROPULSION_GAME_LVL3_UNLOCK";
 	public const string PROPULSION_GAME_ALREADY_PLAYED = "PROPULSION_GAME_ALREADY_PLAYED";
+	public const string PROPULSION_GAME_MAX_DIFFICULTY = "PROPULSION_GAME_MAX_DIFFICULTY";
+	// integer used to indicate the more important difficulty already played once
+	// (used for tutorial and message at the beginning of each level)
+	public const string PROPULSION_GAME_MAX_PLAYED = "PROPULSION_GAME_MAX_PLAYED";
+	// integer set to the maximum level succeed once (needed in order to manage last level message...)
+	public const string PROPULSION_GAME_MAX_WON = "PROPULSION_GAME_MAX_WON";
+
 
 	// Paint game
 	public const string PAINT_GAME_LVL1_UNLOCK = "PAINT_GAME_LVL1_UNLOCK";

@@ -17,6 +17,8 @@ public class MainMenuManager : MonoBehaviour {
 		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL3_UNLOCK, 0);
 		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL4_UNLOCK, 0);
 		PlayerPrefs.GetInt (Constants.PAINT_GAME_ALREADY_PLAYED, 0);
+		PlayerPrefs.GetInt (Constants.PROPULSION_GAME_MAX_PLAYED, 0);
+		PlayerPrefs.GetInt (Constants.PROPULSION_GAME_MAX_WON, 0);
 		
 		// TO REMOVE later, initialize saved values...
 		if(!isInitialized) {
@@ -36,10 +38,13 @@ public class MainMenuManager : MonoBehaviour {
 	
 	
 	void initializeSave() {
+		print("Saved content resets! Should be removed in release! (MainMenuManager)");
 		
 		//Set the constant for the first time
 		PlayerPrefs.SetInt (Constants.MAIN_GAME_HIGH_SCORE, 0);
 		PlayerPrefs.SetInt (Constants.MAIN_GAME_MAX_LIFE, 0);
 		PlayerPrefs.SetInt (Constants.PROPULSION_GAME_MAX_DIFFICULTY, 1);
+		PlayerPrefs.SetInt (Constants.PROPULSION_GAME_MAX_PLAYED, 0);
+		PlayerPrefs.SetInt (Constants.PROPULSION_GAME_MAX_WON, 0);
 	}
 }
