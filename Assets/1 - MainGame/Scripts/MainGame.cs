@@ -234,6 +234,7 @@ public class MainGame : MonoBehaviour {
 				//Fin du jeu
 				Time.timeScale = 0;
 				if (score > objectif ) {
+					bouttonPause.interactable = false;
 					displayWin();
 				}
 				else {
