@@ -12,11 +12,11 @@ public class HeartBar : MonoBehaviour {
 	private Heart[] heartBar;
 	// Use this for initialization
 	void Start () {
-		if (PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL3_UNLOCK) == 1) {
+		if (PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL3_SUCCES) ==1) {
 			maxLife = 3;
-		} else if (PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL2_UNLOCK) == 1) {
+		} else if (PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL2_SUCCES) == 1) {
 			maxLife = 2;
-		} else if (PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL2_UNLOCK) == 1) {
+		} else if (PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL1_SUCCES) == 1) {
 			maxLife = 1;
 		} else {
 			maxLife = 0;
