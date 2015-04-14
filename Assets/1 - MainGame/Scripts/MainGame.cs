@@ -79,10 +79,7 @@ public class MainGame : MonoBehaviour {
 
 	private void displayObjectif() {
 		isPause = true;
-		tutoScript.setBubbleVisibility(false);
-		
 		tutoScript.readyCallback = delegate() {
-			scriptFuelControl.enabled = false;
 			tutoScript.setBubbleVisibility(true);
 			string[] messages = new string[] {
 				"L'objectif et de: "+objectif+" mètres."
@@ -93,14 +90,12 @@ public class MainGame : MonoBehaviour {
 		tutoScript.outCallback = delegate() {
 			isPause = false;
 		};
-		
 		tutoScript.getIn();
 	}
 
 	private void displayWin() {
 		isPause = true;
 		tutoScript.setBubbleVisibility(false);
-		
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
 			string message = "Bravo tu as réussi l'objectif, va voir du côté des jeux "+scenario.getGameUnlocked()+"";
@@ -124,9 +119,7 @@ public class MainGame : MonoBehaviour {
 	private void firstPlayTuto() {
 		isPause = true;
 		tutoScript.setBubbleVisibility(false);
-		
 		tutoScript.readyCallback = delegate() {
-			scriptFuelControl.enabled = false;
 			tutoScript.setBubbleVisibility(true);
 			
 			string[] messages = new string[] {
@@ -153,7 +146,6 @@ public class MainGame : MonoBehaviour {
 		tutoScript.outCallback = delegate() {
 			//isPause = false;
 		};
-		
 		tutoScript.getIn();
 	}
 

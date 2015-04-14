@@ -3435,6 +3435,7 @@ MonoBehaviour:
   - {fileID: 706072815}
   - {fileID: 1653380086}
   plane: {fileID: 1231583000}
+  main: {fileID: 1704847862}
 --- !u!1 &1794765229
 GameObject:
   m_ObjectHideFlags: 0

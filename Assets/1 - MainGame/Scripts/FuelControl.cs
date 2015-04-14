@@ -7,6 +7,7 @@ public class FuelControl : MonoBehaviour {
 
 	public List<GameObject> fuelBars;
 	public GameObject plane;
+	public MainGame main;
 
 	private PlanePhysics planePhysic;
 	float offsetProgress = 0.01f;
@@ -35,7 +36,7 @@ public class FuelControl : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		if(Input.GetMouseButton(0) && !empty && !EventSystem.current.IsPointerOverGameObject())
+		if(Input.GetMouseButton(0) && !empty && !EventSystem.current.IsPointerOverGameObject() && !main.isPause)
 		{
 			planePhysic.flappyState = PlanePhysics.FlappyState.BOUNCING;
 			useFuel();
