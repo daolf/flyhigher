@@ -112,13 +112,37 @@ public class SceneGeneratorScript : MonoBehaviour {
 					}
 					break;
 				case 2:
-					secondPlayTuto();
+				if (PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED2") == 0) {
+					PlayerPrefs.SetInt("MECANO_GAME_ALREADY_PLAYED2",1);
+						secondPlayTuto();
+					} else {
+						state = State.Before;
+						menupause.SetActive(true);
+						isPause = false;
+						startRound ();
+					}
 					break;
 				case 3:
-					thurdPlayTuto();
+				if (PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED3") == 0) {
+					PlayerPrefs.SetInt("MECANO_GAME_ALREADY_PLAYED3",1);
+						thurdPlayTuto();
+					} else {
+						state = State.Before;
+						menupause.SetActive(true);
+						isPause = false;
+						startRound ();
+					}
 					break;
 				default:
-					firstPlayTuto();
+					if (PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED1") == 0) {
+						PlayerPrefs.SetInt("MECANO_GAME_ALREADY_PLAYED1",1);
+						firstPlayTuto();
+					} else {
+						state = State.Before;
+						menupause.SetActive(true);
+						isPause = false;
+						startRound ();
+					}
 					break;
 			}
 		} else {
