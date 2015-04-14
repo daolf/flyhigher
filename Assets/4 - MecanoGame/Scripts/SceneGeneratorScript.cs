@@ -27,6 +27,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public GameObject lostRound;
 	public GameObject looseMenu;
 	public GameObject endMenu;
+	public GameObject endMenu1;
 	public TimeBarscript timeBar;
 	public string scene;
 
@@ -456,8 +457,8 @@ public class SceneGeneratorScript : MonoBehaviour {
 				endMenu.GetComponent<Canvas> ().enabled = true;
 			} else {
 				// Game win + no bonus 
-				// TODO no bonus
-				endMenu.GetComponent<Canvas> ().enabled = true;
+				// XXX Clean up no endMenu1
+				endMenu1.GetComponent<Canvas> ().enabled = true;
 			}
 		} else {
 			// Game lost
