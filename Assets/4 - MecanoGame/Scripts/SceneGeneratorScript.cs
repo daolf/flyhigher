@@ -73,7 +73,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 	void Awake() {
 		state = State.Before;
 		// Default
-		tuto = true; // TO DELETE
+		tuto = true; 
 		isPause = false;
 		Time.timeScale = 1;
 		initCogsLevel ();
@@ -448,6 +448,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		winRound.SetActive (false);
 		lostRound.SetActive (false);
 		setAllUnselectable();
+		menupause.SetActive(false);
 		if (myscore.value >= WIN_SCORE) {
 			if (MecanoLevelConfiguration.level < NUMBER_OF_LEVEL 
 			    && PlayerPrefs.GetInt("MECANO_GAME_LVL"+(MecanoLevelConfiguration.level+1).ToString()+"_UNLOCK") == 0 ) {
