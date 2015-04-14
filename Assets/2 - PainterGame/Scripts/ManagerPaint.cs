@@ -75,7 +75,7 @@ public class ManagerPaint : MonoBehaviour {
 			string[] messages = new string[] {
 				"Le but du jeu, c'est de peindre la carlingue de l'avion.",
 				"Pour cela, ton doigt doit rester sur le trait à peindre. L'objectif est d'avoir un taux de réussite de 100%.",
-				" Attention, si tu dépassesl'écran, ton taux de réussite diminuera !"
+				" Attention, si tu dépasses l'écran, ton taux de réussite diminuera !"
 			};
 			tutoScript.say(messages);
 		};
