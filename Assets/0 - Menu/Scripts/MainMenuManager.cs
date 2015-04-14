@@ -19,6 +19,12 @@ public class MainMenuManager : MonoBehaviour {
 		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL3_UNLOCK, 0);
 		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL4_UNLOCK, 0);
 		PlayerPrefs.GetInt (Constants.PAINT_GAME_ALREADY_PLAYED, 0);
+
+
+		// Propulsion game
+		PlayerPrefs.GetInt (Constants.PROPULSION_GAME_LVL1_UNLOCK, 0);
+		PlayerPrefs.GetInt (Constants.PROPULSION_GAME_LVL2_UNLOCK, 0);
+		PlayerPrefs.GetInt (Constants.PROPULSION_GAME_LVL3_UNLOCK, 0);
 		PlayerPrefs.GetInt (Constants.PROPULSION_GAME_MAX_PLAYED, 0);
 		PlayerPrefs.GetInt (Constants.PROPULSION_GAME_MAX_WON, 0);
 

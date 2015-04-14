@@ -18,14 +18,18 @@ public class MiniGameMenuManager : MonoBehaviour {
 	void Start(){
 		Time.timeScale = 1;
 
-		// only allow to choose unlocked levels
-		int propulsionMaxLevel = PlayerPrefs.GetInt (Constants.PROPULSION_GAME_MAX_DIFFICULTY, 1);
-		for (int i=propulsionMaxLevel; i<3; i++) {
-			levelPropulsionButtons.transform.GetChild (i).GetComponent<Button>().interactable = false;
-		}
 
 
 		//Make button disabled if level not unlocked
+		if (PlayerPrefs.GetInt (Constants.PROPULSION_GAME_LVL1_UNLOCK) == 0) {
+			levelPropulsionButtons.transform.FindChild ("LevelPropusion1").GetComponent<Button> ().interactable = false;
+		}
+		if (PlayerPrefs.GetInt (Constants.PROPULSION_GAME_LVL2_UNLOCK) == 0) {
+			levelPropulsionButtons.transform.FindChild ("LevelPropusion2").GetComponent<Button> ().interactable = false;
+		}
+		if (PlayerPrefs.GetInt (Constants.PROPULSION_GAME_LVL3_UNLOCK) == 0) {
+			levelPropulsionButtons.transform.FindChild ("LevelPropusion3").GetComponent<Button> ().interactable = false;
+		}
 		if (PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL1_UNLOCK) == 0) {
 			levelPeintreButtons.transform.FindChild ("LevelPeintre1").GetComponent<Button> ().interactable = false;
 		}
