@@ -109,6 +109,7 @@ public class MainGame : MonoBehaviour {
 			isPause = false;
 			bouttonPause.image.enabled = false;
 			bouttonPause.enabled = false;
+			scenario.unlockNext();
 			endMenu.GetComponent<Canvas>().enabled = true;
 		};
 
@@ -235,7 +236,6 @@ public class MainGame : MonoBehaviour {
 				//Fin du jeu
 				Time.timeScale = 0;
 				if (score > objectif ) {
-					scenario.unlockNext();
 					displayWin();
 				}
 				else {

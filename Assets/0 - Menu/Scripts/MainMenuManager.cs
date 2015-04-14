@@ -5,8 +5,8 @@ public class MainMenuManager : MonoBehaviour {
 	
 	// TO REMOVE later, initialize saved values...
 	private static bool isInitialized = false;
-
-	void Start() {		
+	
+	void Start() {
 		//Set the constant for the first time
 		PlayerPrefs.GetInt (Constants.MAIN_GAME_HIGH_SCORE, 0);
 		PlayerPrefs.GetInt (Constants.MAIN_GAME_MAX_LIFE, 0);
