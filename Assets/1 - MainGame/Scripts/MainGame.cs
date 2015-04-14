@@ -59,7 +59,7 @@ public class MainGame : MonoBehaviour {
 		scriptRandomObject = this.GetComponent<RandomObject> ();
 		scriptRandomObject.enabled = false;
 		scriptFuelControl = GetComponent<FuelControl>();
-		scriptFuelControl.enabled = false;
+		scriptFuelControl.enabled = true;
 
 		prevY = scriptPlanePhysics.transform.position.y;
 		isPause = false;
@@ -105,9 +105,15 @@ public class MainGame : MonoBehaviour {
 		};
 
 		tutoScript.outCallback = delegate() {
+			Time.timeScale = 0;
 			isPause = false;
+			bouttonPause.image.enabled = false;
+			bouttonPause.enabled = false;
+			scenario.unlockNext();
+			endMenu.GetComponent<Canvas>().enabled = true;
 		};
-		
+
+		Time.timeScale = 1;
 		tutoScript.getIn();
 	}
 
@@ -163,7 +169,9 @@ public class MainGame : MonoBehaviour {
 		if (!isPause) {
 			switch (state) {
 			case State.INTRO:
-			//If in the final state of introControl, leave the state
+				scriptFuelControl.enabled = false;
+
+				//If in the final state of introControl, leave the state
 				bouttonPause.interactable = true;
 
 				if (scriptIntroControl.state == IntroControl.State.TWOCLICK) {
@@ -213,9 +221,9 @@ public class MainGame : MonoBehaviour {
 					state = State.END_LOOSE;
 				}
 
-			//Wait for the fuel not to be consume with the first on touch
+				//Wait for the fuel not to be consume with the first on touch
 				scriptFuelControl.enabled = true;
-			//On active l'intéraction fuel
+				//On active l'intéraction fuel
 				score = scriptPlanePhysics.getDistanceFromOrigin ();
 				setScore (score);
 				if (scriptPlanePhysics.myHeartBar.currLife == -1) {
@@ -230,12 +238,13 @@ public class MainGame : MonoBehaviour {
 				//Fin du jeu
 				Time.timeScale = 0;
 				if (score > objectif ) {
-					scenario.unlockNext();
 					displayWin();
 				}
+				else {
 				bouttonPause.image.enabled = false;
 				bouttonPause.enabled = false;
 				endMenu.GetComponent<Canvas>().enabled = true;
+				}
 				break;
 			}
 		} 

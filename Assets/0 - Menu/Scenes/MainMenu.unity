@@ -758,13 +758,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb3f977d722335d4f81439b5660b287f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jeuPeintreButton: {fileID: 0}
-  levelPeintreButtons: {fileID: 0}
-  jeuMecanoButton: {fileID: 0}
-  levelMecanoButtons: {fileID: 0}
-  jeuPropulsionButton: {fileID: 0}
-  levelPropulsionButtons: {fileID: 0}
-  panel: {fileID: 0}
 --- !u!4 &1796372848
 Transform:
   m_ObjectHideFlags: 0
