@@ -93,6 +93,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		winBg.enabled = false;
 		lostBg.enabled = false;
 
+		//FIXME i m ogly !
 		if (tuto) {
 			setAllUnselectable();
 			state = State.Tuto;
@@ -100,7 +101,15 @@ public class SceneGeneratorScript : MonoBehaviour {
 			isPause = true;
 			switch (MecanoLevelConfiguration.level) {
 				case 1: 
-					firstPlayTuto();
+					if (PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED1") == 0) {
+						PlayerPrefs.SetInt("MECANO_GAME_ALREADY_PLAYED1",1);
+						firstPlayTuto();
+					} else {
+						state = State.Before;
+						menupause.SetActive(true);
+						isPause = false;
+						startRound ();
+					}
 					break;
 				case 2:
 					secondPlayTuto();
