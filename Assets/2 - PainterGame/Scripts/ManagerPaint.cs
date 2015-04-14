@@ -27,7 +27,7 @@ public class ManagerPaint : MonoBehaviour {
 		if (PlayerPrefs.GetInt (Constants.PAINT_GAME_ALREADY_PLAYED) == 0) {
 			tutoFirstPlayed ();
 		} else {
-			tuto ();
+			tuto();
 		}
 	}
 	
@@ -100,6 +100,7 @@ public class ManagerPaint : MonoBehaviour {
 		yield return new WaitForSeconds(0.3f);
 		tutoScript.hand.setHandKind(TutoHandScript.HandKind.HandNormal);
 		yield return new WaitForSeconds(0.5f);
+		mainPaintScript.drawPaint(new Vector3(0,0,0));
 		tutoScript.hand.setVisibility(false);
 		tutoScript.getOut();
 	}
