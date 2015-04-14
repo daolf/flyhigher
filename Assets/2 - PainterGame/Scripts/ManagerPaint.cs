@@ -90,7 +90,7 @@ public class ManagerPaint : MonoBehaviour {
 		tutoScript.outCallback = delegate() {
 			state = State.MAIN;
 		};
-		
+		PlayerPrefs.SetInt (Constants.PAINT_GAME_ALREADY_PLAYED,1);
 		tutoScript.getIn();
 	}
 
