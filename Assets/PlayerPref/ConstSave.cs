@@ -36,4 +36,7 @@ public static class Constants {
 	public const string MECANO_GAME_LVL3_UNLOCK = "MECANO_GAME_LVL3_UNLOCK";
 	public const string MECANO_GAME_LVL4_UNLOCK = "MECANO_GAME_LVL4_UNLOCK";
 	public const string MECANO_GAME_ALREADY_PLAYED = "MECANO_GAME_ALREADY_PLAYED";
+	public const string MECANO_GAME_LVL1_SUCCES = "MECANO_GAME_LVL1_SUCCES";
+	public const string MECANO_GAME_LVL2_SUCCES = "MECANO_GAME_LVL2_SUCCES";
+	public const string MECANO_GAME_LVL3_SUCCES = "MECANO_GAME_LVL3_SUCCES";
 }

@@ -51,6 +51,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 	public GameObject cogsLevel2;
 	public GameObject cogsLevel3;
 	private GameObject cogsLevel;
+	private int NUMBER_OF_LEVEL = 3;
 
 	// Tutorial
 	public GenericTutoScript tutoScript;
@@ -249,7 +250,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		case 3:
 			cogsLevel = cogsLevel3;
 			break;
-		default:
+		default: // 0 
 			cogsLevel = cogsLevel1;
 			break;
 		}
@@ -447,8 +448,17 @@ public class SceneGeneratorScript : MonoBehaviour {
 		lostRound.SetActive (false);
 		setAllUnselectable();
 		if (myscore.value >= WIN_SCORE) {
-			// Game win 
-			endMenu.GetComponent<Canvas> ().enabled = true;
+			if (MecanoLevelConfiguration.level < NUMBER_OF_LEVEL 
+			    && PlayerPrefs.GetInt("MECANO_GAME_LVL"+(MecanoLevelConfiguration.level+1).ToString()+"_UNLOCK") == 0 ) {
+				// Game win + bonus 
+				PlayerPrefs.SetInt("MECANO_GAME_LVL"+(MecanoLevelConfiguration.level).ToString()+"_SUCCES",1);
+				PlayerPrefs.SetInt("MECANO_GAME_LVL"+(MecanoLevelConfiguration.level+1).ToString()+"_UNLOCK",1);
+				endMenu.GetComponent<Canvas> ().enabled = true;
+			} else {
+				// Game win + no bonus 
+				// TODO no bonus
+				endMenu.GetComponent<Canvas> ().enabled = true;
+			}
 		} else {
 			// Game lost
 			looseMenu.GetComponent<Canvas> ().enabled = true;
