@@ -69,9 +69,11 @@ public class MainGame : MonoBehaviour {
 		
 		if (PlayerPrefs.GetInt (Constants.MAIN_GAME_ALREADY_PLAYED) == 0) {
 			firstPlayTuto ();
+
 			PlayerPrefs.SetInt (Constants.MAIN_GAME_ALREADY_PLAYED, 1);
 		} else {
 			displayObjectif();
+
 		}
 	}
 
@@ -80,6 +82,7 @@ public class MainGame : MonoBehaviour {
 		tutoScript.setBubbleVisibility(false);
 		
 		tutoScript.readyCallback = delegate() {
+			scriptFuelControl.enabled = false;
 			tutoScript.setBubbleVisibility(true);
 			string[] messages = new string[] {
 				"L'objectif et de: "+objectif+" mètres."
@@ -123,6 +126,7 @@ public class MainGame : MonoBehaviour {
 		tutoScript.setBubbleVisibility(false);
 		
 		tutoScript.readyCallback = delegate() {
+			scriptFuelControl.enabled = false;
 			tutoScript.setBubbleVisibility(true);
 			
 			string[] messages = new string[] {
