@@ -105,9 +105,14 @@ public class MainGame : MonoBehaviour {
 		};
 
 		tutoScript.outCallback = delegate() {
+			Time.timeScale = 0;
 			isPause = false;
+			bouttonPause.image.enabled = false;
+			bouttonPause.enabled = false;
+			endMenu.GetComponent<Canvas>().enabled = true;
 		};
-		
+
+		Time.timeScale = 1;
 		tutoScript.getIn();
 	}
 
@@ -233,9 +238,11 @@ public class MainGame : MonoBehaviour {
 					scenario.unlockNext();
 					displayWin();
 				}
+				else {
 				bouttonPause.image.enabled = false;
 				bouttonPause.enabled = false;
 				endMenu.GetComponent<Canvas>().enabled = true;
+				}
 				break;
 			}
 		} 
