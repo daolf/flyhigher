@@ -14,7 +14,7 @@ public class MainMenuManager : MonoBehaviour {
 		PlayerPrefs.GetInt (Constants.MAIN_GAME_LVL, 0);
 
 		// Paint game
-		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL1_UNLOCK, 1);
+		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL1_UNLOCK, 0);
 		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL2_UNLOCK, 0);
 		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL3_UNLOCK, 0);
 		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL4_UNLOCK, 0);
@@ -23,7 +23,7 @@ public class MainMenuManager : MonoBehaviour {
 		PlayerPrefs.GetInt (Constants.PROPULSION_GAME_MAX_WON, 0);
 
 		//Mecano game
-		PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL1_UNLOCK, 1);
+		PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL1_UNLOCK, 0);
 		PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL2_UNLOCK, 0);
 		PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL3_UNLOCK, 0);
 		PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL4_UNLOCK, 0);
@@ -49,11 +49,11 @@ public class MainMenuManager : MonoBehaviour {
 	
 	void initializeSave() {
 		print("Saved content resets! Should be removed in release! (MainMenuManager)");
-		
+
 		//Set the constant for the first time
 		PlayerPrefs.SetInt (Constants.MAIN_GAME_HIGH_SCORE, 0);
 		PlayerPrefs.SetInt (Constants.MAIN_GAME_MAX_LIFE, 0);
-		PlayerPrefs.SetInt (Constants.PROPULSION_GAME_MAX_DIFFICULTY, 1);
+		PlayerPrefs.SetInt (Constants.PROPULSION_GAME_MAX_DIFFICULTY, 0);
 		PlayerPrefs.SetInt (Constants.PROPULSION_GAME_MAX_PLAYED, 0);
 		PlayerPrefs.SetInt (Constants.PROPULSION_GAME_MAX_WON, 0);
 	}
