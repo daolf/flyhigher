@@ -210,6 +210,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		};
 		
 		tutoScript.outCallback = delegate() {
+			startRound();
 			isPause = false;
 			menupause.SetActive(true);
 			tuto = false;
@@ -229,6 +230,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		};
 		
 		tutoScript.outCallback = delegate() {
+			startRound();
 			isPause = false;
 			menupause.SetActive(true);
 			tuto = false;
