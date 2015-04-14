@@ -1493,6 +1493,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1582381690}
+--- !u!114 &1633655610
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11404438, guid: 96a875195d89b48e683e3d8d486dce30,
+    type: 2}
+  m_PrefabInternal: {fileID: 1875171900}
+  m_Script: {fileID: 11500000, guid: 47278881daae74f5c81d8a4a03ed7da4, type: 3}
 --- !u!1001 &1742145600
 Prefab:
   m_ObjectHideFlags: 0
@@ -1977,6 +1983,18 @@ Prefab:
     - target: {fileID: 105290, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
       propertyPath: m_Name
       value: WinMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 11447406, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1633655610}
+    - target: {fileID: 11447406, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnBonusFromMiniGames
+      objectReference: {fileID: 0}
+    - target: {fileID: 11447406, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
