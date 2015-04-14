@@ -18,9 +18,16 @@ public class FuelControl : MonoBehaviour {
 
 	void Start () {
 		planePhysic = plane.GetComponent<PlanePhysics>();
+		int maxSucces = PlayerPrefs.GetInt (Constants.PROPULSION_GAME_MAX_PLAYED);
+
+		for (int i=0; i<(3-maxSucces); i++) {
+			fuelBars.RemoveAt(fuelBars.Count -1);
+		}
+
 		foreach (GameObject behavior in fuelBars) {
 			fuelBarBehaviors.Add(behavior.GetComponent<FuelBarScript>());
 		}
+
 	}
 	
 	void FixedUpdate () {
