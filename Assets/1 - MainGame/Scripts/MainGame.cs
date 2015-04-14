@@ -59,7 +59,7 @@ public class MainGame : MonoBehaviour {
 		scriptRandomObject = this.GetComponent<RandomObject> ();
 		scriptRandomObject.enabled = false;
 		scriptFuelControl = GetComponent<FuelControl>();
-		scriptFuelControl.enabled = false;
+		scriptFuelControl.enabled = true;
 
 		prevY = scriptPlanePhysics.transform.position.y;
 		isPause = false;
@@ -169,7 +169,9 @@ public class MainGame : MonoBehaviour {
 		if (!isPause) {
 			switch (state) {
 			case State.INTRO:
-			//If in the final state of introControl, leave the state
+				scriptFuelControl.enabled = false;
+
+				//If in the final state of introControl, leave the state
 				bouttonPause.interactable = true;
 
 				if (scriptIntroControl.state == IntroControl.State.TWOCLICK) {
@@ -219,9 +221,9 @@ public class MainGame : MonoBehaviour {
 					state = State.END_LOOSE;
 				}
 
-			//Wait for the fuel not to be consume with the first on touch
+				//Wait for the fuel not to be consume with the first on touch
 				scriptFuelControl.enabled = true;
-			//On active l'intéraction fuel
+				//On active l'intéraction fuel
 				score = scriptPlanePhysics.getDistanceFromOrigin ();
 				setScore (score);
 				if (scriptPlanePhysics.myHeartBar.currLife == -1) {

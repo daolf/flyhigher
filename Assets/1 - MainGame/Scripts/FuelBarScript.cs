@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class FuelBarScript : MonoBehaviour {
 
@@ -13,6 +14,18 @@ public class FuelBarScript : MonoBehaviour {
 
 	private void OnGUI() {
 		rectTransform.localScale = new Vector2(progress, 1);
+	}
+
+	public void hide(){
+		foreach(Image tr in this.GetComponentsInChildren<Image>()){
+			tr.enabled = false;
+		}
+	}
+
+	public void show(){
+		foreach(Image tr in this.GetComponentsInChildren<Image>()){
+			tr.enabled = true;
+		}
 	}
 
 	void Update () {
