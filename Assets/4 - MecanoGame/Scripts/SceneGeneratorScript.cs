@@ -94,14 +94,16 @@ public class SceneGeneratorScript : MonoBehaviour {
 		lostBg.enabled = false;
 
 		//FIXME i m ogly !
-		if (tuto 
-		    //&& PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED"+(MecanoLevelConfiguration.level).ToString()) == 0 
+		if (true
+			//tuto 
+		    //&& PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED1") == 0
 		    ) {
 			state = State.Tuto;
 			PlayerPrefs.SetInt("MECANO_GAME_ALREADY_PLAYED"+(MecanoLevelConfiguration.level).ToString(),1);
 			setAllUnselectable();
 			menupause.SetActive(false);
 			isPause = true;
+			tuto = false;
 			switch (MecanoLevelConfiguration.level) {
 				case 1: 
 					firstPlayTuto();
@@ -121,6 +123,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 			menupause.SetActive(true);
 			isPause = false;
 			startRound ();
+			tuto = false;
 		}
 	}
 
@@ -214,7 +217,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		};
 		
 		tutoScript.outCallback = delegate() {
-			startRound();
+			//startRound();
 			isPause = false;
 			menupause.SetActive(true);
 			tuto = false;
@@ -234,7 +237,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		};
 		
 		tutoScript.outCallback = delegate() {
-			startRound();
+			//startRound();
 			isPause = false;
 			menupause.SetActive(true);
 			tuto = false;
