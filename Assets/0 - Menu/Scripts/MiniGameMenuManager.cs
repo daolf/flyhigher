@@ -32,6 +32,13 @@ public class MiniGameMenuManager : MonoBehaviour {
 		if (PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL3_UNLOCK) == 0) {
 			levelPeintreButtons.transform.FindChild ("LevelPeintre3").GetComponent<Button> ().interactable = false;
 		}
+		if (PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL2_UNLOCK) == 0) {
+			levelMecanoButtons.transform.FindChild ("LevelMecano2").GetComponent<Button> ().interactable = false;
+		}
+		if (PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL3_UNLOCK) == 0) {
+			levelMecanoButtons.transform.FindChild ("LevelMecano3").GetComponent<Button> ().interactable = false;
+		}
+
 	}
 	//public SceneGenerator sg; // for Mecano
 
