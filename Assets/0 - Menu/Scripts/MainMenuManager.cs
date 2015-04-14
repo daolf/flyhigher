@@ -37,7 +37,9 @@ public class MainMenuManager : MonoBehaviour {
 		PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL2_UNLOCK, 0);
 		PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL3_UNLOCK, 0);
 		PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL4_UNLOCK, 0);
-		PlayerPrefs.GetInt (Constants.MECANO_GAME_ALREADY_PLAYED, 0);
+		PlayerPrefs.GetInt (Constants.MECANO_GAME_ALREADY_PLAYED1, 0);
+		PlayerPrefs.GetInt (Constants.MECANO_GAME_ALREADY_PLAYED2, 0);
+		PlayerPrefs.GetInt (Constants.MECANO_GAME_ALREADY_PLAYED3, 0);
 
 		
 		// TO REMOVE later, initialize saved values...

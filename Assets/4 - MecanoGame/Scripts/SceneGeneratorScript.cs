@@ -93,6 +93,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		winBg.enabled = false;
 		lostBg.enabled = false;
 
+		//FIXME i m ogly !
 		if (tuto) {
 			setAllUnselectable();
 			state = State.Tuto;
@@ -100,16 +101,48 @@ public class SceneGeneratorScript : MonoBehaviour {
 			isPause = true;
 			switch (MecanoLevelConfiguration.level) {
 				case 1: 
-					firstPlayTuto();
+					if (PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED1") == 0) {
+						PlayerPrefs.SetInt("MECANO_GAME_ALREADY_PLAYED1",1);
+						firstPlayTuto();
+					} else {
+						state = State.Before;
+						menupause.SetActive(true);
+						isPause = false;
+						startRound ();
+					}
 					break;
 				case 2:
-					secondPlayTuto();
+				if (PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED2") == 0) {
+					PlayerPrefs.SetInt("MECANO_GAME_ALREADY_PLAYED2",1);
+						secondPlayTuto();
+					} else {
+						state = State.Before;
+						menupause.SetActive(true);
+						isPause = false;
+						startRound ();
+					}
 					break;
 				case 3:
-					thurdPlayTuto();
+				if (PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED3") == 0) {
+					PlayerPrefs.SetInt("MECANO_GAME_ALREADY_PLAYED3",1);
+						thurdPlayTuto();
+					} else {
+						state = State.Before;
+						menupause.SetActive(true);
+						isPause = false;
+						startRound ();
+					}
 					break;
 				default:
-					firstPlayTuto();
+					if (PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED1") == 0) {
+						PlayerPrefs.SetInt("MECANO_GAME_ALREADY_PLAYED1",1);
+						firstPlayTuto();
+					} else {
+						state = State.Before;
+						menupause.SetActive(true);
+						isPause = false;
+						startRound ();
+					}
 					break;
 			}
 		} else {
@@ -210,6 +243,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		};
 		
 		tutoScript.outCallback = delegate() {
+			startRound();
 			isPause = false;
 			menupause.SetActive(true);
 			tuto = false;
@@ -229,6 +263,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		};
 		
 		tutoScript.outCallback = delegate() {
+			startRound();
 			isPause = false;
 			menupause.SetActive(true);
 			tuto = false;
