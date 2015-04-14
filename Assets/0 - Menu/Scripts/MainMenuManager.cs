@@ -41,12 +41,7 @@ public class MainMenuManager : MonoBehaviour {
 		PlayerPrefs.GetInt (Constants.MECANO_GAME_ALREADY_PLAYED2, 0);
 		PlayerPrefs.GetInt (Constants.MECANO_GAME_ALREADY_PLAYED3, 0);
 
-		
-		// TO REMOVE later, initialize saved values...
-		if(!isInitialized) {
-			initializeSave();
-			isInitialized = true;
-		}
+
 		
 	}
 	
@@ -59,14 +54,5 @@ public class MainMenuManager : MonoBehaviour {
 	}
 	
 	
-	void initializeSave() {
-		print("Saved content resets! Should be removed in release! (MainMenuManager)");
 
-		//Set the constant for the first time
-		PlayerPrefs.SetInt (Constants.MAIN_GAME_HIGH_SCORE, 0);
-		PlayerPrefs.SetInt (Constants.MAIN_GAME_MAX_LIFE, 0);
-		PlayerPrefs.SetInt (Constants.PROPULSION_GAME_MAX_DIFFICULTY, 0);
-		PlayerPrefs.SetInt (Constants.PROPULSION_GAME_MAX_PLAYED, 0);
-		PlayerPrefs.SetInt (Constants.PROPULSION_GAME_MAX_WON, 0);
-	}
 }
