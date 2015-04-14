@@ -1180,6 +1180,19 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11447406, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11405458, guid: 8b06514daeb8a4529aeb2b6e86172fa0,
+        type: 2}
+    - target: {fileID: 11447406, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnBonusFromMiniGames
+      objectReference: {fileID: 0}
+    - target: {fileID: 11447406, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96a875195d89b48e683e3d8d486dce30, type: 2}
   m_IsPrefabParent: 0
@@ -5136,7 +5149,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -174, y: -129}
+  m_AnchoredPosition: {x: -187, y: -134}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &1964648921

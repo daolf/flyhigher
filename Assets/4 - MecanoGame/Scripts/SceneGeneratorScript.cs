@@ -94,62 +94,35 @@ public class SceneGeneratorScript : MonoBehaviour {
 		lostBg.enabled = false;
 
 		//FIXME i m ogly !
-		if (tuto) {
-			setAllUnselectable();
+		if (true
+			//tuto 
+		    && PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED"+(MecanoLevelConfiguration.level).ToString()) == 0) {
 			state = State.Tuto;
+			PlayerPrefs.SetInt("MECANO_GAME_ALREADY_PLAYED"+(MecanoLevelConfiguration.level).ToString(),1);
+			setAllUnselectable();
 			menupause.SetActive(false);
 			isPause = true;
 			switch (MecanoLevelConfiguration.level) {
 				case 1: 
-					if (PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED1") == 0) {
-						PlayerPrefs.SetInt("MECANO_GAME_ALREADY_PLAYED1",1);
-						firstPlayTuto();
-					} else {
-						state = State.Before;
-						menupause.SetActive(true);
-						isPause = false;
-						startRound ();
-					}
+					firstPlayTuto();
 					break;
 				case 2:
-				if (PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED2") == 0) {
-					PlayerPrefs.SetInt("MECANO_GAME_ALREADY_PLAYED2",1);
-						secondPlayTuto();
-					} else {
-						state = State.Before;
-						menupause.SetActive(true);
-						isPause = false;
-						startRound ();
-					}
+					secondPlayTuto();
 					break;
 				case 3:
-				if (PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED3") == 0) {
-					PlayerPrefs.SetInt("MECANO_GAME_ALREADY_PLAYED3",1);
-						thurdPlayTuto();
-					} else {
-						state = State.Before;
-						menupause.SetActive(true);
-						isPause = false;
-						startRound ();
-					}
+					thurdPlayTuto();
 					break;
 				default:
-					if (PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED1") == 0) {
-						PlayerPrefs.SetInt("MECANO_GAME_ALREADY_PLAYED1",1);
-						firstPlayTuto();
-					} else {
-						state = State.Before;
-						menupause.SetActive(true);
-						isPause = false;
-						startRound ();
-					}
+					firstPlayTuto();
 					break;
 			}
+			tuto = false;
 		} else {
 			state = State.Before;
 			menupause.SetActive(true);
 			isPause = false;
 			startRound ();
+			tuto = false;
 		}
 	}
 
@@ -210,6 +183,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		tutoScript.setBubbleVisibility(false);
 		
 		tutoScript.readyCallback = delegate() {
+			isPause = true;
 			tutoScript.setBubbleVisibility(true);
 			tutoScript.say(Dialogue.tuto);
 		};
@@ -221,8 +195,6 @@ public class SceneGeneratorScript : MonoBehaviour {
 			initCogsLevel ();
 			generateCogs ();
 			setAllSelectable ();
-			// TODO Add ready
-			menupause.SetActive(true);
 			isPause = false;
 			menupause.SetActive(true);
 			tuto = false;
@@ -243,7 +215,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		};
 		
 		tutoScript.outCallback = delegate() {
-			startRound();
+			//startRound();
 			isPause = false;
 			menupause.SetActive(true);
 			tuto = false;
@@ -263,7 +235,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		};
 		
 		tutoScript.outCallback = delegate() {
-			startRound();
+			//startRound();
 			isPause = false;
 			menupause.SetActive(true);
 			tuto = false;

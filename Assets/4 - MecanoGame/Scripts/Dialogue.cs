@@ -10,7 +10,7 @@ public class Dialogue {
 		"je vérifie que tout les éléments servant à faire",
 		"voler l'avion sont en bon état.",
 		"Ici, tu dois trouver le plus d'engrenage le " +
-		"plus vite possible. Attention, ceux-ci se" +
+		"plus vite possible. Attention, ceux-ci se " +
 		"ressemblent mais tu dois trouver le bon !"
 	};
 	public static string[] dialogue2 = new string[] 
