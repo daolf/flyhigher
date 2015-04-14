@@ -14,6 +14,10 @@ public class MainMenuManager : MonoBehaviour {
 		PlayerPrefs.GetInt (Constants.MAIN_GAME_LVL, 0);
 
 		// Paint game
+		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL1_SUCCES, 0);
+		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL2_SUCCES, 0);
+		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL3_SUCCES, 0);
+		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL4_SUCCES, 0);
 		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL1_UNLOCK, 0);
 		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL2_UNLOCK, 0);
 		PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL3_UNLOCK, 0);
