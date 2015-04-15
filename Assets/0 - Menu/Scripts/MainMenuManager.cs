@@ -7,6 +7,7 @@ public class MainMenuManager : MonoBehaviour {
 	private static bool isInitialized = false;
 	
 	void Start() {
+	
 		//Set the constant for the first time
 		PlayerPrefs.GetInt (Constants.MAIN_GAME_HIGH_SCORE, 0);
 		PlayerPrefs.GetInt (Constants.MAIN_GAME_MAX_LIFE, 0);
@@ -44,7 +45,8 @@ public class MainMenuManager : MonoBehaviour {
 
 		
 	}
-	
+
+
 	public void MainGame () {
 		Application.LoadLevel("MainGame");
 	}

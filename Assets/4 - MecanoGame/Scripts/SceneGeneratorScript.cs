@@ -94,9 +94,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		lostBg.enabled = false;
 
 		//FIXME i m ogly !
-		if (true
-			//tuto 
-		    && PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED"+(MecanoLevelConfiguration.level).ToString()) == 0) {
+		if (tuto && PlayerPrefs.GetInt("MECANO_GAME_ALREADY_PLAYED"+(MecanoLevelConfiguration.level).ToString()) == 0) {
 			state = State.Tuto;
 			PlayerPrefs.SetInt("MECANO_GAME_ALREADY_PLAYED"+(MecanoLevelConfiguration.level).ToString(),1);
 			setAllUnselectable();
@@ -175,6 +173,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 		PlayTuto ();
 		myscore.value = 0;
 		winBg.enabled = false;
+		setAllUnselectable ();
 	}
 
 	// Tuto dialogue.

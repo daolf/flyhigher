@@ -48,6 +48,12 @@ public class MenuManager : MonoBehaviour {
 		Time.timeScale = 1;
 		Application.LoadLevel ("MainGame");
 	}
+
+	
+	public void DeleteAllUserInfo() {
+		PlayerPrefs.DeleteAll ();
+	}
+
 	// Use this for initialization
 	void Start () {
 	
