@@ -12,6 +12,7 @@ public class MainGame : MonoBehaviour {
 	public GameObject winMenu;
 	public GameObject backgrounds;
 	public GameObject tutoPref;
+	public Objectif guiObjectif;
 
 
 	public Score guiScore;
@@ -79,26 +80,8 @@ public class MainGame : MonoBehaviour {
 	}
 
 	private void displayObjectif() {
-		isPause = true;
-		string[] messages;
-		tutoScript.readyCallback = delegate() {
-			tutoScript.setBubbleVisibility(true);
-			if (objectif != -1) {
-				messages = new string[] {
-					"L'objectif et de: "+objectif+" mètres."
-				};
-			} else {
-				messages  = new string[] {
-					"Tu as fini le jeux, essaies d'aller le plus loin possible"
-				};
-			}
-			tutoScript.say(messages);
-		};
-
-		tutoScript.outCallback = delegate() {
-			isPause = false;
-		};
-		tutoScript.getIn();
+		guiObjectif.setObjectif(objectif);
+		guiObjectif.getInAndOut ();
 	}
 
 	private void firstPlayTuto() {
@@ -133,6 +116,8 @@ public class MainGame : MonoBehaviour {
 		};
 		tutoScript.getIn();
 	}
+
+
 
 	private IEnumerator testCoroutine() {
 		yield return new WaitForSeconds(2);
