@@ -32,7 +32,11 @@ public class Scenario  {
 	}
 
 	public int getObjectif() {
-		return scenario [niveau].getObjectif ();
+		if (niveau < scenario.Length) {
+			return scenario [niveau].getObjectif ();
+		} else {
+			return -1;
+		}
 	}
 
 	public string getGameUnlocked() {
