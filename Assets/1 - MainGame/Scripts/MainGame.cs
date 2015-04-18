@@ -8,9 +8,11 @@ public class MainGame : MonoBehaviour {
 	public GameObject guiComponent;
 	public GameObject scoreContainer;
 	public GameObject gui;
-	public GameObject endMenu;
+	public GameObject loseMenu;
+	public GameObject winMenu;
 	public GameObject backgrounds;
 	public GameObject tutoPref;
+	public Objectif guiObjectif;
 
 
 	public Score guiScore;
@@ -78,50 +80,9 @@ public class MainGame : MonoBehaviour {
 	}
 
 	private void displayObjectif() {
-		isPause = true;
-		string[] messages;
-		tutoScript.readyCallback = delegate() {
-			tutoScript.setBubbleVisibility(true);
-			if (objectif != -1) {
-				messages = new string[] {
-					"L'objectif et de: "+objectif+" mètres."
-				};
-			} else {
-				messages  = new string[] {
-					"Tu as fini le jeux, essaies d'aller le plus loin possible"
-				};
-			}
-			tutoScript.say(messages);
-		};
-
-		tutoScript.outCallback = delegate() {
-			isPause = false;
-		};
-		tutoScript.getIn();
+		guiObjectif.setObjectif(objectif);
+		guiObjectif.getInAndOut ();
 	}
-
-	private void displayWin() {
-		isPause = true;
-		tutoScript.setBubbleVisibility(false);
-		tutoScript.readyCallback = delegate() {
-			tutoScript.setBubbleVisibility(true);
-			string message = "Bravo tu as réussi l'objectif, va voir du côté des jeux "+scenario.getGameUnlocked()+"";
-			tutoScript.say(message);
-		};
-
-		tutoScript.outCallback = delegate() {
-			Time.timeScale = 0;
-			isPause = false;
-			bouttonPause.image.enabled = false;
-			bouttonPause.enabled = false;
-			scenario.unlockNext();
-			endMenu.GetComponent<Canvas>().enabled = true;
-		};
-
-		Time.timeScale = 1;
-		tutoScript.getIn();
-	}
-
 
 	private void firstPlayTuto() {
 		isPause = true;
@@ -155,6 +116,8 @@ public class MainGame : MonoBehaviour {
 		};
 		tutoScript.getIn();
 	}
+
+
 
 	private IEnumerator testCoroutine() {
 		yield return new WaitForSeconds(2);
@@ -240,14 +203,14 @@ public class MainGame : MonoBehaviour {
 			case State.END_LOOSE:
 				//Fin du jeu
 				Time.timeScale = 0;
+				bouttonPause.interactable = false;
 				if (score > objectif ) {
-					bouttonPause.interactable = false;
-					displayWin();
+					winMenu.GetComponent<Canvas>().enabled = true;
+					winMenu.GetComponentInChildren<Text>().text = "Tu as débloqué \n"+"le niveau "+ scenario.getLevelUnlocked() + " du jeux " + scenario.getGameUnlocked();
+					scenario.unlockNext();
 				}
 				else {
-				bouttonPause.image.enabled = false;
-				bouttonPause.enabled = false;
-				endMenu.GetComponent<Canvas>().enabled = true;
+					loseMenu.GetComponent<Canvas>().enabled = true;
 				}
 				break;
 			}

@@ -54,4 +54,20 @@ public class Scenario  {
 		return r;
 	}
 
+	/* Sorry for the uglyness of this*/
+	public string getLevelUnlocked() {
+		string r;
+		if (scenario [niveau].getString ().Contains ("LVL1")) {
+			r = "1";
+		} else if (scenario [niveau].getString ().Contains ("LVL2")) {
+			r = "2";
+		} else if (scenario [niveau].getString ().Contains ("LVL3")) {
+			r = "3";
+		} else {
+			r = "Mystère";
+		}
+		
+		return r;
+	}
+
 }
