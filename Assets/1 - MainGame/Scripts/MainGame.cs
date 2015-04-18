@@ -79,11 +79,18 @@ public class MainGame : MonoBehaviour {
 
 	private void displayObjectif() {
 		isPause = true;
+		string[] messages;
 		tutoScript.readyCallback = delegate() {
 			tutoScript.setBubbleVisibility(true);
-			string[] messages = new string[] {
-				"L'objectif et de: "+objectif+" mètres."
-			};
+			if (objectif != -1) {
+				messages = new string[] {
+					"L'objectif et de: "+objectif+" mètres."
+				};
+			} else {
+				messages  = new string[] {
+					"Tu as fini le jeux, essaies d'aller le plus loin possible"
+				};
+			}
 			tutoScript.say(messages);
 		};
 
