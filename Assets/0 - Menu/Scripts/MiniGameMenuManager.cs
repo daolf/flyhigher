@@ -19,6 +19,25 @@ public class MiniGameMenuManager : MonoBehaviour {
 		Time.timeScale = 1;
 
 
+		//Make button disable if none of the minigame is unlock
+		//Very dirty solution, 
+		if (PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL1_UNLOCK) == 0 &&
+		    PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL1_UNLOCK) == 0 &&
+		    PlayerPrefs.GetInt (Constants.PAINT_GAME_LVL1_UNLOCK) == 0) {
+			jeuPeintreButton.GetComponent<Button>().interactable = false;
+		}
+
+		if (PlayerPrefs.GetInt (Constants.PROPULSION_GAME_LVL1_UNLOCK) == 0 &&
+		    PlayerPrefs.GetInt (Constants.PROPULSION_GAME_LVL1_UNLOCK) == 0 &&
+		    PlayerPrefs.GetInt (Constants.PROPULSION_GAME_LVL1_UNLOCK) == 0) {
+			jeuPropulsionButton.GetComponent<Button>().interactable = false;
+		}
+
+		if (PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL1_UNLOCK) == 0 &&
+		    PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL1_UNLOCK) == 0 &&
+		    PlayerPrefs.GetInt (Constants.MECANO_GAME_LVL1_UNLOCK) == 0) {
+			jeuMecanoButton.GetComponent<Button>().interactable = false;
+		}
 
 		//Make button disabled if level not unlocked
 		if (PlayerPrefs.GetInt (Constants.PROPULSION_GAME_LVL1_UNLOCK) == 0) {
