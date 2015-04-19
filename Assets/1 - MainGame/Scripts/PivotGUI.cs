@@ -7,12 +7,16 @@ public class PivotGUI : MonoBehaviour {
 	public Vector2 pos;
 	public Vector2 size;
 	public float angle;
-	public enum State {mov,stop};
-	public State state = State.mov;
+	public enum State {Move, Stop};
+	public State state = State.Move;
 	public bool up=true;
-	public float borneSupAngle;
-	public float borneInfAngle;
-	public float pasAngle;
+	
+	private const float borneSupAngle = 71.0f;
+	private const float borneInfAngle = 3.0f;
+	
+	// angular speed (degrees per second)
+	private const float angleSpeed = 180.0f;
+	
 	public GameObject arrowPivot;
 
 	void OnDisable() {
@@ -21,24 +25,26 @@ public class PivotGUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		borneSupAngle= 71;
-		borneInfAngle= 0;
-		pasAngle=2;
+	
 	}
 
 	void incremAngle() {
 	
 		if (up){
-			if(angle<borneSupAngle) 
-				angle += pasAngle;
-			else 
-				up = !up; 	
+			angle += angleSpeed * Time.deltaTime;
+			
+			if(angle > borneSupAngle) {
+				angle = borneSupAngle - (angle - borneSupAngle);
+				up = !up;
+			}
 		}
 		else {
-			if(angle>borneInfAngle) 
-				angle -= pasAngle;
-			else 
-				up = !up; 
+			angle -= angleSpeed * Time.deltaTime;
+			
+			if(angle < borneInfAngle) {
+				angle = borneInfAngle + (borneInfAngle - angle);
+				up = !up;
+			}
 		}
 	}
 
@@ -47,11 +53,11 @@ public class PivotGUI : MonoBehaviour {
 		if (! GetComponentInParent<MainGame> ().isPause) {
 			arrowPivot.transform.eulerAngles = new Vector3 (0, 0, angle); 
 			switch (state) {
-			case State.mov:
+			case State.Move:
 				incremAngle ();
 				break;
 			
-			case State.stop:
+			case State.Stop:
 				break;
 			}
 		}
