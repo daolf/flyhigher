@@ -19,7 +19,7 @@ public class FuelControl : MonoBehaviour {
 
 	void Start () {
 		planePhysic = plane.GetComponent<PlanePhysics>();
-		int maxSucces = PlayerPrefs.GetInt (Constants.PROPULSION_GAME_MAX_PLAYED);
+		int maxSucces = PlayerPrefs.GetInt (Constants.PROPULSION_GAME_MAX_WON);
 
 		foreach (GameObject behavior in fuelBars) {
 			fuelBarBehaviors.Add(behavior.GetComponent<FuelBarScript>());
