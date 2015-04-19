@@ -55,6 +55,8 @@ public class MainMenuManager : MonoBehaviour {
 		Application.LoadLevel("MenuMiniGames");
 	}
 	
-	
+	public void DevelopperMenu () {
+		Application.LoadLevel("HiddenDevMenu");
+	}
 
 }

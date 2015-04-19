@@ -23,3 +23,5 @@ EditorBuildSettings:
     path: Assets/1 - MainGame/MainGame.unity
   - enabled: 1
     path: Assets/4 - MecanoGame/Scenes/Mecano.unity
+  - enabled: 1
+    path: Assets/0 - Menu/Scenes/HiddenDevMenu.unity
