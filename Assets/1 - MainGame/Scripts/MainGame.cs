@@ -106,7 +106,6 @@ public class MainGame : MonoBehaviour {
 			tutoScript.dialogueEndCallback = null;
 			tutoScript.setBubbleVisibility(false);
 			tutoScript.getOut();
-			isPause = false;
 			tutoScript.hand.moveToWorldPosition(criticalPanel.transform.position, 1.8f);
 			StartCoroutine(testCoroutine()); 
 		};
@@ -127,6 +126,7 @@ public class MainGame : MonoBehaviour {
 		yield return new WaitForSeconds(0.5f);
 		tutoScript.hand.setVisibility(false);
 		tutoScript.getOut();
+		isPause = false;
 	}
 
 
