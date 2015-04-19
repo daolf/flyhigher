@@ -7,14 +7,16 @@ public class PowerBarGUI : MonoBehaviour {
 	//Vector2 pos = new Vector2(30, 300);
 	Vector3 defaultSize;
 
-	public enum State {mov,stop};
-	public State state = State.mov;
-	public bool up = true;
-	public float borneMax;
-	public float borneMin;
-	public float padding;
+	public enum State {Move, Stop};
+	public State state = State.Move;
 	public Transform redBar;
 	public Transform whiteBG;
+	
+	private const float borneMax = 1.0f;
+	private const float borneMin = 0.0f;
+	private const float incrementSpeed = 2.5f;
+	
+	private bool up = true;
 
 
 	void OnDisable() {
@@ -26,26 +28,22 @@ public class PowerBarGUI : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		defaultSize = redBar.transform.localScale;
-		borneMax= 1;
-		borneMin= 0;
-		padding=0.02F;
-
-		//barDisplay = 100f; 
 	}
 
 	void incremValue() {
-		
 		if (up){
-			if(barValue<borneMax) 
-				barValue += padding;
-			else 
-				up = !up; 	
+			barValue += incrementSpeed * Time.deltaTime;
+			if(barValue > borneMax) {
+				barValue = borneMax;
+				up = !up;
+			}
 		}
 		else {
-			if(barValue>borneMin) 
-				barValue -= padding;
-			else 
-				up = !up; 
+			barValue -= incrementSpeed * Time.deltaTime;
+			if(barValue < borneMin) {
+				barValue = borneMin;
+				up = !up;
+			}
 		}
 	}
 
@@ -58,11 +56,11 @@ public class PowerBarGUI : MonoBehaviour {
 			//redBarBounds.size = new Vector3(redBarBounds.size.x, defaultSize.y*barValue);
 			redBar.transform.localScale = new Vector3 (redBar.transform.localScale.x, defaultSize.y * barValue);
 			switch (state) {
-			case State.mov:
+			case State.Move:
 				incremValue ();
 				break;
 			
-			case State.stop:
+			case State.Stop:
 			
 				break;
 			}

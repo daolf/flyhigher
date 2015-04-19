@@ -36,7 +36,7 @@ public class IntroControl : MonoBehaviour {
 			switch (state) {
 			case State.INIT:
 				power = powerBarGUIScript.barValue * powerMax;
-				powerBarGUIScript.state = PowerBarGUI.State.stop;
+				powerBarGUIScript.state = PowerBarGUI.State.Stop;
 				pivotGUIScript.state = PivotGUI.State.Move;
 				state = State.ONECLICK;
 
@@ -53,15 +53,15 @@ public class IntroControl : MonoBehaviour {
 		} else {
 			switch (state) {
 			case State.INIT:
-				powerBarGUIScript.state = PowerBarGUI.State.mov;
+				powerBarGUIScript.state = PowerBarGUI.State.Move;
 				pivotGUIScript.state = PivotGUI.State.Stop;
 				break;
 			case State.ONECLICK:
-				powerBarGUIScript.state = PowerBarGUI.State.stop;
+				powerBarGUIScript.state = PowerBarGUI.State.Stop;
 				pivotGUIScript.state = PivotGUI.State.Move;
 				break;
 			case State.TWOCLICK:
-				powerBarGUIScript.state = PowerBarGUI.State.stop;
+				powerBarGUIScript.state = PowerBarGUI.State.Stop;
 				pivotGUIScript.state = PivotGUI.State.Stop;
 				break;
 			}
