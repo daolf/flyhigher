@@ -15,7 +15,7 @@ public class PivotGUI : MonoBehaviour {
 	private const float borneInfAngle = 3.0f;
 	
 	// angular speed (degrees per second)
-	private const float angleSpeed = 180.0f;
+	private const float angleSpeed = 80.0f;
 	
 	public GameObject arrowPivot;
 
