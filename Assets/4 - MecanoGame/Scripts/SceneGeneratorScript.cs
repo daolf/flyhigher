@@ -460,7 +460,7 @@ public class SceneGeneratorScript : MonoBehaviour {
 			    && PlayerPrefs.GetInt("MECANO_GAME_LVL"+(MecanoLevelConfiguration.level+1).ToString()+"_UNLOCK") == 0 ) {
 				// Game win + bonus 
 				PlayerPrefs.SetInt("MECANO_GAME_LVL"+(MecanoLevelConfiguration.level).ToString()+"_SUCCES",1);
-				PlayerPrefs.SetInt("MECANO_GAME_LVL"+(MecanoLevelConfiguration.level+1).ToString()+"_UNLOCK",1);
+				//PlayerPrefs.SetInt("MECANO_GAME_LVL"+(MecanoLevelConfiguration.level+1).ToString()+"_UNLOCK",1);
 				endMenu.GetComponent<Canvas> ().enabled = true;
 			} else {
 				// Game win + no bonus 
