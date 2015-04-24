@@ -456,11 +456,10 @@ public class SceneGeneratorScript : MonoBehaviour {
 		setAllUnselectable();
 		menupause.SetActive(false);
 		if (myscore.value >= WIN_SCORE) {
-			if (MecanoLevelConfiguration.level < NUMBER_OF_LEVEL 
+			if (MecanoLevelConfiguration.level <= NUMBER_OF_LEVEL 
 			    && PlayerPrefs.GetInt("MECANO_GAME_LVL"+(MecanoLevelConfiguration.level+1).ToString()+"_UNLOCK") == 0 ) {
 				// Game win + bonus 
 				PlayerPrefs.SetInt("MECANO_GAME_LVL"+(MecanoLevelConfiguration.level).ToString()+"_SUCCES",1);
-				//PlayerPrefs.SetInt("MECANO_GAME_LVL"+(MecanoLevelConfiguration.level+1).ToString()+"_UNLOCK",1);
 				endMenu.GetComponent<Canvas> ().enabled = true;
 			} else {
 				// Game win + no bonus 
