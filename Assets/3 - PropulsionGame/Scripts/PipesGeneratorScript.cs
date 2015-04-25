@@ -214,7 +214,14 @@ public class PipesGeneratorScript : MonoBehaviour {
 			// FIXME not a good place to be called?
 			PlayerPrefs.Save();
 		}
-	
+
+		if(PlayerPrefs.GetInt("PROPULSION_GAME_LVL"+(currentDifficulty).ToString()+"_SUCCES") == 0 ) {
+			GameObject.Find("WinMenu/MenuBg/Bonus").GetComponent<Button>().GetComponent<Image>().enabled = true;
+		}
+		else {
+			GameObject.Find("WinMenu/MenuBg/Bonus").GetComponent<Button>().GetComponent<Image>().enabled = false;
+		}
+		PlayerPrefs.SetInt ("PROPULSION_GAME_LVL" + (currentDifficulty).ToString () + "_SUCCES", 1);
 		GameObject.Find("WinMenu").GetComponent<Canvas>().enabled = true;
 	}
 	

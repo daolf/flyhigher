@@ -1493,12 +1493,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1582381690}
---- !u!114 &1633655610
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11404438, guid: 96a875195d89b48e683e3d8d486dce30,
-    type: 2}
-  m_PrefabInternal: {fileID: 1875171900}
-  m_Script: {fileID: 11500000, guid: 47278881daae74f5c81d8a4a03ed7da4, type: 3}
 --- !u!1001 &1742145600
 Prefab:
   m_ObjectHideFlags: 0
