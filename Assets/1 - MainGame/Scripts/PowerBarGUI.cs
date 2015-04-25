@@ -14,7 +14,7 @@ public class PowerBarGUI : MonoBehaviour {
 	
 	private const float borneMax = 1.0f;
 	private const float borneMin = 0.0f;
-	private const float incrementSpeed = 2.5f;
+	private const float incrementSpeed = 1f;
 	
 	private bool up = true;
 
