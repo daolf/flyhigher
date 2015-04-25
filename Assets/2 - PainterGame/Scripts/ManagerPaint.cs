@@ -35,11 +35,11 @@ public class ManagerPaint : MonoBehaviour {
 	void FixedUpdate () {
 		switch (state) {
 		case State.BEGIN :
-			pauseButton.GetComponent<Button>().interactable = false;
+			pauseButton.GetComponent<Image>().enabled = false;
 			break;
 
 		case State.MAIN :
-			pauseButton.GetComponent<Button>().interactable = true;
+			pauseButton.GetComponent<Image>().enabled = true;
 			beginPaintScript.enabled = false;
 			mainPaintScript.enabled = true;
 			endLooseMenu.enabled = false;
@@ -47,6 +47,7 @@ public class ManagerPaint : MonoBehaviour {
 			break;
 
 		case State.ENDLOOSE :
+			pauseButton.GetComponent<Image>().enabled = false;
 			beginPaintScript.enabled = false;
 			mainPaintScript.enabled = false;
 			endLooseMenu.enabled = true;
@@ -54,6 +55,7 @@ public class ManagerPaint : MonoBehaviour {
 			break;
 
 		case State.ENDWIN :
+			pauseButton.GetComponent<Image>().enabled = false;
 			beginPaintScript.enabled = false;
 			mainPaintScript.enabled = false;
 			endLooseMenu.enabled = false;
