@@ -66,7 +66,7 @@ public class MainPaintScript : MonoBehaviour {
 		
 		// We check we didn't get out off the screen
 		// Check if not out of the screen
-		if (movement < maxMovement) {
+		if (movement < maxMovement && score < objectif ) {
 			previousX = this.transform.position.x;
 			this.transform.Translate (Vector3.up * speed * Time.deltaTime);
 			movement += (this.transform.position.x - previousX);
