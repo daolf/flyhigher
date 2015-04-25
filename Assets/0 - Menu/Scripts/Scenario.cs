@@ -6,6 +6,7 @@ public class Scenario  {
 
 
 	public int niveau;
+	public int niveauMax = 9;
 	public Etape[] scenario;
 
 	// Use this for initialization
@@ -54,17 +55,26 @@ public class Scenario  {
 		return r;
 	}
 
+	public int getNiveauMax(){
+		return niveauMax;
+	}
+
+	public bool isFinished(){
+		return (niveau >= niveauMax);
+	}
 	/* Sorry for the uglyness of this*/
 	public string getLevelUnlocked() {
-		string r;
-		if (scenario [niveau].getString ().Contains ("LVL1")) {
-			r = "1";
-		} else if (scenario [niveau].getString ().Contains ("LVL2")) {
-			r = "2";
-		} else if (scenario [niveau].getString ().Contains ("LVL3")) {
-			r = "3";
-		} else {
-			r = "Mystère";
+		string r = "";
+		if (!isFinished()) {
+			if ( scenario [niveau].getString ().Contains ("LVL1")) {
+				r = "1";
+			} else if (scenario [niveau].getString ().Contains ("LVL2")) {
+				r = "2";
+			} else if (scenario [niveau].getString ().Contains ("LVL3")) {
+				r = "3";
+			} else {
+				r = "Mystère";
+			}
 		}
 		
 		return r;

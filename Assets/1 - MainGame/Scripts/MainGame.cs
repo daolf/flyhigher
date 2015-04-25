@@ -73,9 +73,8 @@ public class MainGame : MonoBehaviour {
 			firstPlayTuto ();
 
 			PlayerPrefs.SetInt (Constants.MAIN_GAME_ALREADY_PLAYED, 1);
-		} else {
+		} else if (! scenario.isFinished()){
 			displayObjectif();
-
 		}
 	}
 
