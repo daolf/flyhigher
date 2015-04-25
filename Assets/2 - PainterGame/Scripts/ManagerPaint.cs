@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class ManagerPaint : MonoBehaviour {
 	
-	public enum State {BEGIN,MAIN,ENDWIN,ENDLOOSE};
+	public enum State {BEGIN,MAIN,ENDWIN,ENDLOOSE,ENDWINBONUS};
 	public State state;
 	public BeginPaintScript beginPaintScript ;
 	public MainPaintScript mainPaintScript ;
@@ -55,6 +55,17 @@ public class ManagerPaint : MonoBehaviour {
 			break;
 
 		case State.ENDWIN :
+			pauseButton.GetComponent<Image>().enabled = false;
+			beginPaintScript.enabled = false;
+			mainPaintScript.enabled = false;
+			endLooseMenu.enabled = false;
+			GameObject a = GameObject.Find("WinMenu/MenuBg/Bonus");
+			GameObject.Find("WinMenu/MenuBg/Bonus").GetComponent<Button>().GetComponent<Image>().enabled = false;
+			print ("yoloy"+a);
+			endWinMenu.enabled = true;
+			break;
+
+		case State.ENDWINBONUS :
 			pauseButton.GetComponent<Image>().enabled = false;
 			beginPaintScript.enabled = false;
 			mainPaintScript.enabled = false;

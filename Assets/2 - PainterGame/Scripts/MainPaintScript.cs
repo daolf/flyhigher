@@ -81,8 +81,13 @@ public class MainPaintScript : MonoBehaviour {
 				GetComponent<ManagerPaint>().state = ManagerPaint.State.ENDLOOSE;
 			}
 			else {
+				if(PlayerPrefs.GetInt("PAINT_GAME_LVL"+(niveau+1).ToString()+"_SUCCES") == 0 ) {
+					GetComponent<ManagerPaint>().state = ManagerPaint.State.ENDWINBONUS;
+				}
+				else {
+					GetComponent<ManagerPaint>().state = ManagerPaint.State.ENDWIN;
+				}
 				PlayerPrefs.SetInt("PAINT_GAME_LVL"+(niveau+1).ToString()+"_SUCCES",1);
-				GetComponent<ManagerPaint>().state = ManagerPaint.State.ENDWIN;
 			}
 		}
 	}
