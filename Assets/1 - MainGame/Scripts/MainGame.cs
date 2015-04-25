@@ -46,7 +46,6 @@ public class MainGame : MonoBehaviour {
 	void Start () {
 		scenario = new Scenario ();
 		objectif = scenario.getObjectif();
-		bouttonPause.interactable = false;
 		Time.timeScale = 1;
 
 		scriptIntroControl = this.GetComponent<IntroControl> ();
@@ -68,8 +67,8 @@ public class MainGame : MonoBehaviour {
 		guiBestScore.value = PlayerPrefs.GetInt (Constants.MAIN_GAME_HIGH_SCORE);
 
 		tutoScript = tutoPref.GetComponent<GenericTutoScript>();
-		
 		if (PlayerPrefs.GetInt (Constants.MAIN_GAME_ALREADY_PLAYED) == 0) {
+			bouttonPause.GetComponent<Image> ().enabled = false;
 			firstPlayTuto ();
 
 			PlayerPrefs.SetInt (Constants.MAIN_GAME_ALREADY_PLAYED, 1);
@@ -111,6 +110,7 @@ public class MainGame : MonoBehaviour {
 		
 		tutoScript.outCallback = delegate() {
 			//isPause = false;
+			bouttonPause.GetComponent<Image> ().enabled = true;
 		};
 		tutoScript.getIn();
 	}
@@ -135,7 +135,6 @@ public class MainGame : MonoBehaviour {
 			switch (state) {
 			case State.INTRO:
 				//If in the final state of introControl, leave the state
-				bouttonPause.interactable = true;
 				if (scriptIntroControl.state == IntroControl.State.TWOCLICK) {
 					scriptIntroState.enabled = false;
 					scriptPlanePhysics.enabled = true;
