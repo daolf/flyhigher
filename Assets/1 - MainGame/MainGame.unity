@@ -3904,6 +3904,7 @@ MonoBehaviour:
   - {fileID: 1653380086}
   plane: {fileID: 1231583000}
   main: {fileID: 1704847862}
+  state: 0
 --- !u!1 &1775790960
 GameObject:
   m_ObjectHideFlags: 0

@@ -134,11 +134,8 @@ public class MainGame : MonoBehaviour {
 		if (!isPause) {
 			switch (state) {
 			case State.INTRO:
-				scriptFuelControl.enabled = false;
-
 				//If in the final state of introControl, leave the state
 				bouttonPause.interactable = true;
-
 				if (scriptIntroControl.state == IntroControl.State.TWOCLICK) {
 					scriptIntroState.enabled = false;
 					scriptPlanePhysics.enabled = true;
@@ -187,7 +184,7 @@ public class MainGame : MonoBehaviour {
 				}
 
 				//Wait for the fuel not to be consume with the first on touch
-				scriptFuelControl.enabled = true;
+				scriptFuelControl.state = FuelControl.State.ACTIVE;
 				//On active l'intéraction fuel
 				score = scriptPlanePhysics.getDistanceFromOrigin ();
 				setScore (score);

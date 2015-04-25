@@ -29,7 +29,6 @@ public class PivotGUI : MonoBehaviour {
 	}
 
 	void incremAngle() {
-	
 		if (up){
 			angle += angleSpeed * Time.deltaTime;
 			
