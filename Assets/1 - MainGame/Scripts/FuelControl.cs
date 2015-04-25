@@ -8,6 +8,8 @@ public class FuelControl : MonoBehaviour {
 	public List<GameObject> fuelBars;
 	public GameObject plane;
 	public MainGame main;
+	public enum State {ACTIVE,INACTIVE};
+	public State state;
 
 	private PlanePhysics planePhysic;
 	float offsetProgress = 0.01f;
@@ -20,7 +22,7 @@ public class FuelControl : MonoBehaviour {
 	void Start () {
 		planePhysic = plane.GetComponent<PlanePhysics>();
 		int maxSucces = PlayerPrefs.GetInt (Constants.PROPULSION_GAME_MAX_WON);
-
+		state = State.INACTIVE;
 		foreach (GameObject behavior in fuelBars) {
 			fuelBarBehaviors.Add(behavior.GetComponent<FuelBarScript>());
 		}
@@ -36,14 +38,17 @@ public class FuelControl : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		if(Input.GetMouseButton(0) && !empty && !EventSystem.current.IsPointerOverGameObject() && !main.isPause)
-		{
-			planePhysic.flappyState = PlanePhysics.FlappyState.BOUNCING;
-			useFuel();
-		}
-		else
-		{
-			planePhysic.flappyState = PlanePhysics.FlappyState.NORMAL;
+		switch (state) {
+		case State.ACTIVE:
+			if (Input.GetMouseButton (0) && !empty && !EventSystem.current.IsPointerOverGameObject () && !main.isPause) {
+				planePhysic.flappyState = PlanePhysics.FlappyState.BOUNCING;
+				useFuel ();
+			} else {
+				planePhysic.flappyState = PlanePhysics.FlappyState.NORMAL;
+			}
+			break;
+		case State.INACTIVE:
+			break;
 		}
 	}
 
